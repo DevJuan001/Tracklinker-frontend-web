@@ -1,0 +1,12 @@
+/* Estilos para el input de tipo archivo */
+input[type="file"]::file-selector-button {
+  padding: 0.5em 1em;
+  border: 1px solid #9ca3af;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  color: #9ca3af;
+}

@@ -1,0 +1,4 @@
+/* Clase para ocultar la barra de navegación */
+::-webkit-scrollbar {
+  display: none;
+}
