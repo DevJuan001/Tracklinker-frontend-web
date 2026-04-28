@@ -10,14 +10,14 @@ import HelpModal from "../../globals/components/modals/HelpModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function HomePage() {
-  const { modalType, isOpen, openModal, closeModal } = useModal();
+  const { modalType, isOpen, triggerRef, openModal, closeModal } = useModal();
   const { user } = useUser();
 
   return (
     <Layout
-      avatarOnClick={() => openModal(null, "user")}
-      helpOnClick={() => {
-        openModal(null, "help");
+      avatarOnClick={(e) => openModal(null, "user", null, e.currentTarget)}
+      helpOnClick={(e) => {
+        openModal(null, "help", null, e.currentTarget);
       }}
     >
       <h1
@@ -33,6 +33,7 @@ export default function HomePage() {
 
       {modalType && (
         <Modal
+          triggerRef={triggerRef}
           title={modalType === "user" ? "Configuración" : "Ayuda"}
           type={modalType}
           isOpen={isOpen}
