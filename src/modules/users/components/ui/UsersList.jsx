@@ -28,6 +28,10 @@ export default function UsersList({ users, loading, openModal }) {
               key={user.id}
               user={user}
               openModal={openModal}
+              itemOnClick={(e) => {
+                e.stopPropagation();
+                openModal(user, "info", null, e.currentTarget);
+              }}
               editButtonOnClick={(e) => {
                 e.stopPropagation();
                 openModal(user, "edit", null, e.currentTarget);
