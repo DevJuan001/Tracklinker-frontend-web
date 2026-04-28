@@ -39,27 +39,25 @@
 }
 
 /* Estilos para el modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .users-background {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
-      url("../../assets/icons/main/dashboard/arrow_up_bg_icon.svg");
-  }
+.dark .users-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/main/dashboard/arrow_up_bg_icon.svg");
+}
 
-  .products-background {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
-      url("../../assets/icons/aside/products-icon.svg");
-  }
+.dark .products-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/aside/products-icon.svg");
+}
 
-  .output-orders-background {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
-      url("../../assets/icons/aside/output-orders-icon.svg");
-  }
-  .categories-background {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
-      url("../../assets/icons/aside/categories-icon.svg");
-  }
+.dark .output-orders-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/aside/output-orders-icon.svg");
+}
+.dark .categories-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/aside/categories-icon.svg");
 }
