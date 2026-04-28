@@ -1,4 +1,4 @@
-import { actionsIcons } from "../../../assets/icons/actionsIcons";
+import Icon from "./Icon";
 
 export default function ActionButtons({
   children,
@@ -12,28 +12,16 @@ export default function ActionButtons({
       {children}
       <button
         onClick={editButtonOnClick}
-        className="transition-colors duration-300 rounded-xl p-1.5 hover:bg-[#969292a8]"
+        className="flex items-center transition-colors duration-300 rounded-xl p-1.5 hover:bg-[#969292a8]"
       >
-        <img
-          src={actionsIcons.editInfoIcon}
-          alt=""
-          className="dark:brightness-200"
-        />
+        <Icon name={"edit"} />
       </button>
       <button
         onClick={deleteButtonOnClick}
         className={`${deleteButtonVisible ? "" : "hidden"}
-        transition-colors duration-300 rounded-xl p-1.5 hover:bg-[#969292a8]`}
+        flex items-centertransition-colors duration-300 rounded-xl p-1.5 hover:bg-[#969292a8]`}
       >
-        <img
-          src={
-            visibilityIcon
-              ? actionsIcons.visibility
-              : actionsIcons.lockVisibility
-          }
-          alt=""
-          className="dark:brightness-200"
-        />
+        <Icon name={`${visibilityIcon ? "visibility" : "visibility_off"}`} />
       </button>
     </section>
   );
