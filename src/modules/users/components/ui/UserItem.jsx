@@ -1,13 +1,8 @@
 import { userStatus } from "../../constants/userStatus";
-import { usersIcons } from "../../../../assets/icons/usersIcons";
-import { actionsIcons } from "../../../../assets/icons/actionsIcons";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import Icon from "../../../../globals/components/ui/Icon";
 
-export default function UserItem({
-  user,
-  openModal,
-  editButtonOnClick,
-}) {
+export default function UserItem({ user, openModal, editButtonOnClick }) {
   return (
     <li
       className="flex items-center justify-between p-5 bg-[#F5F3F6] rounded-lg transition duration-300 cursor-pointer
@@ -22,26 +17,25 @@ export default function UserItem({
           <p className="text-base sm:text-xl md:text-xl lg:text-xl xl:text-xl">
             {user.name} {user.first_surname} {user.second_surname}
           </p>
+
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
-            <img
-              src={usersIcons.phoneIcon}
-              alt=""
-              className="w-5 h-5 dark:invert"
-            />
-            <p>{user.phone}</p>
+            <Icon name={"phone"} size={22} />
+            <span>{user.phone}</span>
           </div>
+
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
-            <img
-              src={usersIcons.rolIcon}
-              alt=""
-              className="w-5 h-5 dark:invert"
-            />
-            <p>{user.rol_name}</p>
+            <Icon name={"person"} size={22} />
+            <span>{user.rol_name}</span>
           </div>
+
           <div
             className={`flex items-center px-2 py-0.5 gap-1 rounded-full border text-xs ${userStatus[user.status]?.styles}`}
           >
-            <img src={userStatus[user.status]?.icon} alt="" />
+            <Icon
+              name={userStatus[user.status]?.icon}
+              size={14}
+              fill={userStatus[user.status]?.fill}
+            />
             <span>{userStatus[user.status]?.text}</span>
           </div>
         </address>
