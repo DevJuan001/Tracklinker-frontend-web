@@ -52,7 +52,7 @@ export default function MoreInfoUser({ user, onClose }) {
 
         <div className="flex flex-col">
           <span className="text-[#75777E] text-sm">Ciudad</span>
-          <span className="dark:text-white">{user.city}</span>
+          <span className="dark:text-white">{user.city_name}</span>
         </div>
 
         <div className="flex flex-col">
