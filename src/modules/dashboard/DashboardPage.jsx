@@ -1,8 +1,6 @@
 // Hooks
 import { useModal } from "../../globals/hooks/useModal";
 import { useState } from "react";
-// Iconos
-import { actionsIcons } from "../../assets/icons/actionsIcons";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import TopSection from "../../globals/components/ui/TopSection";
@@ -28,7 +26,7 @@ export default function DashBoardPage() {
     >
       <TopSection
         sectionName={"Panel De Control"}
-        addButtonIcon={actionsIcons.uploadIcon}
+        addButtonIcon={"cloud_upload"}
         addButtonText={"Descargar"}
         createOnClick={() => setShowDownloadToast(true)}
         filterButton={false}
