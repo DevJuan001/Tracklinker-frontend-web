@@ -1,22 +1,31 @@
 import { userStatus } from "../../constants/userStatus";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 import Icon from "../../../../globals/components/ui/Icon";
+import Avatar from "../../../../globals/components/ui/Avatar";
 
-export default function UserItem({ user, openModal, editButtonOnClick }) {
+export default function UserItem({
+  user,
+  openModal,
+  itemOnClick,
+  editButtonOnClick,
+}) {
   return (
     <li
       className="flex items-center justify-between p-5 bg-[#F5F3F6] rounded-lg transition duration-300 cursor-pointer
       hover:bg-[#9692923b]
       dark:bg-[#0f0f11] dark:hover:bg-[#212125]"
       key={user.id}
-      onClick={editButtonOnClick}
+      onClick={itemOnClick}
     >
       {/* Datos del Usuario */}
       <article>
         <address className="flex items-center gap-3 not-italic font-medium dark:text-white">
-          <p className="text-base sm:text-xl md:text-xl lg:text-xl xl:text-xl">
-            {user.name} {user.first_surname} {user.second_surname}
-          </p>
+          <div className="flex items-center gap-3">
+            <Avatar user={user} size={35} />
+            <span className="text-base sm:text-xl md:text-xl lg:text-xl xl:text-xl">
+              {user.name} {user.first_surname} {user.second_surname}
+            </span>
+          </div>
 
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
             <Icon name={"phone"} size={22} />
@@ -29,7 +38,7 @@ export default function UserItem({ user, openModal, editButtonOnClick }) {
           </div>
 
           <div
-            className={`flex items-center px-2 py-0.5 gap-1 rounded-full border text-xs ${userStatus[user.status]?.styles}`}
+            className={`flex items-center px-2 py-1 gap-1 rounded-full border text-xs ${userStatus[user.status]?.styles}`}
           >
             <Icon
               name={userStatus[user.status]?.icon}
