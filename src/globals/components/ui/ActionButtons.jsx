@@ -8,7 +8,7 @@ export default function ActionButtons({
   deleteButtonOnClick,
 }) {
   return (
-    <section className="flex items-center justify-center gap-5 dark:invert">
+    <section className="flex items-center justify-center gap-3 dark:invert">
       {children}
       <button
         onClick={editButtonOnClick}
