@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useUsers } from "./hooks/useUsers";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
-// Iconos
-import { usersIcons } from "../../assets/icons/usersIcons";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
 import AddUserModal from "./components/modals/AddUserModal";
@@ -36,7 +34,6 @@ export default function UsersPage() {
     >
       <TopSection
         sectionName={"Usuarios"}
-        addButtonIcon={usersIcons.addUserIcon}
         addButtonText={"Agregar Usuario"}
         createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
         filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}
