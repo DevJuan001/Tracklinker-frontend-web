@@ -18,8 +18,6 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    .loader {
-        border: 5px solid #000;
-    }
+.dark .loader {
+    border: 5px solid #000;
 }

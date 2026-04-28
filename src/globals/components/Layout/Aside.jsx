@@ -7,8 +7,8 @@ import {
   mobileItems,
 } from "../../../constants/asideMenuItems";
 import { useUser } from "../../hooks/useUser";
-import { asideIcons } from "../../../assets/icons/asideIcons";
 import { useState } from "react";
+import Icon from "../ui/Icon";
 
 // Menú lateral principal de opciones
 export default function Aside({ avatarOnClick, helpOnClick }) {
@@ -34,25 +34,27 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                 {({ isActive }) => (
                   <section
                     className={`w-auto h-14 flex flex-col py-2.5 px-5 items-center justify-center subpixel-antialiased rounded-xl transition duration-300 group
-                        ${
-                          isActive
-                            ? `bg-black font-medium shadow-[0px_0px_32px_-9px_#000000] text-white fill-white
-                        dark:bg-white dark:text-black dark:shadow-[0px_0px_32px_-11px_#ffffff] animate-clickEffect`
-                            : `text-[#75777E] font-normal dark:text-[7E8088]`
-                        }`}
+                    ${
+                      isActive
+                        ? `bg-black font-medium shadow-[0px_0px_32px_-9px_#000000] text-white fill-white
+                    dark:bg-white dark:text-black dark:shadow-[0px_0px_32px_-11px_#ffffff] animate-clickEffect`
+                        : `text-[#75777E] font-normal dark:text-[7E8088]`
+                    }`}
                   >
-                    <item.icon
+                    <Icon
+                      name={item.icon}
+                      fill={isActive}
                       className={`group-hover:stroke-black
-                          ${
-                            isActive
-                              ? "fill-white scale-105 stroke-none animate-iconFill dark:fill-black"
-                              : "stroke-[60] stroke-[#75777E] fill-none group-hover:stroke-[90] dark:group-hover:stroke-white"
-                          }`}
+                      ${
+                        isActive
+                          ? "fill-white scale-105 stroke-none animate-iconFill dark:fill-black"
+                          : "text-[#75777E] fill-none dark:group-hover:text-white"
+                      }`}
                     />
                     <div
                       className={`flex gap-1 text-center font-medium
-                        ${isActive ? "" : "group-hover:text-black dark:group-hover:text-white"}
-                        `}
+                      ${isActive ? "" : "group-hover:text-black dark:group-hover:text-white"}
+                      `}
                     >
                       <span className="text-nowrap text-[10px]">
                         {item.name}
@@ -71,7 +73,10 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
             <section
               className={`w-auto h-14 flex flex-col py-2.5 px-5 items-center justify-center rounded-xl group`}
             >
-              <asideIcons.moreIcon className="fill-[#75777E] group-hover:fill-black dark:group-hover:fill-white" />
+              <Icon
+                name={"menu"}
+                className="text-[#75777E] group-hover:text-black dark:group-hover:text-white"
+              />
               <div
                 className={`flex gap-1 text-center font-medium text-[#75777E]`}
               >
@@ -102,11 +107,6 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                 alt={avatarItem.alt}
                 className="w-8 h-8"
               />
-              <section className="hidden xl:block text-center">
-                <span className="text-[#4a4a4d] font-medium dark:text-[#7E8088]">
-                  {user.name} {user.first_surname}
-                </span>
-              </section>
             </button>
             {mobileItems.map((item) => (
               <NavLink to={item.path}>
@@ -121,12 +121,13 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                         : `text-[#75777E] font-normal dark:text-[7E8088]`
                     }`}
                   >
-                    <item.icon
+                    <Icon
+                      name={item.icon}
                       className={`group-hover:stroke-black
                       ${
                         isActive
                           ? "fill-white scale-105 stroke-none animate-iconFill dark:fill-black"
-                          : "stroke-[60] stroke-[#75777E] fill-none group-hover:stroke-[90] dark:group-hover:stroke-white"
+                          : "text-[#75777E] fill-none dark:group-hover:text-white"
                       }`}
                     />
                     <div
@@ -153,26 +154,25 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
             md:flex-col
             xl:flex-col"
           >
-            <li>
-              <button
-                onClick={avatarOnClick}
-                className="w-full h-full flex items-center justify-center py-1.5 gap-2.5 rounded-2xl transition duration-300
-              hover:bg-gray-200 
-              dark:text-gray-50 dark:hover:bg-[#202022]
-              xl:justify-start xl:pl-6
-              "
-              >
-                <img
-                  src={avatarItem.icon}
-                  alt={avatarItem.alt}
-                  className="w-8 h-8"
-                />
-                <section className="hidden text-center xl:block">
-                  <span className="text-[#75777E] font-medium dark:text-[#7E8088]">
-                    {user.name} {user.first_surname}
-                  </span>
-                </section>
-              </button>
+            <li
+              onClick={avatarOnClick}
+              className="w-full h-full flex items-center justify-center py-1.5 gap-2.5 rounded-2xl transition duration-300 cursor-pointer
+            hover:bg-gray-200 
+            dark:text-gray-50 dark:hover:bg-[#202022]
+            xl:justify-start xl:pl-6
+            "
+            >
+              <img
+                src={avatarItem.icon}
+                alt={avatarItem.alt}
+                className="w-8 h-8"
+              />
+
+              <div className="hidden text-center xl:block">
+                <span className="text-[#75777E] font-medium dark:text-[#7E8088]">
+                  {user.name} {user.first_surname}
+                </span>
+              </div>
             </li>
             {/* Esto lo que hace es recorrer la constante y traer los datos uno a uno e ir creando un li para cada uno */}
             {firstSectionItems.map((item) => (
@@ -182,7 +182,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                     <section
                       className={`w-auto h-14 flex flex-col items-center py-3 justify-center subpixel-antialiased rounded-2xl transition duration-300 group
                         md:w-full md:h-full md:py-4
-                        xl:w-full xl:h-full xl:flex-row xl:pl-7 xl:py-3 xl:gap-2.5 xl:justify-start
+                        xl:w-full xl:h-full xl:flex-row xl:pl-6 xl:py-2.5 xl:gap-2.5 xl:justify-start
                         ${
                           isActive
                             ? `bg-black font-medium shadow-[0px_0px_32px_-9px_#000000] text-white fill-white
@@ -191,12 +191,15 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                         dark:text-[7E8088] dark:hover:bg-[#3b3b3f98]`
                         }`}
                     >
-                      <item.icon
-                        className={`w-6 h-6 group-hover:stroke-black
+                      <Icon
+                        name={item.icon}
+                        size={25}
+                        fill={isActive}
+                        className={`
                           ${
                             isActive
-                              ? "fill-white scale-105 stroke-none animate-iconFill dark:fill-black"
-                              : "stroke-[90] stroke-[#75777eb7] fill-none group-hover:stroke-[90] group-hover:stroke-[#ffffff] dark:group-hover:stroke-white"
+                              ? "fill-white animate-iconFill group-hover:scale-105 dark:fill-black"
+                              : "text-[#75777eb7] fill-none group-hover:text-black group-hover:[--icon-weight:600] dark:group-hover:text-white"
                           }`}
                       />
                       <div
@@ -238,18 +241,29 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
             {secondSectionItems.map((item) => (
               <li
                 key={item.name}
-                className="rounded-2xl hover:bg-gray-200 transition duration-300 dark:hover:bg-[#3b3b3f98]"
+                className="rounded-2xl transition duration-300 text-[#75777E] 
+                hover:bg-gray-200
+                dark:hover:bg-[#3b3b3f98]"
               >
                 {item.path ? (
                   <NavLink to={item.path} onClick={item.onClick}>
                     <section
-                      className="w-20 h-14 flex items-center justify-center gap-2.5 py-2.5 subpixel-antialiased text-[#75777E] group
+                      className="h-14 flex items-center justify-center gap-2.5 py-2.5 subpixel-antialiased group
                       dark:text-[7E8088]
                       md:pl-0
                       xl:w-full xl:h-auto xl:justify-start xl:pl-7"
                     >
-                      <item.icon className="stroke-[80] stroke-[#75777eb7] fill-none group-hover:stroke-black group-hover:stroke-[90] dark:group-hover:stroke-[#ffffff]" />
-                      <span className="hidden font-medium group-hover:text-black dark:group-hover:text-white xl:block">
+                      <Icon
+                        name={item.icon}
+                        size={25}
+                        className="fill-none text-[#75777eb7]
+                        group-hover:text-black group-hover:[--icon-weight:600]
+                        dark:group-hover:text-white"
+                      />
+                      <span
+                        className="hidden font-medium group-hover:text-black dark:group-hover:text-white
+                        xl:block"
+                      >
                         {item.name}
                       </span>
                     </section>
@@ -257,12 +271,21 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                 ) : (
                   <button onClick={helpOnClick} className="w-full">
                     <section
-                      className="w-full h-full flex items-center justify-center gap-2.5 py-2.5 pl-7  subpixel-antialiased text-[#75777E] group
+                      className="w-full h-full flex items-center justify-center gap-2.5 py-2.5 pl-7  subpixel-antialiased group
                       md:pl-0
                       xl:w-full xl:h-auto xl:justify-start xl:pl-7"
                     >
-                      <item.icon className="w-6 h-6 stroke-[80] stroke-[#75777eb7] fill-none group-hover:stroke-black group-hover:stroke-[90] dark:group-hover:stroke-[#ffffff]" />
-                      <span className="hidden font-medium group-hover:text-black dark:group-hover:text-white xl:block">
+                      <Icon
+                        name={item.icon}
+                        size={23}
+                        className={`fill-none text-[#75777eb7]
+                        group-hover:text-black group-hover:[--icon-weight:600]
+                        dark:group-hover:text-white`}
+                      />
+                      <span
+                        className="hidden font-medium group-hover:text-black dark:group-hover:text-white 
+                        xl:block"
+                      >
                         {item.name}
                       </span>
                     </section>
