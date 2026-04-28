@@ -17,6 +17,7 @@ import Layout from "../../globals/components/Layout/Layout";
 import SearchBar from "../../globals/components/ui/SearchBar";
 import TopSection from "../../globals/components/ui/TopSection";
 import EnableUserModal from "./components/modals/EnableUserModal";
+import MoreInfoUser from "./components/modals/MoreInfoUser";
 
 export default function UsersPage() {
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
@@ -61,13 +62,17 @@ export default function UsersPage() {
                   ? "Agregar usuario"
                   : modalType === "edit"
                     ? "Editar usuario"
-                    : modalType === "disable"
-                      ? "Deshabilitar usuario"
-                      : modalType === "enable"
-                        ? "Habilitar usuario"
-                        : "Ayuda"
+                    : modalType === "info"
+                      ? ""
+                      : modalType === "disable"
+                        ? "Deshabilitar usuario"
+                        : modalType === "enable"
+                          ? "Habilitar usuario"
+                          : "Ayuda"
           }
-          location={modalType === "edit" ? "center" : "anchored"}
+          location={
+            modalType === "edit" || modalType === "info" ? "center" : "anchored"
+          }
           type={modalType}
           isOpen={isOpen}
           onClose={() => closeModal()}
@@ -84,6 +89,10 @@ export default function UsersPage() {
           {/* Modal para agregar un usuario */}
           {modalType === "add" && (
             <AddUserModal onClose={() => closeModal()} openModal={openModal} />
+          )}
+
+          {modalType === "info" && (
+            <MoreInfoUser user={modalData} onClose={() => closeModal} />
           )}
 
           {/* Modal para editar el usuario */}
