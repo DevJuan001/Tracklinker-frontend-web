@@ -271,13 +271,13 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                 ) : (
                   <button onClick={helpOnClick} className="w-full">
                     <section
-                      className="w-full h-full flex items-center justify-center gap-2.5 py-2.5 pl-7  subpixel-antialiased group
+                      className="w-full h-full flex items-center justify-center gap-2.5 py-4 pl-7  subpixel-antialiased group
                       md:pl-0
                       xl:w-full xl:h-auto xl:justify-start xl:pl-7"
                     >
                       <Icon
                         name={item.icon}
-                        size={23}
+                        size={25}
                         className={`fill-none text-[#75777eb7]
                         group-hover:text-black group-hover:[--icon-weight:600]
                         dark:group-hover:text-white`}

@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useUsers } from "./hooks/useUsers";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
-// Iconos
-import { usersIcons } from "../../assets/icons/usersIcons";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
 import AddUserModal from "./components/modals/AddUserModal";
@@ -19,6 +17,7 @@ import Layout from "../../globals/components/Layout/Layout";
 import SearchBar from "../../globals/components/ui/SearchBar";
 import TopSection from "../../globals/components/ui/TopSection";
 import EnableUserModal from "./components/modals/EnableUserModal";
+import MoreInfoUser from "./components/modals/MoreInfoUser";
 
 export default function UsersPage() {
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
@@ -36,7 +35,6 @@ export default function UsersPage() {
     >
       <TopSection
         sectionName={"Usuarios"}
-        addButtonIcon={usersIcons.addUserIcon}
         addButtonText={"Agregar Usuario"}
         createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
         filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}
@@ -64,13 +62,17 @@ export default function UsersPage() {
                   ? "Agregar usuario"
                   : modalType === "edit"
                     ? "Editar usuario"
-                    : modalType === "disable"
-                      ? "Deshabilitar usuario"
-                      : modalType === "enable"
-                        ? "Habilitar usuario"
-                        : "Ayuda"
+                    : modalType === "info"
+                      ? ""
+                      : modalType === "disable"
+                        ? "Deshabilitar usuario"
+                        : modalType === "enable"
+                          ? "Habilitar usuario"
+                          : "Ayuda"
           }
-          location={modalType === "edit" ? "center" : "anchored"}
+          location={
+            modalType === "edit" || modalType === "info" ? "center" : "anchored"
+          }
           type={modalType}
           isOpen={isOpen}
           onClose={() => closeModal()}
@@ -87,6 +89,10 @@ export default function UsersPage() {
           {/* Modal para agregar un usuario */}
           {modalType === "add" && (
             <AddUserModal onClose={() => closeModal()} openModal={openModal} />
+          )}
+
+          {modalType === "info" && (
+            <MoreInfoUser user={modalData} onClose={() => closeModal} />
           )}
 
           {/* Modal para editar el usuario */}

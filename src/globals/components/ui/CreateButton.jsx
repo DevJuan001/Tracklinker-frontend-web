@@ -1,3 +1,5 @@
+import Icon from "./Icon";
+
 export default function CreateButton({
   icon,
   text,
@@ -11,10 +13,10 @@ export default function CreateButton({
       dark:bg-white dark:hover:shadow-[0px_0px_32px_-11px_#ffffff]`}
       onClick={onClick}
     >
-      <img
-        src={icon}
-        alt=""
-        className="w-6 h-6 invert brightness-0 dark:brightness-200 dark:invert-0"
+      <Icon
+        name={icon ? icon : "add"}
+        weight={600}
+        className="invert dark:brightness-200 dark:invert-0"
       />
       <span
         data-flip-id="modal-title"

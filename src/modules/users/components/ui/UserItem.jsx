@@ -1,11 +1,12 @@
 import { userStatus } from "../../constants/userStatus";
-import { usersIcons } from "../../../../assets/icons/usersIcons";
-import { actionsIcons } from "../../../../assets/icons/actionsIcons";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import Icon from "../../../../globals/components/ui/Icon";
+import Avatar from "../../../../globals/components/ui/Avatar";
 
 export default function UserItem({
   user,
   openModal,
+  itemOnClick,
   editButtonOnClick,
 }) {
   return (
@@ -14,34 +15,36 @@ export default function UserItem({
       hover:bg-[#9692923b]
       dark:bg-[#0f0f11] dark:hover:bg-[#212125]"
       key={user.id}
-      onClick={editButtonOnClick}
+      onClick={itemOnClick}
     >
       {/* Datos del Usuario */}
       <article>
         <address className="flex items-center gap-3 not-italic font-medium dark:text-white">
-          <p className="text-base sm:text-xl md:text-xl lg:text-xl xl:text-xl">
-            {user.name} {user.first_surname} {user.second_surname}
-          </p>
-          <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
-            <img
-              src={usersIcons.phoneIcon}
-              alt=""
-              className="w-5 h-5 dark:invert"
-            />
-            <p>{user.phone}</p>
+          <div className="flex items-center gap-3">
+            <Avatar user={user} size={35} />
+            <span className="text-base sm:text-xl md:text-xl lg:text-xl xl:text-xl">
+              {user.name} {user.first_surname} {user.second_surname}
+            </span>
           </div>
+
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
-            <img
-              src={usersIcons.rolIcon}
-              alt=""
-              className="w-5 h-5 dark:invert"
-            />
-            <p>{user.rol_name}</p>
+            <Icon name={"phone"} size={22} />
+            <span>{user.phone}</span>
           </div>
+
+          <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
+            <Icon name={"person"} size={22} />
+            <span>{user.rol_name}</span>
+          </div>
+
           <div
-            className={`flex items-center px-2 py-0.5 gap-1 rounded-full border text-xs ${userStatus[user.status]?.styles}`}
+            className={`flex items-center px-2 py-1 gap-1 rounded-full border text-xs ${userStatus[user.status]?.styles}`}
           >
-            <img src={userStatus[user.status]?.icon} alt="" />
+            <Icon
+              name={userStatus[user.status]?.icon}
+              size={14}
+              fill={userStatus[user.status]?.fill}
+            />
             <span>{userStatus[user.status]?.text}</span>
           </div>
         </address>

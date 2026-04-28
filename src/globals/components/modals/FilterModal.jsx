@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import Calendar from "../ui/Calendar";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
-import { actionsIcons } from "../../../assets/icons/actionsIcons";
 import DateField from "../ui/DateField";
 
 export default function FilterModal({

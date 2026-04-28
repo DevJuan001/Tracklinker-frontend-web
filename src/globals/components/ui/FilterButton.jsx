@@ -1,4 +1,4 @@
-import { actionsIcons } from "../../../assets/icons/actionsIcons";
+import Icon from "./Icon";
 
 export default function FilterButton({ onClick, filterButtonVisibility }) {
   return (
@@ -8,12 +8,8 @@ export default function FilterButton({ onClick, filterButtonVisibility }) {
         ${filterButtonVisibility ? "block" : "hidden"}`}
       onClick={onClick}
     >
-      <img
-        src={actionsIcons.filterIcon}
-        alt=""
-        className="w-5 h-5 dark:invert-[.7]"
-      />
-      <span className="hidden font-medium dark:text-gray-300 lg:block">
+      <Icon name={"page_info"} size={24} className="dark:text-[#C5C6CE]" />
+      <span className="hidden font-medium dark:text-[#C5C6CE] lg:block">
         Filtrar
       </span>
     </button>
