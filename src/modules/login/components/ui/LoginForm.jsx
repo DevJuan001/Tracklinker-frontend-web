@@ -19,7 +19,7 @@ export default function LoginForm({ openModal }) {
   return (
     <section className="w-full h-full flex items-center justify-center">
       {/* Container del formulario */}
-      <div className="min-w-[500px] flex flex-col items-center px-4 py-8 ">
+      <div className="min-w-full flex flex-col items-center px-4 py-8">
         {/* Icono de Tracklinker */}
         <img
           src={loginIcons.tracklinkerIcon}
