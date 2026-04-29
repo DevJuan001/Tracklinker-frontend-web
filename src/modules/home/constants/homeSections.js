@@ -1,47 +1,38 @@
-import { asideIcons } from "../../../assets/icons/asideIcons";
-
 export const items = [
-  { name: "Usuarios", path: "/users", icon: asideIcons.usersIcon, alt: "" },
+  { name: "Usuarios", path: "/users", icon: "groups" },
   {
     name: "Productos",
     path: "/products",
-    icon: asideIcons.productsIcon,
-    alt: "",
+    icon: "shopping_cart",
   },
   {
     name: "Categorias",
     path: "/categories",
-    icon: asideIcons.categoriesIcon,
-    alt: "",
+    icon: "folder_open",
   },
   {
     name: "Subcategorias",
     path: "/subcategories",
-    icon: asideIcons.subcategoriesIcon,
-    alt: "",
+    icon: "folder_copy",
   },
   {
     name: "Informes",
     path: "/reports",
-    icon: asideIcons.reportsIcon,
-    alt: "",
+    icon: "finance_mode",
   },
   {
     name: "Garantías",
     path: "/warranties",
-    icon: asideIcons.warrantiesIcon,
-    alt: "",
+    icon: "service_toolbox",
   },
   {
     name: "Proveedores",
     path: "/suppliers",
-    icon: asideIcons.suppliersIcon,
-    alt: "",
+    icon: "group",
   },
   {
     name: "Transformaciones",
     path: "/transformations",
-    icon: asideIcons.transformationsIcon,
-    alt: "",
+    icon: "shuffle",
   },
 ];
