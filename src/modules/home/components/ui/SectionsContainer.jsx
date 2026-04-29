@@ -15,7 +15,6 @@ export default function SectionsContainer() {
           itemName={item.name}
           itemPath={item.path}
           itemIcon={item.icon}
-          itemAlt={item.alt}
         />
       ))}
     </section>
