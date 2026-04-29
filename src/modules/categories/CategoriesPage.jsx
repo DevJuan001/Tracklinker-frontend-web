@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useCategories } from "./hooks/useCategories";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
-// Iconos
-import { actionsIcons } from "../../assets/icons/actionsIcons";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import CategoriesList from "./components/ui/CategoriesList";
@@ -37,7 +35,6 @@ export default function CategoriesPage() {
     >
       <TopSection
         sectionName={"Categorias"}
-        addButtonIcon={actionsIcons.addIcon}
         addButtonText={"Crear Categoria"}
         createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
         filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}
