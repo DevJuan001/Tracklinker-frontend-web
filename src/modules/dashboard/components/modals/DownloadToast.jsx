@@ -11,10 +11,10 @@ export default function DownloadToast({ showDownloadToast, onClose }) {
     dark:text-white pointer-events-none"
     >
       <div
-        className="relative border bg-green-200 rounded-full shadow-md shadow-green-300 py-1.5 px-3 animate-toastIn
-      dark:bg-black dark:border-[#7e77773b]"
+        className="relative border bg-green-200 rounded-full shadow-md shadow-green-300 py-3 px-4 animate-toastIn
+      dark:bg-green-700 dark:border-[#ffffff26] dark:shadow-[0px_0px_20px_-1px_#16a34a]"
       >
-        <span className="font-medium text-green-600 text-sm">
+        <span className="font-medium text-center text-green-600 dark:text-white">
           Descarga exitosa
         </span>
       </div>
