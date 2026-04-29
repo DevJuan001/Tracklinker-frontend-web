@@ -26,7 +26,7 @@ export default function ActionCard({ itemName, itemPath, itemIcon }) {
             size={40}
             fill
             color={"#75777E"}
-            className="w-8 h-10
+            className="w-10 h-10
             md:w-11 md:h-11"
           />
         </section>
