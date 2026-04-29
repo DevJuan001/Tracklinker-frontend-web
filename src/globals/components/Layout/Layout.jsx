@@ -4,7 +4,7 @@ export default function Layout({ avatarOnClick, helpOnClick, children }) {
   return (
     // Container
     <div
-      className="min-h-screen min-w-screen max-w-screen max-h-screen grid grid-cols-1 grid-rows-[1fr_65px]
+      className="min-h-screen min-w-screen max-w-screen max-h-screen grid grid-cols-1 grid-rows-[1fr_80px]
         md:grid-cols-[110px_1fr] md:grid-rows-1
         xl:grid-cols-[260px_1fr] xl:grid-rows-1
         "
