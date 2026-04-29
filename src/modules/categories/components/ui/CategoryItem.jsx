@@ -1,6 +1,7 @@
 import { actionsIcons } from "../../../../assets/icons/actionsIcons";
 import { categoryStatusConfig } from "../../constants/categoryStatusConfig";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import Icon from "../../../../globals/components/ui/Icon";
 
 export default function CategoryItem({
   category,
@@ -10,8 +11,8 @@ export default function CategoryItem({
 }) {
   return (
     <li
-      className="flex items-center justify-between p-5 bg-[#96929213] rounded-lg transition duration-300 cursor-pointer
-      hover:bg-[#96929231]
+      className="flex items-center justify-between p-5 bg-[#F5F3F6] rounded-lg transition duration-300 cursor-pointer
+      hover:bg-[#9692923b]
       dark:bg-[#0f0f11] dark:hover:bg-[#212125]"
       onClick={moreInfoOnClick}
     >
@@ -23,10 +24,10 @@ export default function CategoryItem({
         <div
           className={`flex items-center px-2 py-0.5 gap-1 rounded-full text-xs border ${categoryStatusConfig[category.status]?.styles}`}
         >
-          <img
-            src={categoryStatusConfig[category.status]?.icon}
-            alt=""
-            className="w-4 h-4"
+          <Icon
+            name={categoryStatusConfig[category.status]?.icon}
+            fill={categoryStatusConfig[category.status]?.fill}
+            size={14}
           />
           <span>{categoryStatusConfig[category.status]?.text}</span>
         </div>
@@ -43,9 +44,7 @@ export default function CategoryItem({
             e.currentTarget,
           );
         }}
-        visibilityIcon={
-          categoryStatusConfig[category.status]?.visibilityIcon
-        }
+        visibilityIcon={categoryStatusConfig[category.status]?.visibilityIcon}
         moreInfoOnClick={moreInfoOnClick}
       >
         {/* Botón de más información del usuario */}
