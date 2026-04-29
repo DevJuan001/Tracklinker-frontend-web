@@ -5,13 +5,13 @@ export default function Avatar({ user, size = 50 }) {
 
   return (
     <div
-      style={{ width: size, height: size }}
+      style={{ minWidth: size, minHeight: size }}
       className="flex justify-center items-center rounded-full bg-[#49454f14] 
       dark:bg-[#28282bbd]"
     >
       <span
         className={`font-medium 
-        ${size > 60 ? "text-2xl" : "text-base"}
+        ${size > 40 ? "text-xl" : "text-base"}
         dark:text-white`}
       >
         {initials}
