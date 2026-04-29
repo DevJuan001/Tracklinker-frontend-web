@@ -15,13 +15,18 @@ export default function MoreInfoCategoryModal({ category, onClose }) {
   return (
     <section className="flex flex-col justify-center items-center dark:text-white">
       <div className="w-full self-start flex flex-col gap-1.5">
-        <div className="flex items-center justify-between">
-          <span className="text-4xl leading-none font-semibold">
-            {category.name}
-          </span>
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-3">
+            <div className="min-w-12 min-h-12 flex items-center justify-center bg-[#49454f14] rounded-full">
+              <Icon name={"folder_open"} fill size={30} />
+            </div>
+            <span className="text-3xl leading-none font-semibold">
+              {category.name}
+            </span>
+          </div>
           <div
-            className={`flex gap-1.5 pl-2 py-1.5 rounded-full border
-                ${categoryStatusConfig[category.status]?.styles}`}
+            className={`flex gap-1.5 px-2 py-1.5 rounded-full border
+            ${categoryStatusConfig[category.status]?.styles}`}
           >
             <Icon
               name={categoryStatusConfig[category.status]?.icon}
@@ -33,11 +38,14 @@ export default function MoreInfoCategoryModal({ category, onClose }) {
             </span>
           </div>
         </div>
-        <div className="flex flex-col mt-3">
+
+        <div className="flex flex-col mt-2">
           <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
-            Categoría
+            Descripción
           </span>
-          <span className="font-medium">{category.name}</span>
+          <span className="flex items-center font-medium">
+            {category.description}
+          </span>
         </div>
 
         <div className="flex flex-col">
