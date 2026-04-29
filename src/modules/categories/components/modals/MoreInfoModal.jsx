@@ -1,8 +1,13 @@
+// Hooks
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+// Constants
 import { categoryStatusConfig } from "../../constants/categoryStatusConfig";
+// Components
+import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Icon from "../../../../globals/components/ui/Icon";
+// Modals
 import EditCategoryInfoModal from "./EditCategoryInfoModal";
 import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 
 export default function MoreInfoCategoryModal({ category, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
@@ -18,10 +23,10 @@ export default function MoreInfoCategoryModal({ category, onClose }) {
             className={`flex gap-1.5 pl-2 py-1.5 rounded-full border
                 ${categoryStatusConfig[category.status]?.styles}`}
           >
-            <img
-              src={categoryStatusConfig[category.status]?.icon}
-              alt=""
-              className="w-4 h-4"
+            <Icon
+              name={categoryStatusConfig[category.status]?.icon}
+              fill={categoryStatusConfig[category.status]?.fill}
+              size={14}
             />
             <span className="text-xs font-medium">
               {categoryStatusConfig[category.status]?.text}
@@ -39,9 +44,7 @@ export default function MoreInfoCategoryModal({ category, onClose }) {
           <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
             Fecha de creación
           </span>
-          <span className="flex items-center font-medium">
-            {category.date}
-          </span>
+          <span className="flex items-center font-medium">{category.date}</span>
         </div>
       </div>
 
