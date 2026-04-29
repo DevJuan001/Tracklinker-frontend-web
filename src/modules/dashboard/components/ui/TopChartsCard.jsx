@@ -11,7 +11,7 @@ export default function TopChartsCard({
       className={`row-span-1 col-span-1 flex flex-col p-4 shadow-xl border border-gray-200 rounded-xl transition duration-500 
         hover:scale-[1.03]
         md:col-span-3
-        dark:bg-[#0f0f11] dark:border-[#ffffff10] dark:shadow-[0px_0px_15px_2px_#ffffff26] dark:text-white ${background}`}
+        dark:bg-[#0f0f11] dark:border-[#ffffff10] dark:text-white ${background}`}
     >
       <section>
         <section className="flex items-center justify-between">
