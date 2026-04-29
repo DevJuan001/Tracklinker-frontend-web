@@ -20,6 +20,7 @@ export default function AddSubcategoryModal({ onClose }) {
     <section className="w-full flex flex-col items-center gap-2">
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
+        searchable
         value={form.category_id}
         id={"subcategory_id_menu"}
         name={"category_id"}
