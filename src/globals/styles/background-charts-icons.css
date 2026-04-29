@@ -72,3 +72,9 @@
     linear-gradient(rgba(0, 0, 0, 0.050), rgba(255, 255, 255, 0)),
     url("../../assets/icons/aside/categories-icon.svg");
 }
+
+.dark .growth-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.050), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/main/dashboard/arrow_up_bg_icon.svg");
+}
