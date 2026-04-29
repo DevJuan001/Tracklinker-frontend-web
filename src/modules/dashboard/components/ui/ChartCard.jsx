@@ -19,7 +19,7 @@ export default function ChartCard({
       className={`row-span-1 col-span-1 bg-${bgColor} text-${textColor} dark:text-white
         flex flex-col p-3 shadow-xl border border-gray-200 rounded-xl transition duration-500
         hover:bg-gray-200 hover:scale-[1.02]
-        dark:bg-[#0f0f11] dark:border-[#ffffff10] dark:shadow-[0px_0px_10px_1px_#ffffff26] dark:hover:bg-[#2c2c2e]
+        dark:bg-[#0f0f11] dark:border-[#ffffff10] dark:hover:bg-[#2c2c2e]
         md:col-span-${colSpan} md:row-span-${rowSpan}  
         `}
     >
