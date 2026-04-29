@@ -1,4 +1,3 @@
-// Gráficos
 import UsersChart from "./charts/UsersChart";
 import SimpleAreaChart from "./charts/SimpleAreaChart";
 import SimpleBarChart from "./charts/SimpleBarChart";
@@ -12,9 +11,8 @@ import CategoriesChart from "./charts/CategoriesChart";
 export default function ChartsContainer() {
   return (
     <section
-      className="grid max-h-[95%] h-full p-2 transition duration-300 ease-in-out
-            xl:grid-cols-12 xl:grid-rows-5
-            sm:grid-cols-1 sm:grid-rows-4 gap-5"
+      className="max-h-[95%] min-h-[95%] grid grid-cols-1 grid-rows-9 gap-5 pb-5 pl-3 transition duration-300 ease-in-out
+      md:grid-cols-12 md:grid-rows-5 overflow-y-auto"
     >
       {/* Primera Fila de Gráficos */}
       <UsersChart />
