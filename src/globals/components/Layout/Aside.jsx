@@ -1,4 +1,8 @@
+// Hooks
+import { useUser } from "../../hooks/useUser";
+import { useModal } from "../../hooks/useModal";
 import { NavLink } from "react-router-dom";
+// Constants
 import {
   avatarItem,
   firstSectionItems,
@@ -6,39 +10,40 @@ import {
   mobileRelevantItems,
   mobileItems,
 } from "../../../constants/asideMenuItems";
-import { useUser } from "../../hooks/useUser";
-import { useState } from "react";
+// Components
 import Icon from "../ui/Icon";
+import Modal from "../modals/Modal";
 
 // Menú lateral principal de opciones
 export default function Aside({ avatarOnClick, helpOnClick }) {
   const { user } = useUser();
-  const [openMore, setOpenMore] = useState(false);
+  const { modalType, isOpen, triggerRef, openModal, closeModal } = useModal();
 
   return (
     <aside
-      className="flex order-2 h-[65px]
+      className="flex order-2 h-[80px] py-1
       md:h-full md:flex-col md:order-1 md:px-5 md:pt-5
       xl:h-full xl:flex-col xl:row-span-2 xl:px-3 xl:pt-5 xl:order-1
       dark:bg-black"
     >
       {/* Menús de opciones - Mobile */}
       <section
-        className="relative w-screen p-1
-        sm:hidden md:hidden xl:hidden"
+        className="relative w-screen flex justify-between pb-1 px-1
+        sm:px-2
+        md:hidden"
       >
-        <ul className="flex w-auto">
+        <ul className="w-auto h-full flex rounded-full shadow-[1px_1px_10px_5px_#00000014]">
           {mobileRelevantItems.map((item) => (
-            <li key={item.name} className="rounded-xl hover:bg-[#7e808854]">
+            <li key={item.name} className="py-1.5 px-1 rounded-full">
               <NavLink to={item.path}>
                 {({ isActive }) => (
                   <section
-                    className={`w-auto h-14 flex flex-col py-2.5 px-5 items-center justify-center subpixel-antialiased rounded-xl transition duration-300 group
+                    className={`w-auto h-full flex flex-col py-2.5 px-6 items-center justify-center subpixel-antialiased rounded-full transition duration-300 group
                     ${
                       isActive
                         ? `bg-black font-medium shadow-[0px_0px_32px_-9px_#000000] text-white fill-white
                     dark:bg-white dark:text-black dark:shadow-[0px_0px_32px_-11px_#ffffff] animate-clickEffect`
-                        : `text-[#75777E] font-normal dark:text-[7E8088]`
+                        : `text-[#75777E] font-normal dark:text-[7E8088] hover:bg-[#7e808854]`
                     }`}
                   >
                     <Icon
@@ -51,102 +56,79 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                           : "text-[#75777E] fill-none dark:group-hover:text-white"
                       }`}
                     />
-                    <div
-                      className={`flex gap-1 text-center font-medium
-                      ${isActive ? "" : "group-hover:text-black dark:group-hover:text-white"}
-                      `}
-                    >
-                      <span className="text-nowrap text-[10px]">
-                        {item.name}
-                      </span>
-                    </div>
                   </section>
                 )}
               </NavLink>
             </li>
           ))}
-          <li
-            key={"Más"}
-            onClick={() => setOpenMore(!openMore)}
-            className="w-auto rounded-xl cursor-pointer hover:bg-[#7e808854]"
-          >
-            <section
-              className={`w-auto h-14 flex flex-col py-2.5 px-5 items-center justify-center rounded-xl group`}
-            >
-              <Icon
-                name={"menu"}
-                className="text-[#75777E] group-hover:text-black dark:group-hover:text-white"
-              />
-              <div
-                className={`flex gap-1 text-center font-medium text-[#75777E]`}
-              >
-                <span
-                  className="text-nowrap text-[10px] group-hover:text-black
-                dark:group-hover:text-white"
-                >
-                  Más
-                </span>
-              </div>
-            </section>
-          </li>
         </ul>
-        {openMore && (
-          <div
-            className="w-auto h-auto absolute bottom-full right-4 rounded-lg border bg-white z-10 animate-blurUp
-          dark:bg-[#1a1a1a] dark:text-white dark:border-none"
+
+        <div
+          onClick={(e) => openModal(null, "menu", null, e.currentTarget)}
+          className="self-end w-auto h-16 flex flex-col items-center justify-center py-2.5 px-5 rounded-full bg-black cursor-pointer group"
+        >
+          <Icon
+            name={"more_horiz"}
+            className="text-white group-hover:text-white dark:group-hover:text-black"
+          />
+        </div>
+
+        {modalType && (
+          <Modal
+            isOpen={isOpen}
+            triggerRef={triggerRef}
+            onClose={closeModal}
+            growDirection="top-left"
+            type={"menu"}
           >
-            <button
-              onClick={avatarOnClick}
-              className="w-full h-full flex items-center justify-center py-1.5 px-4 gap-2.5 rounded-lg transition duration-300
-              hover:bg-gray-200 dark:text-gray-50
-              xl:justify-start
-              "
-            >
-              <img
-                src={avatarItem.icon}
-                alt={avatarItem.alt}
-                className="w-8 h-8"
-              />
-            </button>
-            {mobileItems.map((item) => (
-              <NavLink to={item.path}>
-                {({ isActive }) => (
-                  <section
-                    className={`w-auto h-14 flex flex-col py-2.5 px-5 items-center justify-center subpixel-antialiased rounded-xl transition duration-300 group
-                      hover:bg-[#7e808854]
-                    ${
-                      isActive
-                        ? `bg-black font-medium shadow-[0px_0px_32px_-9px_#000000] text-white fill-white
-                    dark:bg-white dark:text-black dark:shadow-[0px_0px_32px_-11px_#ffffff] animate-clickEffect`
-                        : `text-[#75777E] font-normal dark:text-[7E8088]`
-                    }`}
-                  >
-                    <Icon
-                      name={item.icon}
-                      className={`group-hover:stroke-black
+            {modalType === "menu" && (
+              <div>
+                <button
+                  onClick={avatarOnClick}
+                  className="w-full h-full flex items-center justify-center py-2.5 px-4 gap-2.5 rounded-full transition duration-300
+                  hover:bg-gray-200 dark:text-gray-50
+                  xl:justify-start"
+                >
+                  <img
+                    src={avatarItem.icon}
+                    alt={avatarItem.alt}
+                    className="w-8 h-8"
+                  />
+                </button>
+                {mobileItems.map((item) => (
+                  <NavLink to={item.path} key={item.name}>
+                    {({ isActive }) => (
+                      <div
+                        className={`w-auto h-14 flex flex-col py-2.5 px-5 items-center justify-center subpixel-antialiased rounded-full transition duration-300 group
+                          ${
+                            isActive
+                              ? `bg-black font-medium shadow-[0px_0px_32px_-9px_#000000] text-white fill-white
+                          dark:bg-white dark:text-black dark:shadow-[0px_0px_32px_-11px_#ffffff] animate-clickEffect`
+                              : `text-[#75777E] font-normal dark:text-[7E8088] hover:bg-gray-200`
+                          }`}
+                      >
+                        <Icon
+                          name={item.icon}
+                          fill={isActive}
+                          className={`
                       ${
                         isActive
-                          ? "fill-white scale-105 stroke-none animate-iconFill dark:fill-black"
-                          : "text-[#75777E] fill-none dark:group-hover:text-white"
+                          ? "group-hover:scale-105 animate-iconFill dark:fill-black"
+                          : "text-[#75777E] group-hover:text-black group-hover:[--icon-weight:600] dark:group-hover:text-white"
                       }`}
-                    />
-                    <div
-                      className={`flex gap-1 text-center font-medium
-                      ${isActive ? "" : "group-hover:text-black dark:group-hover:text-white"}
-                      `}
-                    >
-                      <span className="text-[9px]">{item.name}</span>
-                    </div>
-                  </section>
-                )}
-              </NavLink>
-            ))}
-          </div>
+                        />
+                      </div>
+                    )}
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </Modal>
         )}
       </section>
 
       {/* Menús de opciones - Desktop */}
-      <nav className="hidden h-full sm:block md:flex xl:flex flex-col justify-between gap-1 order-1">
+      <nav className="hidden h-full md:flex xl:flex flex-col justify-between gap-1 order-1">
         {/* Primera Sección */}
         <section className="flex">
           <ul

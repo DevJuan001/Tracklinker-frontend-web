@@ -15,8 +15,13 @@ export default function MoreInfoUser({ user, onClose }) {
   return (
     <section className="flex flex-col items-center">
       <div className="w-full self-start flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <Avatar user={user} size={65} />
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <Avatar user={user} size={50} />
+            <span className="font-semibold text-2xl dark:text-white">
+              {user.name} {user.first_surname} {user.second_surname}
+            </span>
+          </div>
           <div
             className={`flex items-center px-2 py-1 gap-1 rounded-full border text-xs
             ${userStatus[user.status]?.styles}
@@ -31,11 +36,7 @@ export default function MoreInfoUser({ user, onClose }) {
           </div>
         </div>
 
-        <span className="font-medium text-lg dark:text-white">
-          {user.name} {user.first_surname} {user.second_surname}
-        </span>
-
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-2">
           <span className="text-[#75777E] text-sm">Rol</span>
           <span className="dark:text-white">{user.rol_name}</span>
         </div>

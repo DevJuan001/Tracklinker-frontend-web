@@ -20,12 +20,9 @@ export default function UserItem({
       {/* Datos del Usuario */}
       <article>
         <address className="flex items-center gap-3 not-italic font-medium dark:text-white">
-          <div className="flex items-center gap-3">
-            <Avatar user={user} size={35} />
-            <span className="text-base sm:text-xl md:text-xl lg:text-xl xl:text-xl">
-              {user.name} {user.first_surname} {user.second_surname}
-            </span>
-          </div>
+          <span className="text-base sm:text-xl md:text-xl lg:text-xl xl:text-xl">
+            {user.name} {user.first_surname} {user.second_surname}
+          </span>
 
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
             <Icon name={"phone"} size={22} />
