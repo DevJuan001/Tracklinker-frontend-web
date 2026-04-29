@@ -27,8 +27,8 @@ export default function Modal({
   }
 
   if (type === "filter") {
-    growDirection = "bottom-center"
-  } 
+    growDirection = "bottom-center";
+  }
 
   const { closeModal } = useFlipModal({
     isOpen,
@@ -68,7 +68,8 @@ export default function Modal({
           visibility: "hidden",
         }}
         ref={modalRef}
-        className={`bg-white rounded-[32px] shadow-lg ${type === "calendar" ? "p-0" : type === "select" ? "p-1.5" : "p-7"}
+        className={`bg-white rounded-[32px] shadow-lg
+          ${type === "calendar" || type === "menu" ? "p-0" : type === "select" ? "p-1.5" : "p-7"}
           dark:bg-black 
           ${
             type === "user"
@@ -79,12 +80,14 @@ export default function Modal({
                   ? "md:min-w-[400px] md:max-w-[400px]"
                   : type === "calendar" || type === "select"
                     ? "md:min-w-[400px] md:max-w-[400px]"
+                    : type === "menu"
+                    ? "max-w-24"
                     : "md:min-w-[500px] md:max-w-[500px]"
           }`}
       >
         <div ref={contentRef}>
           <header
-            className={`${type === "calendar" || type === "select" ? "hidden" : ""} flex justify-between items-center mb-2`}
+            className={`${type === "calendar" || type === "select" || type === "menu" ? "hidden" : ""} flex justify-between items-center mb-2`}
           >
             <span
               data-flip-id="modal-title"
