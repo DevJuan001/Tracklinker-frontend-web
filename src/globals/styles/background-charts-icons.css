@@ -2,20 +2,20 @@
 .users-background {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.644), rgba(255, 255, 255, 0.089)),
-    url("../../assets/icons/main/dashboard/arrow_up_bg_icon.svg");
+    url("../../assets/icons/aside/users-icon.svg");
   background-repeat: no-repeat;
-  background-size: 240px;
-  background-position: right 0px;
+  background-size: 260px;
+  background-position: right -10px top -10px;
 }
 
 /* Fondo del grafico de productos */
 .products-background {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.644), rgba(255, 255, 255, 0.089)),
+    linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9)),
     url("../../assets/icons/aside/products-icon.svg");
   background-repeat: no-repeat;
-  background-size: 140px;
-  background-position: right 5px bottom -20px;
+  background-size: 200px;
+  background-position: right -10px bottom -82px;
 }
 
 /* Fondo del gráfico de ordenes de salida */
@@ -25,7 +25,7 @@
     url("../../assets/icons/aside/output-orders-icon.svg");
   background-repeat: no-repeat;
   background-size: 155px;
-  background-position: right 5px bottom -40px;
+  background-position: right 5px bottom -42px;
 }
 
 /* Fondo del gráfico de categorias */
@@ -35,31 +35,46 @@
     url("../../assets/icons/aside/categories-icon.svg");
   background-repeat: no-repeat;
   background-size: 180px;
-  background-position: right 5px bottom -45px;
+  background-position: right 5px bottom -52px;
 }
 
+/* Fondo que se aplica si el growth es mayor a 0 */
+.growth-background {
+  background-image:
+  linear-gradient(rgba(255, 255, 255, 0.644), rgba(255, 255, 255, 0.089)),
+  url("../../assets/icons/main/dashboard/arrow_up_bg_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 240px;
+  background-position: right 0px top 6px;
+}
+
+
 /* Estilos para el modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .users-background {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
-      url("../../assets/icons/main/dashboard/arrow_up_bg_icon.svg");
-  }
+.dark .users-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.050), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/main/dashboard/arrow_up_bg_icon.svg");
+}
 
-  .products-background {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
-      url("../../assets/icons/aside/products-icon.svg");
-  }
+.dark .products-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.050), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/aside/products-icon.svg");
+}
 
-  .output-orders-background {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
-      url("../../assets/icons/aside/output-orders-icon.svg");
-  }
-  .categories-background {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0)),
-      url("../../assets/icons/aside/categories-icon.svg");
-  }
+.dark .output-orders-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.050), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/aside/output-orders-icon.svg");
+}
+.dark .categories-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.050), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/aside/categories-icon.svg");
+}
+
+.dark .growth-background {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.050), rgba(255, 255, 255, 0)),
+    url("../../assets/icons/main/dashboard/arrow_up_bg_icon.svg");
 }

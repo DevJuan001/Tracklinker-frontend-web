@@ -87,10 +87,10 @@ export default {
         },
         toastIn: {
           "0%": {
-            transform : "translateY(-80px) scale(0.80)"
+            transform: "translateY(-80px) scale(0.80)",
           },
           "100%": {
-            transform: "translateY(0px) scale(1)"
+            transform: "translateY(0px) scale(1)",
           },
         },
       },
@@ -104,14 +104,20 @@ export default {
         modalFadeIn: "modalFadeIn 0.3s cubic-bezier(.56,.27,0,1) forwards",
         modalFadeOut: "modalFadeOut 0.3s cubic-bezier(.56,.27,0,1) forwards",
         blurUp: "blurUp 0.3s ease-in forwards",
-        toastIn: "toastIn 0.2s cubic-bezier(.56,.27,0,1) forwards"
+        toastIn: "toastIn 0.2s cubic-bezier(.56,.27,0,1) forwards",
       },
     },
   },
   plugins: [],
   safelist: [
-    { pattern: /row-span-(2|3|4|5|6|7|8|9|10|11|12)/ },
-    { pattern: /col-span-(2|3|4|5|6|7|8|9|10|11|12)/ },
+    {
+      pattern: /row-span-(2|3|4|5|6|7|8|9|10|11|12)/,
+      variants: ["md", "lg", "xl"],
+    },
+    {
+      pattern: /col-span-(2|3|4|5|6|7|8|9|10|11|12)/,
+      variants: ["md", "lg", "xl"],
+    },
     { pattern: /z-(50|100|150)/ },
     "flex-col",
     "self-end",
