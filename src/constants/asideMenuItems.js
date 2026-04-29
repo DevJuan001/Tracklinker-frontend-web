@@ -85,7 +85,7 @@ export const mobileRelevantItems = [
   {
     name: "Usuarios",
     path: "/users",
-    icon: "person",
+    icon: "groups",
   },
   {
     name: "Productos",
@@ -109,11 +109,6 @@ export const mobileItems = [
     name: "Subcategorias",
     path: "/subcategories",
     icon: "folder_copy",
-  },
-  {
-    name: "Informes",
-    path: "/reports",
-    icon: "finance_mode",
   },
   {
     name: "Garantías",
