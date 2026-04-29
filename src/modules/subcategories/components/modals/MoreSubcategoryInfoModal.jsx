@@ -1,8 +1,13 @@
-import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+// Hooks
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+// Constants
 import { categoryStatusConfig } from "../../../categories/constants/categoryStatusConfig";
+// Components
+import Icon from "../../../../globals/components/ui/Icon";
+import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+// Modals
 import EditSubcategoryInfoModal from "./EditSubcategoryModal";
+import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function MoreSubcategoryInfoModal({ subcategory, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
@@ -11,17 +16,22 @@ export default function MoreSubcategoryInfoModal({ subcategory, onClose }) {
     <section className="flex flex-col justify-center items-center dark:text-white">
       <div className="w-full self-start flex flex-col gap-1.5">
         <div className="flex items-center justify-between">
-          <span className="text-4xl leading-none font-semibold">
-            {subcategory.subcategory_name}
-          </span>
+          <div className="flex items-center gap-2">
+            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#F5F3F6]">
+              <Icon name={"folder_copy"} fill size={28} />
+            </div>
+            <span className="text-4xl leading-none font-semibold">
+              {subcategory.subcategory_name}
+            </span>
+          </div>
           <div
             className={`flex gap-1.5 pl-2 py-1.5 rounded-full border
             ${categoryStatusConfig[subcategory.subcategory_status]?.styles}`}
           >
-            <img
-              src={categoryStatusConfig[subcategory.subcategory_status]?.icon}
-              alt=""
-              className="w-4 h-4"
+            <Icon
+              name={categoryStatusConfig[subcategory.subcategory_status]?.icon}
+              fill={categoryStatusConfig[subcategory.subcategory_status]?.fill}
+              size={16}
             />
             <span className="text-xs font-medium">
               {categoryStatusConfig[subcategory.subcategory_status]?.text}
