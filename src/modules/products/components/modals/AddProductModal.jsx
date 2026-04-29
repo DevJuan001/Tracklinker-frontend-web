@@ -29,6 +29,7 @@ export default function AddProductModal({ onCloseModal }) {
     <section className="w-full flex flex-col items-center gap-2">
       {/* Menú de ordenes de entrada */}
       <SelectMenu
+        searchable
         value={form.input_order}
         spanText={"Orden de entrada"}
         onChange={handleChange}
@@ -43,6 +44,7 @@ export default function AddProductModal({ onCloseModal }) {
 
       {/* Menú de subcategorias */}
       <SelectMenu
+        searchable
         value={form.subcategory}
         name={"subcategory"}
         spanText={"Subcategoria"}
@@ -57,6 +59,7 @@ export default function AddProductModal({ onCloseModal }) {
 
       {/* Menú de marcas */}
       <SelectMenu
+        searchable
         value={form.brand}
         spanText={"Marca"}
         name={"brand"}
@@ -77,6 +80,7 @@ export default function AddProductModal({ onCloseModal }) {
 
       {/* Menú de modelos */}
       <SelectMenu
+        searchable
         value={form.model}
         spanText={"Modelo"}
         name={"model"}
