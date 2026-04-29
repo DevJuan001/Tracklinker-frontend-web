@@ -27,8 +27,8 @@ export default function AddSubcategoryModal({ onClose }) {
         spanText={"Categoria"}
         onChange={handleChange}
         options={categories.map((category) => ({
-          value: category.category_id,
-          label: category.category_name,
+          value: category.id,
+          label: category.name,
         }))}
       />
 

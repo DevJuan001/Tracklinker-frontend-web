@@ -24,6 +24,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
       <div className="w-full flex flex-col gap-2">
         {/* Ordenar Por Orden de entrada*/}
         <SelectMenu
+          searchable
           name={"input_order"}
           spanText={"Orden de entrada"}
           value={form.input_order}
@@ -36,19 +37,21 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
 
         {/* Ordenar Por Categoría */}
         <SelectMenu
+          searchable
           id={"order-by-category-menu"}
           name={"category_order"}
           spanText={"Categoria"}
           value={form.category_order}
           onChange={handleChange}
           options={categories.map((category) => ({
-            value: category.category_id,
-            label: category.category_name,
+            value: category.id,
+            label: category.name,
           }))}
         />
 
         {/* Ordenar Por Subcategoria */}
         <SelectMenu
+          searchable
           width={"w-full"}
           spanText={"Subcategoria"}
           value={form.subcategory_order}
@@ -69,6 +72,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
 
         {/* Ordenar Por Marca */}
         <SelectMenu
+          searchable
           name={"brand"}
           spanText={"Marca"}
           value={form.brand}
@@ -89,6 +93,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
 
         {/* Ordenar Por Modelo */}
         <SelectMenu
+          searchable
           name={"product_model"}
           spanText={"Modelo"}
           value={form.product_model}

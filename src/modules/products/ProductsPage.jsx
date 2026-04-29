@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useCatalog } from "./hooks/useCatalog";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
-// Iconos
-import { productsIcons } from "../../assets/icons/productsIcons";
 // Componentes
 import ProductsTable from "./components/ui/ProductsTable";
 import Layout from "../../globals/components/Layout/Layout";
@@ -39,7 +37,7 @@ export default function ProductsPage() {
     >
       <TopSection
         sectionName={"Productos"}
-        addButtonIcon={productsIcons.addProductIcon}
+        addButtonIcon={"box_add"}
         addButtonText={"Agregar Producto"}
         createOnClick={(e) => {
           openModal(null, "add", null, e.currentTarget);

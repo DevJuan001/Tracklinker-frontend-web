@@ -2,14 +2,18 @@ import { useState } from "react";
 import { productsIcons } from "../../../../assets/icons/productsIcons";
 import { productStatusConfig } from "../../constants/productStatusConfig";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import Icon from "../../../../globals/components/ui/Icon";
 
 export default function ProductsTable({ products, openModal }) {
   const [openId, setOpenId] = useState(null);
   const noProducts = !Array.isArray(products) || products.length === 0;
 
   return noProducts ? (
-    <div className="flex items-center justify-center">
-      <span>No se encontraron productos</span>
+    <div className="flex flex-col items-center justify-center gap-4 text-[#7E7775]">
+      <Icon name={"production_quantity_limits"} size={70} />
+      <span className="text-lg font-medium">
+        No se han encontrado resultados
+      </span>
     </div>
   ) : (
     <section
