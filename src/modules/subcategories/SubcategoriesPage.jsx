@@ -3,8 +3,6 @@ import { useModal } from "../../globals/hooks/useModal";
 import { useState } from "react";
 import { useSearch } from "../../globals/hooks/useSearch";
 import { useSubcategories } from "./hooks/useSubcategories";
-// Iconos
-import { actionsIcons } from "../../assets/icons/actionsIcons";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
 import HelpModal from "../../globals/components/modals/HelpModal";
@@ -37,7 +35,6 @@ export default function SubcategoriesPage() {
     >
       <TopSection
         sectionName={"Subcategorias"}
-        addButtonIcon={actionsIcons.addIcon}
         addButtonText={"Crear Subcategoria"}
         createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
         filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}

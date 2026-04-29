@@ -1,7 +1,7 @@
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 import { actionsIcons } from "../../../../assets/icons/actionsIcons";
 import { categoryStatusConfig } from "../../../categories/constants/categoryStatusConfig";
-import { asideIcons } from "../../../../assets/icons/asideIcons";
+import Icon from "../../../../globals/components/ui/Icon";
 
 export default function SubcategoriesItem({
   subcategory,
@@ -22,16 +22,16 @@ export default function SubcategoriesItem({
         <address className="flex items-center gap-3 not-italic font-medium dark:text-white">
           <p className="text-xl">{subcategory.subcategory_name}</p>
           <div className="flex items-center gap-2">
-            <asideIcons.categoriesIcon className="w-5 h-5 stroke-[90] stroke-black dark:stroke-white" />
+            <Icon name={"folder_open"} size={24} className="dark:text-white" />
             <p>{subcategory.category_name}</p>
           </div>
           <div
             className={`flex items-center px-2 py-1 gap-1 rounded-full text-xs border ${categoryStatusConfig[subcategory.subcategory_status]?.styles}`}
           >
-            <img
-              src={categoryStatusConfig[subcategory.subcategory_status]?.icon}
-              alt=""
-              className="w-4 h-4"
+            <Icon
+              name={categoryStatusConfig[subcategory.subcategory_status]?.icon}
+              fill={categoryStatusConfig[subcategory.subcategory_status]?.fill}
+              size={14}
             />
             <span>
               {categoryStatusConfig[subcategory.subcategory_status]?.text}

@@ -1,7 +1,6 @@
-import { useState, useRef } from "react";
-import { modalIcons } from "../../../assets/icons/modalIcons";
-import { actionsIcons } from "../../../assets/icons/actionsIcons";
+import Icon from "../ui/Icon";
 import Modal from "./Modal";
+import { useSelectMenu } from "../../hooks/useSelectMenu";
 
 export default function SelectMenu({
   name,
@@ -12,18 +11,23 @@ export default function SelectMenu({
   addIconFunction,
   addIconRef,
   addButtonInvisible = true,
+  searchable = false,
 }) {
-  const [open, setOpen] = useState(false);
-  const triggerRef = useRef(null);
+  const {
+    open,
+    search,
+    setSearch,
+    triggerRef,
+    handleSelect,
+    handleClose,
+    handleToggle,
+  } = useSelectMenu();
 
-  const handleSelect = (option) => {
-    const parsed =
-      option.value !== "" && !isNaN(option.value)
-        ? Number(option.value)
-        : option.value;
-    onChange({ target: { name, value: parsed } });
-    setOpen(false);
-  };
+  const filteredOptions = searchable
+    ? options.filter((opt) =>
+        opt.label.toLowerCase().includes(search.toLowerCase()),
+      )
+    : options;
 
   return (
     <section className="relative w-full flex flex-col gap-1">
@@ -31,7 +35,7 @@ export default function SelectMenu({
         <div
           ref={triggerRef}
           tabIndex={0}
-          onClick={() => setOpen(!open)}
+          onClick={handleToggle}
           className="relative w-full h-16 pr-2 pt-2 flex items-center border border-[#a1a1a131] 
           rounded-2xl cursor-pointer text-sm transition-all duration-300 focus-within:shadow-[0_0_3px_2px_#e5e7eb]
           dark:border-[#28282b] dark:text-[#E4E2E5] dark:focus:focus:shadow-[0_0_4px_2px_#ffffff33]"
@@ -41,6 +45,7 @@ export default function SelectMenu({
               {spanText}
             </span>
           </div>
+
           <div className="w-full h-full flex pl-4 pt-3">
             <div className="w-full flex items-center text-base">
               {options.find((opt) => {
@@ -51,10 +56,10 @@ export default function SelectMenu({
               })?.label ?? "Seleccionar"}
             </div>
           </div>
-          <img
-            src={modalIcons.arrowUp}
-            alt=""
-            className={`-translate-y-1 transition-transform duration-200 ${open ? "rotate-180" : "rotate-0"} dark:invert`}
+
+          <Icon
+            name={"arrow_drop_down"}
+            className={`-translate-y-1 dark:invert`}
           />
         </div>
         <button
@@ -65,39 +70,69 @@ export default function SelectMenu({
           }}
           disabled={addButtonInvisible}
           type="button"
-          className={`h-16 flex items-center justify-center px-6 border rounded-2xl bg-[#e5e5e527]
+          className={`h-16 flex items-center justify-center px-5 border rounded-2xl bg-[#e5e5e527]
           ${addButtonInvisible ? "hidden" : "opacity-100"} 
           dark:bg-black dark:border-[#28282b]`}
         >
-          <img src={actionsIcons.addIcon} className="h-5 w-5 dark:invert" />
+          <Icon name={"add"} size={22} className="dark:invert" />
         </button>
       </div>
 
       {open && (
         <Modal
           isOpen={open}
-          onClose={() => setOpen(false)}
+          onClose={handleClose}
           triggerRef={triggerRef}
           growDirection="center"
           type="select"
           z_index="600"
         >
           <div
-            className="w-full max-h-96 overflow-y-auto rounded-[32px] bg-white 
+            className="w-full max-h-96 flex flex-col gap-1.5 overflow-y-auto rounded-3xl bg-white 
             dark:bg-black dark:text-white"
             onClick={(e) => e.stopPropagation()}
           >
-            {options.map((option) => (
-              <div
-                key={option.value}
-                onClick={() => handleSelect(option)}
-                className="h-14 flex items-center px-6 cursor-pointer text-sm rounded-full transition-colors
-                hover:bg-[#efedf0] hover:font-medium  
-                dark:hover:bg-[#ffffff15]"
-              >
-                <span>{option.label}</span>
+            {searchable && (
+              <input
+                id="search-menu-bar"
+                autoFocus
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Buscar..."
+                className="w-full min-h-14 px-5 sticky top-0.5 text-sm rounded-full border border-[#a1a1a131] 
+                  outline-none dark:border-[#28282b]
+                  dark:text-white dark:placeholder:text-[#b4aab4]"
+              />
+            )}
+            {filteredOptions.length === 0 ? (
+              <div className="min-h-14 flex items-center justify-center text-[#7E777E] gap-2.5">
+                <Icon name={"search_off"} />
+                <span className="text-center text-sm py-6">
+                  No encontraron resultados
+                </span>
               </div>
-            ))}
+            ) : (
+              filteredOptions.map((option) => {
+                const isSelected =
+                  option.value !== "" && !isNaN(option.value)
+                    ? Number(option.value) === Number(value)
+                    : String(option.value) === String(value);
+
+                return (
+                  <div
+                    key={option.value}
+                    onClick={() => handleSelect(option, name, onChange)}
+                    className={`min-h-14 flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
+                  hover:bg-[#efedf0] hover:font-medium  
+                  dark:hover:bg-[#ffffff15]
+                  ${isSelected ? "bg-[#efedf0] font-medium dark:bg-[#ffffff15]" : ""}`}
+                  >
+                    <span>{option.label}</span>
+                  </div>
+                );
+              })
+            )}
           </div>
         </Modal>
       )}
