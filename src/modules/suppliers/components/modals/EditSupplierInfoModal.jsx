@@ -1,4 +1,5 @@
 // Hooks
+import { useCities } from "../../../users/hooks/useCities";
 import { useEditSupplier } from "../../hooks/useEditSupplier";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
@@ -7,13 +8,14 @@ import FormField from "../../../../globals/components/ui/FormField";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
+import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditSupplierInfoModal({ supplier, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { form, loading, handleChange, handleSubmit } =
     useEditSupplier(supplier);
+  const { cities } = useCities();
 
   return (
     <section className="flex flex-col items-center">
@@ -25,6 +27,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           labelText={"Nombre"}
           id={"name"}
         />
+
         <FormField
           onChange={handleChange}
           name={"email"}
@@ -33,14 +36,20 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           id={"email"}
           autoComplete="email"
         />
-        <FormField
+
+        <SelectMenu
+          searchable
           onChange={handleChange}
           name={"city"}
           value={form.city}
-          labelText={"Ciudad"}
+          spanText={"Ciudad"}
           id={"city"}
-          autoComplete="city"
+          options={cities.map((city) => ({
+            value: city.id,
+            label: city.name,
+          }))}
         />
+
         <FormField
           onChange={handleChange}
           value={form.phone}
@@ -49,6 +58,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           name={"phone"}
           autoComplete="tel"
         />
+
         <FormField
           onChange={handleChange}
           name={"address"}
@@ -95,7 +105,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          errorTitle="¡No se puedo editar el proveedor!"
+          errorTitle="¡No se pudo editar el proveedor!"
           errorText="Verfica que todos los campos esten completos"
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
