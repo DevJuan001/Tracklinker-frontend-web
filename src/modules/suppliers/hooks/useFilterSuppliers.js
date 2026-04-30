@@ -6,7 +6,7 @@ export function useFilterSuppliers() {
     end_date: "",
     status: "",
     name_order: "",
-    city_order: "",
+    city: "",
   });
 
   function handleChange(e) {
