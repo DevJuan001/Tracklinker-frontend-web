@@ -7,8 +7,9 @@ export function useEnableSupplier(supplier_id, onClose) {
   const [error, setError] = useState(false);
   const queryClient = useQueryClient();
 
-  async function handleSubmit(setInnerModal) {
+  async function handleSubmit() {
     setLoading(true);
+
     try {
       const response = await enableSupplierService(supplier_id);
       if (response.success === true) {
@@ -16,7 +17,6 @@ export function useEnableSupplier(supplier_id, onClose) {
         onClose();
       }
     } catch (error) {
-      setInnerModal("error");
       setError(error);
     } finally {
       setLoading(false);
