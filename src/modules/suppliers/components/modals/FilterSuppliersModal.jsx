@@ -32,6 +32,7 @@ export default function FilterSuppliersModal({ setFilters, onClose }) {
         />
 
         <SelectMenu
+          searchable
           spanText={"Ciudad"}
           name={"city_order"}
           onChange={handleChange}
@@ -40,6 +41,17 @@ export default function FilterSuppliersModal({ setFilters, onClose }) {
             value: city.id,
             label: city.name,
           }))}
+        />
+
+        <SelectMenu
+          spanText={"Estado"}
+          name={"status"}
+          onChange={handleChange}
+          value={form.status}
+          options={[
+            { value: 1, label: "Deshabilitado" },
+            { value: 2, label: "Activo" },
+          ]}
         />
       </div>
     </FilterModal>
