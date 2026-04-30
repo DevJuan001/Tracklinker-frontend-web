@@ -21,14 +21,12 @@ export default function SupplierItem({
       <article className="flex dark:text-white">
         <address className="flex items-center gap-5 not-italic font-medium">
           <p className="text-[22px]">{supplier.name}</p>
+
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
-            <img
-              src={usersIcons.phoneIcon}
-              alt=""
-              className="w-5 h-5 dark:invert"
-            />
+            <Icon size={22} name={"phone"} />
             <p>{supplier.phone}</p>
           </div>
+
           <div className="hidden md:flex lg:flex xl:flex items-center">
             <img
               src={usersIcons.cityIcon}
@@ -37,6 +35,7 @@ export default function SupplierItem({
             />
             <p>{supplier.city_name}</p>
           </div>
+
           <div
             className={`flex items-center px-2 py-1 gap-1 rounded-full border text-xs ${userStatus[supplier.status]?.styles}`}
           >
