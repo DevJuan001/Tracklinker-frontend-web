@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useSuppliers } from "./hooks/useSuppliers";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
-// Iconos
-import { actionsIcons } from "../../assets/icons/actionsIcons";
 // Componentes
 import SuppliersList from "./components/ui/SuppliersList";
 import Layout from "../../globals/components/Layout/Layout";
@@ -37,7 +35,6 @@ export default function SuppliersPage() {
     >
       <TopSection
         sectionName={"Proveedores"}
-        addButtonIcon={actionsIcons.addIcon}
         addButtonText={"Agregar Proveedor"}
         createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
         filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}
