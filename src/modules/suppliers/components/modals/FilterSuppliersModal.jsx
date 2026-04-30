@@ -34,9 +34,9 @@ export default function FilterSuppliersModal({ setFilters, onClose }) {
         <SelectMenu
           searchable
           spanText={"Ciudad"}
-          name={"city_order"}
+          name={"city"}
           onChange={handleChange}
-          value={form.city_order}
+          value={form.city}
           options={cities.map((city) => ({
             value: city.id,
             label: city.name,
