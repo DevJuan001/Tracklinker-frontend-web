@@ -1,59 +1,69 @@
 // Hooks
-import { useState } from "react";
+import { useCities } from "../../../users/hooks/useCities";
 import { useCreateSupplier } from "../../hooks/useCreateSupplier";
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import FormField from "../../../../globals/components/ui/FormField";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function AddSupplierModal({ onClose }) {
-  const [innerModal, setInnerModal] = useState(null);
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { form, loading, handleChange, handleSubmit } = useCreateSupplier();
+  const { cities } = useCities();
+
   return (
     <section className="flex flex-col items-center gap-2">
       <FormField
         onChange={handleChange}
-        name={"supplier_name"}
-        value={form.supplier_name}
+        name={"name"}
+        value={form.name}
         labelText={"Nombre"}
         placeholder={"Lenovo"}
         id={"name"}
         autoComplete="given-name"
       />
+
       <FormField
         onChange={handleChange}
-        value={form.supplier_email}
-        name={"supplier_email"}
+        value={form.email}
+        name={"email"}
         labelText={"Correo Electrónico"}
         placeholder={"asus@asus.com"}
         id={"email"}
         autoComplete="email"
       />
+
       <FormField
         onChange={handleChange}
-        value={form.supplier_phone}
-        name={"supplier_phone"}
+        value={form.phone}
+        name={"phone"}
         labelText={"Número"}
         placeholder={"300012124"}
         id={"phone"}
         autoComplete="tel"
       />
-      <FormField
+
+      <SelectMenu
+        searchable
         onChange={handleChange}
-        name={"supplier_city"}
-        value={form.supplier_city}
-        labelText={"Ciudad"}
-        placeholder={"Miami"}
-        id={"city"}
-        autoComplete="city"
+        name={"city"}
+        value={form.city}
+        spanText={"Ciudad"}
+        options={cities.map((city) => ({
+          value: city.id,
+          label: city.name,
+        }))}
       />
+
       <FormField
         onChange={handleChange}
-        name={"supplier_address"}
-        value={form.supplier_address}
+        name={"address"}
+        value={form.address}
         labelText={"Dirección"}
         placeholder={"KR 124 # 12-124"}
         id={"address"}
@@ -63,12 +73,16 @@ export default function AddSupplierModal({ onClose }) {
       {/* Botones */}
       <ConfirmCancelButtons
         confirmText={loading ? <Loader /> : "Crear"}
-        confirmButtonOnClick={(e) => handleSubmit(e, setInnerModal)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onClose}
       />
+
       {/* Modales internas */}
-      {innerModal === "success" && (
+      {innerType === "success" && (
         <SuccessModal
+          location="anchored"
+          growDirection={"top-right"}
+          triggerRef={innerTrigger}
           isOpen={true}
           confirmTitle={"Proveedor creado con éxito!"}
           confirmText={
@@ -76,18 +90,21 @@ export default function AddSupplierModal({ onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            setInnerModal(null);
+            openInnerModal(null);
             onClose();
           }}
         />
       )}
-      {innerModal === "error" && (
+      {innerType === "error" && (
         <ErrorModal
+          location="anchored"
+          growDirection={"top-right"}
+          triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="¡No se puedo crear el proveedor!"
           errorText="Verfica que todos los campos esten completos o que no exista un proveedor con ese correo"
           confirmButtonText="Volver a intentarlo"
-          onClose={() => setInnerModal(null)}
+          onClose={() => openInnerModal(null)}
         />
       )}
     </section>
