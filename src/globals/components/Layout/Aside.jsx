@@ -21,8 +21,8 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
 
   return (
     <aside
-      className="flex order-2 h-[80px] py-1
-      md:h-full md:flex-col md:order-1 md:px-5 md:pt-5
+      className="absolute bottom-0 flex order-2 h-[80px] py-1 z-10
+      md:static md:h-full md:flex-col md:order-1 md:px-5 md:pt-5
       xl:h-full xl:flex-col xl:row-span-2 xl:px-3 xl:pt-5 xl:order-1
       dark:bg-black"
     >
@@ -32,7 +32,10 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
         sm:px-2
         md:hidden"
       >
-        <ul className="w-auto h-full flex rounded-full shadow-[1px_1px_10px_5px_#00000014]">
+        <ul
+          className="w-auto h-full flex rounded-full shadow-[1px_1px_10px_5px_#00000014] bg-white
+        dark:bg-black dark:shadow-[1px_1px_1px_4px_#ffffff14]"
+        >
           {mobileRelevantItems.map((item) => (
             <li key={item.name} className="py-1.5 px-1 rounded-full">
               <NavLink to={item.path}>
@@ -65,11 +68,12 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
 
         <div
           onClick={(e) => openModal(null, "menu", null, e.currentTarget)}
-          className="self-end w-auto h-16 flex flex-col items-center justify-center py-2.5 px-5 rounded-full bg-black cursor-pointer group"
+          className="self-end w-auto h-16 flex flex-col items-center justify-center py-2.5 px-5 rounded-full bg-black cursor-pointer group
+          dark:bg-white"
         >
           <Icon
             name={"more_horiz"}
-            className="text-white group-hover:text-white dark:group-hover:text-black"
+            className="text-white group-hover:text-white dark:text-black dark:group-hover:text-black"
           />
         </div>
 
