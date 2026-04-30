@@ -1,6 +1,7 @@
 import SupplierActions from "./SupplierActions";
 import { usersIcons } from "../../../../assets/icons/usersIcons";
 import { userStatus } from "../../../users/constants/userStatus";
+import Icon from "../../../../globals/components/ui/Icon";
 
 export default function SupplierItem({
   supplier,
@@ -18,28 +19,31 @@ export default function SupplierItem({
     >
       {/* Información del proveedor */}
       <article className="flex dark:text-white">
-        <address className="flex gap-5 not-italic font-medium">
+        <address className="flex items-center gap-5 not-italic font-medium">
           <p className="text-[22px]">{supplier.name}</p>
+
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
-            <img
-              src={usersIcons.phoneIcon}
-              alt=""
-              className="w-5 h-5 dark:invert"
-            />
+            <Icon size={22} name={"phone"} />
             <p>{supplier.phone}</p>
           </div>
+
           <div className="hidden md:flex lg:flex xl:flex items-center">
             <img
               src={usersIcons.cityIcon}
               alt=""
               className="invert brightness-200 dark:invert-0"
             />
-            <p>{supplier.city}</p>
+            <p>{supplier.city_name}</p>
           </div>
+
           <div
-            className={`flex items-center px-2 gap-1 rounded-full border text-xs ${userStatus[supplier.status]?.styles}`}
+            className={`flex items-center px-2 py-1 gap-1 rounded-full border text-xs ${userStatus[supplier.status]?.styles}`}
           >
-            <img src={userStatus[supplier.status]?.icon} alt="" />
+            <Icon
+              size={14}
+              name={userStatus[supplier.status]?.icon}
+              fill={userStatus[supplier.status]?.fill}
+            />
             <span>{userStatus[supplier.status]?.text}</span>
           </div>
         </address>

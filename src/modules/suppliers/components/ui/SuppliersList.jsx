@@ -2,6 +2,7 @@ import SupplierItem from "./SupplierItem";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { userStatus } from "../../../users/constants/userStatus";
+import Icon from "../../../../globals/components/ui/Icon";
 
 export default function SuppliersList({ suppliers, loading, openModal }) {
   const noSuppliers = suppliers.length === 0 && !loading;
@@ -11,9 +12,12 @@ export default function SuppliersList({ suppliers, loading, openModal }) {
     <section className="max-h-[95%] max-w-full flex flex-col gap-1 overflow-x-auto overflow-y-auto">
       <ul className="flex flex-col gap-1">
         {noSuppliers && (
-          <span className="text-center dark:text-white pt-5">
-            No se encontraron proveedores
-          </span>
+          <div className="flex flex-col items-center justify-center gap-4 text-[#7E7775]">
+            <Icon name={"group_search"} size={70} />
+            <span className="text-lg font-medium">
+              No se han encontrado resultados
+            </span>
+          </div>
         )}
         {isFirstLoad ? (
           <SkeletonTheme baseColor="#f3eef5" highlightColor="#c5c1c7">
