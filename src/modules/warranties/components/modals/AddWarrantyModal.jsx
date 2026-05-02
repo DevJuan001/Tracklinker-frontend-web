@@ -1,5 +1,5 @@
 // Hooks
-import { useCities } from "../../../users/hooks/useCities";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useCreateWarranty } from "../../hooks/useCreateWarranties";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
