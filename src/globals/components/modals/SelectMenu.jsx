@@ -100,9 +100,8 @@ export default function SelectMenu({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar..."
-                className="w-full min-h-14 px-5 sticky top-0.5 text-sm rounded-full border border-[#a1a1a131] 
-                  outline-none dark:border-[#28282b]
-                  dark:text-white dark:placeholder:text-[#b4aab4]"
+                className="w-full min-h-14 px-5 sticky top-0.5 text-sm rounded-full border border-[#a1a1a131] outline-none
+                dark:border-[#28282ba1] dark:bg-black dark:text-white dark:placeholder:text-[#b4aab4]"
               />
             )}
             {filteredOptions.length === 0 ? (
