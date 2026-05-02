@@ -1,7 +1,11 @@
 import { useState } from "react";
 
-export function useFilterWarranties(filters, refetch) {
-  const [form, setForm] = useState(filters);
+export function useFilterWarranties() {
+  const [form, setForm] = useState({
+    start_date: "",
+    end_date: "",
+    status: "",
+  });
 
   function handleChange(e) {
     setForm((prev) => ({
@@ -10,13 +14,8 @@ export function useFilterWarranties(filters, refetch) {
     }));
   }
 
-  function handleApply() {
-    refetch(form);
-  }
-
   return {
     form,
     handleChange,
-    handleApply,
   };
 }

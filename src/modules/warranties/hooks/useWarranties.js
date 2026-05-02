@@ -1,25 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getWarranties } from "../services/getWarranties";
+import { useQuery } from "@tanstack/react-query";
 
 export function useWarranties() {
-  const [warranties, setWarranties] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [filters, setFilters] = useState();
 
-  async function fetchWarranties(filters) {
-    try {
-      setLoading(true);
-      const data = await getWarranties(filters);
-      setWarranties(data);
-    } catch (error) {
-      setError(error.message);
-    }
-  }
+  const warranties = useQuery({
+    queryKey: ["warranties", filters],
+    queryFn: () => getWarranties(filters),
+    staleTime: 1000 * 60 * 10,
+  });
 
-  // Esto llama a la función getWarranties y espera a obtener toda los datos y los almacena en "data"
-  useEffect(() => {
-    fetchWarranties();
-  }, []);
-
-  return { warranties, loading, error, fetchWarranties };
+  return {
+    warranties: warranties.data || [],
+    loading: warranties.isLoading,
+    error: warranties.error,
+    setFilters,
+  };
 }

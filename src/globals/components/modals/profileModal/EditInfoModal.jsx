@@ -1,6 +1,6 @@
 //Hooks
 import { useInnerModal } from "../../../hooks/useInnerModal";
-import { useCities } from "../../../../modules/users/hooks/useCities";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useUpdateCurrentUserInfo } from "../../../hooks/useUpdateCurrentUserInfo";
 // Components
 import Loader from "../../ui/Loader";

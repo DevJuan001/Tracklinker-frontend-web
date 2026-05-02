@@ -1,132 +1,130 @@
 // Hooks
-import { useState } from "react";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useEditWarranty } from "../../hooks/useEditWarranty";
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import FormField from "../../../../globals/components/ui/FormField";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import TextArea from "../../../../globals/components/ui/TextArea";
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
-export default function EditWarrantyModal({
-  selectedWarranty,
-  onClose,
-  onEditSuccess,
-}) {
-  const [innerModal, setInnerModal] = useState(null);
-  const { form, handleChange, handleSubmit, loading } = useEditWarranty(
-    selectedWarranty.warranty_incidents_id,
-    {
-      product_serial: selectedWarranty.product_serial,
-      warranty_customer: selectedWarranty.warranty_customer,
-      warranty_phone: selectedWarranty.warranty_phone,
-      warranty_address: selectedWarranty.warranty_address,
-      warranty_city: selectedWarranty.warranty_city,
-      warranty_link_attachments: selectedWarranty.warranty_link_attachments,
-      warranty_description: selectedWarranty.warranty_description,
-      warranty_status: selectedWarranty.warranty_status,
-    },
-  );
+export default function EditWarrantyModal({ selectedWarranty, onClose }) {
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { form, handleChange, handleSubmit, loading } =
+    useEditWarranty(selectedWarranty);
+  const { cities } = useCities();
 
   return (
-    <section className="flex flex-col items-center">
-      <form className="w-full flex flex-col gap-1 w-72">
-        <FormField
-          name={"product_serial"}
-          labelText={"Serial"}
-          value={form.product_serial}
-          onChange={handleChange}
-          placeholder="QTYC99999"
-        />
+    <section className="flex flex-col items-center gap-2">
+      <FormField
+        id={"product_serial"}
+        name={"product_serial"}
+        labelText={"Serial"}
+        value={form.product_serial}
+        onChange={handleChange}
+        placeholder="QTYC99999"
+      />
 
-        <FormField
-          name={"warranty_customer"}
-          labelText={"Nombre del Cliente"}
-          value={form.warranty_customer}
-          onChange={handleChange}
-        />
+      <FormField
+        id={"customer"}
+        name={"customer"}
+        labelText={"Nombre del Cliente"}
+        value={form.customer}
+        onChange={handleChange}
+      />
 
-        <FormField
-          name={"warranty_phone"}
-          labelText={"Teléfono"}
-          value={form.warranty_phone}
-          onChange={handleChange}
-        />
+      <FormField
+        id={"phone"}
+        name={"phone"}
+        labelText={"Teléfono"}
+        value={form.phone}
+        onChange={handleChange}
+      />
 
-        <FormField
-          name={"warranty_address"}
-          labelText={"Dirección"}
-          value={form.warranty_address}
-          onChange={handleChange}
-        />
+      <FormField
+        id={"address"}
+        name={"address"}
+        labelText={"Dirección"}
+        value={form.address}
+        onChange={handleChange}
+      />
 
-        <FormField
-          name={"warranty_city"}
-          labelText={"Ciudad"}
-          value={form.warranty_city}
-          onChange={handleChange}
-        />
+      <SelectMenu
+        searchable
+        spanText={"Ciudad"}
+        name={"city"}
+        value={form.city}
+        onChange={handleChange}
+        options={cities.map((city) => ({
+          value: city.id,
+          label: city.name,
+        }))}
+      />
 
-        <label className="text-sm mt-1">Requerimiento</label>
-        <textarea
-          name="warranty_description"
-          value={form.warranty_description}
-          onChange={handleChange}
-          className="w-full px-6 py-3 text-sm rounded-xl border bg-[#e5e5e527] dark:bg-[#ffffff10] dark:border-[#ffffff15] dark:text-white"
-        />
+      <TextArea
+        labelText={"Descripción"}
+        placeholder={
+          "Descripción detallada del estado del producto y que se debería modificar del producto"
+        }
+        onChange={handleChange}
+        value={form.description}
+        id={"description"}
+        name={"description"}
+      />
 
-        <FormField
-          name={"warranty_link_attachments"}
-          labelText={"Enlace de Adjuntos"}
-          value={form.warranty_link_attachments}
-          onChange={handleChange}
-        />
+      <FormField
+        id={"link_attachments"}
+        name={"link_attachments"}
+        labelText={"Enlace de Adjuntos"}
+        value={form.link_attachments}
+        onChange={handleChange}
+      />
 
-        <SelectMenu
-          spanText={"Estado"}
-          name={"warranty_status"}
-          value={form.warranty_status}
-          onChange={handleChange}
-          options={[
-            {
-              value: 1,
-              label: "Pendiente",
-            },
-            { value: 2, label: "En proceso" },
-            { value: 3, label: "Completada" },
-          ]}
-        />
-      </form>
+      <SelectMenu
+        spanText={"Estado"}
+        name={"status"}
+        value={form.status}
+        onChange={handleChange}
+        options={[
+          { value: 1, label: "Deshabilitada" },
+          { value: 2, label: "Pendiente" },
+          { value: 3, label: "En Proceso" },
+          { value: 4, label: "Completada" },
+        ]}
+      />
 
       <ConfirmCancelButtons
-        confirmButtonOnClick={(e) => handleSubmit(e, setInnerModal)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onClose}
         confirmText={loading ? <Loader /> : "Editar"}
       />
 
-      {innerModal === "success" && (
+      {innerType === "success" && (
         <SuccessModal
-          isOpen
+          triggerRef={innerTrigger}
+          isOpen={true}
           confirmTitle="¡Garantía actualizada!"
           confirmText="La garantía se ha actualizado correctamente."
           confirmButtonText="Cerrar"
           onClose={() => {
-            setInnerModal(null);
-            if (onEditSuccess) onEditSuccess();
+            openInnerModal(null);
             onClose();
           }}
         />
       )}
 
-      {innerModal === "error" && (
+      {innerType === "error" && (
         <ErrorModal
-          isOpen
+          triggerRef={innerTrigger}
+          isOpen={true}
           errorTitle="Error al actualizar"
           errorText="No se pudo actualizar la garantía. Intenta nuevamente."
           confirmButtonText="Cerrar"
-          onClose={() => setInnerModal(null)}
+          onClose={() => openInnerModal(null)}
         />
       )}
     </section>

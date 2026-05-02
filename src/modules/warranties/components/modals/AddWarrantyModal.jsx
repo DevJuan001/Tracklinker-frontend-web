@@ -1,6 +1,7 @@
 // Hooks
-import { useState } from "react";
-import { useCreateWarranty } from "../../hooks/useCreateWarranties"; // ⚠ Asegúrate de que la ruta es correcta
+import { useCities } from "../../../../globals/hooks/useCities";
+import { useCreateWarranty } from "../../hooks/useCreateWarranty";
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import FormField from "../../../../globals/components/ui/FormField";
@@ -8,26 +9,18 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function AddWarrantyModal({
-  product,
-  onCloseModal,
-  onAddSuccess,
-}) {
-  const [innerModal, setInnerModal] = useState(null);
-  const { form, loading, handleChange, handleSubmit } = useCreateWarranty({
-    product_serial: product?.product_serial || "",
-    warranty_customer: "",
-    warranty_phone: "",
-    warranty_address: "",
-    warranty_city: "",
-    warranty_description: "",
-    warranty_link_attachments: "",
-  });
+export default function AddWarrantyModal({ product, onCloseModal }) {
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { form, loading, handleChange, handleSubmit } =
+    useCreateWarranty(product);
+  const { cities } = useCities();
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center gap-2">
       <FormField
+        id={"serial"}
         placeholder={"QTYC99999"}
         name={"product_serial"}
         labelText={"Serial"}
@@ -36,87 +29,123 @@ export default function AddWarrantyModal({
       />
 
       <FormField
-        name={"warranty_customer"}
+        id={"customer"}
+        name={"customer"}
         labelText={"Nombre del Cliente"}
-        value={form.warranty_customer}
+        value={form.customer}
         onChange={handleChange}
         placeholder="Miguel Arnulfo Pérez"
       />
 
       <FormField
-        name={"warranty_phone"}
+        id={"phone"}
+        name={"phone"}
         labelText={"Teléfono"}
-        value={form.warranty_phone}
+        value={form.phone}
         onChange={handleChange}
         placeholder="+57 300 123 XXXX"
       />
 
       <FormField
-        name={"warranty_address"}
+        id={"address"}
+        name={"address"}
         labelText={"Dirección"}
-        value={form.warranty_address}
+        value={form.address}
         onChange={handleChange}
         placeholder="kr 45 # 67-XX"
       />
 
-      <FormField
-        name={"warranty_city"}
-        labelText={"Ciudad"}
-        value={form.warranty_city}
+      <SelectMenu
+        searchable
+        name={"city"}
+        spanText={"Ciudad"}
+        value={form.city}
         onChange={handleChange}
+        options={cities.map((city) => ({
+          value: city.id,
+          label: city.name,
+        }))}
         placeholder="Bogotá"
       />
 
-      <div className="w-full">
-        <span>Descripción del problema</span>
+      <div
+        tabIndex={0}
+        className="relative flex w-full border pr-1 rounded-xl
+        focus-within:shadow-[0_0_3px_2px_#e5e7eb]
+        dark:border-[#28282b] dark:focus:shadow-[0_0_4px_2px_#ffffff33]
+        "
+      >
         <textarea
-          name="warranty_description"
-          value={form.warranty_description}
+          required
+          placeholder={
+            "Descripción detallada del estado del producto y que se debería modificar del producto"
+          }
+          name={"description"}
           onChange={handleChange}
-          placeholder="Descripción breve del problema reportado por el cliente"
-          className="w-full rounded-xl outline-none border bg-[#e5e5e527] placeholder:text-[#8a8a8a] placeholder:text-sm
-            dark:bg-[#ffffff10] dark:border-[#ffffff15] dark:text-white p-3"
+          value={form.description}
+          id={"description"}
+          className="
+          w-full h-40 px-4 pt-7 pb-2 outline-none
+          bg-transparent rounded-xl
+          transition-all duration-200
+          autofill:bg-white autofill:shadow-[inset_0_0_0px_1000px_white]
+          dark:text-[#E4E2E5]
+          "
         />
+        <label
+          htmlFor={"description"}
+          className="
+          absolute left-3.5 top-5 px-0.5
+          -translate-y-1/2
+          text-xs text-[#7E777E]
+          pointer-events-none
+          transition-all duration-200
+          bg-white dark:bg-black dark:text-[#b4aab4]
+          "
+        >
+          Descripción
+        </label>
       </div>
 
       <FormField
-        name={"warranty_link_attachments"}
+        id={"link_attachments"}
+        name={"link_attachments"}
         labelText={"Link de adjuntos"}
-        value={form.warranty_link_attachments}
+        value={form.link_attachments}
         onChange={handleChange}
         placeholder="https://drive.google.com/ejemplo"
       />
 
       <ConfirmCancelButtons
-        confirmButtonOnClick={(e) => handleSubmit(e, setInnerModal)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onCloseModal}
         confirmText={loading ? <Loader /> : "Crear"}
       />
 
-      {/* MODALES DE ÉXITO / ERROR */}
-      {innerModal === "success" && (
+      {innerType === "success" && (
         <SuccessModal
-          isOpen
+          triggerRef={innerTrigger}
+          location="right"
+          isOpen={true}
           confirmTitle="¡Garantía registrada con éxito!"
           confirmText="La garantía se ha guardado correctamente."
           confirmButtonText="Volver"
           onClose={() => {
-            setInnerModal(null);
-            onAddSuccess();
+            openInnerModal(null);
             onCloseModal();
           }}
         />
       )}
 
-      {innerModal === "error" && (
+      {innerType === "error" && (
         <ErrorModal
-          isOpen
+          triggerRef={innerTrigger}
+          location="right"
+          isOpen={true}
           errorTitle="Error al registrar la garantía"
-          errorText={
-            innerModal.message || "Verifica los datos e inténtalo nuevamente."
-          }
+          errorText={"Verifica los datos e inténtalo nuevamente."}
           confirmButtonText="Volver"
-          onClose={() => setInnerModal(null)}
+          onClose={() => openInnerModal(null)}
         />
       )}
     </section>
