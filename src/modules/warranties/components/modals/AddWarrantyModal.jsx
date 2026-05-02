@@ -1,6 +1,6 @@
 // Hooks
 import { useCities } from "../../../../globals/hooks/useCities";
-import { useCreateWarranty } from "../../hooks/useCreateWarranties";
+import { useCreateWarranty } from "../../hooks/useCreateWarranty";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
