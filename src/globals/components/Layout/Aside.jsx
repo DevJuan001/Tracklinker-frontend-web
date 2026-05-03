@@ -33,11 +33,11 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
         md:hidden"
       >
         <ul
-          className="w-auto h-full flex rounded-full shadow-[1px_1px_10px_5px_#00000014] bg-white
+          className="w-auto h-full flex px-1 gap-0.5 rounded-full shadow-[1px_1px_10px_5px_#00000014] bg-white
         dark:bg-black dark:shadow-[1px_1px_1px_4px_#ffffff14]"
         >
           {mobileRelevantItems.map((item) => (
-            <li key={item.name} className="py-1.5 px-1 rounded-full">
+            <li key={item.name} className="py-1.5 rounded-full">
               <NavLink to={item.path}>
                 {({ isActive }) => (
                   <section
@@ -46,7 +46,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                       isActive
                         ? `bg-black font-medium shadow-[0px_0px_32px_-9px_#000000] text-white fill-white
                     dark:bg-white dark:text-black dark:shadow-[0px_0px_32px_-11px_#ffffff] animate-clickEffect`
-                        : `text-[#75777E] font-normal dark:text-[7E8088] hover:bg-[#7e808854]`
+                        : `text-[#75777E] font-normal dark:text-[7E8088] hover:bg-gray-200`
                     }`}
                   >
                     <Icon
@@ -174,7 +174,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                             ? `bg-black font-medium shadow-[0px_0px_32px_-9px_#000000] text-white fill-white
                         dark:bg-white dark:text-black dark:shadow-[0px_0px_32px_-11px_#ffffff] animate-clickEffect`
                             : `text-[#75777E] font-normal hover:bg-gray-200
-                        dark:text-[7E8088] dark:hover:bg-[#3b3b3f98]`
+                        dark:text-[#75777eb7] dark:hover:bg-[#181818]`
                         }`}
                     >
                       <Icon
@@ -185,7 +185,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                           ${
                             isActive
                               ? "fill-white animate-iconFill group-hover:scale-105 dark:fill-black"
-                              : "text-[#75777eb7] fill-none group-hover:text-black group-hover:[--icon-weight:600] dark:group-hover:text-white"
+                              : "text-[#75777eb7] fill-none group-hover:text-black group-hover:[--icon-weight:500] dark:group-hover:text-white"
                           }`}
                       />
                       <div
@@ -235,7 +235,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                   <NavLink to={item.path} onClick={item.onClick}>
                     <section
                       className="h-14 flex items-center justify-center gap-2.5 py-2.5 subpixel-antialiased group
-                      dark:text-[7E8088]
+                      dark:text-[#7E8088]
                       md:pl-0
                       xl:w-full xl:h-auto xl:justify-start xl:pl-7"
                     >
@@ -265,7 +265,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
                         name={item.icon}
                         size={25}
                         className={`fill-none text-[#75777eb7]
-                        group-hover:text-black group-hover:[--icon-weight:600]
+                        group-hover:text-black group-hover:[--icon-weight:500]
                         dark:group-hover:text-white`}
                       />
                       <span
