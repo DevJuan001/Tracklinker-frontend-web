@@ -16,16 +16,7 @@ export default function AddUserModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { roles } = useRoles();
   const { cities } = useCities();
-  const { form, loading, handleSubmit, handleChange } = useCreateUser({
-    rol_id: "",
-    name: "",
-    first_surname: "",
-    second_surname: "",
-    address: "",
-    city: "",
-    email: "",
-    phone: "",
-  });
+  const { form, loading, handleSubmit, handleChange } = useCreateUser();
 
   return (
     <section className="flex flex-col items-center">
@@ -75,6 +66,7 @@ export default function AddUserModal({ onClose }) {
         />
 
         <SelectMenu
+          searchable
           spanText={"Ciudad"}
           value={form.city}
           onChange={handleChange}
