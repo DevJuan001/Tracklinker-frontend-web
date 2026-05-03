@@ -28,7 +28,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
     >
       {/* Menús de opciones - Mobile */}
       <section
-        className="relative w-screen flex justify-between pb-1 px-1
+        className="relative w-screen flex justify-between pb-1 pl-1 pr-2
         sm:px-2
         md:hidden"
       >
