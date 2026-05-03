@@ -4,9 +4,7 @@ import Loader from "../ui/Loader";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
 
 export default function HelpModal({ onClose }) {
-  const { form, loading, handleChange, handleSubmit } = useSendSuggestion({
-    suggestion: "",
-  });
+  const { form, loading, handleChange, handleSubmit } = useSendSuggestion();
   return (
     <section className="flex flex-col items-center justify-center gap-4">
       <span className="text-[#75777E] text-sm">
@@ -14,14 +12,18 @@ export default function HelpModal({ onClose }) {
         presentas un problema con la aplicación, puedes comunicarte con nosotros
         y te ayudaremos.
       </span>
-      <div className="w-full pr-1 pl-2 pt-2 border border-gray-500 text-black rounded-xl">
+      <div
+        className="w-full pr-1 pl-2 pt-2 border shadow-sm text-black rounded-xl bg-white
+        focus-within:shadow-[0_0_3px_2px_#e5e7eb]
+        dark:bg-black dark:border-[#1e1e20cb] dark:focus-within:shadow-[0_0_3px_3px_#28282b]"
+      >
         <textarea
           name="suggestion"
           value={form.sugggestion}
           onChange={handleChange}
           className="w-full h-40 outline-none
           placeholder:text-gray-800
-          dark:bg-transparent dark:placeholder:text-gray-300"
+          dark:bg-transparent dark:placeholder:text-[#7E8088]"
           placeholder="Escribe aquí tu problema o sugerencia"
         />
       </div>
