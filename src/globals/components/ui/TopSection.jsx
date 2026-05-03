@@ -21,7 +21,7 @@ export default function TopSection({
         {sectionName}
       </span>
       <section
-        className="w-full flex justify-end gap-5
+        className="w-full flex justify-end gap-2
         lg:gap-3"
       >
         {children}
