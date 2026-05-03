@@ -23,7 +23,7 @@ export default function FilterModal({
       <div className="flex flex-col gap-1">
         {/* Inputs para seleccionar las fechas */}
         <span className="text-sm dark:text-white">Fecha de {fieldName}</span>
-        <div className="flex gap-2">
+        <div className="max-w-full flex gap-2">
           <DateField
             onClick={() => setShowCalendarStartDate(!showCalendarStartDate)}
             spanText={"Desde:"}
