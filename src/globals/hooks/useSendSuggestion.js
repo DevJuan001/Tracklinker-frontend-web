@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { sendSuggestionService } from "../services/sendSuggestionService";
 
-export default function useSendSuggestion(suggestion) {
-  const [form, setForm] = useState(suggestion);
+export default function useSendSuggestion() {
+  const [form, setForm] = useState({
+    suggestion: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
