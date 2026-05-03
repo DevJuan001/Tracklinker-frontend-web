@@ -1,6 +1,6 @@
 // Hooks
 import { useRoles } from "../../hooks/useRoles";
-import { useCities } from "../../hooks/useCities";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useEditUser } from "../../hooks/useEditUser";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
@@ -32,6 +32,7 @@ export default function EditUserInfoModal({ user, onClose }) {
             label: rol.name,
           }))}
         />
+
         <FormField
           name={"name"}
           value={form.name}
@@ -40,6 +41,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           id={"name"}
           autoComplete="given-name"
         />
+
         <FormField
           name={"first_surname"}
           value={form.first_surname}
@@ -48,6 +50,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           onChange={handleChange}
           autoComplete="family-name"
         />
+
         <FormField
           name={"second_surname"}
           value={form.second_surname}
@@ -56,7 +59,9 @@ export default function EditUserInfoModal({ user, onClose }) {
           onChange={handleChange}
           autoComplete="family-name"
         />
+
         <SelectMenu
+          searchable
           value={form.city}
           name={"city"}
           spanText={"Ciudad"}
@@ -75,6 +80,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           onChange={handleChange}
           autoComplete="tel"
         />
+
         <FormField
           name={"email"}
           isRequired={true}
@@ -84,6 +90,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           onChange={handleChange}
           autoComplete="email"
         />
+
         <FormField
           name={"address"}
           value={form.address}
@@ -92,6 +99,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           onChange={handleChange}
           autoComplete="street-address"
         />
+        
         <SelectMenu
           name={"status"}
           value={form.status}

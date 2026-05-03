@@ -1,7 +1,7 @@
 import React, { useRef, useId } from "react";
-import { modalIcons } from "../../../assets/icons/modalIcons";
 import { useFlipModal } from "../../hooks/useFlipModal";
 import { createPortal } from "react-dom";
+import Icon from "../ui/Icon";
 
 export default function Modal({
   isOpen,
@@ -68,7 +68,7 @@ export default function Modal({
           visibility: "hidden",
         }}
         ref={modalRef}
-        className={`bg-white rounded-[32px] shadow-lg
+        className={`bg-[#fbf9fc] rounded-[32px] shadow-lg dark:border dark:border-[#1e1e209f]
           ${type === "calendar" || type === "menu" ? "p-0" : type === "select" ? "p-1.5" : "p-7"}
           dark:bg-black 
           ${
@@ -81,8 +81,8 @@ export default function Modal({
                   : type === "calendar" || type === "select"
                     ? "md:min-w-[400px] md:max-w-[400px]"
                     : type === "menu"
-                    ? "max-w-24"
-                    : "md:min-w-[500px] md:max-w-[500px]"
+                      ? "max-w-24"
+                      : "md:min-w-[500px] md:max-w-[500px]"
           }`}
       >
         <div ref={contentRef}>
@@ -97,11 +97,13 @@ export default function Modal({
             </span>
             <button
               onClick={closeModal}
-              className="w-10 h-10 self-end flex items-center justify-center hover:bg-[#49454f21] dark:hover:bg-[#28282bbd] rounded-full"
+              className="w-10 h-10 p-2.5 self-end flex items-center justify-center
+              hover:bg-[#49454f21] dark:hover:bg-[#28282bbd] rounded-full"
             >
-              <img
-                src={modalIcons.closeIcon}
-                className="w-6 h-6 brightness-0 dark:invert dark:brightness-50"
+              <Icon
+                name={"close"}
+                size={24}
+                className="dark:invert"
               />
             </button>
           </header>

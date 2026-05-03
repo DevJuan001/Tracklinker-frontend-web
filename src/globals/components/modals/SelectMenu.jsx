@@ -36,17 +36,17 @@ export default function SelectMenu({
           ref={triggerRef}
           tabIndex={0}
           onClick={handleToggle}
-          className="relative w-full h-16 pr-2 pt-2 flex items-center border border-[#a1a1a131] 
+          className="relative w-full h-16 pr-2 pt-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131] shadow-sm
           rounded-2xl cursor-pointer text-sm transition-all duration-300 focus-within:shadow-[0_0_3px_2px_#e5e7eb]
-          dark:border-[#28282b] dark:text-[#E4E2E5] dark:focus:focus:shadow-[0_0_4px_2px_#ffffff33]"
+          dark:bg-black dark:border-[#1e1e20cb] dark:focus:focus:shadow-[0_0_4px_2px_#ffffff33]"
         >
           <div className="absolute top-2 left-3 px-1">
-            <span className="text-xs bg-white text-[#7E777E] dark:bg-black dark:text-[#b4aab4]">
+            <span className="text-xs bg-[#FBF9FC] text-[#7E777E] dark:bg-black dark:text-[#7E8088]">
               {spanText}
             </span>
           </div>
 
-          <div className="w-full h-full flex pl-4 pt-3">
+          <div className="w-full h-full flex pl-4 pt-3 dark:text-[#E4E2E5]">
             <div className="w-full flex items-center text-base">
               {options.find((opt) => {
                 if (opt.value !== "" && !isNaN(opt.value)) {
@@ -59,7 +59,7 @@ export default function SelectMenu({
 
           <Icon
             name={"arrow_drop_down"}
-            className={`-translate-y-1 dark:invert`}
+            className={`-translate-y-1 dark:text-[#7e8088]`}
           />
         </div>
         <button
@@ -70,11 +70,11 @@ export default function SelectMenu({
           }}
           disabled={addButtonInvisible}
           type="button"
-          className={`h-16 flex items-center justify-center px-5 border rounded-2xl bg-[#e5e5e527]
+          className={`h-16 flex items-center justify-center px-5 border rounded-2xl bg-[#FBF9FC] shadow-sm
           ${addButtonInvisible ? "hidden" : "opacity-100"} 
-          dark:bg-black dark:border-[#28282b]`}
+          dark:bg-black dark:border-[#1e1e20cb]`}
         >
-          <Icon name={"add"} size={22} className="dark:invert" />
+          <Icon name={"add"} size={22} className="dark:text-[#7e8088]" />
         </button>
       </div>
 
@@ -88,7 +88,7 @@ export default function SelectMenu({
           z_index="600"
         >
           <div
-            className="w-full max-h-96 flex flex-col gap-1.5 overflow-y-auto rounded-3xl bg-white 
+            className="w-full max-h-96 flex flex-col gap-1.5 px-1 pt-1 overflow-y-auto rounded-3xl bg-[#fbf9fc]
             dark:bg-black dark:text-white"
             onClick={(e) => e.stopPropagation()}
           >
@@ -100,13 +100,12 @@ export default function SelectMenu({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar..."
-                className="w-full min-h-14 px-5 sticky top-0.5 text-sm rounded-full border border-[#a1a1a131] 
-                  outline-none dark:border-[#28282b]
-                  dark:text-white dark:placeholder:text-[#b4aab4]"
+                className="w-full min-h-[50px] px-5 sticky top-0.5 text-sm rounded-full border border-[#a1a1a131] outline-none
+                dark:border-[#28282ba1] dark:bg-black dark:text-white dark:placeholder:text-[#b4aab4]"
               />
             )}
             {filteredOptions.length === 0 ? (
-              <div className="min-h-14 flex items-center justify-center text-[#7E777E] gap-2.5">
+              <div className="min-h-[50px] flex items-center justify-center text-[#7E777E] gap-2.5">
                 <Icon name={"search_off"} />
                 <span className="text-center text-sm py-6">
                   No encontraron resultados
@@ -123,7 +122,7 @@ export default function SelectMenu({
                   <div
                     key={option.value}
                     onClick={() => handleSelect(option, name, onChange)}
-                    className={`min-h-14 flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
+                    className={`min-h-[52px] flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
                   hover:bg-[#efedf0] hover:font-medium  
                   dark:hover:bg-[#ffffff15]
                   ${isSelected ? "bg-[#efedf0] font-medium dark:bg-[#ffffff15]" : ""}`}

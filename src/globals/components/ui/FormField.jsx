@@ -12,9 +12,9 @@ export default function FormField({
   return (
     <div
       tabIndex={0}
-      className="relative flex w-full border pr-2 rounded-xl
+      className="relative flex w-full border pr-2 rounded-2xl shadow-sm bg-[#FBF9FC]
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
-      dark:border-[#28282b] dark:focus:shadow-[0_0_4px_2px_#ffffff33]
+      dark:bg-black dark:border-[#1e1e20cb] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
       "
     >
       <input

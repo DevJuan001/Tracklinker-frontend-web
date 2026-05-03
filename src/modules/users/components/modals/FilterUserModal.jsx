@@ -1,8 +1,8 @@
 import { useRoles } from "../../hooks/useRoles";
 import { useFilterUsers } from "../../hooks/useFilterUsers";
+import { useCities } from "../../../../globals/hooks/useCities";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
-import { useCities } from "../../hooks/useCities";
 
 export default function FilterUserModal({ setFilters, onClose }) {
   const { roles } = useRoles();
@@ -45,6 +45,7 @@ export default function FilterUserModal({ setFilters, onClose }) {
         />
 
         <SelectMenu
+          searchable
           name={"city"}
           value={form.city}
           onChange={handleChange}

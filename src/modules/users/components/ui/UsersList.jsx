@@ -1,6 +1,7 @@
 import UserItem from "./UserItem";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Icon from "../../../../globals/components/ui/Icon";
 
 export default function UsersList({ users, loading, openModal }) {
   const noUsers = users.length === 0 && !loading;
@@ -8,13 +9,19 @@ export default function UsersList({ users, loading, openModal }) {
 
   return (
     /* Contenedor de los usuarios */
-    <section className="max-h-[95%] max-w-full overflow-x-auto overflow-y-auto overflow-hidden">
-      <ul className="flex flex-col gap-1">
-        {noUsers && (
-          <span className="text-center dark:text-white pt-5">
+    <section className="h-[95%] w-full pb-4 overflow-x-auto overflow-y-auto">
+      {noUsers && (
+        <div
+          className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-2 bg-[#F5F3F6] text-[#7E8088]
+          dark:bg-[#17171a]"
+        >
+          <Icon name={"mist"} size={70} />
+          <span className="text-2xl font-medium">
             No se encontraron usuarios
           </span>
-        )}
+        </div>
+      )}
+      <ul className="flex flex-col gap-1">
         {isFirstLoad ? (
           <SkeletonTheme baseColor="#f3eef5" highlightColor="#c5c1c7">
             <li>

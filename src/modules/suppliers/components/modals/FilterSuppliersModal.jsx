@@ -1,7 +1,7 @@
+import { useCities } from "../../../../globals/hooks/useCities";
+import { useFilterSuppliers } from "../../hooks/useFilterSuppliers";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import { useCities } from "../../../users/hooks/useCities";
-import { useFilterSuppliers } from "../../hooks/useFilterSuppliers";
 
 export default function FilterSuppliersModal({ setFilters, onClose }) {
   const { form, handleChange } = useFilterSuppliers();

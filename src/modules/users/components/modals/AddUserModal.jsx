@@ -1,7 +1,8 @@
 // Hooks
 import { useRoles } from "../../hooks/useRoles";
-import { useCities } from "../../hooks/useCities";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useCreateUser } from "../../hooks/useCreateUser";
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import FormField from "../../../../globals/components/ui/FormField";
@@ -10,22 +11,12 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 
 export default function AddUserModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { roles } = useRoles();
   const { cities } = useCities();
-  const { form, loading, handleSubmit, handleChange } = useCreateUser({
-    rol_id: "",
-    name: "",
-    first_surname: "",
-    second_surname: "",
-    address: "",
-    city: "",
-    email: "",
-    phone: "",
-  });
+  const { form, loading, handleSubmit, handleChange } = useCreateUser();
 
   return (
     <section className="flex flex-col items-center">
@@ -75,6 +66,7 @@ export default function AddUserModal({ onClose }) {
         />
 
         <SelectMenu
+          searchable
           spanText={"Ciudad"}
           value={form.city}
           onChange={handleChange}

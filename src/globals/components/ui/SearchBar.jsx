@@ -1,25 +1,27 @@
-import { headerIcons } from "../../../assets/icons/headerIcons";
+import Icon from "./Icon";
 
 export default function SearchBar({ value, onChange }) {
   return (
-    <div className="flex px-2 w-[43%] border border-gray-300 rounded-3xl dark:bg-[#0f0f11] dark:border-[#34343a77]">
+    <div
+      className="flex items-center pr-3 w-[44%] border border-[#a1a1a140] rounded-3xl
+      dark:border-[#34343a77]"
+    >
       <input
         id="search-text"
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Buscar"
-        className="w-full py-2.5 px-5 rounded-xl outline-none
-        placeholder:text-[15px] placeholder:text-gray-400
-        dark:bg-[#0f0f11] dark:placeholder:text-white dark:text-white"
+        className="w-full py-2.5 px-5 rounded-3xl outline-none
+        placeholder:text-[14px] placeholder:text-gray-400
+        dark:bg-black dark:placeholder:text-[#b4aab49f] dark:text-white"
       />
-      <button>
-        <img
-          src={headerIcons.searchIcon}
-          alt="Lens Icon"
-          className="dark:brightness-200"
-        />
-      </button>
+
+      <Icon
+        name={"search"}
+        className="dark:brightness-200"
+        color={"#7E80889f"}
+      />
     </div>
   );
 }
