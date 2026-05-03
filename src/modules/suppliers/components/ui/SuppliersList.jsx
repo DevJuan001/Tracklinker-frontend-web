@@ -9,16 +9,19 @@ export default function SuppliersList({ suppliers, loading, openModal }) {
   const isFirstLoad = suppliers.length === 0 && loading;
 
   return (
-    <section className="max-h-[95%] max-w-full flex flex-col gap-1 overflow-x-auto overflow-y-auto">
+    <section className="h-[95%] w-full flex flex-col gap-1 overflow-x-auto overflow-y-auto">
+      {noSuppliers && (
+        <div
+          className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-2 bg-[#F5F3F6] text-[#7E8088]
+            dark:bg-[#17171a]"
+        >
+          <Icon name={"mist"} size={70} />
+          <span className="text-2xl font-medium">
+            No se encontraron proveedores
+          </span>
+        </div>
+      )}
       <ul className="flex flex-col gap-1">
-        {noSuppliers && (
-          <div className="flex flex-col items-center justify-center gap-4 text-[#7E7775]">
-            <Icon name={"group_search"} size={70} />
-            <span className="text-lg font-medium">
-              No se han encontrado resultados
-            </span>
-          </div>
-        )}
         {isFirstLoad ? (
           <SkeletonTheme baseColor="#f3eef5" highlightColor="#c5c1c7">
             <li>
