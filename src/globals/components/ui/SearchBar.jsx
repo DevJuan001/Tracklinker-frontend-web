@@ -3,7 +3,7 @@ import Icon from "./Icon";
 export default function SearchBar({ value, onChange }) {
   return (
     <div
-      className="flex items-center pr-3 w-[44%] border border-[#a1a1a140] rounded-3xl
+      className="flex items-center pr-3 w-[20%] border border-[#a1a1a140] rounded-3xl
       dark:border-[#34343a77]"
     >
       <input
