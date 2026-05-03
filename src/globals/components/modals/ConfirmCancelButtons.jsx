@@ -35,7 +35,7 @@ export default function ConfirmCancelButtons({
         onClick={cancelButtonOnClick}
         className={`${cancelButtonWidth} h-11 px-5 py-2.5 rounded-2xl text-sm transition duration-300 border border-gray-200 
             hover:bg-gray-200
-            dark:text-white dark:hover:bg-[#101012] dark:border-gray-900`}
+            dark:text-white dark:hover:bg-[#28282bbd] dark:border-[#1e1e20cb]`}
       >
         <span>{cancelText}</span>
       </button>
