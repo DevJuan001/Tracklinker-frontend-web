@@ -3,8 +3,17 @@ import { useQueryClient } from "@tanstack/react-query";
 import { createUser } from "../services/createUserService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 
-export function useCreateUser(formData) {
-  const [form, setForm] = useState(formData);
+export function useCreateUser() {
+  const [form, setForm] = useState({
+    rol_id: "",
+    name: "",
+    first_surname: "",
+    second_surname: "",
+    address: "",
+    city: "",
+    email: "",
+    phone: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
