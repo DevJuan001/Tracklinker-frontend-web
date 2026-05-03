@@ -1,5 +1,5 @@
-import { actionsIcons } from "../../../../assets/icons/actionsIcons";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import Icon from "../../../../globals/components/ui/Icon";
 
 export default function SupplierActions({
   editButtonOnClick,
@@ -14,8 +14,12 @@ export default function SupplierActions({
         deleteButtonOnClick={deleteButtonOnClick}
       >
         {/* Botón de más información del usuario */}
-        <button onClick={moreInfoOnClick} className="transition-all duration-300 hover:scale-125">
-          <img src={actionsIcons.moreInfoIcon} alt="" />
+        <button
+          onClick={moreInfoOnClick}
+          className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[#F5F3F6]
+         hover:bg-[#969292a8]"
+        >
+          <Icon name={"arrow_outward"} />
         </button>
       </ActionButtons>
     </nav>

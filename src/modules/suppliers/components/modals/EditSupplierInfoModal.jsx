@@ -1,6 +1,6 @@
 // Hooks
-import { useCities } from "../../../users/hooks/useCities";
 import { useEditSupplier } from "../../hooks/useEditSupplier";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";

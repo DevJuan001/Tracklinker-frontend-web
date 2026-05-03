@@ -3,7 +3,9 @@ import Icon from "./Icon";
 export default function FilterButton({ onClick, filterButtonVisibility }) {
   return (
     <button
-      className={`flex items-center px-5 py-2.5 gap-2 rounded-3xl bg-[#efedf0] transition duration-200 border border-gray-200 hover:bg-gray-300
+      className={`flex items-center px-5 py-2.5 gap-2 rounded-[40px] bg-[#efedf0] transition duration-200 border border-gray-200
+        lg:rounded-3xl
+        hover:bg-gray-300
         dark:bg-[#202022] dark:hover:bg-[#38383b] dark:shadow-none dark:border-none
         ${filterButtonVisibility ? "block" : "hidden"}`}
       onClick={onClick}

@@ -1,5 +1,5 @@
 // Hooks
-import { useCities } from "../../../users/hooks/useCities";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useCreateSupplier } from "../../hooks/useCreateSupplier";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes

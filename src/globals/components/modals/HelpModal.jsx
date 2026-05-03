@@ -1,4 +1,3 @@
-import { actionsIcons } from "../../../assets/icons/actionsIcons";
 import useSendSuggestion from "../../hooks/useSendSuggestion";
 import Loader from "../ui/Loader";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
@@ -13,7 +12,7 @@ export default function HelpModal({ onClose }) {
         y te ayudaremos.
       </span>
       <div
-        className="w-full pr-1 pl-2 pt-2 border shadow-sm text-black rounded-xl bg-white
+        className="w-full pr-1 pl-2 pt-2 border shadow-sm text-black rounded-xl bg-[#fbf9fc]
         focus-within:shadow-[0_0_3px_2px_#e5e7eb]
         dark:bg-black dark:border-[#1e1e20cb] dark:focus-within:shadow-[0_0_3px_3px_#28282b]"
       >
@@ -21,7 +20,7 @@ export default function HelpModal({ onClose }) {
           name="suggestion"
           value={form.sugggestion}
           onChange={handleChange}
-          className="w-full h-40 outline-none
+          className="w-full h-40 outline-none bg-[#fbf9fc]
           placeholder:text-gray-800
           dark:bg-transparent dark:placeholder:text-[#7E8088]"
           placeholder="Escribe aquí tu problema o sugerencia"
@@ -31,7 +30,7 @@ export default function HelpModal({ onClose }) {
         itemsPosition="end"
         confirmText={loading ? <Loader /> : "Enviar"}
         confirmImageDisplay={loading ? false : true}
-        confirmImage={actionsIcons.sendIcon}
+        confirmImage={"send"}
         confirmButtonOnClick={(e) => handleSubmit(e)}
         cancelButtonOnClick={onClose}
       />
