@@ -16,12 +16,12 @@ export default function MoreInfoSupplierModal({ supplier, onClose }) {
             {supplier.name}
           </span>
           <div
-            className={`flex gap-1.5 pl-2 py-1.5 rounded-full border
+            className={`flex items-center gap-1.5 px-2 py-1.5 rounded-full border
             ${userStatus[supplier.status]?.styles}`}
           >
             <Icon
               name={userStatus[supplier.status]?.icon}
-              size={16}
+              size={14}
               fill={userStatus[supplier.status]?.fill}
             />
             <span className="text-xs font-medium">
