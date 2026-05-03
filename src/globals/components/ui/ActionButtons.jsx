@@ -12,14 +12,14 @@ export default function ActionButtons({
       {children}
       <button
         onClick={editButtonOnClick}
-        className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[#fbf9fc] hover:bg-[#969292a8]"
+        className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[#F5F3F6] hover:bg-[#969292a8]"
       >
         <Icon name={"edit"} />
       </button>
       <button
         onClick={deleteButtonOnClick}
         className={`${deleteButtonVisible ? "" : "hidden"}
-        flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[#fbf9fc] hover:bg-[#969292a8]`}
+        flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[#F5F3F6] hover:bg-[#969292a8]`}
       >
         <Icon name={`${visibilityIcon ? "visibility" : "visibility_off"}`} />
       </button>
