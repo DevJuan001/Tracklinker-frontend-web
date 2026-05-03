@@ -1,3 +1,5 @@
+import Icon from "../ui/Icon";
+
 export default function ConfirmCancelButtons({
   disabled = false,
   itemsPosition = "center",
@@ -19,23 +21,24 @@ export default function ConfirmCancelButtons({
       <button
         ref={confirmBtnRef}
         onClick={confirmButtonOnClick}
-        className={`h-11 flex items-center px-6 py-2.5 gap-2 font-medium text-sm bg-${confirmBgColor} text-white  rounded-2xl transition duration-300
-            hover:text-gray-300
-            dark:bg-white dark:text-black dark:hover:text-gray-800`}
+        className={`h-11 flex items-center px-5 py-2.5 gap-2 font-medium text-sm bg-${confirmBgColor} text-white rounded-2xl transition duration-300
+        hover:text-gray-300
+        dark:bg-white dark:text-black dark:hover:text-gray-800`}
       >
-        <img
-          src={confirmImage}
-          alt=""
-          className={`w-5 h-5 invert dark:invert-0 ${confirmImageDisplay ? "block" : "hidden"}`}
+        <Icon
+          name={confirmImage}
+          size={24}
+          className={`dark:invert-0 ${confirmImageDisplay ? "block" : "hidden"}`}
         />
         <span>{confirmText}</span>
       </button>
+
       <button
         disabled={disabled}
         onClick={cancelButtonOnClick}
-        className={`${cancelButtonWidth} h-11 px-5 py-2.5 rounded-2xl text-sm transition duration-300 border border-gray-200 
-            hover:bg-gray-200
-            dark:text-white dark:hover:bg-[#28282bbd] dark:border-[#1e1e20cb]`}
+        className={`${cancelButtonWidth} h-11 px-5 py-2.5 rounded-2xl text-sm transition duration-300 bg-[#F5F3F6]
+        hover:bg-gray-200
+        dark:bg-[#101012] dark:text-white dark:hover:bg-[#28282bbd]`}
       >
         <span>{cancelText}</span>
       </button>
