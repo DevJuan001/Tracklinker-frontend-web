@@ -35,7 +35,7 @@ export default function SuppliersPage() {
     >
       <TopSection
         sectionName={"Proveedores"}
-        addButtonText={"Agregar Proveedor"}
+        addButtonText={"Crear Proveedor"}
         createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
         filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}
       >
