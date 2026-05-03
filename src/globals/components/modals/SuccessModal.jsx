@@ -1,6 +1,6 @@
-import { modalIcons } from "../../../assets/icons/modalIcons";
 import Modal from "./Modal";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
+import Icon from "../ui/Icon";
 
 export default function SuccessModal({
   isOpen,
@@ -25,7 +25,7 @@ export default function SuccessModal({
       <section className="flex flex-col items-center gap-1">
         <div className="flex flex-col items-center gap-3">
           <div className="w-20 h-20 flex items-center justify-center bg-green-100 rounded-full dark:bg-green-950">
-            <img src={modalIcons.confirmIcon} alt="" className="w-10" />
+            <Icon name={"check"} size={40} color={"#22c55e"} />
           </div>
           <div className="flex flex-col items-center text-center gap-2 dark:text-white">
             <span className="text-xl font-medium">{confirmTitle}</span>
