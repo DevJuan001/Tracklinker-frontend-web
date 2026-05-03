@@ -42,7 +42,7 @@ export default function FormField({
         text-xs text-[#7E777E]
         pointer-events-none
         transition-all duration-200
-        bg-white dark:bg-black dark:text-[#b4aab4]
+        bg-[#FBF9FC] dark:bg-black dark:text-[#b4aab4]
         "
       >
         {labelText}
