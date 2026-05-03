@@ -10,7 +10,7 @@ export default function Avatar({ user, size = 50 }) {
       dark:bg-[#28282bbd]"
     >
       <span
-        className={`font-medium 
+        className={`font-semibold 
         ${size > 40 ? "text-xl" : "text-base"}
         dark:text-white`}
       >
