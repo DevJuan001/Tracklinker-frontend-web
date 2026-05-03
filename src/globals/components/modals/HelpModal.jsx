@@ -1,4 +1,3 @@
-import { actionsIcons } from "../../../assets/icons/actionsIcons";
 import useSendSuggestion from "../../hooks/useSendSuggestion";
 import Loader from "../ui/Loader";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
@@ -31,7 +30,7 @@ export default function HelpModal({ onClose }) {
         itemsPosition="end"
         confirmText={loading ? <Loader /> : "Enviar"}
         confirmImageDisplay={loading ? false : true}
-        confirmImage={actionsIcons.sendIcon}
+        confirmImage={"send"}
         confirmButtonOnClick={(e) => handleSubmit(e)}
         cancelButtonOnClick={onClose}
       />
