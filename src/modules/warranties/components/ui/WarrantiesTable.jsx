@@ -14,8 +14,9 @@ export default function WarrantiesTable({ warranties, openModal }) {
 
   return (
     <section
-      className="h-auto max-h-[95%] max-w-full border border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
-    dark:border-[#303033]"
+      className="h-auto max-h-[92.5%] w-full border border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      md:max-h-[94%]
+      dark:border-[#303033]"
     >
       {noWarranties ? (
         <div
@@ -32,8 +33,8 @@ export default function WarrantiesTable({ warranties, openModal }) {
           className="w-full h-auto border-collapse
           dark:text-white"
         >
-          <thead className="sticky top-0 z-1">
-            <tr className="h-[40px] border-b border-gray-200 dark:border-[#303033] text-sm">
+          <thead className="sticky -top-0 z-10 bg-white border-b border-gray-200">
+            <tr className="h-[40px] dark:border-[#303033] text-sm">
               <th className="font-medium text-start pl-4">Estado</th>
               <th className="font-medium text-start pl-4">Fecha de creación</th>
               <th className="font-medium text-start pl-4">Cliente</th>
