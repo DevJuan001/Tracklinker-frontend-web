@@ -125,7 +125,8 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
       {innerType === "success" && (
         <SuccessModal
           triggerRef={innerTrigger}
-          location="right"
+          location="anchored"
+          growDirection={"top-right"}
           isOpen={true}
           confirmTitle="¡Garantía registrada con éxito!"
           confirmText="La garantía se ha guardado correctamente."
@@ -140,10 +141,13 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
-          location="right"
+          location="anchored"
+          growDirection={"top-center"}
           isOpen={true}
-          errorTitle="Error al registrar la garantía"
-          errorText={"Verifica los datos e inténtalo nuevamente."}
+          errorTitle="No se pudo registrar la garantía"
+          errorText={
+            "Verifica que los datos no esten vacios y que no exista una garantía vigente con este producto e inténtalo nuevamente."
+          }
           confirmButtonText="Volver"
           onClose={() => openInnerModal(null)}
         />
