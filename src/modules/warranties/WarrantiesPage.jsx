@@ -14,7 +14,7 @@ import HelpModal from "../../globals/components/modals/HelpModal";
 import MoreWarrantyInfo from "./components/modals/MoreWarrantyInfo";
 import AddWarrantyModal from "./components/modals/AddWarrantyModal";
 import EditWarrantyModal from "./components/modals/EditWarrantyModal";
-import DeleteWarrantyModal from "./components/modals/DeleteWarrantyModal";
+import DisableWarrantyModal from "./components/modals/DisableWarrantyModal";
 import FilterWarrantyModal from "./components/modals/FilterWarrantyModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
@@ -34,7 +34,7 @@ export default function WarrantiesPage() {
     >
       <TopSection
         sectionName={"Garantías"}
-        addButtonText={"Agregar Garantía"}
+        addButtonText={"Crear Garantía"}
         createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
         filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}
       >
@@ -57,8 +57,8 @@ export default function WarrantiesPage() {
                     ? ""
                     : modalType === "edit"
                       ? "Editar Garantía"
-                      : modalType === "delete"
-                        ? "Eliminar Garantía"
+                      : modalType === "disable"
+                        ? "Deshabiltitar Garantía"
                         : "Ayuda"
           }
           type={modalType}
@@ -89,8 +89,8 @@ export default function WarrantiesPage() {
             />
           )}
           {/* Modal para eliminar una garantía */}
-          {modalType === "delete" && (
-            <DeleteWarrantyModal
+          {modalType === "disable" && (
+            <DisableWarrantyModal
               selectedWarranty={modalData}
               onClose={closeModal}
             />
