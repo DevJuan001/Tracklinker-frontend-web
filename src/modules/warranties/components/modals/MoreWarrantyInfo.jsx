@@ -79,7 +79,7 @@ export default function MoreWarrantyInfo({ modalData, onClose }) {
         confirmButtonOnClick={
           modalData.status === 4
             ? (e) => openInnerModal("edit", e)
-            : () => handleStatusChange(onClose)
+            : () => handleStatusChange(modalData, onClose)
         }
         cancelButtonOnClick={onClose}
       />
