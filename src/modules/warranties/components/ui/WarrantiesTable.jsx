@@ -33,7 +33,10 @@ export default function WarrantiesTable({ warranties, openModal }) {
           className="w-full h-auto border-collapse
           dark:text-white"
         >
-          <thead className="sticky -top-0 z-10 bg-white border-b border-gray-200">
+          <thead
+            className="sticky -top-0 z-10 bg-white border-b border-gray-200
+            dark:bg-black dark:border-[#303033]"
+          >
             <tr className="h-[40px] dark:border-[#303033] text-sm">
               <th className="font-medium text-start pl-4">Estado</th>
               <th className="font-medium text-start pl-4">Fecha de creación</th>
@@ -120,7 +123,7 @@ export default function WarrantiesTable({ warranties, openModal }) {
                       className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-white
                       hover:bg-[#969292a8]"
                     >
-                      <Icon name={"arrow_outward"} />
+                      <Icon name={"arrow_outward"} className={"dark:invert"} />
                     </button>
                   </ActionButtons>
                   <button
@@ -129,7 +132,8 @@ export default function WarrantiesTable({ warranties, openModal }) {
                       setActiveProductSerial(warranty.id);
                     }}
                     className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-white
-                  hover:bg-[#969292a8]"
+                    hover:bg-[#969292a8]
+                    dark:bg-black"
                   >
                     <Icon name={"shuffle"} />
                   </button>
