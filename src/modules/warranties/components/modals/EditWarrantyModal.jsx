@@ -121,8 +121,8 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          errorTitle="Error al actualizar"
-          errorText="No se pudo actualizar la garantía. Intenta nuevamente."
+          errorTitle="No se pudo actualizar la garantía"
+          errorText="Revisa que hayas cambiado algún campo o no este vacio e intentalo nuevamente."
           confirmButtonText="Cerrar"
           onClose={() => openInnerModal(null)}
         />
