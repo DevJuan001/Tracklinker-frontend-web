@@ -14,7 +14,7 @@ export const warrantyStatusConfig = {
     fill: true,
     icon: "circle",
     optionStyles:
-      "hover:bg-red-50 text-red-600 dark:text-[#ff00008e] dark:bg-[#ff00002f]",
+      "hover:bg-gray-200 text-gray-600 dark:text-[#ff00008e] dark:bg-[#ff00002f]",
     styles: "bg-red-50 text-red-600 dark:text-[#ff00008e] dark:bg-[#ff00002f]",
   },
   3: {
