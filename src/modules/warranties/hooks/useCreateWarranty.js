@@ -42,6 +42,7 @@ export function useCreateWarranty(product) {
     try {
       const response = await createWarranty(form);
       if (response.success === true) {
+        queryClient.invalidateQueries({ queryKey: ["products"] });
         queryClient.invalidateQueries({ queryKey: ["warranties"] });
         openInnerModal("success", triggerButton);
       }

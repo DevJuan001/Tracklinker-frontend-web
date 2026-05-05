@@ -3,7 +3,8 @@ import Icon from "./Icon";
 export default function FilterButton({ onClick, filterButtonVisibility }) {
   return (
     <button
-      className={`flex items-center px-5 py-2.5 gap-2 rounded-[40px] bg-[#efedf0] transition duration-200 border border-gray-200
+      className={`flex items-center px-5 py-2.5 gap-2 rounded-2xl bg-[#FBF9FC] transition-all duration-200 border border-gray-200
+        hover:rounded-[40px]
         lg:rounded-3xl
         hover:bg-gray-300
         dark:bg-[#202022] dark:hover:bg-[#38383b] dark:shadow-none dark:border-none

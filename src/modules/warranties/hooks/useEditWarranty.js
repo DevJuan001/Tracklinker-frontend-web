@@ -49,9 +49,10 @@ export function useEditWarranty(selectedWarranty) {
         ...changes,
         product_serial: selectedWarranty.product_serial,
       });
+      
       if (response.success === true) {
-        queryClient.invalidateQueries({ queryKey: ["warranties"] });
         queryClient.invalidateQueries({ queryKey: ["products"] });
+        queryClient.invalidateQueries({ queryKey: ["warranties"] });
         openInnerModal("success", triggerButton);
       } else {
         openInnerModal("error", triggerButton);

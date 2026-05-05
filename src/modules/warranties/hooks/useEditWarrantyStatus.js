@@ -8,19 +8,20 @@ const WARRANTY_NEXT_STATUS = {
   3: 4,
 };
 
-export function useEditWarrantyStatus(modalData) {
+export function useEditWarrantyStatus() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
 
-  async function handleStatusChange(onClose) {
-    const nextStatus = WARRANTY_NEXT_STATUS[modalData.status];
+  async function handleStatusChange(warranty, onClose) {
+    const nextStatus = WARRANTY_NEXT_STATUS[warranty.status];
 
     setLoading(true);
+    
     try {
-      const response = await updateWarranty(modalData.id, {
+      const response = await updateWarranty(warranty.id, {
         status: nextStatus,
-        product_serial: modalData.product_serial,
+        product_serial: warranty.product_serial,
       });
 
       if (response.success === true) {

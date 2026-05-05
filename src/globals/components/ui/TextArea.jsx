@@ -10,9 +10,9 @@ export default function TextArea({
   return (
     <div
       tabIndex={0}
-      className="relative flex w-full border pr-2 rounded-xl
+      className="relative flex w-full border pr-1 pb-1 rounded-xl shadow-sm
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
-      dark:border-[#28282b] dark:focus:shadow-[0_0_4px_2px_#ffffff33]
+      dark:border-[#1e1e20cb] dark:focus-within:shadow-[0_0_4px_3px_#28282b]
       "
     >
       <textarea
@@ -38,7 +38,7 @@ export default function TextArea({
         text-xs text-[#7E777E]
         pointer-events-none
         transition-all duration-200
-        bg-white dark:bg-black dark:text-[#b4aab4]
+        bg-[#FBF9FC] dark:bg-black dark:text-[#b4aab4]
         "
       >
         {labelText}

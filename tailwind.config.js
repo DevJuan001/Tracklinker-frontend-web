@@ -133,5 +133,6 @@ export default {
     "animate-blurUp",
     "users-background",
     "bg-green-500",
+    "bg-[#FFFFFF]"
   ],
 };
