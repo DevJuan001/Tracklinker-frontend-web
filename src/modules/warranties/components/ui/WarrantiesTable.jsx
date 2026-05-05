@@ -5,6 +5,7 @@ import Icon from "../../../../globals/components/ui/Icon";
 import { useState } from "react";
 import Modal from "../../../../globals/components/modals/Modal";
 import { useEditWarrantyStatus } from "../../hooks/useEditWarrantyStatus";
+import Avatar from "../../../../globals/components/ui/Avatar";
 
 export default function WarrantiesTable({ warranties, openModal }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
@@ -15,12 +16,13 @@ export default function WarrantiesTable({ warranties, openModal }) {
   return (
     <section
       className="h-auto max-h-[92.5%] w-full border border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
-      md:max-h-[94%]
+      md:max-h-[94.5%]
       dark:border-[#303033]"
     >
       {noWarranties ? (
         <div
-          className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-2 bg-[#F5F3F6] text-[#7E8088]
+          className="w-full min-h-[770px] flex flex-col items-center justify-center rounded-3xl gap-2 bg-[#F5F3F6] text-[#7E8088]
+          md:min-h-[920px]
           dark:bg-[#17171a]"
         >
           <Icon name={"mist"} size={70} />
@@ -40,12 +42,14 @@ export default function WarrantiesTable({ warranties, openModal }) {
             <tr className="h-[40px] dark:border-[#303033] text-sm">
               <th className="font-medium text-start pl-4">Estado</th>
               <th className="font-medium text-start pl-4">Fecha de creación</th>
-              <th className="font-medium text-start pl-4">Cliente</th>
+              <th className="font-medium text-start pl-4">Creada por</th>
+              <th className="font-medium text-start pl-4">Asignada a</th>
+              <th className="font-medium text-start pl-5">Cliente</th>
               <th className="font-medium text-start pl-4">Descripción</th>
               <th className="font-medium text-start pl-4">Serial Producto</th>
               <th className="font-medium text-start pl-4">Teléfono</th>
-              <th className="font-medium text-start pl-4">Dirección</th>
               <th className="font-medium text-start pl-4">Ciudad</th>
+              <th className="font-medium text-start pl-4">Dirección</th>
               <th className="font-medium text-center">Acción</th>
             </tr>
           </thead>
@@ -81,7 +85,19 @@ export default function WarrantiesTable({ warranties, openModal }) {
                   <p>{warranty.date}</p>
                 </th>
                 <th className="font-normal text-start pl-4 text-sm">
-                  <p>{warranty.customer}</p>
+                  <div className="flex items-center gap-2">
+                    <span>{warranty.created_by}</span>
+                  </div>
+                </th>
+                <th className="font-normal text-start pl-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <span>{warranty.assigned_to || "No asignada"}</span>
+                  </div>
+                </th>
+                <th className="font-normal text-start pl-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <span>{warranty.customer}</span>
+                  </div>
                 </th>
                 <th className="font-normal text-start pl-4 text-sm">
                   <p>{warranty.description}</p>
@@ -93,10 +109,10 @@ export default function WarrantiesTable({ warranties, openModal }) {
                   <p>{warranty.phone}</p>
                 </th>
                 <th className="font-normal text-start pl-4 text-sm">
-                  <p>{warranty.address}</p>
+                  <p>{warranty.city_name}</p>
                 </th>
                 <th className="font-normal text-start pl-4 text-sm">
-                  <p>{warranty.city_name}</p>
+                  <p>{warranty.address}</p>
                 </th>
                 <th className="relative flex items-center justify-center gap-3 pt-1.5 text-end text-sm">
                   <ActionButtons
@@ -161,12 +177,21 @@ export default function WarrantiesTable({ warranties, openModal }) {
                           .map(([id, config]) => (
                             <div
                               key={id}
-                              onClick={() =>
-                                handleStatusChange(warranty, () => {
-                                  openInnerModal(null);
-                                  setActiveProductSerial(null);
-                                })
-                              }
+                              onClick={(e) => {
+                                if (id === "1") {
+                                  openModal(
+                                    warranty,
+                                    "disable",
+                                    null,
+                                    e.currentTarget,
+                                  );
+                                } else {
+                                  handleStatusChange(warranty, () => {
+                                    openInnerModal(null);
+                                    setActiveProductSerial(null);
+                                  });
+                                }
+                              }}
                               className={`${config.optionStyles} px-4 py-3.5 rounded-3xl cursor-pointer text-sm font-normal transition-all duration-200
                               dark:hover:bg-[#333]`}
                             >
