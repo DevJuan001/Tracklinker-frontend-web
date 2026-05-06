@@ -1,5 +1,4 @@
 // Hooks
-import { useCatalog } from "../../hooks/useCatalog";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import { useCreateProductBrand } from "../../hooks/useCreateProductBrand";
 // Components
@@ -12,12 +11,8 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
-  const { fetchBrands } = useCatalog();
-  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
-    useInnerModal();
-  const { loading, handleChange, handleSubmit } = useCreateProductBrand({
-    product_brand_name: "",
-  });
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { loading, handleChange, handleSubmit } = useCreateProductBrand();
   return (
     <AddInnerModal
       triggerRef={triggerRef}
@@ -27,7 +22,7 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
     >
       <section className="w-full flex flex-col items-center gap-2.5">
         <FormField
-          name={"product_brand_name"}
+          name={"name"}
           labelText={"Nombre de la marca"}
           placeholder={"Asus"}
           onChange={handleChange}
@@ -49,9 +44,8 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           onClose={() => {
-            fetchBrands();
-            onClose();
             openInnerModal(null);
+            onClose();
           }}
           confirmTitle={"Marca creada correctamente"}
           confirmText={
