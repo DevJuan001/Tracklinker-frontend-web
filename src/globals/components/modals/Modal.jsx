@@ -82,7 +82,7 @@ export default function Modal({
                     : type === "calendar"
                       ? "w-[380px] md:w-[400px]"
                       : type === "menu"
-                        ? "p-0 max-w-24"
+                        ? "p-1 max-w-24"
                         : type === "edit_status"
                           ? "p-1.5 w-72 md:w-80"
                           : "p-7 w-[400px] md:w-[500px]"
