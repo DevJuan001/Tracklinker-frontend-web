@@ -69,25 +69,28 @@ export default function Modal({
         }}
         ref={modalRef}
         className={`bg-[#fbf9fc] rounded-[32px] shadow-lg dark:border dark:border-[#1e1e209f]
-          ${type === "calendar" || type === "menu" ? "p-0" : type === "select" ? "p-1.5" : "p-7"}
           dark:bg-black 
           ${
             type === "user"
-              ? "max-w-full min-h-screen md:min-w-[650px] md:max-w-[650px] md:min-h-[550px] md:max-h-[550px]"
+              ? "p-7 w-full h-screen md:w-[650px] md:h-[550px]"
               : type === "help"
-                ? "md:max-w-[600px] md:min-h-max"
+                ? "p-7 md:w-[600px] h-max"
                 : type === "filter"
-                  ? "md:min-w-[400px] md:max-w-[400px]"
-                  : type === "calendar" || type === "select"
-                    ? "md:min-w-[400px] md:max-w-[400px]"
-                    : type === "menu"
-                      ? "max-w-24"
-                      : "md:min-w-[500px] md:max-w-[500px]"
+                  ? "p-7 md:w-[400px]"
+                  : type === "select"
+                    ? "p-1 w-[350px] md:w-[400px]"
+                    : type === "calendar"
+                      ? "w-80 md:w-[400px]"
+                      : type === "menu"
+                        ? "p-0 max-w-24"
+                        : type === "edit_status"
+                          ? "p-1.5 w-72 md:w-80"
+                          : "p-7 w-[400px] md:w-[500px]"
           }`}
       >
         <div ref={contentRef}>
           <header
-            className={`${type === "calendar" || type === "select" || type === "menu" ? "hidden" : ""} flex justify-between items-center mb-2`}
+            className={`${type === "calendar" || type === "select" || type === "menu" || type === "edit_status" ? "hidden" : ""} flex justify-between items-center mb-2`}
           >
             <span
               data-flip-id="modal-title"
@@ -100,11 +103,7 @@ export default function Modal({
               className="w-10 h-10 p-2.5 self-end flex items-center justify-center
               hover:bg-[#49454f21] dark:hover:bg-[#28282bbd] rounded-full"
             >
-              <Icon
-                name={"close"}
-                size={24}
-                className="dark:invert"
-              />
+              <Icon name={"close"} size={24} className="dark:invert" />
             </button>
           </header>
 
