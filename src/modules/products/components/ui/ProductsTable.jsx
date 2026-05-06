@@ -1,9 +1,13 @@
+// Hooks
+import { useState } from "react";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+// Constants
 import { productStatusConfig } from "../../constants/productStatusConfig";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+// Components
 import Icon from "../../../../globals/components/ui/Icon";
+// Modals
 import Modal from "../../../../globals/components/modals/Modal";
-import { useState } from "react";
 
 export default function ProductsTable({ products, openModal }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
