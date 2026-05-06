@@ -2,9 +2,8 @@
 import { useCatalog } from "../../hooks/useCatalog";
 import { useCreateProduct } from "../../hooks/useCreateProduct";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
-// Icons
-import { productsIcons } from "../../../../assets/icons/productsIcons";
 // Componentes
+import Icon from "../../../../globals/components/ui/Icon";
 import Loader from "../../../../globals/components/ui/Loader";
 import FormField from "../../../../globals/components/ui/FormField";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
@@ -124,16 +123,12 @@ export default function AddProductModal({ onCloseModal }) {
       <section className="flex items-center justify-center">
         <button
           className="flex items-center py-3 px-4 gap-2 border rounded-lg transition duration-300 
-          hover:bg-gray-300
+          hover:bg-gray-200
           dark:bg-[#2020226c] dark:hover:bg-[#2c2c2e] dark:border-[#101012] hover:cursor-pointer"
           onClick={onCloseModal}
           disabled
         >
-          <img
-            src={productsIcons.barcodeIcon}
-            alt=""
-            className="dark:invert dark:brightness-0"
-          />
+          <Icon name={"barcode_scanner"}/>
           <span className="text-sm dark:text-white">¡Proximamente!</span>
         </button>
       </section>
