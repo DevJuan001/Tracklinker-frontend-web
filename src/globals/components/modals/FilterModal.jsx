@@ -36,22 +36,7 @@ export default function FilterModal({
               });
               setShowCalendarStartDate(false);
             }}
-          >
-            {showCalendarStartDate && (
-              <Calendar
-                growDirection={"center"}
-                triggerRef={startInputRef}
-                value={orderByStartDateValue}
-                onClose={() => setShowCalendarStartDate(false)}
-                onChange={(formatted) => {
-                  orderByStartDateOnChange({
-                    target: { name: "start_date", value: formatted },
-                  });
-                  setShowCalendarStartDate(false);
-                }}
-              />
-            )}
-          </DateField>
+          />
 
           <DateField
             onClick={() => setShowCalendarFinishDate(!showCalendarFinishDate)}
@@ -67,22 +52,7 @@ export default function FilterModal({
               });
               setShowCalendarFinishDate(false);
             }}
-          >
-            {showCalendarFinishDate && (
-              <Calendar
-                growDirection={"center"}
-                triggerRef={finishInputRef}
-                value={orderByFinishDateValue}
-                onClose={() => setShowCalendarFinishDate(false)}
-                onChange={(formatted) => {
-                  orderByFinishDateOnChange({
-                    target: { name: "end_date", value: formatted },
-                  });
-                  setShowCalendarFinishDate(false);
-                }}
-              />
-            )}
-          </DateField>
+          />
         </div>
       </div>
 
