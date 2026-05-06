@@ -29,10 +29,10 @@ export default function AddProductModal({ onCloseModal }) {
       {/* Menú de ordenes de entrada */}
       <SelectMenu
         searchable
-        value={form.input_order}
+        value={form.input_order_id}
         spanText={"Orden de entrada"}
         onChange={handleChange}
-        name={"input_order"}
+        name={"input_order_id"}
         addIconFunction={(e) => openInnerModal("addInputOrder", e)}
         addButtonInvisible={false}
         options={inputOrders.map((inputOrder) => ({
@@ -44,8 +44,8 @@ export default function AddProductModal({ onCloseModal }) {
       {/* Menú de subcategorias */}
       <SelectMenu
         searchable
-        value={form.subcategory}
-        name={"subcategory"}
+        value={form.subcategory_id}
+        name={"subcategory_id"}
         spanText={"Subcategoria"}
         onChange={handleChange}
         addIconFunction={(e) => openInnerModal("addSubcategory", e)}
@@ -59,17 +59,17 @@ export default function AddProductModal({ onCloseModal }) {
       {/* Menú de marcas */}
       <SelectMenu
         searchable
-        value={form.brand}
+        value={form.brand_id}
         spanText={"Marca"}
-        name={"brand"}
+        name={"brand_id"}
         onChange={handleChange}
         addIconFunction={(e) => openInnerModal("addBrand", e)}
         addButtonInvisible={false}
         options={brands
           .filter(
             (brand) =>
-              !form.subcategory ||
-              brand.subcategories.split(",").includes(String(form.subcategory)),
+              !form.subcategory_id ||
+              brand.subcategories.split(",").includes(String(form.subcategory_id)),
           )
           .map((brand) => ({
             value: brand.id,
@@ -80,22 +80,22 @@ export default function AddProductModal({ onCloseModal }) {
       {/* Menú de modelos */}
       <SelectMenu
         searchable
-        value={form.model}
+        value={form.model_id}
         spanText={"Modelo"}
-        name={"model"}
+        name={"model_id"}
         onChange={handleChange}
         id={"model"}
         addIconFunction={(e) => openInnerModal("addModel", e)}
         addButtonInvisible={false}
         options={models
-          .filter((model) => !form.brand || model.brand === form.brand)
+          .filter((model) => !form.brand_id || model.brand === form.brand_id)
           .map((model) => ({
             value: model.id,
             label: model.model,
           }))}
       />
       <FormField
-        name={"serial"}
+        name={"product_serial"}
         labelText={"Serial"}
         placeholder={"10KQ340"}
         id={"product_serial"}
