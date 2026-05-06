@@ -7,11 +7,11 @@ import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 export function useCreateProduct() {
   const queryClient = useQueryClient();
   const [form, setForm] = useState({
-    input_order: "",
-    subcategory: "",
-    model: "",
-    serial: "",
-    brand: "",
+    input_order_id: "",
+    subcategory_id: "",
+    model_id: "",
+    product_serial: "",
+    brand_id: "",
     warranty_time: "",
   });
   const [loading, setLoading] = useState(false);
@@ -41,7 +41,7 @@ export function useCreateProduct() {
 
     try {
       const response = await createProductService(form);
-      if (response.sucess) {
+      if (response.success == true) {
         openInnerModal("success", triggerButton);
         await queryClient.invalidateQueries({ queryKey: ["products"] });
       }
