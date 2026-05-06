@@ -13,5 +13,11 @@ export async function updateProductStatusService(product_data) {
     },
   );
 
-  return response.json();
+  const json = await response.json();
+
+  if (!response.ok) {
+    return { error: json.detail || "Error en la petición", data: null };
+  }
+
+  return json;
 }
