@@ -42,7 +42,10 @@ export default function DateField({
           value={value}
           growDirection={growDirection}
           triggerRef={innerTrigger}
-          onChange={onChange}
+          onChange={(formatted) => {
+            onChange({ target: { name, value: formatted } });
+            openInnerModal(null);
+          }}
           onClose={() => openInnerModal(null)}
         />
       )}
