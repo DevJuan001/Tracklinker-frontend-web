@@ -32,7 +32,7 @@ export default function Calendar({
       growDirection={growDirection}
     >
       <div
-        className="min-w-[400px] max-w-[600px] min-h-96 p-2 bg-white border border-[#a1a1a131] rounded-[32px] cursor-default overflow-hidden z-[600]
+        className="w-full min-h-96 p-2 bg-white border border-[#a1a1a131] rounded-[32px] cursor-default overflow-hidden z-[600]
         dark:border-[#ffffff15] dark:bg-black"
         onClick={(e) => e.stopPropagation()}
       >
