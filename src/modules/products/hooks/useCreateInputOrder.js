@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 import { createInputOrderService } from "../services/createInputOrderService";
 
 export function useCreateInputOrder() {
@@ -20,23 +21,16 @@ export function useCreateInputOrder() {
     e.preventDefault();
     setLoading(true);
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
+    const triggerButton = getModalTrigger(e);
 
     try {
       const response = await createInputOrderService(form);
       if (response.success) {
-        openInnerModal("success", {
-          currentTarget: buttonElement,
-          rect: buttonRect,
-        });
+        openInnerModal("success", triggerButton);
         queryClient.invalidateQueries({ queryKey: ["inputOrders"] });
       }
     } catch (error) {
-      openInnerModal("error", {
-        currentTarget: buttonElement,
-        rect: buttonRect,
-      });
+      openInnerModal("error", triggerButton);
       setError(error);
     } finally {
       setLoading(false);
