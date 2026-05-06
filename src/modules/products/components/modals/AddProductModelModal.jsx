@@ -17,6 +17,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
     useInnerModal();
   const { brands } = useCatalog();
   const { form, loading, handleChange, handleSubmit } = useCreateProductModel();
+
   return (
     <AddInnerModal
       triggerRef={triggerRef}
@@ -26,8 +27,9 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
     >
       <section className="w-full flex flex-col items-center gap-2.5">
         <SelectMenu
-          value={form.product_brand_id}
-          name="product_brand_id"
+          searchable
+          value={form.brand_id}
+          name="brand_id"
           spanText={"Marca"}
           onChange={handleChange}
           options={brands.map((brand) => ({
@@ -35,21 +37,24 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
             label: brand.name,
           }))}
         />
+
         <FormField
-          value={form.product_detail_model}
-          name="product_detail_model"
+          value={form.model}
+          name="model"
           labelText={"Modelo"}
           onChange={handleChange}
           placeholder={"Impresora a color"}
         />
+
         <FormField
-          value={form.product_detail_description}
+          value={form.description}
           type="textarea"
           labelText={"Descripción"}
-          name={"product_detail_description"}
+          name={"description"}
           onChange={handleChange}
           placeholder={"Impresora multicolor "}
         />
+
         <ConfirmCancelButtons
           confirmText={loading ? <Loader /> : "Crear"}
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
@@ -69,6 +74,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
             confirmButtonText={"Volver"}
           />
         )}
+
         {innerType === "error" && (
           <ErrorModal
             triggerRef={innerTrigger}
