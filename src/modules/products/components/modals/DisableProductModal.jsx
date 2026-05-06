@@ -1,5 +1,5 @@
 // Hooks
-import { useState } from "react";
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import { useUpdateProductStatus } from "../../hooks/useUpdateProductStatus";
 // Components
 import Loader from "../../../../globals/components/ui/Loader";
@@ -8,47 +8,40 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
-export default function DisableProductModal({ product, onClose, refetch }) {
-  const [innerModal, setInnerModal] = useState(null);
-  const { handleSubmit, loading } = useUpdateProductStatus();
+export default function DisableProductModal({ product, onClose }) {
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { handleSubmit, loading, error } = useUpdateProductStatus({
+    product_id: product.product_id,
+    product_serial: product.product_serial,
+    status: 1,
+  });
 
   return (
     <section className="flex flex-col justify-center items-center dark:text-white">
-      <p className="text-center">
-        ¿Seguro/a que deseas deshabilitar el producto con serial{" "}
+      <span className="text-start">
+        ¿Estás seguro/a que deseas deshabilitar el producto con serial{" "}
         <span className="font-medium">{product.product_serial}</span>?
-      </p>
+      </span>
 
       {/* Botones */}
       <ConfirmCancelButtons
         confirmText={loading ? <Loader /> : "Deshabilitar"}
         confirmBgColor="red-600"
+        itemsPosition="end"
         cancelText={"Cancelar"}
-        confirmButtonOnClick={(e) => handleSubmit(e, setInnerModal)}
+        confirmButtonOnClick={(e) => handleSubmit(e, onClose, openInnerModal)}
         cancelButtonOnClick={onClose}
       />
-      {innerModal === "success" && (
-        <SuccessModal
-          isOpen={true}
-          confirmButtonText={"Volver a la página"}
-          confirmTitle={"¡Producto deshabilitado correctamente!"}
-          confirmText={"El producto ha sido deshabilitado correctamente."}
-          onClose={() => {
-            setInnerModal(null);
-            refetch();
-            onClose();
-          }}
-        />
-      )}
-      {innerModal === "error" && (
+      {innerType === "error" && (
         <ErrorModal
+          triggerRef={innerTrigger}
           isOpen={true}
+          location="anchored"
+          growDirection={"top-right"}
           confirmButtonText={"Volver a intentarlo"}
           errorTitle={"¡No se pudo deshabilitar el producto!"}
-          errorText={
-            "Intenta nuevamente deshabilitar el producto y si el problema persiste comunicate con soporte"
-          }
-          onClose={() => setInnerModal(null)}
+          errorText={error}
+          onClose={() => openInnerModal(null)}
         />
       )}
     </section>
