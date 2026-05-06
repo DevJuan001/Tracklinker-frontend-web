@@ -22,11 +22,7 @@ export default function FilterModal({
             spanText={"Desde:"}
             name={"start_date"}
             value={orderByStartDateValue ? orderByStartDateValue : "yyyy-mm-dd"}
-            onChange={(formatted) => {
-              orderByStartDateOnChange({
-                target: { name: "start_date", value: formatted },
-              });
-            }}
+            onChange={orderByStartDateOnChange}
           />
 
           <DateField
@@ -35,11 +31,7 @@ export default function FilterModal({
             value={
               orderByFinishDateValue ? orderByFinishDateValue : "yyyy-mm-dd"
             }
-            onChange={(formatted) => {
-              orderByFinishDateOnChange({
-                target: { name: "end_date", value: formatted },
-              });
-            }}
+            onChange={orderByFinishDateOnChange}
           />
         </div>
       </div>
