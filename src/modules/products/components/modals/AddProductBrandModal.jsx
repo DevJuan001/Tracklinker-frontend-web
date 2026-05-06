@@ -22,6 +22,7 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
     >
       <section className="w-full flex flex-col items-center gap-2.5">
         <FormField
+          id={"name"}
           name={"name"}
           labelText={"Nombre de la marca"}
           placeholder={"Asus"}
