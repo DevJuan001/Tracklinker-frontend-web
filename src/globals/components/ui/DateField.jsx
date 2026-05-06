@@ -1,3 +1,5 @@
+import { useInnerModal } from "../../hooks/useInnerModal";
+import Calendar from "./Calendar";
 import Icon from "./Icon";
 
 export default function DateField({
@@ -5,14 +7,14 @@ export default function DateField({
   inputRef,
   value,
   name,
-  onClick,
   onChange,
-  children,
+  growDirection = "center",
 }) {
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+
   return (
     <div
-      tabIndex={0}
-      onClick={onClick}
+      onClick={(e) => openInnerModal("calendar", e)}
       className="relative w-full h-16 flex px-4 rounded-2xl border outline-[#00000028] text-center cursor-pointer shadow-sm
     dark:border-[#1e1e20cb] text-sm dark:text-white focus:shadow-[0_0_2px_1px_#e5e7eb]"
     >
@@ -35,7 +37,15 @@ export default function DateField({
           className="dark:text-[#7e8088]"
         />
       </div>
-      {children}
+      {innerType === "calendar" && (
+        <Calendar
+          value={value}
+          growDirection={growDirection}
+          triggerRef={innerTrigger}
+          onChange={onChange}
+          onClose={() => openInnerModal(null)}
+        />
+      )}
     </div>
   );
 }
