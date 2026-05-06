@@ -10,11 +10,11 @@ export function useEditProduct(product) {
 
   const [form, setForm] = useState({
     id: product.product_id,
-    input_order: product.input_order_id || "",
-    subcategory: product.subcategory_id || "",
-    serial: product.product_serial || "",
-    brand: product.brand_id || "",
-    model: product.model_id || "",
+    input_order_id: product.input_order_id || "",
+    subcategory_id: product.subcategory_id || "",
+    product_serial: product.product_serial || "",
+    brand_id: product.brand_id || "",
+    model_id: product.model_id || "",
     warranty_time: product.warranty_time || "",
     product_details_id: product.product_details_id,
     status: product.status || "",
@@ -33,7 +33,7 @@ export function useEditProduct(product) {
     e.preventDefault();
 
     const triggerButton = getModalTrigger(e);
-    
+
     const isValid = validate(form);
 
     if (!isValid) {
@@ -51,14 +51,19 @@ export function useEditProduct(product) {
     setLoading(true);
 
     try {
-      const response = await editProductService({
-        id: product.product_id,
-        product_details_id: product.product_details_id,
-        ...changes,
-      });
-      if (response.success) {
-        openInnerModal("success", triggerButton);
-        queryClient.invalidateQueries({ queryKey: ["products"] });
+      if (Object.keys(changes).length > 1) {
+        const response = await editProductService({
+          id: product.product_id,
+          product_details_id: product.product_details_id,
+          ...changes,
+        });
+
+        if (response.success === true) {
+          queryClient.invalidateQueries({ queryKey: ["products"] });
+          openInnerModal("success", triggerButton);
+        } else {
+          openInnerModal("error", triggerButton);
+        }
       } else {
         openInnerModal("error", triggerButton);
       }
