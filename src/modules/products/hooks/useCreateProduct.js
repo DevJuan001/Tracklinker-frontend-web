@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 import { createProductService } from "../services/createProductService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 
@@ -27,14 +28,12 @@ export function useCreateProduct() {
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
       return;
     }
 
@@ -43,11 +42,11 @@ export function useCreateProduct() {
     try {
       const response = await createProductService(form);
       if (response.sucess) {
-        openInnerModal("success", triggerData);
+        openInnerModal("success", triggerButton);
         await queryClient.invalidateQueries({ queryKey: ["products"] });
       }
     } catch (error) {
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
       setError(error);
     } finally {
       setLoading(false);
