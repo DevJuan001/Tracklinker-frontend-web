@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 import { createProductBrandService } from "../services/createProductBrandService";
 
-export function useCreateProductBrand(formData) {
-  const [form, setForm] = useState(formData);
+export function useCreateProductBrand() {
+  const [form, setForm] = useState({
+    name: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
@@ -20,14 +23,12 @@ export function useCreateProductBrand(formData) {
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
       return;
     }
 
@@ -35,11 +36,12 @@ export function useCreateProductBrand(formData) {
 
     try {
       const response = await createProductBrandService(form);
+
       if (response.success === true) {
-        openInnerModal("success", triggerData);
+        openInnerModal("success", triggerButton);
         queryClient.invalidateQueries({ queryKey: ["brands"] });
       } else {
-        openInnerModal("error", triggerData);
+        openInnerModal("error", triggerButton);
       }
     } catch (error) {
       setError(error);
