@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useCalendar(value, onChange) {
+export function useCalendar(value, onChange, onClose) {
   const today = new Date();
   const [current, setCurrent] = useState({
     year: today.getFullYear(),
@@ -29,6 +29,7 @@ export function useCalendar(value, onChange) {
   const handleSelect = (day) => {
     const formatted = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     onChange(formatted);
+    onClose();
   };
 
   const isToday = (day) =>

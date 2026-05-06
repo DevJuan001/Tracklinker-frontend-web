@@ -27,14 +27,15 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
     >
       <section className="w-full flex flex-col items-center gap-2.5">
         <SelectMenu
+          searchable
           value={form.supplier_id}
           name={"supplier_id"}
           spanText={"Proveedor"}
           id={"supplier_id"}
           onChange={handleChange}
           options={suppliers.map((supplier) => ({
-            value: supplier.supplier_id,
-            label: supplier.supplier_name,
+            value: supplier.id,
+            label: supplier.name,
           }))}
         />
         <FormField

@@ -12,6 +12,7 @@ export default function SelectMenu({
   addIconRef,
   addButtonInvisible = true,
   searchable = false,
+  growDirection = "center",
 }) {
   const {
     open,
@@ -70,8 +71,9 @@ export default function SelectMenu({
           }}
           disabled={addButtonInvisible}
           type="button"
-          className={`h-16 flex items-center justify-center px-5 border rounded-2xl bg-[#FBF9FC] shadow-sm
-          ${addButtonInvisible ? "hidden" : "opacity-100"} 
+          className={`h-16 flex items-center justify-center px-5 border rounded-2xl transition-colors duration-200 bg-[#FBF9FC] shadow-sm
+          ${addButtonInvisible ? "hidden" : "opacity-100"}
+          hover:bg-gray-200
           dark:bg-black dark:border-[#1e1e20cb]`}
         >
           <Icon name={"add"} size={22} className="dark:text-[#7e8088]" />
@@ -83,7 +85,7 @@ export default function SelectMenu({
           isOpen={open}
           onClose={handleClose}
           triggerRef={triggerRef}
-          growDirection="center"
+          growDirection={growDirection}
           type="select"
           z_index="600"
         >

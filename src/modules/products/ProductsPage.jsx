@@ -77,10 +77,15 @@ export default function ProductsPage() {
           type={modalType}
           isOpen={isOpen}
           triggerRef={triggerRef}
-          location={modalType === "filter" ? "anchored" : "center"}
-          onClose={() => {
-            closeModal();
-          }}
+          location={
+            modalType === "filter" ||
+            modalType === "enable" ||
+            modalType === "disable"
+              ? "anchored"
+              : "center"
+          }
+          growDirection={"center"}
+          onClose={() => closeModal()}
         >
           {modalType === "user" && <ProfileModal />}
           {modalType === "filter" && (

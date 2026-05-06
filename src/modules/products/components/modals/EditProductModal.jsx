@@ -4,7 +4,9 @@ import { useCatalog } from "../../hooks/useCatalog";
 import { useEditProduct } from "../../hooks/useEditProduct";
 // Components
 import Loader from "../../../../globals/components/ui/Loader";
+import Calendar from "../../../../globals/components/ui/Calendar";
 import FormField from "../../../../globals/components/ui/FormField";
+import DateField from "../../../../globals/components/ui/DateField";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modals
@@ -20,8 +22,22 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
   return (
     <section className="w-full flex flex-col items-center gap-2.5">
       <SelectMenu
-        value={form.subcategory}
-        name={"subcategory"}
+        searchable
+        onChange={handleChange}
+        value={form.input_order_id}
+        spanText={"Orden de entrada"}
+        name={"input_order_id"}
+        id={"input_order_id"}
+        options={inputOrders.map((input_order) => ({
+          value: input_order.id,
+          label: input_order.bill,
+        }))}
+      />
+
+      <SelectMenu
+        searchable
+        value={form.subcategory_id}
+        name={"subcategory_id"}
         spanText={"Subcategoria"}
         onChange={handleChange}
         options={subcategories.map((subcategory) => ({
@@ -31,55 +47,53 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
       />
 
       <SelectMenu
+        searchable
         onChange={handleChange}
-        value={form.input_order}
-        spanText={"Orden de entrada"}
-        name={"input_order"}
-        id={"input_order"}
-        options={inputOrders.map((input_order) => ({
-          value: input_order.id,
-          label: input_order.bill,
-        }))}
-      />
-
-      <SelectMenu
-        onChange={handleChange}
-        value={form.brand}
+        value={form.brand_id}
         spanText={"Marca"}
-        name={"brand"}
-        id={"brand"}
-        options={brands.map((brand) => ({
-          value: brand.id,
-          label: brand.name,
-        }))}
+        name={"brand_id"}
+        id={"brand_id"}
+        options={brands
+          .filter(
+            (brand) =>
+              !form.subcategory_id ||
+              brand.subcategories
+                .split(",")
+                .includes(String(form.subcategory_id)),
+          )
+          .map((brand) => ({
+            value: brand.id,
+            label: brand.name,
+          }))}
       />
 
       <SelectMenu
+        searchable
         onChange={handleChange}
-        value={form.model}
+        value={form.model_id}
         spanText={"Modelo"}
-        name={"model"}
-        id={"model"}
-        options={models.map((model) => ({
-          value: model.id,
-          label: model.model,
-        }))}
+        name={"model_id"}
+        id={"model_id"}
+        options={models
+          .filter((model) => !form.brand_id || model.brand === form.brand_id)
+          .map((model) => ({
+            value: model.id,
+            label: model.model,
+          }))}
       />
 
       <FormField
-        id={"serial"}
-        name={"serial"}
+        id={"product_serial"}
+        name={"product_serial"}
         labelText={"Serial"}
-        value={form.serial}
+        value={form.product_serial}
         onChange={handleChange}
       />
 
-      <FormField
+      <DateField
         id={"warranty_time"}
-        type="date"
         name={"warranty_time"}
         value={form.warranty_time}
-        labelText={"Tiempo de garantía"}
         spanText={"Tiempo de garantía"}
         onChange={handleChange}
       />
@@ -106,6 +120,13 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
       />
 
       {/* Modales internos */}
+      {innerType === "calendar" && (
+        <Calendar
+          onClose={() => openInnerModal(null)}
+          triggerRef={innerTrigger}
+        />
+      )}
+
       {innerType === "success" && (
         <SuccessModal
           triggerRef={innerTrigger}
