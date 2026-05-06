@@ -4,7 +4,9 @@ import { useCatalog } from "../../hooks/useCatalog";
 import { useEditProduct } from "../../hooks/useEditProduct";
 // Components
 import Loader from "../../../../globals/components/ui/Loader";
+import Calendar from "../../../../globals/components/ui/Calendar";
 import FormField from "../../../../globals/components/ui/FormField";
+import DateField from "../../../../globals/components/ui/DateField";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modals
@@ -20,6 +22,7 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
   return (
     <section className="w-full flex flex-col items-center gap-2.5">
       <SelectMenu
+        searchable
         value={form.subcategory}
         name={"subcategory"}
         spanText={"Subcategoria"}
@@ -31,6 +34,7 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
       />
 
       <SelectMenu
+        searchable
         onChange={handleChange}
         value={form.input_order}
         spanText={"Orden de entrada"}
@@ -43,6 +47,7 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
       />
 
       <SelectMenu
+        searchable
         onChange={handleChange}
         value={form.brand}
         spanText={"Marca"}
@@ -55,6 +60,7 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
       />
 
       <SelectMenu
+        searchable
         onChange={handleChange}
         value={form.model}
         spanText={"Modelo"}
@@ -74,9 +80,8 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
         onChange={handleChange}
       />
 
-      <FormField
+      <DateField
         id={"warranty_time"}
-        type="date"
         name={"warranty_time"}
         value={form.warranty_time}
         labelText={"Tiempo de garantía"}
@@ -106,6 +111,13 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
       />
 
       {/* Modales internos */}
+      {innerType === "calendar" && (
+        <Calendar
+          onClose={() => openInnerModal(null)}
+          triggerRef={innerTrigger}
+        />
+      )}
+
       {innerType === "success" && (
         <SuccessModal
           triggerRef={innerTrigger}
