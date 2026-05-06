@@ -37,7 +37,7 @@ export default function DisableProductModal({ product, onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           location="anchored"
-          growDirection={"top-right"}
+          growDirection={"center"}
           confirmButtonText={"Volver a intentarlo"}
           errorTitle={"¡No se pudo deshabilitar el producto!"}
           errorText={error}
