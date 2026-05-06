@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 import { editProductService } from "../services/editProductService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 
@@ -31,21 +32,19 @@ export function useEditProduct(product) {
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
-
+    const triggerButton = getModalTrigger(e);
+    
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
       return;
     }
 
     const changes = getChanges(product, form);
 
     if (Object.keys(changes).length === 0) {
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
       return;
     }
 
@@ -58,10 +57,10 @@ export function useEditProduct(product) {
         ...changes,
       });
       if (response.success) {
-        openInnerModal("success", triggerData);
+        openInnerModal("success", triggerButton);
         queryClient.invalidateQueries({ queryKey: ["products"] });
       } else {
-        openInnerModal("error", triggerData);
+        openInnerModal("error", triggerButton);
       }
       setLoading(false);
     } catch (err) {
