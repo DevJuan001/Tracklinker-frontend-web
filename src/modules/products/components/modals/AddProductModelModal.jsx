@@ -39,6 +39,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
         />
 
         <FormField
+          id={"model"}
           value={form.model}
           name="model"
           labelText={"Modelo"}
@@ -47,6 +48,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
         />
 
         <FormField
+          id={"description"}
           value={form.description}
           type="textarea"
           labelText={"Descripción"}
