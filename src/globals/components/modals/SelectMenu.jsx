@@ -12,6 +12,7 @@ export default function SelectMenu({
   addIconRef,
   addButtonInvisible = true,
   searchable = false,
+  growDirection = "center",
 }) {
   const {
     open,
@@ -83,7 +84,7 @@ export default function SelectMenu({
           isOpen={open}
           onClose={handleClose}
           triggerRef={triggerRef}
-          growDirection="center"
+          growDirection={growDirection}
           type="select"
           z_index="600"
         >
