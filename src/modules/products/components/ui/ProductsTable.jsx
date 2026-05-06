@@ -163,7 +163,13 @@ export default function ProductsTable({ products, openModal }) {
                         type={"edit_status"}
                       >
                         {Object.entries(productStatusConfig)
-                          .filter(([id]) => Number(id) !== product.status)
+                          .filter(([id]) => {
+                            const numId = Number(id);
+                            if (numId === product.status) return false;
+                            if (product.status === 4 && numId === 2)
+                              return false;
+                            return true;
+                          })
                           .map(([id, config]) => (
                             <div
                               key={id}
