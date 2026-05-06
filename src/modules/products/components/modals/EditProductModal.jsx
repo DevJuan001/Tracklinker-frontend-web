@@ -84,7 +84,6 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
         id={"warranty_time"}
         name={"warranty_time"}
         value={form.warranty_time}
-        labelText={"Tiempo de garantía"}
         spanText={"Tiempo de garantía"}
         onChange={handleChange}
       />
