@@ -128,11 +128,11 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
           value={form.warranty_time}
           onChange={handleChange}
           options={[
-            { value: "3", label: "3 Meses" },
-            { value: "6", label: "6 Meses" },
-            { value: "12", label: "12 Meses" },
-            { value: "18", label: "18 Meses" },
-            { value: "24", label: "24 Meses" },
+            { value: "3", label: "Menos de 3 Meses" },
+            { value: "6", label: "Menos de 6 Meses" },
+            { value: "12", label: "Menos de 12 Meses" },
+            { value: "18", label: "Menos de 18 Meses" },
+            { value: "24", label: "Menos de 24 Meses" },
           ]}
         />
       </div>
