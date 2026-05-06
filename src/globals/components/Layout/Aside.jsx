@@ -89,7 +89,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
               <div>
                 <button
                   onClick={avatarOnClick}
-                  className="w-full h-full flex items-center justify-center py-2.5 px-4 gap-2.5 rounded-full transition duration-300
+                  className="w-full h-full flex items-center justify-center py-2.5 px-4 gap-2.5 rounded-3xl transition duration-300
                   hover:bg-[#e5e7eb96]
                   dark:text-[#7E8088] dark:hover:bg-[#181818]
                   xl:justify-start"
