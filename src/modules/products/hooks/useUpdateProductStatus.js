@@ -23,7 +23,7 @@ export function useUpdateProductStatus(product_data) {
         onClose();
       } else {
         openInnerModal("error", triggerButton);
-        setError(response.detail)
+        setError(response.error)
       }
       setLoading(false);
     } catch (err) {
