@@ -16,14 +16,13 @@ export function useCreateWarranty(product) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { validate } = useFormValidation();
+  const { validate, clearError, fieldError } = useFormValidation();
   const queryClient = useQueryClient();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
@@ -34,14 +33,11 @@ export function useCreateWarranty(product) {
     const isValid = validate(form);
 
     if (!isValid) {
-      setError(
-        "Verifica que los campos no esten vacios e intentalo nuevamente",
-      );
-      openInnerModal("error", triggerButton);
       return;
     }
 
     setLoading(true);
+
     try {
       const response = await createWarranty(form);
 
@@ -61,5 +57,5 @@ export function useCreateWarranty(product) {
     }
   }
 
-  return { form, loading, error, handleChange, handleSubmit };
+  return { form, loading, error, fieldError, handleChange, handleSubmit };
 }
