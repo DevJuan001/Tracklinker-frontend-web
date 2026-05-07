@@ -13,7 +13,7 @@ import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
 export default function AddWarrantyModal({ product, onCloseModal }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, error, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateWarranty(product);
   const { cities } = useCities();
 
@@ -26,6 +26,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
         labelText={"Serial"}
         value={form.product_serial}
         onChange={handleChange}
+        className={fieldError("product_serial")}
       />
 
       <FormField
@@ -35,6 +36,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
         value={form.customer}
         onChange={handleChange}
         placeholder="Miguel Arnulfo Pérez"
+        className={fieldError("customer")}
       />
 
       <FormField
@@ -44,6 +46,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
         value={form.phone}
         onChange={handleChange}
         placeholder="+57 300 123 XXXX"
+        className={fieldError("phone")}
       />
 
       <FormField
@@ -53,6 +56,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
         value={form.address}
         onChange={handleChange}
         placeholder="kr 45 # 67-XX"
+        className={fieldError("address")}
       />
 
       <SelectMenu
@@ -66,14 +70,15 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
           label: city.name,
         }))}
         placeholder="Bogotá"
+        className={fieldError("city")}
       />
 
       <div
         tabIndex={0}
-        className="relative flex w-full border pr-1 rounded-xl
+        className={`relative flex w-full border pr-1 rounded-xl
         focus-within:shadow-[0_0_3px_2px_#e5e7eb]
         dark:border-[#28282b] dark:focus:shadow-[0_0_4px_2px_#ffffff33]
-        "
+        ${fieldError("description")}`}
       >
         <textarea
           required
@@ -100,7 +105,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
           text-xs text-[#7E777E]
           pointer-events-none
           transition-all duration-200
-          bg-white dark:bg-black dark:text-[#b4aab4]
+          bg-[#FBF9FC] dark:bg-black dark:text-[#b4aab4]
           "
         >
           Descripción
@@ -114,6 +119,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
         value={form.link_attachments}
         onChange={handleChange}
         placeholder="https://drive.google.com/ejemplo"
+        className={fieldError("link_attachments")}
       />
 
       <ConfirmCancelButtons
