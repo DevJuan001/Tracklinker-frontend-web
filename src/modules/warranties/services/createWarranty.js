@@ -13,9 +13,11 @@ export async function createWarranty(data) {
     },
   );
 
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error en la petición");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  return await res.json();
+  return json;
 }
