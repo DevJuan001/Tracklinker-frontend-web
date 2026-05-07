@@ -13,6 +13,7 @@ export default function SelectMenu({
   addButtonInvisible = true,
   searchable = false,
   growDirection = "center",
+  className,
 }) {
   const {
     open,
@@ -37,9 +38,10 @@ export default function SelectMenu({
           ref={triggerRef}
           tabIndex={0}
           onClick={handleToggle}
-          className="relative w-full h-16 pr-2 pt-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131] shadow-sm
-          rounded-2xl cursor-pointer text-sm transition-all duration-300 focus-within:shadow-[0_0_3px_2px_#e5e7eb]
-          dark:bg-black dark:border-[#1e1e20cb] dark:focus:focus:shadow-[0_0_4px_2px_#ffffff33]"
+          className={`relative w-full h-16 pr-2 pt-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131] shadow-sm
+          rounded-2xl cursor-pointer text-sm focus-within:shadow-[0_0_3px_2px_#e5e7eb]
+          dark:bg-black dark:border-[#1e1e20cb] dark:focus:focus:shadow-[0_0_4px_2px_#ffffff33]
+          ${className}`}
         >
           <div className="absolute top-2 left-3 px-1">
             <span className="text-xs bg-[#FBF9FC] text-[#7E777E] dark:bg-black dark:text-[#7E8088]">

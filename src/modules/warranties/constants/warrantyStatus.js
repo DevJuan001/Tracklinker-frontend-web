@@ -5,7 +5,7 @@ export const warrantyStatusConfig = {
     icon: "block",
     fill: false,
     optionStyles:
-      "hover:bg-red-50 text-red-600 dark:text-[#ff00008e] dark:bg-[#ff00002f]",
+      "hover:bg-red-100 text-red-600 dark:text-[#ff00008e] dark:bg-[#ff00002f]",
     styles: "bg-gray-50 text-gray-400 dark:text-gray-300 dark:bg-[#ff00002f]",
   },
   2: {
@@ -23,7 +23,7 @@ export const warrantyStatusConfig = {
     icon: "circle",
     fill: true,
     optionStyles:
-      "hover:bg-yellow-50 text-yellow-500 dark:text-[#eeff009d] dark:bg-[#fbff001f]",
+      "hover:bg-yellow-100 text-yellow-500 dark:text-[#eeff009d] dark:bg-[#fbff001f]",
     styles:
       "bg-yellow-50 text-yellow-500 dark:text-[#eeff009d] dark:bg-[#fbff001f]",
   },
@@ -33,7 +33,7 @@ export const warrantyStatusConfig = {
     icon: "check_circle",
     fill: true,
     optionStyles:
-      "hover:bg-green-50 text-green-600 dark:text-[#00ff3779] dark:bg-[#00ff151f]",
+      "hover:bg-green-100 text-green-600 dark:text-[#00ff3779] dark:bg-[#00ff151f]",
     styles:
       "bg-green-50 text-green-600 dark:text-[#00ff3779] dark:bg-[#00ff151f]",
   },

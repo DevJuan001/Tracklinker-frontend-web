@@ -163,7 +163,7 @@ export default function WarrantiesTable({ warranties, openModal }) {
                           setActiveProductSerial(null);
                         }}
                         location="anchored"
-                        type={"select"}
+                        type={"edit_status"}
                       >
                         {Object.entries(warrantyStatusConfig)
                           .filter(([id]) => {

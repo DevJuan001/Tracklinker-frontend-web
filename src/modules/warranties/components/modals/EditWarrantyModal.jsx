@@ -100,6 +100,7 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
       <ConfirmCancelButtons
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onClose}
+        disabled={loading}
         confirmText={loading ? <Loader /> : "Editar"}
       />
 
