@@ -13,7 +13,7 @@ import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
 export default function AddWarrantyModal({ product, onCloseModal }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, handleChange, handleSubmit } =
+  const { form, loading, error, handleChange, handleSubmit } =
     useCreateWarranty(product);
   const { cities } = useCities();
 
@@ -145,9 +145,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
           growDirection={"top-center"}
           isOpen={true}
           errorTitle="No se pudo registrar la garantía"
-          errorText={
-            "Verifica que los datos no esten vacios y que no exista una garantía vigente con este producto e inténtalo nuevamente."
-          }
+          errorText={error}
           confirmButtonText="Volver"
           onClose={() => openInnerModal(null)}
         />
