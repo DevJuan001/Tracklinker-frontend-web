@@ -125,6 +125,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
       <ConfirmCancelButtons
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onCloseModal}
+        disabled={loading}
         confirmText={loading ? <Loader /> : "Crear"}
       />
 
