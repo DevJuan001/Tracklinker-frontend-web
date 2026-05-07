@@ -93,6 +93,14 @@ export default {
             transform: "translateY(0px) scale(1)",
           },
         },
+        shake: {
+          "0%": { transform: "translateX(0)" },
+          "20%": { transform: "translateX(-6px)" },
+          "40%": { transform: "translateX(6px)" },
+          "60%": { transform: "translateX(-4px)" },
+          "80%": { transform: "translateX(4px)" },
+          "100%": { transform: "translateX(0)" },
+        },
       },
       animation: {
         fade: "fade 0.3s ease-out forwards",
@@ -105,6 +113,7 @@ export default {
         modalFadeOut: "modalFadeOut 0.3s cubic-bezier(.56,.27,0,1) forwards",
         blurUp: "blurUp 0.3s ease-in forwards",
         toastIn: "toastIn 0.2s cubic-bezier(.56,.27,0,1) forwards",
+        shake: "shake 0.35s ease",
       },
     },
   },
@@ -133,6 +142,6 @@ export default {
     "animate-blurUp",
     "users-background",
     "bg-green-500",
-    "bg-[#FFFFFF]"
+    "bg-[#FFFFFF]",
   ],
 };
