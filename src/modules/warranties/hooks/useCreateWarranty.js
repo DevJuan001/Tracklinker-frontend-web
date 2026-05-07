@@ -34,6 +34,9 @@ export function useCreateWarranty(product) {
     const isValid = validate(form);
 
     if (!isValid) {
+      setError(
+        "Verifica que los campos no esten vacios e intentalo nuevamente",
+      );
       openInnerModal("error", triggerButton);
       return;
     }
@@ -41,10 +44,14 @@ export function useCreateWarranty(product) {
     setLoading(true);
     try {
       const response = await createWarranty(form);
+
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["products"] });
         queryClient.invalidateQueries({ queryKey: ["warranties"] });
         openInnerModal("success", triggerButton);
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
     } catch (error) {
       openInnerModal("error", triggerButton);
