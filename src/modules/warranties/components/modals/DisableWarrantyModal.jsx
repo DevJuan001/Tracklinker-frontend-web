@@ -23,6 +23,7 @@ export default function DisableWarrantyModal({ selectedWarranty, onClose }) {
         confirmBgColor="red-600"
         cancelButtonOnClick={onClose}
         confirmText={loading ? <Loader /> : "Deshabilitar"}
+        disabled={loading}
       />
     </div>
   );
