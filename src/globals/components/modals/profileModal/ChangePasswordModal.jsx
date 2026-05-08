@@ -2,6 +2,7 @@
 import { useInnerModal } from "../../../hooks/useInnerModal";
 import { useUpdateCurrentUserPassword } from "../../../hooks/useUpdateCurrentUserPassword";
 // Components
+import Icon from "../../ui/Icon";
 import Loader from "../../ui/Loader";
 import FormField from "../../ui/FormField";
 import ConfirmCancelButtons from "../ConfirmCancelButtons";
@@ -9,7 +10,6 @@ import ConfirmCancelButtons from "../ConfirmCancelButtons";
 import Modal from "../Modal";
 import ErrorModal from "../ErrorModal";
 import SuccessModal from "../SuccessModal";
-import { actionsIcons } from "../../../../assets/icons/actionsIcons";
 
 export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
@@ -21,7 +21,9 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
     loading,
     showPasswords,
     togglePassword,
+    fieldError,
   } = useUpdateCurrentUserPassword();
+
   return (
     <Modal
       z_index="300"
@@ -39,59 +41,47 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
           name="old_password"
           labelText={"Contraseña actual"}
           onChange={handleChange}
+          className={fieldError("old_password")}
         >
           <button type="button" onClick={() => togglePassword("old")}>
-            <img
-              src={
-                showPasswords.old
-                  ? actionsIcons.lockVisibility
-                  : actionsIcons.visibility
-              }
-              alt=""
-            />
+            <Icon name={showPasswords.old ? "visibility_off" : "visibility"} />
           </button>
         </FormField>
+
         <FormField
           id={"new_password"}
           type={showPasswords.new ? "text" : "password"}
           name="new_password"
           labelText={"Nueva contraseña"}
           onChange={handleChange}
+          className={fieldError("new_password")}
         >
           <button type="button" onClick={() => togglePassword("new")}>
-            <img
-              src={
-                showPasswords.new
-                  ? actionsIcons.lockVisibility
-                  : actionsIcons.visibility
-              }
-              alt=""
-            />
+            <Icon name={showPasswords.new ? "visibility_off" : "visibility"} />
           </button>
         </FormField>
+
         <FormField
           id={"repeat_password"}
           type={showPasswords.repeat ? "text" : "password"}
           name="repeat_password"
           labelText={"Repita la nueva contraseña"}
           onChange={handleChange}
+          className={fieldError("repeat_password")}
         >
           <button type="button" onClick={() => togglePassword("repeat")}>
-            <img
-              src={
-                showPasswords.repeat
-                  ? actionsIcons.lockVisibility
-                  : actionsIcons.visibility
-              }
-              alt=""
+            <Icon
+              name={showPasswords.repeat ? "visibility_off" : "visibility"}
             />
           </button>
         </FormField>
+
         {!passwordsMatch && passwordData.repeat_password && (
           <span className="text-sm text-red-700">
             Las contraseñas no coinciden
           </span>
         )}
+
         <ConfirmCancelButtons
           confirmText={loading ? <Loader /> : "Cambiar"}
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
