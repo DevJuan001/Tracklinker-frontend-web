@@ -4,9 +4,7 @@ import { getCurrentUserService } from "../services/getCurrentUserService";
 export function useUser() {
   const user = useQuery({
     queryKey: ["currentUser"],
-    queryFn: async ({ signal }) => {
-      return getCurrentUserService(signal);
-    },
+    queryFn: getCurrentUserService,
     staleTime: 1000 * 60 * 60,
   });
 

@@ -1,10 +1,13 @@
 import { apiRoutes } from "../../config/apiRoutes";
+import { fetchWithAuth } from "../../utils/fetchWithAuth";
 
 export async function getCurrentUserService() {
-  const response = await fetch(`${apiRoutes.apiUrl}${apiRoutes.auth}/me`, {
-    method: "GET",
-    credentials: "include",
-  });
+  const response = await fetchWithAuth(
+    `${apiRoutes.apiUrl}${apiRoutes.users}/me`,
+    {
+      method: "GET",
+    },
+  );
 
   if (!response.ok) {
     throw new Error("Error al intentar obtener tu información");
@@ -12,5 +15,5 @@ export async function getCurrentUserService() {
 
   const data = await response.json();
 
-  return data.user;
+  return data;
 }
