@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { updateCurrentUserPasswordService } from "../services/updateCurrentUserPasswordService";
 import { useFormValidation } from "./useFormValidation";
+import { getModalTrigger } from "../../utils/getModalTrigger";
 
 export function useUpdateCurrentUserPassword() {
   const [passwordData, setPasswordData] = useState({
@@ -15,19 +16,19 @@ export function useUpdateCurrentUserPassword() {
     new: false,
     repeat: false,
   });
+  const { validate, clearError, fieldError } = useFormValidation();
 
-  const togglePassword = (field) => {
+  function togglePassword(field) {
     setShowPasswords((prev) => ({ ...prev, [field]: !prev[field] }));
-  };
+  }
+
   const passwordsMatch =
     passwordData.new_password === passwordData.repeat_password;
-  const { validate } = useFormValidation();
 
   function handleChange(e) {
-    setPasswordData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setPasswordData((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
@@ -35,14 +36,11 @@ export function useUpdateCurrentUserPassword() {
 
     if (!passwordsMatch) return;
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(passwordData);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
       return;
     }
 
@@ -50,13 +48,13 @@ export function useUpdateCurrentUserPassword() {
 
     try {
       const response = await updateCurrentUserPasswordService(passwordData);
-      if (response.success) {
-        openInnerModal("success");
+      if (response.success == true) {
+        openInnerModal("success", triggerButton);
       } else {
-        openInnerModal("error");
+        openInnerModal("error", triggerButton);
       }
     } catch (error) {
-      openInnerModal("error");
+      openInnerModal("error", triggerButton);
       setError(error);
     } finally {
       setLoading(false);
@@ -72,5 +70,6 @@ export function useUpdateCurrentUserPassword() {
     passwordsMatch,
     showPasswords,
     togglePassword,
+    fieldError,
   };
 }
