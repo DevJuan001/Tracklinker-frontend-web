@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { createUser } from "../services/createUserService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useCreateUser() {
   const [form, setForm] = useState({
@@ -17,27 +18,23 @@ export function useCreateUser() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
-  const { validate } = useFormValidation();
+  const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   // Función que pasa los parametros al service y valida la respuesta
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
       return;
     }
 
@@ -47,15 +44,15 @@ export function useCreateUser() {
       const response = await createUser(form);
       if (response.success) {
         queryClient.invalidateQueries({ queryKey: ["users"] });
-        openInnerModal("success", triggerData);
+        openInnerModal("success", triggerButton);
       }
     } catch (error) {
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
       setError(error);
     } finally {
       setLoading(false);
     }
   }
 
-  return { form, loading, error, handleSubmit, handleChange };
+  return { form, loading, error, fieldError, handleSubmit, handleChange };
 }
