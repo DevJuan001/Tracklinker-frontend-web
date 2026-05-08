@@ -8,5 +8,5 @@ export function useUser() {
     staleTime: 1000 * 60 * 60,
   });
 
-  return { user: user.data || [], error: user.error };
+  return { user: user.data?.data?.[0] || [], error: user.error };
 }
