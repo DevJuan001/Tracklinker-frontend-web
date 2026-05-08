@@ -1,8 +1,10 @@
 import Icon from "../../ui/Icon";
+import SelectMenu from "../SelectMenu";
 import { useTheme } from "../../../hooks/useTheme";
 
 export default function AppearanceContent() {
   const { setTheme } = useTheme();
+
   return (
     <section className="flex flex-col w-full pb-10 gap-7 animate-blurUp dark:text-white">
       {/* Opciones de apariencia */}
@@ -79,16 +81,19 @@ export default function AppearanceContent() {
         </section>
       </section>
 
-      <section className="flex items-center justify-between">
+      <section className="flex items-center justify-between gap-44">
         <div className="flex flex-col gap-1">
           <span className="font-medium text-sm">Lenguaje</span>
           <span className="text-xs font-light">Español</span>
         </div>
-        <button className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg bg-black text-white dark:bg-[#2020226c]">
-          <Icon name={"globe"} size={20} />
 
-          <span className="text-sm font-medium">Cambiar</span>
-        </button>
+        <SelectMenu
+          value={1}
+          options={[
+            { value: 1, label: "Español" },
+            { value: 2, label: "Ingles" },
+          ]}
+        />
       </section>
     </section>
   );
