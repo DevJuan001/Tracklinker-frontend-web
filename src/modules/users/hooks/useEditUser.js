@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { editUserService } from "../services/editUserService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useEditUser(user) {
   const [form, setForm] = useState({
@@ -19,54 +20,56 @@ export function useEditUser(user) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
-  const { validate, getChanges } = useFormValidation();
+  const { validate, getChanges, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
       return;
     }
 
     const changes = getChanges(user, form);
 
     if (Object.keys(changes).length === 0) {
-      openInnerModal("error", triggerData);
+      setError(
+        "No hay cambios para actualizar, modifica un campo para actualizar la información del usuario.",
+      );
+      openInnerModal("error", triggerButton);
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await editUserService(user.id, form);
-      if (response.success) {
+      const response = await editUserService(user.id, changes);
+      
+      if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["users"] });
-        openInnerModal("success", triggerData);
+        openInnerModal("success", triggerButton);
       } else {
-        openInnerModal("error", triggerData);
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
+      
       setData(response);
     } catch (error) {
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
       setError(error);
     } finally {
       setLoading(false);
     }
   }
 
-  return { handleChange, data, handleSubmit, loading, error, form };
+  return { handleChange, data, handleSubmit, fieldError, loading, error, form };
 }
