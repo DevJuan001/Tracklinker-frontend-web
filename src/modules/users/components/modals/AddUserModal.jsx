@@ -16,7 +16,8 @@ export default function AddUserModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { roles } = useRoles();
   const { cities } = useCities();
-  const { form, loading, handleSubmit, handleChange } = useCreateUser();
+  const { form, loading, error, fieldError, handleSubmit, handleChange } =
+    useCreateUser();
 
   return (
     <section className="flex flex-col items-center">
@@ -33,6 +34,7 @@ export default function AddUserModal({ onClose }) {
             value: rol.id,
             label: rol.name,
           }))}
+          className={fieldError("rol_id")}
         />
 
         <FormField
@@ -43,6 +45,7 @@ export default function AddUserModal({ onClose }) {
           name={"name"}
           onChange={handleChange}
           autoComplete="given-name"
+          className={fieldError("name")}
         />
 
         <FormField
@@ -53,6 +56,7 @@ export default function AddUserModal({ onClose }) {
           name={"first_surname"}
           onChange={handleChange}
           autoComplete="family-name"
+          className={fieldError("first_surname")}
         />
 
         <FormField
@@ -63,6 +67,7 @@ export default function AddUserModal({ onClose }) {
           name={"second_surname"}
           onChange={handleChange}
           autoComplete="name"
+          className={fieldError("second_surname")}
         />
 
         <SelectMenu
@@ -72,6 +77,7 @@ export default function AddUserModal({ onClose }) {
           onChange={handleChange}
           name={"city"}
           options={cities.map((city) => ({ value: city.id, label: city.name }))}
+          className={fieldError("city")}
         />
 
         <FormField
@@ -82,6 +88,7 @@ export default function AddUserModal({ onClose }) {
           name={"phone"}
           onChange={handleChange}
           autoComplete="tel"
+          className={fieldError("phone")}
         />
 
         <FormField
@@ -92,6 +99,7 @@ export default function AddUserModal({ onClose }) {
           name={"email"}
           onChange={handleChange}
           autoComplete="email"
+          className={fieldError("email")}
         />
 
         <FormField
@@ -102,6 +110,7 @@ export default function AddUserModal({ onClose }) {
           name={"address"}
           onChange={handleChange}
           autoComplete="street-address"
+          className={fieldError("address")}
         />
       </form>
 
@@ -137,8 +146,8 @@ export default function AddUserModal({ onClose }) {
           growDirection={"top-right"}
           triggerRef={innerTrigger}
           isOpen={true}
-          errorTitle="No se puedo completar el registro!"
-          errorText="Verfica que todos los campos esten completos y que el correo electronico no este registrado"
+          errorTitle="No se pudo completar el registro!"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />

@@ -1,11 +1,11 @@
 import { apiRoutes } from "../../config/apiRoutes";
+import { fetchWithAuth } from "../../utils/fetchWithAuth";
 
 export async function updateCurrentUserPasswordService(password_data) {
-  const response = await fetch(
-    `${apiRoutes.apiUrl}${apiRoutes.auth}/update-password`,
+  const response = await fetchWithAuth(
+    `${apiRoutes.apiUrl}${apiRoutes.users}/update-password`,
     {
       method: "PUT",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

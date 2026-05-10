@@ -38,18 +38,20 @@ export default function SelectMenu({
           ref={triggerRef}
           tabIndex={0}
           onClick={handleToggle}
-          className={`relative w-full h-16 pr-2 pt-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131] shadow-sm
-          rounded-2xl cursor-pointer text-sm focus-within:shadow-[0_0_3px_2px_#e5e7eb]
-          dark:bg-black dark:border-[#1e1e20cb] dark:focus:focus:shadow-[0_0_4px_2px_#ffffff33]
+          className={`relative w-full ${spanText ? "h-16 pt-1.5": "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
+          rounded-2xl cursor-pointer text-sm
+          dark:bg-black dark:border-[#1e1e20cb]
           ${className}`}
         >
-          <div className="absolute top-2 left-3 px-1">
-            <span className="text-xs bg-[#FBF9FC] text-[#7E777E] dark:bg-black dark:text-[#7E8088]">
-              {spanText}
-            </span>
-          </div>
+          {spanText && (
+            <div className="absolute top-2 left-3 px-1">
+              <span className="text-xs bg-[#FBF9FC] text-[#7E777E] dark:bg-black dark:text-[#7E8088]">
+                {spanText}
+              </span>
+            </div>
+          )}
 
-          <div className="w-full h-full flex pl-4 pt-3 dark:text-[#E4E2E5]">
+          <div className={`w-full h-full flex pl-4 ${spanText ? "pt-3": "pt-0"} dark:text-[#E4E2E5]`}>
             <div className="w-full flex items-center text-base">
               {options.find((opt) => {
                 if (opt.value !== "" && !isNaN(opt.value)) {
@@ -62,7 +64,7 @@ export default function SelectMenu({
 
           <Icon
             name={"arrow_drop_down"}
-            className={`-translate-y-1 dark:text-[#7e8088]`}
+            className={`dark:text-[#7e8088]`}
           />
         </div>
         <button
