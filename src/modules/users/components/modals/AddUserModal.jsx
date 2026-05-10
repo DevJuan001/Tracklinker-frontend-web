@@ -16,7 +16,7 @@ export default function AddUserModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { roles } = useRoles();
   const { cities } = useCities();
-  const { form, loading, fieldError, handleSubmit, handleChange } =
+  const { form, loading, error, fieldError, handleSubmit, handleChange } =
     useCreateUser();
 
   return (
@@ -146,8 +146,8 @@ export default function AddUserModal({ onClose }) {
           growDirection={"top-right"}
           triggerRef={innerTrigger}
           isOpen={true}
-          errorTitle="No se puedo completar el registro!"
-          errorText="Verfica que todos los campos esten completos y que el correo electronico no este registrado"
+          errorTitle="No se pudo completar el registro!"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />
