@@ -37,7 +37,7 @@ export default function AppearanceContent() {
                 className={"rounded-3xl dark:border dark:border-gray-900"}
               />
             </div>
-            <span className="font-medium text-xs md:text-sm">Sistema</span>
+            <span className="font-medium text-sm">Sistema</span>
           </button>
 
           {/* Claro */}
