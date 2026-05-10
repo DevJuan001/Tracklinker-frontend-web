@@ -16,7 +16,8 @@ export default function EditUserInfoModal({ user, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { roles } = useRoles();
   const { cities } = useCities();
-  const { handleChange, handleSubmit, loading, form } = useEditUser(user);
+  const { handleChange, handleSubmit, loading, form, error, fieldError } =
+    useEditUser(user);
 
   return (
     <section className="flex flex-col items-center">
@@ -31,6 +32,7 @@ export default function EditUserInfoModal({ user, onClose }) {
             value: rol.id,
             label: rol.name,
           }))}
+          className={fieldError("rol_id")}
         />
 
         <FormField
@@ -40,6 +42,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           onChange={handleChange}
           id={"name"}
           autoComplete="given-name"
+          className={fieldError("name")}
         />
 
         <FormField
@@ -49,6 +52,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           id={"first_surname"}
           onChange={handleChange}
           autoComplete="family-name"
+          className={fieldError("first_surname")}
         />
 
         <FormField
@@ -58,6 +62,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           id={"second_surname"}
           onChange={handleChange}
           autoComplete="family-name"
+          className={fieldError("second_surname")}
         />
 
         <SelectMenu
@@ -70,6 +75,7 @@ export default function EditUserInfoModal({ user, onClose }) {
             value: city.id,
             label: city.name,
           }))}
+          className={fieldError("city")}
         />
 
         <FormField
@@ -79,6 +85,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           id={"phone"}
           onChange={handleChange}
           autoComplete="tel"
+          className={fieldError("phone")}
         />
 
         <FormField
@@ -89,6 +96,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           id={"email"}
           onChange={handleChange}
           autoComplete="email"
+          className={fieldError("email")}
         />
 
         <FormField
@@ -98,8 +106,9 @@ export default function EditUserInfoModal({ user, onClose }) {
           id={"address"}
           onChange={handleChange}
           autoComplete="street-address"
+          className={fieldError("address")}
         />
-        
+
         <SelectMenu
           name={"status"}
           value={form.status}
@@ -109,6 +118,7 @@ export default function EditUserInfoModal({ user, onClose }) {
             { value: 1, label: "Deshabilitado" },
             { value: 2, label: "Activo" },
           ]}
+          className={fieldError("status")}
         />
       </form>
 
@@ -140,8 +150,8 @@ export default function EditUserInfoModal({ user, onClose }) {
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          errorTitle="¡No se pudo completar el registro!"
-          errorText="Verfica que todos los campos esten completos y que el correo electronico es el correcto"
+          errorTitle="¡No se pudo actualizar el usuario!"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />
