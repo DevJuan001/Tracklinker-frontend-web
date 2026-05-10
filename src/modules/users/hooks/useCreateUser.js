@@ -42,6 +42,7 @@ export function useCreateUser() {
 
     try {
       const response = await createUser(form);
+      
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["users"] });
         openInnerModal("success", triggerButton);
