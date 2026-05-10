@@ -42,9 +42,12 @@ export function useCreateUser() {
 
     try {
       const response = await createUser(form);
-      if (response.success) {
+      if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["users"] });
         openInnerModal("success", triggerButton);
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
     } catch (error) {
       openInnerModal("error", triggerButton);
