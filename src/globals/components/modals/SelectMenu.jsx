@@ -38,9 +38,9 @@ export default function SelectMenu({
           ref={triggerRef}
           tabIndex={0}
           onClick={handleToggle}
-          className={`relative w-full ${spanText ? "h-16 pt-2": "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
-          rounded-2xl cursor-pointer text-sm focus-within:shadow-[0_0_3px_2px_#e5e7eb]
-          dark:bg-black dark:border-[#1e1e20cb] dark:focus:focus:shadow-[0_0_4px_2px_#ffffff33]
+          className={`relative w-full ${spanText ? "h-16 pt-1.5": "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
+          rounded-2xl cursor-pointer text-sm
+          dark:bg-black dark:border-[#1e1e20cb]
           ${className}`}
         >
           {spanText && (
