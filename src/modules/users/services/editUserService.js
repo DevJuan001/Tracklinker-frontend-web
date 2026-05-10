@@ -12,10 +12,11 @@ export async function editUserService(user_id, user_data) {
       body: JSON.stringify(user_data),
     },
   );
-  // Validamos si la respuesta no fue OK
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al intentar actualizar el usuario");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  return await res.json();
+  return json;
 }
