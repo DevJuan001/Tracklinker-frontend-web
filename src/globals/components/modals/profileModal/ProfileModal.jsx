@@ -18,10 +18,14 @@ export default function ProfileModal() {
 
   return (
     <section
-      className="flex flex-col-reverse items-center h-full gap-4
+      className="min-h-full flex flex-col-reverse items-center justify-between gap-4
       md:grid md:grid-cols-[150px_1fr]"
     >
-      <aside className="w-full border-gray-300 justify-self-end dark:border-[#3a3d43] md:justify-self-start md:self-start">
+      <aside
+        className="w-full border-gray-300 justify-self-end
+        dark:border-[#3a3d43]
+        md:justify-self-start md:self-start"
+      >
         {/* Lista de opciones */}
         <ul className="flex justify-center gap-1 md:flex-col md:justify-start">
           <li>
