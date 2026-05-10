@@ -12,7 +12,8 @@ export function useEnableUser(userId) {
     setLoading(true);
     try {
       const response = await enableUserService(userId);
-      if (response.success) {
+      
+      if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["users"] });
         closeModal();
       }
