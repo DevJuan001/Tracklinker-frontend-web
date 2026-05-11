@@ -2,20 +2,23 @@
 import { useLogin } from "../../hooks/useLogin";
 // Iconos
 import { loginIcons } from "../../../../assets/icons/loginIcons";
-import { actionsIcons } from "../../../../assets/icons/actionsIcons";
 // Components
 import FormButtons from "./FormButtons";
 import Loader from "../../../../globals/components/ui/Loader";
+import FormField from "../../../../globals/components/ui/FormField";
+import Icon from "../../../../globals/components/ui/Icon";
 
 export default function LoginForm({ openModal }) {
   const {
-    setEmail,
-    setPassword,
-    handleLogin,
+    form,
+    loading,
+    fieldError,
+    handleChange,
+    handleSubmit,
     showPassword,
     setShowPassword,
-    loading,
   } = useLogin(openModal);
+
   return (
     <section className="w-full h-full flex items-center justify-center">
       {/* Container del formulario */}
@@ -26,58 +29,50 @@ export default function LoginForm({ openModal }) {
           alt=""
           className="w-[150px] h-[150px] dark:invert dark:brightness-0"
         />
-        <form className="w-[370px] flex flex-col gap-1.5 dark:text-white">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="w-[370px] flex flex-col gap-1.5 dark:text-white"
+        >
           {/* Campo del correo */}
           <div>
-            <span className="text-sm font-medium">Correo</span>
-            <div className="h-14 flex rounded-xl border dark:border-gray-700">
-              <input
-                id="email-input"
-                type="text"
-                placeholder="tu@correo.com"
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3.5 py-3 text-sm rounded-xl outline-none bg-transparent
-                autofill:bg-white autofill:shadow-[inset_0_0_0px_1000px_white]
-                dark:text-white dark:placeholder:text-[#7c7c7cb5]"
-              />
-            </div>
+            <span className="pl-1 text-sm font-medium">Correo</span>
+            <FormField
+              id={"email"}
+              name={"email"}
+              value={form.email}
+              autoComplete="email"
+              placeholder={"Correo"}
+              onChange={handleChange}
+              className={fieldError("email")}
+            />
           </div>
 
           {/* Campo de la contraseña */}
           <div>
-            <span className="text-sm font-medium">Contraseña</span>
-            <div className="h-14 flex items-center rounded-xl border dark:border-gray-700">
-              <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="********"
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-3 text-sm outline-none rounded-xl bg-transparent
-                autofill:bg-white autofill:shadow-[inset_0_0_0px_1000px_white]
-                dark:text-white dark:placeholder:text-[#7c7c7cb5]"
-              />
-
+            <span className="pl-1 text-sm font-medium">Contraseña</span>
+            <FormField
+              id={"password"}
+              name={"password"}
+              type="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder={"Contraseña"}
+              className={fieldError("password")}
+            >
               <button
-                className="pr-2"
+                className="flex items-center pr-1"
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
-                <img
-                  src={
-                    showPassword
-                      ? actionsIcons.visibility
-                      : actionsIcons.lockVisibility
-                  }
-                  alt=""
-                  className="dark:invert dark:brightness-0"
-                />
+                <Icon name={showPassword ? "visibility" : "visibility_off"} />
               </button>
-            </div>
+            </FormField>
           </div>
+
           {/* Botones de Ingresar y recuperar contraseña */}
           <FormButtons
             getIntoButtonText={loading ? <Loader /> : "Ingresar"}
-            getIntoButtonOnclick={(e) => handleLogin(e)}
+            getIntoButtonOnclick={(e) => handleSubmit(e)}
             recoverButtonOnclick={(e) =>
               openModal(null, "rememberPassword", null, e.currentTarget)
             }
