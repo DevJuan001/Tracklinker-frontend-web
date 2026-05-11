@@ -1,12 +1,13 @@
 import { apiRoutes } from "../../../config/apiRoutes";
-import { getToken } from "../../../utils/auth";
+import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
 export async function tinyLineChartData() {
-  const res = await fetch(`${apiRoutes.apiUrl}${apiRoutes.dashboard}/`, {
-    headers: {
-      Authorization: getToken(),
+  const res = await fetchWithAuth(
+    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/`,
+    {
+      method: "GET",
     },
-  });
+  );
 
   // Validamos si la respuesta fue OK
   if (!res.ok) {
