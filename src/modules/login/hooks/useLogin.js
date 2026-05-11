@@ -1,49 +1,60 @@
-import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
+import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 
 export function useLogin(openModal) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const controllerRef = useRef(null);
+  const { validate, fieldError, clearError } = useFormValidation();
 
-  async function handleLogin(e) {
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    const targetElement = e.currentTarget;
 
-    controllerRef.current?.abort();
-    controllerRef.current = new AbortController();
+    const currentTarget = e.currentTarget;
+
+    const isValid = validate(form);
+
+    if (!isValid) return;
+
     setLoading(true);
 
     try {
-      const response = await login(
-        email,
-        password,
-        controllerRef.current.signal,
-      );
+      const response = await login(form);
+
       if (response.success === true) {
         navigate("/home");
       } else {
-        openModal(null, "error", null, targetElement);
+        openModal(null, "error", null, currentTarget);
       }
     } catch (error) {
-      if (error.name === "AbortError") return;
-      openModal(null, "error", null, targetElement);
+      setError(error);
+      openModal(null, "error", null, currentTarget);
     } finally {
       setLoading(false);
     }
   }
 
   return {
-    showPassword,
+    form,
     loading,
-    setEmail,
-    setPassword,
-    handleLogin,
+    error,
+    fieldError,
+    handleChange,
+    handleSubmit,
+    showPassword,
     setShowPassword,
   };
 }
