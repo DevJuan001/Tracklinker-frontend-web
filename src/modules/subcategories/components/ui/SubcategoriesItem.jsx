@@ -1,7 +1,6 @@
-import ActionButtons from "../../../../globals/components/ui/ActionButtons";
-import { actionsIcons } from "../../../../assets/icons/actionsIcons";
-import { categoryStatusConfig } from "../../../categories/constants/categoryStatusConfig";
 import Icon from "../../../../globals/components/ui/Icon";
+import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import { categoryStatusConfig } from "../../../categories/constants/categoryStatusConfig";
 
 export default function SubcategoriesItem({
   subcategory,
@@ -53,17 +52,8 @@ export default function SubcategoriesItem({
         visibilityIcon={
           categoryStatusConfig[subcategory.subcategory_status]?.visibilityIcon
         }
-        moreInfoOnClick={moreInfoOnClick}
-      >
-        {/* Botón de más información del usuario */}
-        <button onClick={moreInfoOnClick}>
-          <img
-            src={actionsIcons.moreInfoIcon}
-            alt=""
-            className="transition-all duration-300 hover:scale-125"
-          />
-        </button>
-      </ActionButtons>
+        moreInfoButtonOnClick={moreInfoOnClick}
+      />
     </li>
   );
 }
