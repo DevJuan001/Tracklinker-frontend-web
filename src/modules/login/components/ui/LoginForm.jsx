@@ -31,43 +31,39 @@ export default function LoginForm({ openModal }) {
         />
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="w-[370px] flex flex-col gap-1.5 dark:text-white"
+          className="w-[370px] flex flex-col gap-2 dark:text-white"
         >
           {/* Campo del correo */}
-          <div>
-            <span className="pl-1 text-sm font-medium">Correo</span>
-            <FormField
-              id={"email"}
-              name={"email"}
-              value={form.email}
-              autoComplete="email"
-              placeholder={"Correo"}
-              onChange={handleChange}
-              className={fieldError("email")}
-            />
-          </div>
+          <FormField
+            id={"email"}
+            name={"email"}
+            labelText={"Correo"}
+            value={form.email}
+            autoComplete="email"
+            placeholder={"Correo"}
+            onChange={handleChange}
+            className={fieldError("email")}
+          />
 
           {/* Campo de la contraseña */}
-          <div>
-            <span className="pl-1 text-sm font-medium">Contraseña</span>
-            <FormField
-              id={"password"}
-              name={"password"}
-              type="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder={"Contraseña"}
-              className={fieldError("password")}
+          <FormField
+            id={"password"}
+            name={"password"}
+            labelText={"Contraseña"}
+            type="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder={"Contraseña"}
+            className={fieldError("password")}
+          >
+            <button
+              className="flex items-center pr-1"
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
             >
-              <button
-                className="flex items-center pr-1"
-                type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
-              >
-                <Icon name={showPassword ? "visibility" : "visibility_off"} />
-              </button>
-            </FormField>
-          </div>
+              <Icon name={showPassword ? "visibility" : "visibility_off"} />
+            </button>
+          </FormField>
 
           {/* Botones de Ingresar y recuperar contraseña */}
           <FormButtons
