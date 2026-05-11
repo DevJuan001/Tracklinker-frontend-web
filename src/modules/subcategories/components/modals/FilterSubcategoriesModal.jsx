@@ -20,6 +20,7 @@ export default function FilterSubcategoriesModal({ setFilters, onClose }) {
     >
       <div className="flex flex-col gap-2">
         <SelectMenu
+          searchable
           spanText={"Categoría"}
           name={"category_order"}
           value={form.category_order}
