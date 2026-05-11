@@ -24,6 +24,9 @@
 /* Importar el loader o circulo de carga */
 @import url("./loader.css");
 
+/* Importar estilos para el auto completado */
+@import url("autofill.css");
+
 /* Importar Fuentes Mediante archivos locales */
 @font-face {
   font-family: "Poppins";

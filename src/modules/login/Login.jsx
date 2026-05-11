@@ -11,9 +11,13 @@ export default function Login() {
   const { modalType, isOpen, triggerRef, openModal, closeModal } = useModal();
 
   return (
-    <section className="w-screen h-screen flex items-center justify-center">
+    <section
+      className="w-screen h-screen flex items-center justify-center bg-[#FBF9FC]
+      dark:bg-black"
+    >
       {/* Formulario */}
       <LoginForm openModal={openModal} />
+
       {modalType && (
         <Modal
           title={modalType === "rememberPassword" ? "Olvide Mi Contraseña" : ""}
