@@ -58,7 +58,7 @@ export const firstSectionItems = [
   },
   {
     name: "Ordenes de salida",
-    path: "/transformations",
+    path: "/output-orders",
     icon: "shuffle",
   },
 ];
