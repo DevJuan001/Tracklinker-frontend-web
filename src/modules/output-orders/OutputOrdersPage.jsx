@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 import { useTransformations } from "./hooks/useTransformations";
-// Iconos
-import { actionsIcons } from "../../assets/icons/actionsIcons";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import TopSection from "../../globals/components/ui/TopSection";
@@ -21,7 +19,7 @@ import DisableTransformationModal from "./components/modals/DisableTransformatio
 import MoreInfoTransformationModal from "./components/modals/MoreInfoTransformationModal";
 import SearchBar from "../../globals/components/ui/SearchBar";
 
-export default function TransformationsPage() {
+export default function OutputOrdersPage() {
   const { transformations, fetchTransformations } = useTransformations();
   const { modalType, isOpen, modalData, refetch, openModal, closeModal } =
     useModal();
@@ -37,8 +35,7 @@ export default function TransformationsPage() {
     >
       <TopSection
         sectionName="Ordenes de salida"
-        addButtonIcon={actionsIcons.addIcon}
-        addButtonText="Agregar orden"
+        addButtonText="Crear orden"
         createOnClick={() => openModal(null, "add", refetch)}
         filterOnClick={() => openModal(null, "filter")}
       >
