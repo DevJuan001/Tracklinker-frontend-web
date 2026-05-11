@@ -50,7 +50,7 @@ export default function LoginForm({ openModal }) {
             id={"password"}
             name={"password"}
             labelText={"Contraseña"}
-            type={showPassword ? "password" : "text"}
+            type={showPassword ? "text" : "password"}
             value={form.password}
             onChange={handleChange}
             placeholder={"Contraseña"}
