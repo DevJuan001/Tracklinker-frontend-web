@@ -1,15 +1,12 @@
 import { apiRoutes } from "../../../config/apiRoutes";
-import { getToken } from "../../../utils/auth";
+import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
 export async function usersChartData() {
-  const res = await fetch(
+  const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.dashboard}/new-users`,
     {
       method: "GET",
-      headers: {
-        Authorization: getToken(),
-      },
-    }
+    },
   );
 
   // Validamos si la respuesta fue OK

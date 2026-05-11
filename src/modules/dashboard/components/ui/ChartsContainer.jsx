@@ -11,8 +11,8 @@ import CategoriesChart from "./charts/CategoriesChart";
 export default function ChartsContainer() {
   return (
     <section
-      className="max-h-[95%] min-h-[95%] grid grid-cols-1 grid-rows-9 gap-5 pb-5 pl-3 transition duration-300 ease-in-out
-      md:grid-cols-12 md:grid-rows-5 overflow-y-auto"
+      className="h-[95%] grid grid-cols-1 auto-rows-[minmax(200px,1fr)] gap-5 pb-5 pl-1 transition duration-300 ease-in-out
+      md:grid-cols-12 md:grid-rows-[repeat(5,minmax(150px,1fr))] overflow-y-auto"
     >
       {/* Primera Fila de Gráficos */}
       <UsersChart />

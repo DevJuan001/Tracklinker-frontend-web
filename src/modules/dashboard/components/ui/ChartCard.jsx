@@ -16,9 +16,9 @@ export default function ChartCard({
 }) {
   return (
     <section
-      className={`row-span-1 col-span-1 bg-${bgColor} text-${textColor} dark:text-white
+      className={`h-full row-span-1 col-span-1 bg-${bgColor} text-${textColor} dark:text-white
         flex flex-col p-3 shadow-xl border border-gray-200 rounded-xl transition duration-500
-        hover:bg-gray-200 hover:scale-[1.02]
+        hover:bg-gray-200 hover:scale-[1.005]
         dark:bg-[#0f0f11] dark:border-[#ffffff10] dark:hover:bg-[#2c2c2e]
         md:col-span-${colSpan} md:row-span-${rowSpan}  
         `}
@@ -34,7 +34,7 @@ export default function ChartCard({
         <SeeReportButton />
       </section>
       <img src={chart} alt="" className={`${imageSize} ${imageDisplay}`} />
-      {children}
+      <div className="h-full">{children}</div>
     </section>
   );
 }

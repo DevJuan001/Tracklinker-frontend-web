@@ -8,6 +8,7 @@ export default function OutputOrdersChart() {
     <>
       {orders.map((item) => (
         <TopChartsCard
+          key={"output_orders"}
           background={"output-orders-background"}
           title={"Ordenes de salida"}
           metricValue={item.orders}
