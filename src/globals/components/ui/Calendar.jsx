@@ -58,7 +58,7 @@ export default function Calendar({
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-7 gap-0.5 text-center text-sm">
+        <div className="grid grid-cols-7 gap-0.5 text-center text-sm dark:text-white">
           <div>Do</div>
           <div>Lu</div>
           <div>Ma</div>
