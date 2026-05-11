@@ -8,8 +8,8 @@ export default function TopChartsCard({
 }) {
   return (
     <section
-      className={`row-span-1 col-span-1 flex flex-col p-4 shadow-xl border border-gray-200 rounded-xl transition duration-500 
-        hover:scale-[1.03]
+      className={`h-full row-span-1 col-span-1 flex flex-col p-4 shadow-xl border border-gray-200 rounded-xl transition duration-500 
+        hover:scale-[1.005]
         md:col-span-3
         dark:bg-[#0f0f11] dark:border-[#ffffff10] dark:text-white ${background}`}
     >
