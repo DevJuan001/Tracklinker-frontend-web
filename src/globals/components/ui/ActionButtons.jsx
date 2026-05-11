@@ -15,7 +15,7 @@ export default function ActionButtons({
         onClick={editButtonOnClick}
         className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}] hover:bg-[#969292a8]`}
       >
-        <Icon name={"edit"} className={"dark:invert"} />
+        <Icon name={"edit"} />
       </button>
       <button
         onClick={deleteButtonOnClick}
