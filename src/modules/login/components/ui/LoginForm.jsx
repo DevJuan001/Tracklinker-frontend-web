@@ -50,7 +50,7 @@ export default function LoginForm({ openModal }) {
             id={"password"}
             name={"password"}
             labelText={"Contraseña"}
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={form.password}
             onChange={handleChange}
             placeholder={"Contraseña"}
@@ -61,7 +61,7 @@ export default function LoginForm({ openModal }) {
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
             >
-              <Icon name={showPassword ? "visibility" : "visibility_off"} />
+              <Icon name={showPassword ? "visibility_off" : "visibility"} />
             </button>
           </FormField>
 
