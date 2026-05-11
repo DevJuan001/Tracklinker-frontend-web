@@ -31,7 +31,7 @@ export default function FormField({
           w-full h-16 pt-7 px-4 pb-2 outline-none
           bg-transparent rounded-xl
           transition-all duration-200
-          dark:text-[#E4E2E5]
+          dark:text-[#E4E2E5] dark:placeholder:text-[#b4aab4]
         `}
       />
       {labelText && (
