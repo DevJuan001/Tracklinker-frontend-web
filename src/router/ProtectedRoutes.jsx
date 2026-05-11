@@ -1,6 +1,6 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { apiRoutes } from "../config/apiRoutes";
+import { useQuery } from "@tanstack/react-query";
+import { Navigate, Outlet } from "react-router-dom";
 import { fetchWithAuth } from "../utils/fetchWithAuth";
 
 export default function ProtectedRoutes({ roles }) {
@@ -23,13 +23,13 @@ export default function ProtectedRoutes({ roles }) {
     },
     // Cacheamos la verificación por 30 minutos para evitar peticiones en cada clic
     staleTime: 1000 * 60 * 30,
+    gcTime: 0,
     retry: false,
   });
 
-  // Mientras carga, podemos retornar null o un loader ligero
   if (isLoading) return null;
 
-  // Si hay error o no está autorizado, al login
+  // Si hay error o no está autorizado
   if (isError || data === false) return <Navigate to={"/login"} replace />;
 
   return <Outlet />;
