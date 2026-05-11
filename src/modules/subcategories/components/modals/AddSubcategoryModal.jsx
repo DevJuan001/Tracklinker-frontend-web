@@ -14,7 +14,7 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 export default function AddSubcategoryModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { categories } = useCategories();
-  const { form, loading, handleSubmit, handleChange } = useCreateSubcategory();
+  const { form, loading, fieldError, handleSubmit, handleChange } = useCreateSubcategory();
 
   return (
     <section className="w-full flex flex-col items-center gap-2">
@@ -27,9 +27,10 @@ export default function AddSubcategoryModal({ onClose }) {
         spanText={"Categoria"}
         onChange={handleChange}
         options={categories.map((category) => ({
-          value: category.id,
-          label: category.name,
+          value: category.category_id,
+          label: category.category_name,
         }))}
+        className={fieldError("category_id")}
       />
 
       <FormField
@@ -40,6 +41,7 @@ export default function AddSubcategoryModal({ onClose }) {
         value={form.subcategory_name}
         autoComplete="off"
         onChange={handleChange}
+        className={fieldError("subcategory_name")}
       />
 
       {/* Botones */}
