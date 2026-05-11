@@ -8,6 +8,7 @@ export default function UsersChart() {
     <>
       {usersChartInfo.map((item) => (
         <TopChartsCard
+          key={"users"}
           background={
             item.new_users > 0 ? "growth-background" : "users-background"
           }
