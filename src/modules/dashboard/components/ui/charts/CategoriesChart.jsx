@@ -7,6 +7,7 @@ export default function CategoriesChart() {
     <>
       {categories.map((item) => (
         <TopChartsCard
+          key={"categories"}
           background={"categories-background"}
           title={"Categorias"}
           metricValue={item.categories}
