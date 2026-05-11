@@ -8,6 +8,7 @@ export default function ProductsChart() {
     <>
       {productChartInfo.map((item) => (
         <TopChartsCard
+          key={"products"}
           background={"products-background"}
           title={"Productos"}
           metricValue={item.products}
