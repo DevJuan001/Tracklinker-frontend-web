@@ -58,6 +58,7 @@ export default function DashBoardPage() {
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
         </Modal>
       )}
+      
       {showDownloadToast && (
         <DownloadToast
           showDownloadToast={showDownloadToast}
