@@ -3,7 +3,7 @@ import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
 export async function getCategories() {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.subcategories}/categories`,
+    `${apiRoutes.apiUrl}${apiRoutes.subcategories}/active-categories`,
     {
       method: "GET",
     },

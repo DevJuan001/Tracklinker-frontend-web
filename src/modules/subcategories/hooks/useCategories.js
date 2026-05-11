@@ -3,7 +3,7 @@ import { getCategories } from "../services/getCategoriesService";
 
 export function useCategories() {
   const categories = useQuery({
-    queryKey: ["categories"],
+    queryKey: ["activeCategories"],
     queryFn: getCategories,
     staleTime: 1000 * 60 * 10,
   });

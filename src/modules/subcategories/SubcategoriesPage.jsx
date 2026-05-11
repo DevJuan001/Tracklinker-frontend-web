@@ -44,6 +44,7 @@ export default function SubcategoriesPage() {
       {/* Listado de las subcategorias */}
       <SubcategoriesList
         subcategories={filteredSubcategories}
+        search={search}
         loading={loading}
         error={error}
         openModal={openModal}
@@ -71,7 +72,8 @@ export default function SubcategoriesPage() {
           type={modalType}
           isOpen={isOpen}
           triggerRef={triggerRef}
-          location={modalType === "info" ? "center" : "anchored"}
+          growDirection="center"
+          location={modalType === "info" || modalType === "add" ? "center" : "anchored"}
           onClose={() => closeModal()}
         >
           {modalType === "user" && <ProfileModal />}

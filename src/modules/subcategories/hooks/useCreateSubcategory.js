@@ -2,36 +2,32 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 import { createSubcategory } from "../services/createSubcategorySevice";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useCreateSubcategory() {
   const [form, setForm] = useState({
     category_id: "",
     subcategory_name: "",
   });
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { validate } = useFormValidation();
+  const { validate, clearError, fieldError } = useFormValidation();
   const queryClient = useQueryClient();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
       return;
     }
 
@@ -39,18 +35,18 @@ export function useCreateSubcategory() {
 
     try {
       const response = await createSubcategory(form);
-      setData(response);
+
       if (response.success === true) {
-        openInnerModal("success", triggerData);
+        openInnerModal("success", triggerButton);
         queryClient.invalidateQueries({ queryKey: ["subcategories"] });
       }
     } catch (error) {
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
       setError(error);
     } finally {
       setLoading(false);
     }
   }
 
-  return { form, data, loading, error, handleSubmit, handleChange };
+  return { form, loading, error, fieldError, handleSubmit, handleChange };
 }
