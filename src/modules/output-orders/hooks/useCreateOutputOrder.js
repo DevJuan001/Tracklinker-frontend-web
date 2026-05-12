@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { createTransformation } from "../services/createTransformation";
+import { createOutputOrderService } from "../services/createOutputOrderService";
 
-export function useCreateTransformation() {
+export function useCreateOutputOrder() {
   const [form, setForm] = useState({
     out_order_id: "",
     product_serial: "",
@@ -26,7 +26,7 @@ export function useCreateTransformation() {
     setLoading(true);
 
     try {
-      const response = await createTransformation(form);
+      const response = await createOutputOrderService(form);
 
       if (!response.success) {
         console.error("Error API:", response.error);
