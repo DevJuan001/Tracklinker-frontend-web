@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { updateTransformation } from "../services/updateTransformation";
+import { updateOutputOrderService } from "../services/updateOutputOrderService";
 
-export function useEditTransformation(Id, formData) {
+export function useEditOutputOrder(Id, formData) {
   const [form, setForm] = useState(formData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ export function useEditTransformation(Id, formData) {
     setLoading(true);
 
     try {
-      const response = await updateTransformation(Id, form);
+      const response = await updateOutputOrderService(Id, form);
       if (response.success == true) {
         setInnerModal("success");
       } else {
