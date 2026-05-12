@@ -1,7 +1,7 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function createOutputOrderService(transformationData) {
+export async function createOutputOrderService(outputOrderData) {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.outputOrders}/create`,
     {
@@ -9,7 +9,7 @@ export async function createOutputOrderService(transformationData) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(transformationData),
+      body: JSON.stringify(outputOrderData),
     },
   );
 
