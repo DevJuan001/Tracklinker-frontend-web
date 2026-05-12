@@ -2,14 +2,16 @@ import { useState } from "react";
 import { createOutputOrderService } from "../services/createOutputOrderService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 import { getModalTrigger } from "../../../utils/getModalTrigger";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function useCreateOutputOrder() {
   const [form, setForm] = useState({
     product_serial: "",
     output_product_garanty: "",
   });
-  const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
@@ -31,7 +33,8 @@ export function useCreateOutputOrder() {
 
     try {
       const response = await createOutputOrderService(form);
-      if (response.success == true) {
+      if (response.success === true) {
+        queryClient.invalidateQueries({ queryKey: ["outputOrders"] });
         openInnerModal("success", triggerButton);
       } else {
         openInnerModal("error", triggerButton);
