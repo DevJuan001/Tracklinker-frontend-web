@@ -5,22 +5,19 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import Loader from "../../../../globals/components/ui/Loader";
 
 export default function EnableOutputOrdersModal({
-  selectedTransformation,
+  selectedOutputOrder,
   onClose,
-  refetch,
 }) {
   const [innerModal, setInnerModal] = useState(null);
   const { handleSubmit, loading } = useEnableOutputOrder(
-    selectedTransformation.output_details_id,
+    selectedOutputOrder.output_order_id,
   );
 
   return (
     <div className="flex flex-col items-center p-5">
       <p className="text-lg mb-6 text-center">
         ¿Estás seguro de que deseas habilitar la transformación N°{" "}
-        <span className="font-bold">
-          {selectedTransformation?.output_details_id}
-        </span>
+        <span className="font-bold">{selectedOutputOrder.output_order_id}</span>
         ?
       </p>
 
@@ -47,13 +44,9 @@ export default function EnableOutputOrdersModal({
         <SuccessModal
           isOpen
           confirmTitle="¡Orden habilitada con éxito!"
-          confirmText={`La orden #${selectedTransformation.output_details_id} ha sido habilitada correctamente.`}
+          confirmText={`La orden #${selectedOutputOrder.output_details_id} ha sido habilitada correctamente.`}
           confirmButtonText="Volver"
-          onClose={() => {
-            setInnerModal(null);
-            onClose();
-            refetch();
-          }}
+          onClose={() => setInnerModal(null)}
         />
       )}
 
