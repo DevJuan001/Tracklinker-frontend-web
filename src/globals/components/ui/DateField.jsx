@@ -9,14 +9,16 @@ export default function DateField({
   name,
   onChange,
   growDirection = "center",
+  className,
 }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
 
   return (
     <div
       onClick={(e) => openInnerModal("calendar", e)}
-      className="relative w-full h-16 flex px-4 rounded-2xl border outline-[#00000028] text-center cursor-pointer shadow-sm
-      dark:border-[#1e1e20cb] text-sm dark:text-white focus:shadow-[0_0_2px_1px_#e5e7eb]"
+      className={`relative w-full h-16 flex px-4 rounded-2xl border outline-[#00000028] text-center cursor-pointer shadow-sm
+      dark:border-[#1e1e20cb] text-sm dark:text-white focus:shadow-[0_0_2px_1px_#e5e7eb]
+      ${className}`}
     >
       <div className="min-w-full max-w-full flex items-center pr-3">
         <div className="min-w-full max-w-28 flex flex-col items-start">
