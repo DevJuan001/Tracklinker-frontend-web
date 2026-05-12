@@ -10,16 +10,14 @@ export default function DisableOutputOrderModal({
 }) {
   const [innerModal, setInnerModal] = useState(null);
   const { handleSubmit, loading } = useDisableOutputOrder(
-    selectedOutputOrder.output_details_id,
+    selectedOutputOrder.output_order_id,
   );
 
   return (
     <div className="flex flex-col items-center p-5">
       <p className="text-lg mb-6 text-center">
         ¿Estás seguro de que deseas deshabilitar la orden de salida N°{" "}
-        <span className="font-bold">
-          {selectedOutputOrder.output_details_id}
-        </span>
+        <span className="font-bold">{selectedOutputOrder.output_order_id}</span>
         ?
       </p>
 
@@ -46,13 +44,9 @@ export default function DisableOutputOrderModal({
         <SuccessModal
           isOpen
           confirmTitle="¡Orden de salida deshabilitada con éxito!"
-          confirmText={`La orden de salida #${selectedOutputOrder.output_details_id} ha sido deshabilitada correctamente.`}
+          confirmText={`La orden de salida #${selectedOutputOrder.output_order_id} ha sido deshabilitada correctamente.`}
           confirmButtonText="Volver"
-          onClose={() => {
-            setInnerModal(null);
-            refetch();
-            onClose();
-          }}
+          onClose={() => setInnerModal(null)}
         />
       )}
 
