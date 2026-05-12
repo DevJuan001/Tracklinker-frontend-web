@@ -2,18 +2,18 @@ import Loader from "../../../../globals/components/ui/Loader";
 import FormField from "../../../../globals/components/ui/FormField";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 import { useState } from "react";
-import { useEditTransformation } from "../../hooks/useEditTransformation";
+import { useEditOutputOrder } from "../../hooks/useEditOutputOrder";
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function EditTransformationModal({
+export default function EditOutputOrderModal({
   selectedTransformation,
   onClose,
   refetch,
 }) {
   const [innerModal, setInnerModal] = useState(null);
-  const { form, loading, handleChange, handleSubmit } = useEditTransformation(
+  const { form, loading, handleChange, handleSubmit } = useEditOutputOrder(
     selectedTransformation.output_details_id,
     {
       out_order_id: selectedTransformation.out_order_id || "",
