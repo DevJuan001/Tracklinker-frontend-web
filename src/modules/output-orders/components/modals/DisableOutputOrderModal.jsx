@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { useDisableTransformation } from "../../hooks/useDisableTransformation";
+import { useDisableOutputOrder } from "../../hooks/useDisableOutputOrder";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import Loader from "../../../../globals/components/ui/Loader";
 
-export default function DisableTransformationModal({
-  selectedTransformation,
+export default function DisableOutputOrderModal({
+  selectedOutputOrder,
   onClose,
-  refetch,
 }) {
   const [innerModal, setInnerModal] = useState(null);
-  const { handleSubmit, loading } = useDisableTransformation(
-    selectedTransformation.output_details_id,
+  const { handleSubmit, loading } = useDisableOutputOrder(
+    selectedOutputOrder.output_details_id,
   );
 
   return (
@@ -19,7 +18,7 @@ export default function DisableTransformationModal({
       <p className="text-lg mb-6 text-center">
         ¿Estás seguro de que deseas deshabilitar la orden de salida N°{" "}
         <span className="font-bold">
-          {selectedTransformation.output_details_id}
+          {selectedOutputOrder.output_details_id}
         </span>
         ?
       </p>
@@ -47,7 +46,7 @@ export default function DisableTransformationModal({
         <SuccessModal
           isOpen
           confirmTitle="¡Orden de salida deshabilitada con éxito!"
-          confirmText={`La orden de salida #${selectedTransformation.output_details_id} ha sido deshabilitada correctamente.`}
+          confirmText={`La orden de salida #${selectedOutputOrder.output_details_id} ha sido deshabilitada correctamente.`}
           confirmButtonText="Volver"
           onClose={() => {
             setInnerModal(null);
