@@ -1,79 +1,67 @@
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
-import { useState } from "react";
+// Hooks
 import { useCreateOutputOrder } from "../../hooks/useCreateOutputOrder";
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+// Componentes
+import Loader from "../../../../globals/components/ui/Loader";
+import TagInput from "../../../../globals/components/ui/TagInput";
+import FormField from "../../../../globals/components/ui/FormField";
+import DateField from "../../../../globals/components/ui/DateField";
+import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+// Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import DateField from "../../../../globals/components/ui/DateField";
 
 export default function AddOutputOrderModal({ onClose }) {
-  const [innerModal, setInnerModal] = useState(null);
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
 
-  const { form, loading, handleSubmit, handleChange } = useCreateOutputOrder();
+  const { form, loading, fieldError, handleSubmit, handleChange } =
+    useCreateOutputOrder();
 
   return (
-    <section className="flex flex-col items-center">
-      <form className="w-full flex flex-col gap-2">
-        <FormField
-          value={form.out_order_id}
-          labelText="Orden de salida"
-          placeholder="XXX123"
-          name="out_order_id"
-          onChange={handleChange}
-        />
+    <section className="flex flex-col items-center gap-2">
+      <DateField
+        onChange={handleChange}
+        id={"output_product_garanty"}
+        name="output_product_garanty"
+        spanText={"Tiempo de garantia"}
+        value={form.output_product_garanty || "yyyy-mm-dd"}
+        className={fieldError("output_product_garanty")}
+      />
 
-        <DateField
-          onChange={handleChange}
-          id={"out_product_garant"}
-          name="out_product_garanty"
-          spanText={"Tiempo de garantia"}
-          value={form.out_product_garanty || "yyyy-mm-dd"}
-        />
-
-        <FormField
-          value={form.product_transformation}
-          labelText="Transformación"
-          placeholder="Cambio de pieza X"
-          name="product_transformation"
-          onChange={handleChange}
-        />
-
-        <FormField
-          value={form.product_serial}
-          labelText="Serial del producto"
-          placeholder="ABC123"
-          name="product_serial"
-          onChange={handleChange}
-        />
-      </form>
+      <TagInput
+        id={"product_serial"}
+        name={"product_serial"}
+        labelText={"Seriales"}
+        placeholder={"QTYC123**"}
+        className={fieldError("product_serial")}
+      />
 
       <ConfirmCancelButtons
         confirmText={loading ? <Loader /> : "Crear"}
         cancelText="Cancelar"
-        confirmButtonOnClick={(e) => handleSubmit(e, setInnerModal)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onClose}
       />
 
-      {innerModal === "success" && (
+      {innerType === "success" && (
         <SuccessModal
-          isOpen
+          triggerRef={innerTrigger}
+          isOpen={true}
           confirmTitle="¡Transformación registrada con éxito!"
           confirmText="La transformación se ha guardado correctamente."
           confirmButtonText="Volver"
-          onClose={() => {
-            setInnerModal(null);
-          }}
+          onClose={() => openInnerModal(null)}
         />
       )}
 
-      {innerModal === "error" && (
+      {innerType === "error" && (
         <ErrorModal
-          isOpen
+          triggerRef={innerTrigger}
+          isOpen={true}
           errorTitle="Error al registrar la transformación"
           errorText="Verifica los datos e inténtalo nuevamente."
           confirmButtonText="Volver"
-          onClose={() => setInnerModal(null)}
+          onClose={() => openInnerModal(null)}
         />
       )}
     </section>
