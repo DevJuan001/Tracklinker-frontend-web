@@ -30,9 +30,9 @@ export default function TagInput({
   return (
     <div
       onClick={focusInput}
-      className={`relative min-h-[66px] flex flex-wrap w-full border pl-4 pb-1 rounded-2xl bg-[#FBF9FC] overflow-hidden
+      className={`relative min-h-[66px] flex flex-wrap w-full border pl-4 pb-1 rounded-2xl bg-[#FBF9FC] overflow-hidden cursor-text
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
-      dark:bg-black dark:border-[#1e1e20cb] dark:focus-within:shadow-[0_0_3px_3px_#28282b] cursor-text
+      dark:bg-black dark:border-[#1e1e20cb] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
       ${
         shake
           ? "shadow-[0_0_2.5px_1px_#f87171] dark:shadow-[0_0_4px_1.5px_#7f1d1d] animate-shake"
