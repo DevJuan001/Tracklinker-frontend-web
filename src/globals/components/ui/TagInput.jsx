@@ -30,7 +30,7 @@ export default function TagInput({
   return (
     <div
       onClick={focusInput}
-      className={`relative min-h-[66px] flex flex-wrap w-full border px-3 pb-1 rounded-2xl bg-[#FBF9FC] overflow-hidden
+      className={`relative min-h-[66px] flex flex-wrap w-full border pl-4 pb-1 rounded-2xl bg-[#FBF9FC] overflow-hidden
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
       dark:bg-black dark:border-[#1e1e20cb] dark:focus-within:shadow-[0_0_3px_3px_#28282b] cursor-text
       ${
