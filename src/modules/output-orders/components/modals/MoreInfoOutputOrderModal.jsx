@@ -1,6 +1,6 @@
 import { userStatus } from "../../../users/constants/userStatus";
 
-export default function MoreInfoOutputOrderModal({ selectedTransformation }) {
+export default function MoreInfoOutputOrderModal({ selectedOutputOrder }) {
   return (
     <address className="flex flex-col justify-center items-center not-italic gap-2">
       <div className="self-start flex flex-col mt-2">
@@ -8,44 +8,38 @@ export default function MoreInfoOutputOrderModal({ selectedTransformation }) {
             Descripción
           </span>
           <span className="flex items-center font-medium">
-            {selectedTransformation.description}
+            {selectedOutputOrder.description}
           </span>
         </div>
       <div className="flex flex-col items-center">
         <span>
           <strong>Modelo</strong>
         </span>
-        <p>{selectedTransformation.product_detail_model}</p>
+        <p>{selectedOutputOrder.product_detail_model}</p>
       </div>
       <div className="flex flex-col items-center">
         <span>
           <strong>Descripción</strong>
         </span>
-        <p>{selectedTransformation.product_detail_description}</p>
+        <p>{selectedOutputOrder.product_detail_description}</p>
       </div>
       <div className="flex flex-col items-center">
         <span>
           <strong>Serial</strong>
         </span>
-        <p>{selectedTransformation.product_serial}</p>
-      </div>
-      <div className="flex flex-col items-center">
-        <span>
-          <strong>Transformación</strong>
-        </span>
-        <p>{selectedTransformation.product_transformation}</p>
+        <p>{selectedOutputOrder.product_serial}</p>
       </div>
       <div className="flex flex-col items-center">
         <span>
           <strong>Fecha de finazalización de la garantía</strong>
         </span>
-        <p>{selectedTransformation.out_product_garanty}</p>
+        <p>{selectedOutputOrder.out_product_garanty}</p>
       </div>
       <div className="flex flex-col items-center">
         <span>
           <strong>Estado</strong>
         </span>
-        <p>{userStatus[selectedTransformation.out_order_status]?.text}</p>
+        <p>{userStatus[selectedOutputOrder.out_order_status]?.text}</p>
       </div>
     </address>
   );
