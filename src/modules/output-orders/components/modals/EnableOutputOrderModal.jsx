@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { useEnableTransformation } from "../../hooks/useEnableTransformation.js";
+import { useEnableOutputOrder } from "../../hooks/useEnableOutputOrder";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import Loader from "../../../../globals/components/ui/Loader.jsx";
+import Loader from "../../../../globals/components/ui/Loader";
 
-export default function EnableTransformationModal({
+export default function EnableOutputOrdersModal({
   selectedTransformation,
   onClose,
   refetch,
 }) {
   const [innerModal, setInnerModal] = useState(null);
-  const { handleSubmit, loading } = useEnableTransformation(
+  const { handleSubmit, loading } = useEnableOutputOrder(
     selectedTransformation.output_details_id,
   );
 
