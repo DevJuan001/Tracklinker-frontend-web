@@ -20,7 +20,6 @@ export default function OutputOrdersTable({ outputOrders, openModal }) {
             <th className="font-medium pl-4 text-start">Marca</th>
             <th className="font-medium pl-4 text-start">Modelo</th>
             <th className="font-medium pl-4 text-start">Tiempo de garantía</th>
-            <th className="font-medium pl-4 text-start">Transformación</th>
             <th className="font-medium pl-4 text-center">Acciones</th>
           </tr>
         </thead>
@@ -65,9 +64,6 @@ export default function OutputOrdersTable({ outputOrders, openModal }) {
               </th>
               <th className="font-normal text-start pl-4 text-sm">
                 {outputOrder.output_product_garanty}
-              </th>
-              <th className="font-normal text-start pl-4 text-sm">
-                {outputOrder.product_transformation}
               </th>
               <th className="relative">
                 <ActionButtons
