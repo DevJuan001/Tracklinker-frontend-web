@@ -2,10 +2,18 @@ import { useState } from "react";
 
 export function useCalendar(value, onChange, onClose) {
   const today = new Date();
-  const [current, setCurrent] = useState({
-    year: today.getFullYear(),
-    month: today.getMonth(),
-  });
+
+  const getInitialCurrent = () => {
+    if (value) {
+      const [yyyy, mm, dd] = value.split("-").map(Number);
+      if (yyyy && mm && dd) {
+        return { year: yyyy, month: mm - 1 };
+      }
+    }
+    return { year: today.getFullYear(), month: today.getMonth() };
+  };
+
+  const [current, setCurrent] = useState(getInitialCurrent);
 
   const { year, month } = current;
 
