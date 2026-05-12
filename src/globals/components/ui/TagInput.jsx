@@ -30,7 +30,7 @@ export default function TagInput({
   return (
     <div
       onClick={focusInput}
-      className={`relative min-h-[66px] flex flex-wrap w-full border pl-4 pb-1 rounded-2xl bg-[#FBF9FC] overflow-hidden cursor-text
+      className={`relative min-h-[66px] max-h-[350px] flex flex-wrap w-full border pl-4 pb-1 rounded-2xl bg-[#FBF9FC] overflow-hidden cursor-text
       focus-within:shadow-[0_0_3px_2px_#e5e7eb]
       dark:bg-black dark:border-[#1e1e20cb] dark:focus-within:shadow-[0_0_3px_3px_#28282b]
       ${
@@ -61,7 +61,7 @@ export default function TagInput({
         {tags.map((tag, i) => (
           <span
             key={i}
-            className="inline-flex items-center gap-1.5 pl-2.5 pr-1 py-1 border text-sm rounded-xl"
+            className="flex items-center gap-1.5 pl-2.5 pr-1 py-1 border text-sm rounded-xl"
           >
             {tag}
             <button
