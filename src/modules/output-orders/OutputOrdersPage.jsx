@@ -2,51 +2,47 @@
 import { useState } from "react";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
-import { useTransformations } from "./hooks/useTransformations";
+import { useOutputOrders } from "./hooks/useOutputOrders";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
+import SearchBar from "../../globals/components/ui/SearchBar";
 import TopSection from "../../globals/components/ui/TopSection";
-import TransformationsTable from "./components/ui/TransformationsTable";
+import OutputOrdersTable from "./components/ui/OutputOrdersTable";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
 import HelpModal from "../../globals/components/modals/HelpModal";
-import FilterModal from "../../globals/components/modals/FilterModal";
-import AddTransformationModal from "./components/modals/AddTransformationModal";
-import EditTransformationModal from "./components/modals/EditTransformationModal";
+import AddOutputOrderModal from "./components/modals/AddOutputOrderModal";
+import EditOutputOrderModal from "./components/modals/EditOutputOrderModal";
+import EnableOutputOrderModal from "./components/modals/EnableOutputOrderModal";
+import FilterOutputOrderModal from "./components/modals/FilterOutputOrdersModal";
+import DisableOutputOrderModal from "./components/modals/DisableOutputOrderModal";
+import MoreInfoOutputOrderModal from "./components/modals/MoreInfoOutputOrderModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
-import EnableTransformationModal from "./components/modals/EnableTransformationModal";
-import DisableTransformationModal from "./components/modals/DisableTransformationModal";
-import MoreInfoTransformationModal from "./components/modals/MoreInfoTransformationModal";
-import SearchBar from "../../globals/components/ui/SearchBar";
 
 export default function OutputOrdersPage() {
-  const { transformations, fetchTransformations } = useTransformations();
-  const { modalType, isOpen, modalData, refetch, openModal, closeModal } =
+  const { outputOrders, setFilters } = useOutputOrders();
+  const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
   const [search, setSearch] = useState("");
-  const filteredOutputs = useSearch(transformations, search);
+  const filteredOutputs = useSearch(outputOrders, search);
 
   return (
     <Layout
-      avatarOnClick={() => openModal(null, "user")}
-      helpOnClick={() => {
-        openModal(null, "help");
+      avatarOnClick={(e) => openModal(null, "user", null, e.currentTarget)}
+      helpOnClick={(e) => {
+        openModal(null, "help", null, e.currentTarget);
       }}
     >
       <TopSection
         sectionName="Ordenes de salida"
         addButtonText="Crear orden"
-        createOnClick={() => openModal(null, "add", refetch)}
-        filterOnClick={() => openModal(null, "filter")}
+        createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
+        filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}
       >
         <SearchBar value={search} onChange={setSearch} />
       </TopSection>
 
-      <TransformationsTable
-        transformations={filteredOutputs}
-        openModal={openModal}
-        refetch={fetchTransformations}
-      />
+      <OutputOrdersTable outputOrders={filteredOutputs} openModal={openModal} />
 
       {modalType && (
         <Modal
@@ -63,50 +59,53 @@ export default function OutputOrdersPage() {
                   : modalType === "edit"
                     ? "Editar Orden"
                     : modalType === "disable"
-                      ? "Deshabilitar Orden"
+                      ? "Deshabilitar orden"
                       : modalType === "enable"
-                        ? "Deshabilitar Orden"
-                        : modalType === "info"
+                        ? "Deshabilitar orden"
+                        : modalType === "moreInfo"
                           ? "Más Información"
                           : "Ayuda"
           }
+          triggerRef={triggerRef}
+          location={modalType === "add" || modalType === "moreInfo" ? "center" : "anchored"}
         >
           {modalType === "user" && <ProfileModal />}
-          {modalType === "filter" && <FilterModal onClose={closeModal} />}
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
-          {modalType === "add" && (
-            <AddTransformationModal
+          {modalType === "filter" && (
+            <FilterOutputOrderModal
+              setFilters={setFilters}
               onClose={closeModal}
-              fetch={fetchTransformations}
             />
           )}
 
+          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
+          {modalType === "add" && (
+            <AddOutputOrderModal onClose={closeModal} />
+          )}
+
           {modalType === "edit" && modalData && (
-            <EditTransformationModal
-              selectedTransformation={modalData}
+            <EditOutputOrderModal
+              selectedOutputOrder={modalData}
               onClose={closeModal}
-              refetch={fetchTransformations}
             />
           )}
 
           {modalType === "disable" && modalData && (
-            <DisableTransformationModal
-              selectedTransformation={modalData}
+            <DisableOutputOrderModal
+              selectedOutputOrder={modalData}
               onClose={closeModal}
-              refetch={fetchTransformations}
             />
           )}
 
           {modalType === "enable" && modalData && (
-            <EnableTransformationModal
-              selectedTransformation={modalData}
+            <EnableOutputOrderModal
+              selectedOutputOrder={modalData}
               onClose={closeModal}
-              refetch={fetchTransformations}
             />
           )}
 
-          {modalType === "info" && modalData && (
-            <MoreInfoTransformationModal selectedTransformation={modalData} />
+          {modalType === "moreInfo" && modalData && (
+            <MoreInfoOutputOrderModal selectedOutputOrder={modalData} />
           )}
         </Modal>
       )}
