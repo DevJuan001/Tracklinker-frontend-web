@@ -1,14 +1,13 @@
 import { apiRoutes } from "../../../config/apiRoutes";
-import { getToken } from "../../../utils/auth";
+import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function createTransformation(transformationData) {
-  const res = await fetch(
-    `${apiRoutes.apiUrl}${apiRoutes.transformations}/create`,
+export async function createOutputOrderService(transformationData) {
+  const res = await fetchWithAuth(
+    `${apiRoutes.apiUrl}${apiRoutes.outputOrders}/create`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: getToken(),
       },
       body: JSON.stringify(transformationData),
     },
