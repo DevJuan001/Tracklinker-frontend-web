@@ -18,35 +18,33 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
     useEditOutputOrder(selectedOutputOrder);
 
   return (
-    <section className="flex flex-col items-center">
-      <form className="w-full  flex flex-col gap-2">
-        <TagInput
-          value={form.product_serial}
-          labelText="Serial del producto"
-          placeholder="ABC123"
-          name="product_serial"
-          onChange={handleChange}
-        />
+    <section className="flex flex-col items-center gap-2">
+      <TagInput
+        value={form.product_serial}
+        labelText="Serial del producto"
+        placeholder="ABC123"
+        name="product_serial"
+        onChange={handleChange}
+      />
 
-        <DateField
-          id={"output_product_garanty"}
-          value={form.output_product_garanty}
-          spanText="Fecha de finalización de la garantía"
-          name="out_product_garanty"
-          onChange={handleChange}
-        />
+      <DateField
+        id={"output_product_garanty"}
+        value={form.output_product_garanty}
+        spanText="Fecha de finalización de la garantía"
+        name="out_product_garanty"
+        onChange={handleChange}
+      />
 
-        <SelectMenu
-          spanText={"Estado"}
-          value={form.output_order_status}
-          name={"out_order_status"}
-          onChange={handleChange}
-          options={[
-            { value: 1, label: "Deshabilitada" },
-            { value: 2, label: "Activa" },
-          ]}
-        />
-      </form>
+      <SelectMenu
+        spanText={"Estado"}
+        value={form.output_order_status}
+        name={"out_order_status"}
+        onChange={handleChange}
+        options={[
+          { value: 1, label: "Deshabilitada" },
+          { value: 2, label: "Activa" },
+        ]}
+      />
 
       <ConfirmCancelButtons
         confirmText={loading ? <Loader /> : "Actualizar"}
