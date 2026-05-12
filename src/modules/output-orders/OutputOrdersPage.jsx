@@ -67,7 +67,14 @@ export default function OutputOrdersPage() {
                           : "Ayuda"
           }
           triggerRef={triggerRef}
-          location={modalType === "add" || modalType === "moreInfo" ? "center" : "anchored"}
+          location={
+            modalType === "add" ||
+            modalType === "moreInfo" ||
+            modalType === "edit"
+              ? "center"
+              : "anchored"
+          }
+          growDirection="center"
         >
           {modalType === "user" && <ProfileModal />}
           {modalType === "filter" && (
@@ -79,9 +86,7 @@ export default function OutputOrdersPage() {
 
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
 
-          {modalType === "add" && (
-            <AddOutputOrderModal onClose={closeModal} />
-          )}
+          {modalType === "add" && <AddOutputOrderModal onClose={closeModal} />}
 
           {modalType === "edit" && modalData && (
             <EditOutputOrderModal
