@@ -59,6 +59,7 @@ export default function UserItem({
           );
         }}
         visibilityIcon={userStatus[user.status]?.visibilityIcon}
+        moreInfoButtonOnClick={itemOnClick}
       />
     </li>
   );
