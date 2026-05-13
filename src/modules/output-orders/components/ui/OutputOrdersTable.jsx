@@ -16,7 +16,7 @@ export default function OutputOrdersTable({ outputOrders, openModal }) {
             <th className="font-medium pl-4 text-start">Estado</th>
             <th className="font-medium pl-4 text-start">N°</th>
             <th className="font-medium pl-4 text-start">Fecha de registro</th>
-            <th className="font-medium pl-4 text-start">Serial</th>
+            <th className="font-medium pl-4 text-start">Seriales</th>
             <th className="font-medium pl-4 text-start">Marca</th>
             <th className="font-medium pl-4 text-start">Modelo</th>
             <th className="font-medium pl-4 text-start">Tiempo de garantía</th>
