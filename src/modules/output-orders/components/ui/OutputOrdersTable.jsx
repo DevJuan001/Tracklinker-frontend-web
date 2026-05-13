@@ -68,7 +68,13 @@ export default function OutputOrdersTable({
       )}
 
       {isFirstLoad ? (
-        <Skeleton height="100%" backgroundColor={"#F3EEF5"} darkModeBackgroundColor={"#E2E5E7"} />
+        <Skeleton
+          height="100%"
+          backgroundColor={"#F3EEF5"}
+          darkModeBackgroundColor={"#101012"}
+          shineColor="#C5C1C7"
+          darkModeShineColor="#1e1e1e"
+        />
       ) : (
         <table className="min-h-full min-w-full">
           {/* Encabezado */}
