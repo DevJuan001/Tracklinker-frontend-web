@@ -1,65 +1,35 @@
-import { useState } from "react";
-import { useEnableOutputOrder } from "../../hooks/useEnableOutputOrder";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import Loader from "../../../../globals/components/ui/Loader";
+import { useEnableOutputOrder } from "../../hooks/useEnableOutputOrder";
+import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 
 export default function EnableOutputOrdersModal({
   selectedOutputOrder,
   onClose,
 }) {
-  const [innerModal, setInnerModal] = useState(null);
   const { handleSubmit, loading } = useEnableOutputOrder(
     selectedOutputOrder.output_order_id,
   );
 
   return (
-    <div className="flex flex-col items-center p-5">
-      <p className="text-lg mb-6 text-center">
-        ¿Estás seguro de que deseas habilitar la transformación N°{" "}
-        <span className="font-bold">{selectedOutputOrder.output_order_id}</span>
+    <section className="flex flex-col justify-center items-center dark:text-white">
+      <p>
+        ¿Estás seguro de que deseas habilitar la orden de salida N°{" "}
+        <span className="font-medium">
+          {selectedOutputOrder.output_order_id}
+        </span>
         ?
       </p>
 
-      <div className="flex gap-4 pt-5">
-        <button
-          className="bg-black text-white px-5 py-2 rounded-xl shadow-xl text-sm transition duration-300"
-          onClick={(e) => handleSubmit(e, setInnerModal)}
-          disabled={loading}
-        >
-          {loading ? <Loader /> : "Habilitar"}
-        </button>
-
-        <button
-          className="px-5 py-2 border rounded-xl shadow-xl text-sm transition duration-300 hover:bg-gray-200"
-          onClick={onClose}
-          disabled={loading}
-        >
-          Cancelar
-        </button>
-      </div>
-
-      {/* Modal interno de éxito */}
-      {innerModal === "success" && (
-        <SuccessModal
-          isOpen
-          confirmTitle="¡Orden habilitada con éxito!"
-          confirmText={`La orden #${selectedOutputOrder.output_details_id} ha sido habilitada correctamente.`}
-          confirmButtonText="Volver"
-          onClose={() => setInnerModal(null)}
-        />
-      )}
-
-      {/* Modal interno de error */}
-      {innerModal === "error" && (
-        <ErrorModal
-          isOpen
-          errorTitle="Error al habilitar la orden"
-          errorText={""}
-          confirmButtonText="Volver"
-          onClose={() => setInnerModal(null)}
-        />
-      )}
-    </div>
+      {/* Botones */}
+      <ConfirmCancelButtons
+        confirmText={loading ? <Loader /> : "Habilitar"}
+        confirmDarkBgColor=""
+        cancelText={"Cancelar"}
+        confirmButtonOnClick={(e) => handleSubmit(e, onClose)}
+        cancelButtonOnClick={onClose}
+      />
+    </section>
   );
 }
