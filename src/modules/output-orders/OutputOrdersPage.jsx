@@ -61,7 +61,7 @@ export default function OutputOrdersPage() {
                     : modalType === "disable"
                       ? "Deshabilitar orden"
                       : modalType === "enable"
-                        ? "Deshabilitar orden"
+                        ? "Habilitar orden"
                         : modalType === "moreInfo"
                           ? "Más Información"
                           : "Ayuda"
