@@ -1,65 +1,36 @@
-import { useState } from "react";
-import { useDisableOutputOrder } from "../../hooks/useDisableOutputOrder";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import Loader from "../../../../globals/components/ui/Loader";
+import { useDisableOutputOrder } from "../../hooks/useDisableOutputOrder";
+import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 
 export default function DisableOutputOrderModal({
   selectedOutputOrder,
   onClose,
 }) {
-  const [innerModal, setInnerModal] = useState(null);
   const { handleSubmit, loading } = useDisableOutputOrder(
     selectedOutputOrder.output_order_id,
   );
 
   return (
-    <div className="flex flex-col items-center p-5">
-      <p className="text-lg mb-6 text-center">
+    <section className="flex flex-col justify-center items-center dark:text-white">
+      <p>
         ¿Estás seguro de que deseas deshabilitar la orden de salida N°{" "}
-        <span className="font-bold">{selectedOutputOrder.output_order_id}</span>
+        <span className="font-medium">
+          {selectedOutputOrder.output_order_id}
+        </span>
         ?
       </p>
 
-      <div className="flex gap-4 pt-5">
-        <button
-          className="bg-red-600 text-white px-5 py-2 rounded-xl shadow-xl text-sm transition duration-300 hover:bg-red-700"
-          onClick={(e) => handleSubmit(e, setInnerModal)}
-          disabled={loading}
-        >
-          {loading ? <Loader /> : "Deshabilitar"}
-        </button>
-
-        <button
-          className="px-5 py-2 border rounded-xl shadow-xl text-sm transition duration-300 hover:bg-gray-200"
-          onClick={onClose}
-          disabled={loading}
-        >
-          Cancelar
-        </button>
-      </div>
-
-      {/* Modal interno de éxito */}
-      {innerModal === "success" && (
-        <SuccessModal
-          isOpen
-          confirmTitle="¡Orden de salida deshabilitada con éxito!"
-          confirmText={`La orden de salida #${selectedOutputOrder.output_order_id} ha sido deshabilitada correctamente.`}
-          confirmButtonText="Volver"
-          onClose={() => setInnerModal(null)}
-        />
-      )}
-
-      {/* Modal interno de error */}
-      {innerModal === "error" && (
-        <ErrorModal
-          isOpen
-          errorTitle="Error al deshabilitar la orden de salida"
-          errorText={"No se pudo deshabilitar la orden de salida"}
-          confirmButtonText="Volver"
-          onClose={() => setInnerModal(null)}
-        />
-      )}
-    </div>
+      {/* Botones */}
+      <ConfirmCancelButtons
+        confirmText={loading ? <Loader /> : "Deshabilitar"}
+        confirmBgColor="red-600"
+        confirmDarkBgColor=""
+        cancelText={"Cancelar"}
+        confirmButtonOnClick={(e) => handleSubmit(e, onClose)}
+        cancelButtonOnClick={onClose}
+      />
+    </section>
   );
 }
