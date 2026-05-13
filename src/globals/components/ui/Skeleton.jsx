@@ -1,27 +1,36 @@
 export default function Skeleton({
-  width = "100%",
-  height = "14",
-  borderRadius = "",
-  backgroundColor,
-  darkModeBackgroundColor,
   count = 1,
+  height = 14,
+  width = "100%",
+  backgroundColor = "#e2e5e7",
+  darkModeBackgroundColor = "#000000",
+  shineColor = "rgba(255,255,255,0.9)",
+  darkModeShineColor = "rgba(255,255,255,0.1)",
+  borderRadius = 6,
 }) {
+  const dark = document.documentElement.classList.contains("dark");
+
   return (
     <>
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className={`relative overflow-hidden animate-shimmer 
-            after:absolute after:inset-0 after:bg-gradient-to-r after:from-transparent after:via-white after:to-transparent after:[background-size:400%_100%] after:[animation:inherit] 
-            bg-[${backgroundColor}] dark:bg-[${darkModeBackgroundColor}]
-            `}
+          className={`relative overflow-hidden`}
           style={{
             height: height,
             width: width,
             borderRadius: borderRadius,
+            backgroundColor: dark ? darkModeBackgroundColor : backgroundColor,
             marginBottom: count > 1 ? 8 : 0,
           }}
-        />
+        >
+          <div
+            className="absolute inset-0 animate-shimmer [background-size:400%_100%]"
+            style={{
+              backgroundImage: `linear-gradient(90deg, transparent, ${dark ? darkModeShineColor : shineColor}, transparent)`,
+            }}
+          />
+        </div>
       ))}
     </>
   );
