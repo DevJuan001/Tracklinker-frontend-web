@@ -47,6 +47,7 @@ export default function UsersPage() {
         users={filteredUsers}
         loading={loading}
         error={error}
+        search={search}
         openModal={openModal}
       />
 
@@ -71,7 +72,7 @@ export default function UsersPage() {
                           : "Ayuda"
           }
           location={
-            modalType === "edit" || modalType === "info" ? "center" : "anchored"
+            modalType === "edit" || modalType === "info" || modalType === "add" ? "center" : "anchored"
           }
           type={modalType}
           isOpen={isOpen}
