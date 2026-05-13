@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { disableTransformation } from "../services/disableTransformation";
+import { enableOutputOrderService } from "../services/enableOutputOrderService";
 
-export function useDisableTransformation(Id) {
+export function useEnableOutputOrder(id) {
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e, setInnerModal) {
@@ -10,7 +10,7 @@ export function useDisableTransformation(Id) {
     setLoading(true);
 
     try {
-      const response = await disableTransformation(Id);
+      const response = await enableOutputOrderService(id);
       if (response.success == true) {
         setInnerModal("success");
       } else {

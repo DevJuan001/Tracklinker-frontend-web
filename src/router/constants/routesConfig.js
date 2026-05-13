@@ -7,7 +7,7 @@ import SubcategoriesPage from "../../modules/subcategories/SubcategoriesPage";
 import ReportsPage from "../../modules/reports/ReportsPage";
 import WarrantiesPage from "../../modules/warranties/WarrantiesPage";
 import SuppliersPage from "../../modules/suppliers/SuppliersPage";
-import TransformationsPage from "../../modules/transformations/TransformationsPage";
+import OutputOrdersPage from "../../modules/output-orders/OutputOrdersPage";
 
 export const routesConfig = [
   {
@@ -56,8 +56,8 @@ export const routesConfig = [
     roles: ["Admin"],
   },
   {
-    path: "/transformations",
-    component: TransformationsPage,
+    path: "/output-orders",
+    component: OutputOrdersPage,
     roles: ["Admin"],
   },
 ];

@@ -6,6 +6,7 @@ export default function FormButtons({
   return (
     <section className="flex flex-col pt-5 gap-2">
       <button
+        id="login-button"
         type="button"
         onClick={getIntoButtonOnclick}
         className="h-16 flex items-center justify-center py-3 text-sm text-white bg-blue-700 rounded-2xl transition duration-300
@@ -14,6 +15,7 @@ export default function FormButtons({
         {getIntoButtonText}
       </button>
       <button
+        id="recover-password-button"
         type="button"
         onClick={recoverButtonOnclick}
         className="h-16 flex items-center justify-center px-8 py-3 text-sm border rounded-2xl transition-all duration-300

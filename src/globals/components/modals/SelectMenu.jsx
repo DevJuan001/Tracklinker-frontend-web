@@ -33,12 +33,12 @@ export default function SelectMenu({
 
   return (
     <section className="relative w-full flex flex-col gap-1">
-      <div className="w-full flex items-center gap-1.5">
+      <div className="h-[66px] w-full flex items-center gap-1.5">
         <div
           ref={triggerRef}
           tabIndex={0}
           onClick={handleToggle}
-          className={`relative w-full ${spanText ? "h-16 pt-1.5": "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
+          className={`relative w-full ${spanText ? "h-full pt-1.5": "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
           rounded-2xl cursor-pointer text-sm
           dark:bg-black dark:border-[#1e1e20cb]
           ${className}`}
