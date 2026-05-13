@@ -31,7 +31,7 @@ export default function LoginForm({ openModal }) {
         />
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="w-[370px] flex flex-col gap-2 dark:text-white"
+          className="w-[400px] flex flex-col gap-2 dark:text-white"
         >
           {/* Campo del correo */}
           <FormField
