@@ -32,7 +32,7 @@ export default function UsersList({ users, loading, search, openModal }) {
                 Intenta nuevamente con otro nombre o crea un nuevo usuario
               </span>
 
-              <ul className="text-center">
+              <ul className="text-center text-sm mt-1">
                 <li>• Revisa que el nombre esté bien escrito</li>
                 <li>• Busca por correo electrónico o rol</li>
                 <li>• Si no existe, agrégalo como nuevo usuario</li>
@@ -59,7 +59,7 @@ export default function UsersList({ users, loading, search, openModal }) {
                   Crea tu primer usuario o empleado
                 </span>
 
-                <ul className="text-center">
+                <ul className="text-center text-sm mt-1">
                   <li>• Asigna roles a cada usuario</li>
                   <li>• Gestiona el acceso al sistema fácilmente</li>
                   <li>• Invita empleados con un solo clic</li>
