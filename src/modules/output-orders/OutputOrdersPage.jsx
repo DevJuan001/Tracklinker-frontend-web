@@ -20,7 +20,7 @@ import MoreInfoOutputOrderModal from "./components/modals/MoreInfoOutputOrderMod
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function OutputOrdersPage() {
-  const { outputOrders, setFilters } = useOutputOrders();
+  const { outputOrders, loading, setFilters } = useOutputOrders();
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
   const [search, setSearch] = useState("");
@@ -42,7 +42,12 @@ export default function OutputOrdersPage() {
         <SearchBar value={search} onChange={setSearch} />
       </TopSection>
 
-      <OutputOrdersTable outputOrders={filteredOutputs} openModal={openModal} />
+      <OutputOrdersTable
+        outputOrders={filteredOutputs}
+        loading={loading}
+        search={search}
+        openModal={openModal}
+      />
 
       {modalType && (
         <Modal
