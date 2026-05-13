@@ -101,6 +101,10 @@ export default {
           "80%": { transform: "translateX(4px)" },
           "100%": { transform: "translateX(0)" },
         },
+        shimmer: {
+          "0%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "-100% 50%" },
+        },
       },
       animation: {
         fade: "fade 0.3s ease-out forwards",
@@ -114,6 +118,7 @@ export default {
         blurUp: "blurUp 0.3s ease-in forwards",
         toastIn: "toastIn 0.2s cubic-bezier(.56,.27,0,1) forwards",
         shake: "shake 0.35s ease",
+        shimmer: "shimmer 3s ease-in-out infinite",
       },
     },
   },
@@ -143,5 +148,8 @@ export default {
     "users-background",
     "bg-green-500",
     "bg-[#FFFFFF]",
+    "bg-[#000000]",
+    "bg-[#F3EEF5]",
+    "bg-[#E2E5E7]"
   ],
 };
