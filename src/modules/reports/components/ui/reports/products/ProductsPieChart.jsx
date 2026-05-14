@@ -16,8 +16,8 @@ export default function ProductsPieChart({ period }) {
         <Tooltip />
         <Pie
           data={productsData}
-          dataKey={"value"}
-          nameKey={"name"}
+          dataKey={"products"}
+          nameKey={"brand"}
           cornerRadius={"10%"}
           paddingAngle={1}
           innerRadius="80"
