@@ -18,13 +18,13 @@ export default function ProfileModal() {
 
   return (
     <section
-      className="min-h-full flex flex-col-reverse items-center justify-between gap-4
-      md:grid md:grid-cols-[150px_1fr]"
+      className="h-screen flex flex-col-reverse items-center justify-between gap-4
+      md:h-[445px] md:grid md:grid-cols-[150px_1fr]"
     >
       <aside
-        className="w-full border-gray-300 justify-self-end
+        className="h-[20%] justify-self-end w-full border-gray-300
         dark:border-[#3a3d43]
-        md:justify-self-start md:self-start"
+        md:h-full md:justify-self-start md:self-start"
       >
         {/* Lista de opciones */}
         <ul className="flex justify-center gap-1 md:flex-col md:justify-start">
@@ -81,41 +81,45 @@ export default function ProfileModal() {
           </li>
         </ul>
       </aside>
+      <section className="h-[80%] w-full flex flex-col gap-7 animate-blurUp
+      dark:text-white
+      md:h-[100%]
+      ">
+        {/* Contenido de la sección seleccionada */}
+        {activeSection === "general" && (
+          <GeneralContent
+            user={user}
+            openInnerModal={openInnerModal}
+            onEditClick={(e) => {
+              openInnerModal("editInfo", e);
+            }}
+            onPasswordClick={(e) => {
+              openInnerModal("changePassword", e);
+            }}
+          />
+        )}
+        {activeSection === "appearance" && <AppearanceContent />}
+        {activeSection === "credits" && <CreditsContent />}
 
-      {/* Contenido de la sección seleccionada */}
-      {activeSection === "general" && (
-        <GeneralContent
-          user={user}
-          openInnerModal={openInnerModal}
-          onEditClick={(e) => {
-            openInnerModal("editInfo", e);
-          }}
-          onPasswordClick={(e) => {
-            openInnerModal("changePassword", e);
-          }}
-        />
-      )}
-      {activeSection === "appearance" && <AppearanceContent />}
-      {activeSection === "credits" && <CreditsContent />}
-
-      {/* Modales Internas */}
-      {innerType === "editInfo" && (
-        <EditInfoModal
-          user={user}
-          triggerRef={innerTrigger}
-          isOpen={true}
-          onClose={() => {
-            openInnerModal(null);
-          }}
-        />
-      )}
-      {innerType === "changePassword" && (
-        <ChangePasswordModal
-          triggerRef={innerTrigger}
-          isOpen={true}
-          onClose={() => openInnerModal(null)}
-        />
-      )}
+        {/* Modales Internas */}
+        {innerType === "editInfo" && (
+          <EditInfoModal
+            user={user}
+            triggerRef={innerTrigger}
+            isOpen={true}
+            onClose={() => {
+              openInnerModal(null);
+            }}
+          />
+        )}
+        {innerType === "changePassword" && (
+          <ChangePasswordModal
+            triggerRef={innerTrigger}
+            isOpen={true}
+            onClose={() => openInnerModal(null)}
+          />
+        )}
+      </section>
     </section>
   );
 }

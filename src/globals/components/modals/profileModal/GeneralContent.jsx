@@ -11,7 +11,7 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
   const navigate = useNavigate();
 
   return (
-    <section className="flex flex-col w-full pb-10 gap-7 animate-blurUp dark:text-white">
+    <div className="h-full w-full flex flex-col gap-7 animate-blurUp dark:text-white">
       {/* Información general del usuario */}
       <section className="flex flex-col">
         <span className="font-medium text-sm pl-1">Perfil</span>
@@ -89,6 +89,6 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
           <span className="font-medium">Cerrar Sesion</span>
         </button>
       </section>
-    </section>
+    </div>
   );
 }
