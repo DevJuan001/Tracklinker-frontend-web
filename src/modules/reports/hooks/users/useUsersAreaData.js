@@ -18,7 +18,7 @@ export function useUsersAreaData(period) {
           controllerRef.current.signal,
         );
         const data = response.map((row) => ({
-          month: formatLabel(row.label, period),
+          month: formatLabel(row.date, period),
           users: row.users,
         }));
         setUsersData(data);
