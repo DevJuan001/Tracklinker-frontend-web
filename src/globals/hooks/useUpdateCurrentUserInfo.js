@@ -48,7 +48,7 @@ export function useUpdateCurrentUserInfo(user) {
     setLoading(true);
 
     try {
-      const response = await updateCurrentUserInfoService(userData);
+      const response = await updateCurrentUserInfoService(changes);
       if (response.success === true) {
         await queryClient.invalidateQueries({ queryKey: ["currentUser"] });
         openInnerModal("success", triggerButton);
