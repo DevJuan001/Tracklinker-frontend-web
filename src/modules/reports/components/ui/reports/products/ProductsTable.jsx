@@ -1,3 +1,4 @@
+import Icon from "../../../../../../globals/components/ui/Icon";
 import { productStatusConfig } from "../../../../../products/constants/productStatusConfig";
 import { useProductsTableData } from "../../../../hooks/products/useProductsTableData";
 
@@ -27,7 +28,11 @@ export default function ProductsTable() {
               <div
                 className={`flex items-center py-1 px-2 gap-1 rounded-md ${productStatusConfig[product.status]?.styles}`}
               >
-                <img src={productStatusConfig[product.status]?.icon} alt="" />
+                <Icon
+                  name={productStatusConfig[product.status]?.icon}
+                  fill={productStatusConfig[product.status]?.fill}
+                  size={14}
+                />
                 <span>{productStatusConfig[product.status]?.text}</span>
               </div>
             </th>
