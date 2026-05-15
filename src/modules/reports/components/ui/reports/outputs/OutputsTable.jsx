@@ -27,10 +27,10 @@ export default function OutputsTable() {
               <div
                 className={`w-fit flex items-center px-2 py-1 gap-1 rounded-md ${userStatus[output.status]?.styles}`}
               >
-                <img
-                  src={userStatus[output.status]?.icon}
-                  alt=""
-                  className="w-3 h-3"
+                <Icon
+                  name={userStatus[output.status]?.icon}
+                  fill={userStatus[output.status]?.fill}
+                  size={14}
                 />
                 <span>{userStatus[output.status]?.text}</span>
               </div>
