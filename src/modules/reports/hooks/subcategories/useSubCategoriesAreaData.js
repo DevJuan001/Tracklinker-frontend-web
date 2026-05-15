@@ -18,7 +18,7 @@ export function useSubcategoriesAreaData(period) {
           controllerRef.current.signal,
         );
         const data = response.map((row) => ({
-          month: formatLabel(row.label, period),
+          month: formatLabel(row.date, period),
           subcategories: row.subcategories,
         }));
         setSubcategoriesData(data);
