@@ -16,8 +16,8 @@ export default function SubcategoriesPieChart({ period }) {
         <Tooltip />
         <Pie
           data={subcategoriesData}
-          dataKey={"value"}
-          nameKey={"name"}
+          dataKey={"subcategories"}
+          nameKey={"category"}
           cornerRadius={"10%"}
           paddingAngle={1}
           innerRadius="80"
