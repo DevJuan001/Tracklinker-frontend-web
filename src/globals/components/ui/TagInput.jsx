@@ -36,9 +36,10 @@ export default function TagInput({
       ${
         shake
           ? "shadow-[0_0_2.5px_1px_#f87171] dark:shadow-[0_0_4px_1.5px_#7f1d1d] animate-shake"
-          : "shadow-sm"
+          : className
+            ? className
+            : "shadow-sm"
       }
-      ${className}
       `}
     >
       {labelText && (
