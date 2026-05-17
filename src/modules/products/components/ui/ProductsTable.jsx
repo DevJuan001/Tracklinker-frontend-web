@@ -79,13 +79,13 @@ export default function ProductsTable({ products, openModal }) {
                 <th className="font-normal pl-4 text-sm">
                   <div
                     className={`w-fit flex items-center pl-1.5 pr-3 py-0.5 gap-1.5 rounded-full border text-nowrap
-                  dark:border-transparent
-                  ${productStatusConfig[product.status]?.styles}`}
+                    dark:border-transparent
+                    ${productStatusConfig[product.status]?.styles}`}
                   >
-                    <img
-                      src={productStatusConfig[product.status]?.icon}
-                      alt=""
-                      className="w-3 h-3"
+                    <Icon
+                      name={productStatusConfig[product.status]?.icon}
+                      fill={productStatusConfig[product.status]?.fill}
+                      size={14}
                     />
                     <span>{product.status_text}</span>
                   </div>
