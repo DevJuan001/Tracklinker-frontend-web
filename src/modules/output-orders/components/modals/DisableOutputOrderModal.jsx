@@ -1,14 +1,18 @@
-import Loader from "../../../../globals/components/ui/Loader";
+// Hooks
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import { useDisableOutputOrder } from "../../hooks/useDisableOutputOrder";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+// Components
+import Loader from "../../../../globals/components/ui/Loader";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+// Modals
+import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function DisableOutputOrderModal({
   selectedOutputOrder,
   onClose,
 }) {
-  const { handleSubmit, loading } = useDisableOutputOrder(
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { loading, error, handleSubmit } = useDisableOutputOrder(
     selectedOutputOrder.output_order_id,
   );
 
@@ -28,9 +32,21 @@ export default function DisableOutputOrderModal({
         confirmBgColor="red-600"
         confirmDarkBgColor=""
         cancelText={"Cancelar"}
-        confirmButtonOnClick={(e) => handleSubmit(e, onClose)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
         cancelButtonOnClick={onClose}
       />
+
+      {innerType === "error" && (
+        <ErrorModal
+          isOpen={true}
+          location="anchored"
+          growDirection={"top-right"}
+          triggerRef={innerTrigger}
+          errorTitle={"¡No se pudo deshabilitar la orden de salida!"}
+          errorText={error}
+          onClose={onClose}
+        />
+      )}
     </section>
   );
 }
