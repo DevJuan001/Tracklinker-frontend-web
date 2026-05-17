@@ -19,26 +19,28 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
 
   return (
     <section className="flex flex-col items-center gap-2">
-      <TagInput
-        value={form.product_serial}
-        labelText="Serial del producto"
-        placeholder="ABC123"
-        name="product_serial"
-        onChange={handleChange}
-      />
-
       <DateField
         id={"output_product_garanty"}
+        name="output_product_garanty"
+        onChange={handleChange}
         value={form.output_product_garanty}
         spanText="Fecha de finalización de la garantía"
-        name="out_product_garanty"
+      />
+
+      <FormField
+        id={"product_serial"}
+        name="product_serial"
+        labelText="Serial del producto"
+        placeholder="ABC123"
+        value={form.product_serial}
         onChange={handleChange}
       />
 
       <SelectMenu
+        id={"status"}
         spanText={"Estado"}
         value={form.output_order_status}
-        name={"out_order_status"}
+        name={"output_order_status"}
         onChange={handleChange}
         options={[
           { value: 1, label: "Deshabilitada" },
@@ -60,7 +62,10 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
           confirmTitle="¡Orden de salida actualizada!"
           confirmText="La orden de salida se ha modificado correctamente."
           confirmButtonText="Volver"
-          onClose={() => openInnerModal(null)}
+          onClose={() => {
+            openInnerModal(null);
+            onClose();
+          }}
         />
       )}
 
