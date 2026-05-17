@@ -2,6 +2,7 @@ import { useState } from "react";
 import { updateOutputOrderService } from "../services/updateOutputOrderService";
 import { getModalTrigger } from "../../../utils/getModalTrigger";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function useEditOutputOrder(selectedOutputOrder) {
   const [form, setForm] = useState({
@@ -12,6 +13,7 @@ export function useEditOutputOrder(selectedOutputOrder) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const queryClient = useQueryClient();
   const { validate, getChanges, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
@@ -43,10 +45,12 @@ export function useEditOutputOrder(selectedOutputOrder) {
 
     try {
       const response = await updateOutputOrderService(
-        selectedOutputOrder.output_details_id,
+        selectedOutputOrder.output_order_id,
         changes,
       );
+
       if (response.success == true) {
+        queryClient.invalidateQueries({ queryKey: ["outputOrders"] });
         openInnerModal("success", triggerButton);
       } else {
         openInnerModal("error", triggerButton);
