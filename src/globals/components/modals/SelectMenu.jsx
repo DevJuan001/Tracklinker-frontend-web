@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import { useSelectMenu } from "../../hooks/useSelectMenu";
 
 export default function SelectMenu({
+  id,
   name,
   onChange,
   value,
@@ -35,10 +36,11 @@ export default function SelectMenu({
     <section className="relative w-full flex flex-col gap-1">
       <div className="h-[66px] w-full flex items-center gap-1.5">
         <div
+          id={id}
           ref={triggerRef}
           tabIndex={0}
           onClick={handleToggle}
-          className={`relative w-full ${spanText ? "h-full pt-1.5": "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
+          className={`relative w-full ${spanText ? "h-full pt-1.5" : "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
           rounded-2xl cursor-pointer text-sm
           dark:bg-black dark:border-[#1e1e20cb]
           ${className}`}
@@ -51,7 +53,9 @@ export default function SelectMenu({
             </div>
           )}
 
-          <div className={`w-full h-full flex pl-4 ${spanText ? "pt-3": "pt-0"} dark:text-[#E4E2E5]`}>
+          <div
+            className={`w-full h-full flex pl-4 ${spanText ? "pt-3" : "pt-0"} dark:text-[#E4E2E5]`}
+          >
             <div className="w-full flex items-center text-base">
               {options.find((opt) => {
                 if (opt.value !== "" && !isNaN(opt.value)) {
@@ -62,10 +66,7 @@ export default function SelectMenu({
             </div>
           </div>
 
-          <Icon
-            name={"arrow_drop_down"}
-            className={`dark:text-[#7e8088]`}
-          />
+          <Icon name={"arrow_drop_down"} className={`dark:text-[#7e8088]`} />
         </div>
         <button
           ref={addIconRef}
