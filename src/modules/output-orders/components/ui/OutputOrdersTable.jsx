@@ -78,12 +78,18 @@ export default function OutputOrdersTable({
       ) : (
         <table className="min-h-full min-w-full">
           {/* Encabezado */}
-          <thead className="sticky top-0 z-10">
-            <tr className="h-[40px] border-b border-gray-200 text-sm dark:text-white dark:border-[#303033]">
+          <thead
+            className="sticky top-0 z-10 bg-white
+            dark:bg-black"
+          >
+            <tr
+              className="h-[40px] border-b border-gray-200 text-sm
+              dark:text-white dark:border-[#303033]"
+            >
               <th className="font-medium pl-4 text-start">Estado</th>
               <th className="font-medium pl-4 text-start">N°</th>
               <th className="font-medium pl-4 text-start">Fecha de registro</th>
-              <th className="font-medium pl-4 text-start">Seriales</th>
+              <th className="font-medium pl-4 text-start">Serial</th>
               <th className="font-medium pl-4 text-start">Marca</th>
               <th className="font-medium pl-4 text-start">Modelo</th>
               <th className="font-medium pl-4 text-start">
@@ -93,10 +99,10 @@ export default function OutputOrdersTable({
             </tr>
           </thead>
           {/* Cuerpo de la tabla */}
-          {outputOrders.map((outputOrder) => (
-            <tbody className="font-normal dark:text-white">
+          <tbody className="font-normal dark:text-white">
+            {outputOrders.map((outputOrder, index) => (
               <tr
-                key={outputOrder.output_order_id}
+                key={index}
                 className="relative h-12 text-base overflow-x-auto overflow-y-auto transition duration-75 text-[#45474d]
                 hover:bg-[#F5F3F6]
                 dark:hover:bg-[#2d2d30] dark:text-white"
@@ -160,8 +166,8 @@ export default function OutputOrdersTable({
                   />
                 </th>
               </tr>
-            </tbody>
-          ))}
+            ))}
+          </tbody>
         </table>
       )}
     </section>
