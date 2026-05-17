@@ -6,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export function useCreateOutputOrder() {
   const [form, setForm] = useState({
-    product_serial: "",
+    product_serials: [],
     output_product_garanty: "",
   });
   const queryClient = useQueryClient();
@@ -33,6 +33,7 @@ export function useCreateOutputOrder() {
 
     try {
       const response = await createOutputOrderService(form);
+      
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["outputOrders"] });
         openInnerModal("success", triggerButton);

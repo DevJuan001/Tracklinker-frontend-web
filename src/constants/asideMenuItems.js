@@ -122,7 +122,7 @@ export const mobileItems = [
   },
   {
     name: "Ordenes",
-    path: "/transformations",
+    path: "/output-orders",
     icon: "shuffle",
   },
   {

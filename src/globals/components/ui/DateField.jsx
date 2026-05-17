@@ -16,9 +16,10 @@ export default function DateField({
   return (
     <div
       onClick={(e) => openInnerModal("calendar", e)}
-      className={`relative w-full h-[66px] flex px-4 rounded-2xl border outline-[#00000028] text-center cursor-pointer shadow-sm
-      dark:border-[#1e1e20cb] text-sm dark:text-white focus:shadow-[0_0_2px_1px_#e5e7eb]
-      ${className}`}
+      className={`relative w-full h-[66px] flex px-4 rounded-2xl border outline-[#00000028] text-center text-sm cursor-pointer
+      focus:shadow-[0_0_2px_1px_#e5e7eb]
+      dark:border-[#1e1e20cb] dark:text-white
+      ${className ? className : "shadow-sm"}`}
     >
       <div className="min-w-full max-w-full flex items-center pr-3">
         <div className="min-w-full max-w-28 flex flex-col items-start">

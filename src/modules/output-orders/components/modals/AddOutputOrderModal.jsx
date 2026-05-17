@@ -29,11 +29,13 @@ export default function AddOutputOrderModal({ onClose }) {
       />
 
       <TagInput
-        id={"product_serial"}
-        name={"product_serial"}
+        id={"product_serials"}
+        name={"product_serials"}
         labelText={"Seriales"}
         placeholder={"QTYC123**"}
-        className={fieldError("product_serial")}
+        value={form.product_serials}
+        onChange={handleChange}
+        className={fieldError("product_serials")}
       />
 
       <ConfirmCancelButtons
@@ -50,7 +52,10 @@ export default function AddOutputOrderModal({ onClose }) {
           confirmTitle="¡Transformación registrada con éxito!"
           confirmText="La transformación se ha guardado correctamente."
           confirmButtonText="Volver"
-          onClose={() => openInnerModal(null)}
+          onClose={() => {
+            openInnerModal(null);
+            onClose();
+          }}
         />
       )}
 
