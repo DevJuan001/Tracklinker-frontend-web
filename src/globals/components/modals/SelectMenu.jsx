@@ -94,7 +94,7 @@ export default function SelectMenu({
           z_index="600"
         >
           <div
-            className="w-full min-h-40 max-h-96 flex flex-col gap-1 px-1 pt-1 overflow-y-auto rounded-3xl bg-[#fbf9fc]
+            className="w-full min-h-24 max-h-96 flex flex-col gap-1 px-1 pt-1 overflow-y-auto rounded-3xl bg-[#fbf9fc]
             dark:bg-black dark:text-white"
             onClick={(e) => e.stopPropagation()}
           >
