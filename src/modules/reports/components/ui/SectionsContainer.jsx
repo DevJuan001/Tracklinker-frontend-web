@@ -32,7 +32,6 @@ export default function SectionsContainer({
           }}
           sectionKey={section.name}
           sectionIcon={section.icon}
-          sectionIconAlt={section.alt}
           sectionName={section.cardName}
         />
       ))}

@@ -1,3 +1,4 @@
+import Icon from "../../../../../../globals/components/ui/Icon";
 import { warrantyStatusConfig } from "../../../../../warranties/constants/warrantyStatus";
 import { useWarrantiesTableData } from "../../../../hooks/warranties/useWarrantiesTableData";
 
@@ -27,11 +28,11 @@ export default function WarrantiesTable() {
               <div
                 className={`w-fit flex items-center px-2 py-1 gap-1 rounded-md ${warrantyStatusConfig[warranty.status]?.styles}`}
               >
-                <img
-                  src={warrantyStatusConfig[warranty.status]?.icon}
-                  alt=""
-                  className="w-3 h-3"
-                />  
+                <Icon
+                  name={warrantyStatusConfig[warranty.status]?.icon}
+                  fill={warrantyStatusConfig[warranty.status]?.fill}
+                  size={14}
+                />
                 <span>{warrantyStatusConfig[warranty.status]?.text}</span>
               </div>
             </th>

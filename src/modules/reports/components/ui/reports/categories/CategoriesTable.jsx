@@ -1,3 +1,4 @@
+import Icon from "../../../../../../globals/components/ui/Icon";
 import { userStatus } from "../../../../../users/constants/userStatus";
 import { useCategoriesTableData } from "../../../../hooks/categories/useCategoriesTableData";
 
@@ -25,7 +26,11 @@ export default function CategoriesTable() {
               <div
                 className={`flex items-center px-2 py-1 gap-1 rounded-md ${userStatus[category.status]?.styles}`}
               >
-                <img src={userStatus[category.status]?.icon} alt="" />
+                <Icon
+                  size={14}
+                  name={userStatus[category.status]?.icon}
+                  fill={userStatus[category.status]?.fill}
+                />
                 <span>{userStatus[category.status]?.text}</span>
               </div>
             </th>

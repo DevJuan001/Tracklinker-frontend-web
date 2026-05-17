@@ -18,7 +18,7 @@ export function useProductsAreaData(period) {
           controllerRef.current.signal,
         );
         const data = response.map((row) => ({
-          month: formatLabel(row.label, period),
+          month: formatLabel(row.date, period),
           products: row.products,
         }));
         setProductsData(data);

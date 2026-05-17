@@ -1,46 +1,37 @@
-import { asideIcons } from "../../../assets/icons/asideIcons";
-
 export const sections = [
   {
     name: "users",
     cardName: "Reporte De Usuarios",
-    icon: asideIcons.usersIcon,
-    alt: "",
+    icon: "groups",
   },
   {
     name: "products",
     cardName: "Reporte De Productos",
-    icon: asideIcons.productsIcon,
-    alt: "",
+    icon: "shopping_cart",
   },
   {
     name: "categories",
     cardName: "Reporte De Categorias",
-    icon: asideIcons.categoriesIcon,
-    alt: "",
+    icon: "folder_open",
   },
   {
     name: "subcategories",
     cardName: "Reporte De Subcategorias",
-    icon: asideIcons.subcategoriesIcon,
-    alt: "",
+    icon: "folder_copy",
   },
   {
     name: "warranties",
     cardName: "Reporte De Garantías",
-    icon: asideIcons.warrantiesIcon,
-    alt: "",
+    icon: "service_toolbox",
   },
   {
     name: "suppliers",
     cardName: "Reporte De Proveedores",
-    icon: asideIcons.suppliersIcon,
-    alt: "",
+    icon: "group",
   },
   {
     name: "outputs",
     cardName: "Reporte De Salidas",
-    icon: asideIcons.transformationsIcon,
-    alt: "",
+    icon: "shuffle",
   },
 ];

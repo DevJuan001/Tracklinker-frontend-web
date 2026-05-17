@@ -1,3 +1,4 @@
+import Icon from "../../../../../../globals/components/ui/Icon";
 import { userStatus } from "../../../../../users/constants/userStatus";
 import { useUsersTableData } from "../../../../hooks/users/useUsersTableData";
 
@@ -27,7 +28,11 @@ export default function UsersTable() {
               <div
                 className={`flex items-center px-2 py-1 gap-1 rounded-md ${userStatus[user.status]?.styles}`}
               >
-                <img src={userStatus[user.status]?.icon} alt="" />
+                <Icon
+                  size={14}
+                  name={userStatus[user.status]?.icon}
+                  fill={userStatus[user.status]?.fill}
+                />
                 <span>{userStatus[user.status]?.text}</span>
               </div>
             </th>

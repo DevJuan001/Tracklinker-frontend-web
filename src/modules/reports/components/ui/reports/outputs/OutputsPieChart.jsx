@@ -10,14 +10,15 @@ import {
 
 export default function OutputsPieChart({ period }) {
   const { outputsData } = useOutputsPieData(period);
+
   return (
     <ResponsiveContainer width={"100%"} height={280}>
       <PieChart width={"100%"} height={"100%"}>
         <Tooltip />
         <Pie
           data={outputsData}
-          dataKey={"value"}
-          nameKey={"name"}
+          dataKey={"outputs"}
+          nameKey={"brand"}
           cornerRadius={"10%"}
           paddingAngle={1}
           innerRadius="80"

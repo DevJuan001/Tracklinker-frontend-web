@@ -1,3 +1,4 @@
+import Icon from "../../../../../../globals/components/ui/Icon";
 import { userStatus } from "../../../../../users/constants/userStatus";
 import { useSubcategoriesTableData } from "../../../../hooks/subcategories/useSubCategoriesTableData";
 
@@ -25,7 +26,11 @@ export default function SubcategoriesTable() {
               <div
                 className={`flex items-center px-2 py-1 gap-1 rounded-md ${userStatus[subcategory.status]?.styles}`}
               >
-                <img src={userStatus[subcategory.status]?.icon} alt="" />
+                <Icon
+                  name={userStatus[subcategory.status]?.icon}
+                  fill={userStatus[subcategory.status]?.fill}
+                  size={14}
+                />
                 <span>{userStatus[subcategory.status]?.text}</span>
               </div>
             </th>

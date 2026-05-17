@@ -19,8 +19,7 @@ export function useWarrantiesPieData(period) {
         );
 
         const pieData = data.map((item, index) => ({
-          name: item.name,
-          value: item.value,
+          ...item,
           color: colors[index % colors.length],
         }));
         setWarrantiesData(pieData);

@@ -18,7 +18,7 @@ export function useSuppliersAreaData(period) {
           controllerRef.current.signal,
         );
         const data = response.map((row) => ({
-          month: formatLabel(row.label, period),
+          month: formatLabel(row.date, period),
           suppliers: row.suppliers,
         }));
         setSuppliersData(data);

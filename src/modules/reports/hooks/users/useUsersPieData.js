@@ -19,7 +19,7 @@ export function useUsersPieData(period) {
         );
 
         const pieData = data.map((item, index) => ({
-          rol: item.rol_name,
+          rol: item.rol,
           users: item.users,
           color: colors[index % colors.length],
         }));

@@ -18,8 +18,8 @@ export function useOutputsAreaData(period) {
           controllerRef.current.signal,
         );
         const data = response.map((row) => ({
-          month: formatLabel(row.label, period),
-          outputs: row.outputs,
+          month: formatLabel(row.date, period),
+          outputs: row.output_orders,
         }));
         setOutputsData(data);
       } catch (error) {

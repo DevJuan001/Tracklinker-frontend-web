@@ -16,8 +16,8 @@ export default function WarrantiesPieChart({ period }) {
         <Tooltip />
         <Pie
           data={warrantiesData}
-          dataKey={"value"}
-          nameKey={"name"}
+          dataKey={"warranties"}
+          nameKey={"brand"}
           cornerRadius={"10%"}
           paddingAngle={1}
           innerRadius="80"
