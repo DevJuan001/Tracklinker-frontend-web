@@ -8,33 +8,88 @@ import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 import Icon from "../../../../globals/components/ui/Icon";
 // Modals
 import Modal from "../../../../globals/components/modals/Modal";
+import Skeleton from "../../../../globals/components/ui/Skeleton";
+import CreateButton from "../../../../globals/components/ui/CreateButton";
 
-export default function ProductsTable({ products, openModal }) {
+export default function ProductsTable({
+  products,
+  loading,
+  search,
+  openModal,
+}) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const [activeProductSerial, setActiveProductSerial] = useState(null);
-  const noProducts = !Array.isArray(products) || products.length === 0;
+  const noProducts = products.length === 0 && !loading;
+  const isFirstLoad = products.length === 0 && loading;
 
   return (
     <section
-      className="h-auto max-h-[92.5%] w-full border rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      className={`max-h-[92.5%] w-full border rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      ${noProducts || isFirstLoad ? "h-full" : "h-auto"}
       md:max-h-[94.5%]
-      dark:border-[#1e1e20cb]"
+      dark:border-[#1e1e20cb]`}
     >
-      {noProducts ? (
-        <div
-          className="w-full min-h-[770px] flex flex-col items-center justify-center rounded-3xl gap-2 bg-[#F5F3F6] text-[#7E8088]
-          md:min-h-[920px]
-          dark:bg-[#17171a]"
-        >
-          <Icon name={"mist"} size={70} />
-          <span className="text-2xl font-medium">
-            No se encontraron productos
-          </span>
+      {noProducts && (
+        <div className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-5">
+          {search !== "" ? (
+            <div
+              className="flex flex-col items-center justify-center gap-0.5 text-[#7E8088]
+              dark:text-[#E4E2E5]"
+            >
+              <div
+                className="flex items-center justify-center bg-[#F5F3F6] w-28 h-28 rounded-full 
+                dark:bg-[#101012]"
+              >
+                <Icon name={"search_off"} size={60} />
+              </div>
+              <span className="text-2xl font-medium text-center">
+                No hay resultados para <strong>"{search}"</strong>.
+              </span>
+              <span className="text-lg text-center">
+                Intenta con otro nombre o agrega un nuevo producto.
+              </span>
+            </div>
+          ) : (
+            <div
+              className="flex flex-col items-center justify-center gap-2 text-[#7E8088] 
+              dark:text-[#E4E2E5]"
+            >
+              <div
+                className="flex items-center justify-center bg-[#F5F3F6] w-28 h-28 rounded-full
+                dark:bg-[#101012]"
+              >
+                <Icon name={"shopping_cart"} size={60} />
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="font-medium text-2xl">
+                  Aún no hay productos
+                </span>
+                <span className="text-lg text-center">
+                  Agrega un nuevo producto y empieza a crecer junto a tu
+                  empresa.
+                </span>
+              </div>
+            </div>
+          )}
+          <CreateButton
+            text={"Agregar producto"}
+            onClick={(e) => openModal(null, "add", null, e.currentTarget)}
+          />
         </div>
+      )}
+
+      {isFirstLoad ? (
+        <Skeleton
+          height="100%"
+          backgroundColor={"#F3EEF5"}
+          darkModeBackgroundColor={"#101012"}
+          shineColor="#C5C1C7"
+          darkModeShineColor="#1e1e1e"
+        />
       ) : (
         <table
-          className="h-auto w-full border-gray-200 appearance-none border-collapse
-          dark:bg-black"
+          className={`${noProducts ? "hidden" : ""} h-auto w-full border-gray-200 appearance-none border-collapse
+          dark:bg-black`}
         >
           {/* Cabecera de la tabla */}
           <thead
