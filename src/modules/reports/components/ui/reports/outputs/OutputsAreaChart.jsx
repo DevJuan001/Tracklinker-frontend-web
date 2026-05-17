@@ -10,6 +10,7 @@ import { useOutputsAreaData } from "../../../../hooks/outputs/useOutputsAreaData
 
 export default function OutputsAreaChart({ period }) {
   const { outputsData } = useOutputsAreaData(period);
+
   return (
     <ResponsiveContainer width={"100%"} height={290}>
       <AreaChart
