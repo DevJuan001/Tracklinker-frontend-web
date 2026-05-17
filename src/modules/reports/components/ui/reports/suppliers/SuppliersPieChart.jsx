@@ -16,8 +16,8 @@ export default function SuppliersPieChart({ period }) {
         <Tooltip />
         <Pie
           data={suppliersData}
-          dataKey={"value"}
-          nameKey={"name"}
+          dataKey={"suppliers"}
+          nameKey={"brand"}
           cornerRadius={"10%"}
           paddingAngle={1}
           innerRadius="80"
