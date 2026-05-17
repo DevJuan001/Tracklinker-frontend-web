@@ -18,6 +18,7 @@ export default function FilterOutputOrderModal({ setFilters, onClose }) {
       }}
     >
       <SelectMenu
+        id={"status"}
         name={"status"}
         spanText={"Estado"}
         value={form.status}
