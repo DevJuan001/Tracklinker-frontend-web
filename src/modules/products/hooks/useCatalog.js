@@ -86,6 +86,7 @@ export function useCatalog() {
       models.error ||
       inputOrders.error ||
       productStatus.error,
+    filters,
     setFilters,
   };
 }
