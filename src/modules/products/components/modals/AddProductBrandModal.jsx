@@ -12,7 +12,9 @@ import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { loading, handleChange, handleSubmit } = useCreateProductBrand();
+  const { form, loading, fieldError, handleChange, handleSubmit } =
+    useCreateProductBrand();
+
   return (
     <AddInnerModal
       triggerRef={triggerRef}
@@ -26,7 +28,9 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
           name={"name"}
           labelText={"Nombre de la marca"}
           placeholder={"Asus"}
+          value={form.name}
           onChange={handleChange}
+          className={fieldError("name")}
         />
 
         <ConfirmCancelButtons
