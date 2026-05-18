@@ -6,7 +6,7 @@ import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 export default function ProductsFilterModal({
   filters,
   setFilters,
-  onCloseModal,
+  onClose,
 }) {
   const { categories, subcategories, inputOrders, models, brands } =
     useCatalog();
@@ -15,15 +15,15 @@ export default function ProductsFilterModal({
   return (
     <FilterModal
       applyButtonOnClick={() => {
+        onClose();
         setFilters({ ...form });
-        onCloseModal();
       }}
       fieldName="Ingreso"
       orderByStartDateOnChange={handleChange}
       orderByStartDateValue={form.start_date}
       orderByFinishDateOnChange={handleChange}
       orderByFinishDateValue={form.end_date}
-      onClose={onCloseModal}
+      onClose={onClose}
     >
       <div className="w-full flex flex-col gap-2">
         {/* Ordenar Por Orden de entrada*/}
