@@ -3,10 +3,14 @@ import { useFilterProducts } from "../../hooks/useFilterProducts";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function ProductsFilterModal({ setFilters, onCloseModal }) {
+export default function ProductsFilterModal({
+  filters,
+  setFilters,
+  onCloseModal,
+}) {
   const { categories, subcategories, inputOrders, models, brands } =
     useCatalog();
-  const { form, handleChange } = useFilterProducts();
+  const { form, handleChange } = useFilterProducts(filters);
 
   return (
     <FilterModal
