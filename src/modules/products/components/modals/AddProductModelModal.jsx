@@ -38,6 +38,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
             label: brand.name,
           }))}
           className={fieldError("brand_id")}
+          minHeight="384px"
         />
 
         <FormField
