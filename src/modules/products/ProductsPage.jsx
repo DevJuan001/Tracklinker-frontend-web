@@ -53,7 +53,6 @@ export default function ProductsPage() {
       <ProductsTable
         products={filteredProducts}
         search={search}
-        filters={filters}
         loading={loading}
         openModal={openModal}
       />
@@ -95,26 +94,18 @@ export default function ProductsPage() {
         >
           {modalType === "user" && <ProfileModal />}
           {modalType === "filter" && (
-            <ProductsFilterModal
-              filters={filters}
-              setFilters={setFilters}
-              onCloseModal={() => closeModal()}
-            />
+            <ProductsFilterModal filters={filters} setFilters={setFilters} />
           )}
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
           {modalType === "add" && (
             <AddProductModal
-              onCloseModal={() => closeModal()}
               selectedProduct={modalData}
               openModal={openModal}
             />
           )}
           {/* Modal para editar el producto */}
           {modalType === "edit" && (
-            <EditProductModal
-              selectedProduct={modalData}
-              onCloseModal={() => closeModal()}
-            />
+            <EditProductModal selectedProduct={modalData} />
           )}
           {modalType === "disable" && (
             <DisableProductModal
@@ -132,7 +123,6 @@ export default function ProductsPage() {
             <AddWarrantyModal
               product={modalData}
               onAddSuccess={() => closeModal()}
-              onCloseModal={() => closeModal()}
             />
           )}
         </Modal>
