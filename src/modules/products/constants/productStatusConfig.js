@@ -5,8 +5,8 @@ export const productStatusConfig = {
     optionText: "Deshabilitar",
     optionStyles: "hover:bg-red-100 text-red-600 dark:hover:bg-[#450a0a8a]",
     visibilityIcon: false,
-    icon: "circle",
-    fill: true,
+    icon: "block",
+    fill: false,
     styles:
       "w-32 bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400",
   },
@@ -27,7 +27,7 @@ export const productStatusConfig = {
     optionStyles: "hover:bg-blue-100 text-blue-600 dark:hover:bg-[#1725548c]",
     visibilityIcon: true,
     icon: "credit_card",
-    fill: true,
+    fill: false,
     styles:
       "w-20 bg-blue-100 text-blue-600 dark:bg-[#1e3a5f] dark:text-[#60a5fa]",
   },
