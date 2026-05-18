@@ -5,7 +5,7 @@ import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Icon from "../../../../globals/components/ui/Icon";
 import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
+import TagInput from "../../../../globals/components/ui/TagInput";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
@@ -74,7 +74,7 @@ export default function AddProductModal({ onCloseModal }) {
           .filter(
             (brand) =>
               !form.subcategory_id ||
-              brand.subcategories
+              (brand.subcategories ?? "")
                 .split(",")
                 .includes(String(form.subcategory_id)),
           )
@@ -105,13 +105,15 @@ export default function AddProductModal({ onCloseModal }) {
         className={fieldError("model_id")}
         minHeight="384px"
       />
-      <FormField
-        name={"product_serial"}
+      
+      <TagInput
+        id={"product_serials"}
+        name={"product_serials"}
         labelText={"Serial"}
         placeholder={"10KQ340"}
-        id={"product_serial"}
+        value={form.product_serials}
         onChange={handleChange}
-        className={fieldError("product_serial")}
+        className={fieldError("product_serials")}
       />
 
       <SelectMenu
