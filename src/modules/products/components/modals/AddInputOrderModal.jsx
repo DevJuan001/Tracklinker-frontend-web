@@ -25,7 +25,6 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
       isOpen={isOpen}
       onClose={onClose}
       title={"Agregar orden de entrada"}
-      disableClose={innerType !== null}
     >
       <section className="w-full flex flex-col items-center gap-2.5">
         <SelectMenu
@@ -63,12 +62,9 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
         <SuccessModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={(e) => {
-            if (e && e.stopPropagation) {
-              e.stopPropagation();
-            }
-            onClose();
+          onClose={() => {
             closeInnerModal();
+            onClose();
           }}
           confirmTitle={"Orden creada correctamente"}
           confirmButtonText={"Volver"}
