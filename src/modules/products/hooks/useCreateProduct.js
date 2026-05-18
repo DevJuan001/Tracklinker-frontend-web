@@ -16,13 +16,12 @@ export function useCreateProduct() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { validate } = useFormValidation();
+  const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
@@ -32,18 +31,16 @@ export function useCreateProduct() {
 
     const isValid = validate(form);
 
-    if (!isValid) {
-      openInnerModal("error", triggerButton);
-      return;
-    }
+    if (!isValid) return;
 
     setLoading(true);
 
     try {
       const response = await createProductService(form);
+
       if (response.success == true) {
-        openInnerModal("success", triggerButton);
         await queryClient.invalidateQueries({ queryKey: ["products"] });
+        openInnerModal("success", triggerButton);
       }
     } catch (error) {
       openInnerModal("error", triggerButton);
@@ -53,5 +50,5 @@ export function useCreateProduct() {
     }
   }
 
-  return { form, loading, error, handleChange, handleSubmit };
+  return { form, loading, error, fieldError, handleChange, handleSubmit };
 }
