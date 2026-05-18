@@ -57,7 +57,7 @@ export default function EditProductModal({ selectedProduct, onCloseModal }) {
           .filter(
             (brand) =>
               !form.subcategory_id ||
-              brand.subcategories
+              (brand.subcategories ?? "")
                 .split(",")
                 .includes(String(form.subcategory_id)),
           )
