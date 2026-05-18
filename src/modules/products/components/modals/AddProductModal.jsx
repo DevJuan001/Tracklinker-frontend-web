@@ -17,7 +17,7 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 import AddSubcategoryModal from "../../../subcategories/components/modals/AddSubcategoryModal";
 
-export default function AddProductModal({ onCloseModal }) {
+export default function AddProductModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
 
   const { subcategories, brands, models, inputOrders } = useCatalog();
@@ -140,7 +140,7 @@ export default function AddProductModal({ onCloseModal }) {
           className="flex items-center py-3 px-4 gap-2 border rounded-lg transition duration-300 
           hover:bg-gray-200
           dark:bg-[#2020226c] dark:hover:bg-[#2c2c2e] dark:border-[#101012] hover:cursor-pointer"
-          onClick={onCloseModal}
+          onClick={onClose}
           disabled
         >
           <Icon name={"barcode_scanner"} />
@@ -151,7 +151,7 @@ export default function AddProductModal({ onCloseModal }) {
       {/* Botones */}
       <ConfirmCancelButtons
         confirmText={loading ? <Loader /> : "Crear"}
-        cancelButtonOnClick={onCloseModal}
+        cancelButtonOnClick={onClose}
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
       />
 
@@ -160,7 +160,7 @@ export default function AddProductModal({ onCloseModal }) {
         <SuccessModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => (openInnerModal(null), onCloseModal())}
+          onClose={() => (openInnerModal(null), onClose())}
           confirmTitle={"Producto Creado Correctamente"}
           confirmText={"El producto ha sido creado correctamente."}
           confirmButtonText={"Volver a la página"}
