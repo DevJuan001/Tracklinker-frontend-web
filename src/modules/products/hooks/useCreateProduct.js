@@ -10,7 +10,7 @@ export function useCreateProduct() {
     input_order_id: "",
     subcategory_id: "",
     model_id: "",
-    product_serial: "",
+    product_serials: [],
     brand_id: "",
     warranty_time: "",
   });
