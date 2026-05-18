@@ -41,6 +41,7 @@ export default function AddProductModal({ onCloseModal }) {
           label: inputOrder.bill,
         }))}
         className={fieldError("input_order_id")}
+        minHeight="384px"
       />
 
       {/* Menú de subcategorias */}
@@ -57,6 +58,7 @@ export default function AddProductModal({ onCloseModal }) {
           label: subcategory.subcategory_name,
         }))}
         className={fieldError("subcategory_id")}
+        minHeight="384px"
       />
 
       {/* Menú de marcas */}
@@ -81,6 +83,7 @@ export default function AddProductModal({ onCloseModal }) {
             label: brand.name,
           }))}
         className={fieldError("brand_id")}
+        minHeight="384px"
       />
 
       {/* Menú de modelos */}
@@ -100,6 +103,7 @@ export default function AddProductModal({ onCloseModal }) {
             label: model.model,
           }))}
         className={fieldError("model_id")}
+        minHeight="384px"
       />
       <FormField
         name={"product_serial"}
