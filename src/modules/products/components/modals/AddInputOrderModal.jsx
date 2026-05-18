@@ -40,6 +40,7 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
             label: supplier.name,
           }))}
           className={fieldError("supplier_id")}
+          minHeight="384px"
         />
 
         <FormField
