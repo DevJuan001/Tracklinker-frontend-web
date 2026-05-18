@@ -193,6 +193,7 @@ export default function ProductsTable({
                 {/* Botones */}
                 <th className="relative flex items-center justify-center h-14 pr-4 gap-3">
                   <ActionButtons
+                    moreInfoButtonVisible={false}
                     backgroundColor="#FFFFFF"
                     editButtonOnClick={(e) => {
                       openModal(product, "edit", null, e.currentTarget);
