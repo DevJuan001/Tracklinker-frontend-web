@@ -33,6 +33,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
             value: input_order.id,
             label: input_order.bill,
           }))}
+          minHeight="384px"
         />
 
         {/* Ordenar Por Categoría */}
@@ -47,6 +48,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
             value: category.id,
             label: category.name,
           }))}
+          minHeight="384px"
         />
 
         {/* Ordenar Por Subcategoria */}
@@ -68,6 +70,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
               value: subcategory.subcategory_id,
               label: subcategory.subcategory_name,
             }))}
+          minHeight="384px"
         />
 
         {/* Ordenar Por Marca */}
@@ -89,6 +92,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
               value: brand.id,
               label: brand.name,
             }))}
+          minHeight="384px"
         />
 
         {/* Ordenar Por Modelo */}
@@ -104,6 +108,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
               value: model.id,
               label: model.model,
             }))}
+          minHeight="384px"
         />
 
         {/* Ordenar por estado */}
