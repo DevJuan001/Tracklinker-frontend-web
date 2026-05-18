@@ -22,7 +22,8 @@ export default function AddProductModal({ onCloseModal }) {
 
   const { subcategories, brands, models, inputOrders } = useCatalog();
 
-  const { form, loading, handleChange, handleSubmit } = useCreateProduct();
+  const { form, loading, fieldError, handleChange, handleSubmit } =
+    useCreateProduct();
 
   return (
     <section className="w-full flex flex-col items-center gap-2">
@@ -39,6 +40,7 @@ export default function AddProductModal({ onCloseModal }) {
           value: inputOrder.id,
           label: inputOrder.bill,
         }))}
+        className={fieldError("input_order_id")}
       />
 
       {/* Menú de subcategorias */}
@@ -54,6 +56,7 @@ export default function AddProductModal({ onCloseModal }) {
           value: subcategory.subcategory_id,
           label: subcategory.subcategory_name,
         }))}
+        className={fieldError("subcategory_id")}
       />
 
       {/* Menú de marcas */}
@@ -69,12 +72,15 @@ export default function AddProductModal({ onCloseModal }) {
           .filter(
             (brand) =>
               !form.subcategory_id ||
-              brand.subcategories.split(",").includes(String(form.subcategory_id)),
+              brand.subcategories
+                .split(",")
+                .includes(String(form.subcategory_id)),
           )
           .map((brand) => ({
             value: brand.id,
             label: brand.name,
           }))}
+        className={fieldError("brand_id")}
       />
 
       {/* Menú de modelos */}
@@ -93,6 +99,7 @@ export default function AddProductModal({ onCloseModal }) {
             value: model.id,
             label: model.model,
           }))}
+        className={fieldError("model_id")}
       />
       <FormField
         name={"product_serial"}
@@ -100,6 +107,7 @@ export default function AddProductModal({ onCloseModal }) {
         placeholder={"10KQ340"}
         id={"product_serial"}
         onChange={handleChange}
+        className={fieldError("product_serial")}
       />
 
       <SelectMenu
@@ -114,6 +122,7 @@ export default function AddProductModal({ onCloseModal }) {
           { value: "12", label: "12 Meses" },
           { value: "24", label: "24 Meses" },
         ]}
+        className={fieldError("warranty_time")}
       />
 
       <div className="flex items-center justify-center my-2">
@@ -128,7 +137,7 @@ export default function AddProductModal({ onCloseModal }) {
           onClick={onCloseModal}
           disabled
         >
-          <Icon name={"barcode_scanner"}/>
+          <Icon name={"barcode_scanner"} />
           <span className="text-sm dark:text-white">¡Proximamente!</span>
         </button>
       </section>
