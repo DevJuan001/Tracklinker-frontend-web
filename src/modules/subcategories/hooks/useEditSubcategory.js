@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { editSubcategoryService } from "../services/editSubcategoryService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useEditSubcategory(subcategory) {
   const [form, setForm] = useState({
@@ -10,34 +11,29 @@ export function useEditSubcategory(subcategory) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { validate, getChanges } = useFormValidation();
+  const { validate, getChanges, fieldError, clearError } = useFormValidation();
   const queryClient = useQueryClient();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
       return;
     }
 
     const changes = getChanges(subcategory, form);
 
     if (Object.keys(changes).length === 0) {
-      openInnerModal("error", triggerData);
       return;
     }
 
@@ -48,17 +44,23 @@ export function useEditSubcategory(subcategory) {
         subcategory.subcategory_id,
         changes,
       );
+      
       if (response.success === true) {
-        openInnerModal("success", triggerData);
         queryClient.invalidateQueries(["subcategories"]);
+        openInnerModal("success", triggerButton);
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
-    } catch (error) {
-      openInnerModal("error", triggerData);
-      setError(error);
+    } catch {
+      setError(
+        "Por el momento no se puede editar la subcategoría, por favor intente nuevamente más tarde.",
+      );
+      openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
     }
   }
 
-  return { form, loading, error, handleSubmit, handleChange };
+  return { form, loading, error, fieldError, handleSubmit, handleChange };
 }

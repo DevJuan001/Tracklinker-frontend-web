@@ -39,10 +39,15 @@ export function useCreateSubcategory() {
       if (response.success === true) {
         openInnerModal("success", triggerButton);
         queryClient.invalidateQueries({ queryKey: ["subcategories"] });
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "Por el momento no se puede crear la subcategoría, por favor intente nuevamente más tarde.",
+      );
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }

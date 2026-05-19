@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getSubcategories } from "../services/getSubcategoriesService";
 
 export function useSubcategories() {
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState({});
   const subcategories = useQuery({
     queryKey: ["subcategories", filters],
     queryFn: () => getSubcategories(filters),
@@ -14,6 +14,7 @@ export function useSubcategories() {
     subcategories: subcategories.data || [],
     loading: subcategories.isLoading,
     error: subcategories.error,
+    filters,
     setFilters,
   };
 }

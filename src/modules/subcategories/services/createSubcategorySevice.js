@@ -12,10 +12,12 @@ export async function createSubcategory(subcategory_data) {
       body: JSON.stringify(subcategory_data),
     },
   );
-  // Validamos si la respuesta no fue OK
+
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al crear la subcategoría");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  return await res.json();
+  return json;
 }

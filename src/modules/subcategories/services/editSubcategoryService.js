@@ -13,10 +13,11 @@ export async function editSubcategoryService(subcategory_id, subcategory_data) {
     },
   );
 
-  // Validamos si la respuesta no fue OK
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al actualizar la subcategoria");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  return await res.json();
+  return json;
 }

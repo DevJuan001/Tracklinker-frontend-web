@@ -17,9 +17,13 @@ export default function MoreSubcategoryInfoModal({ subcategory, onClose }) {
       <div className="w-full self-start flex flex-col gap-1.5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#F5F3F6]">
+            <div
+              className="min-w-12 min-h-12 flex items-center justify-center bg-[#49454f14] rounded-full
+              dark:bg-[#101012]"
+            >
               <Icon name={"folder_copy"} fill size={28} />
             </div>
+
             <span className="text-4xl leading-none font-semibold">
               {subcategory.subcategory_name}
             </span>
@@ -33,6 +37,7 @@ export default function MoreSubcategoryInfoModal({ subcategory, onClose }) {
               fill={categoryStatusConfig[subcategory.subcategory_status]?.fill}
               size={16}
             />
+
             <span className="text-xs font-medium">
               {categoryStatusConfig[subcategory.subcategory_status]?.text}
             </span>
@@ -42,6 +47,7 @@ export default function MoreSubcategoryInfoModal({ subcategory, onClose }) {
           <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
             Categoría
           </span>
+
           <span className="font-medium">{subcategory.category_name}</span>
         </div>
 
@@ -49,6 +55,7 @@ export default function MoreSubcategoryInfoModal({ subcategory, onClose }) {
           <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
             Fecha de creación
           </span>
+
           <span className="flex items-center font-medium">
             {subcategory.subcategory_date}
           </span>

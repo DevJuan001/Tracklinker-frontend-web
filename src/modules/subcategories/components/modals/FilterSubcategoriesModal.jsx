@@ -1,11 +1,16 @@
-import { useCategories } from "../../hooks/useCategories";
+import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useFilterSubcategories } from "../../hooks/useFilterSubcategories";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function FilterSubcategoriesModal({ setFilters, onClose }) {
-  const { categories } = useCategories();
-  const { form, handleChange } = useFilterSubcategories();
+export default function FilterSubcategoriesModal({
+  setFilters,
+  filters,
+  onClose,
+}) {
+  const { categories } = useActiveCategories();
+  const { form, handleChange } = useFilterSubcategories(filters);
+
   return (
     <FilterModal
       applyButtonOnClick={() => {
@@ -17,6 +22,11 @@ export default function FilterSubcategoriesModal({ setFilters, onClose }) {
       orderByFinishDateValue={form.end_date}
       orderByFinishDateOnChange={handleChange}
       onClose={onClose}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
+        onClose();
+      }}
     >
       <div className="flex flex-col gap-2">
         <SelectMenu
@@ -30,6 +40,7 @@ export default function FilterSubcategoriesModal({ setFilters, onClose }) {
             label: category.category_name,
           }))}
         />
+
         <SelectMenu
           spanText={"Nombres"}
           name={"name_order"}

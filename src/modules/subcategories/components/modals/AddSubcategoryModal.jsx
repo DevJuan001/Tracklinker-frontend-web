@@ -1,5 +1,5 @@
 // Hooks
-import { useCategories } from "../../hooks/useCategories";
+import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import { useCreateSubcategory } from "../../hooks/useCreateSubcategory";
 // Modales
@@ -13,8 +13,9 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 
 export default function AddSubcategoryModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { categories } = useCategories();
-  const { form, loading, fieldError, handleSubmit, handleChange } = useCreateSubcategory();
+  const { categories } = useActiveCategories();
+  const { form, loading, error, fieldError, handleSubmit, handleChange } =
+    useCreateSubcategory();
 
   return (
     <section className="w-full flex flex-col items-center gap-2">
@@ -73,7 +74,7 @@ export default function AddSubcategoryModal({ onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="¡No se pudo crear la subcategoria!"
-          errorText="Verfica que todos los campos esten completos o que no exista una subcategoria con ese nombre"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />

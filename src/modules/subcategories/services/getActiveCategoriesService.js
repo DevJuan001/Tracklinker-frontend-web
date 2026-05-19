@@ -1,13 +1,14 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getCategories() {
+export async function getActiveCategories() {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.subcategories}/active-categories`,
     {
       method: "GET",
     },
   );
+  
   // Validamos si la respuesta fue OK
   if (!res.ok) {
     throw new Error("Error en la petición");

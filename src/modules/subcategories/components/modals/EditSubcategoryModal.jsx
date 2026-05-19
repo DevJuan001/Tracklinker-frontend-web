@@ -1,5 +1,5 @@
 // Hooks
-import { useCategories } from "../../hooks/useCategories";
+import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useEditSubcategory } from "../../hooks/useEditSubcategory";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
@@ -12,9 +12,9 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
-  const { categories } = useCategories();
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, handleChange, handleSubmit } =
+  const { categories } = useActiveCategories();
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditSubcategory(subcategory);
 
   return (
@@ -23,7 +23,7 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
       <SelectMenu
         searchable
         value={form.category_id}
-        id={"subcategory_id_menu"}
+        id={"category_id"}
         name={"category_id"}
         spanText={"Categoria"}
         onChange={handleChange}
@@ -31,18 +31,20 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           value: category.category_id,
           label: category.category_name,
         }))}
+        className={fieldError("category_id")}
       />
       <FormField
+        id={"name"}
+        name={"subcategory_name"}
+        labelText={"Nombre"}
         value={form.subcategory_name}
         onChange={handleChange}
-        labelText={"Nombre"}
-        name={"subcategory_name"}
-        id={"name"}
+        className={fieldError("subcategory_name")}
       />
 
       {/* Botones */}
       <ConfirmCancelButtons
-        confirmText={loading ? <Loader /> : "Confirmar"}
+        confirmText={loading ? <Loader /> : "Editar"}
         cancelText={"Cancelar"}
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onClose}
@@ -66,14 +68,15 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           }}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
           location="anchored"
-          growDirection={"top-right"}
+          growDirection={"top-center"}
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="¡No se pudo editar la subcategoria!"
-          errorText="Verifica que todos los campos esten completos o que no exista una subcategoria con ese nombre"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />

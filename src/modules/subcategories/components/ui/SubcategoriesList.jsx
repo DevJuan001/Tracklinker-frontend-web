@@ -1,8 +1,7 @@
 import SubcategoriesItem from "./SubcategoriesItem";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import Icon from "../../../../globals/components/ui/Icon";
 import CreateButton from "../../../../globals/components/ui/CreateButton";
+import Skeleton from "../../../../globals/components/ui/Skeleton";
 
 export default function SubcategoriesList({
   subcategories,
@@ -29,10 +28,20 @@ export default function SubcategoriesList({
               >
                 <Icon name={"search_off"} size={60} />
               </div>
-              <span className="text-xl font-medium text-center">
-                No hay resultados para <strong>"{search}"</strong>. Intenta con
-                otro nombre o crea una nueva.
+
+              <span className="text-2xl font-medium">
+                No hay resultados para <strong>"{search}"</strong>
               </span>
+
+              <span className="text-center">
+                Intenta con otro nombre o crea una nueva.
+              </span>
+
+              <ul className="text-center text-sm mt-1">
+                <li>• Revisa que el nombre esté bien escrito</li>
+                <li>• Busca por categoría o fecha de creación</li>
+                <li>• Si no existe, crea una nueva subcategoría</li>
+              </ul>
             </div>
           ) : (
             <div
@@ -49,10 +58,17 @@ export default function SubcategoriesList({
                 <span className="font-medium text-2xl">
                   Aún no hay subcategorías
                 </span>
+
                 <span className="text-lg text-center">
                   Crea tu primera subcategoría para empezar a organizar tus
                   productos.
                 </span>
+
+                <ul className="text-center text-sm mt-1">
+                  <li>• Crea subcategorías para organizar tus productos</li>
+                  <li>• Gestiona tu inventario de manera eficiente</li>
+                  <li>• Crea y edita subcategorías fácilmente</li>
+                </ul>
               </div>
             </div>
           )}
@@ -62,15 +78,18 @@ export default function SubcategoriesList({
           />
         </div>
       )}
-      <ul className="flex flex-col gap-1">
-        {isFirstLoad ? (
-          <SkeletonTheme baseColor="#f3eef5" highlightColor="#c5c1c7">
-            <li>
-              <Skeleton height={"68px"} count={13} borderRadius={"8px"} />
-            </li>
-          </SkeletonTheme>
-        ) : (
-          subcategories.map((subcategory) => (
+      {isFirstLoad ? (
+        <Skeleton
+          height="100%"
+          backgroundColor={"#F3EEF5"}
+          darkModeBackgroundColor={"#101012"}
+          shineColor="#C5C1C7"
+          darkModeShineColor="#1e1e1e"
+          borderRadius={26}
+        />
+      ) : (
+        <ul className="flex flex-col gap-1">
+          {subcategories.map((subcategory) => (
             // Subcategorías
             <SubcategoriesItem
               key={subcategory.subcategory_id}
@@ -85,9 +104,9 @@ export default function SubcategoriesList({
                 openModal(subcategory, "edit", null, e.currentTarget);
               }}
             />
-          ))
-        )}
-      </ul>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
