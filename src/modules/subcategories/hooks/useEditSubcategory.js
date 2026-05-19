@@ -44,6 +44,7 @@ export function useEditSubcategory(subcategory) {
         subcategory.subcategory_id,
         changes,
       );
+      
       if (response.success === true) {
         queryClient.invalidateQueries(["subcategories"]);
         openInnerModal("success", triggerButton);
