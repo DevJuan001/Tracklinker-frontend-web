@@ -13,13 +13,11 @@ export async function createCategoryService(category_data) {
     },
   );
 
-  // Validamos si la petición falló
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al crear la categoría");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  const data = await res.json();
-
-  // Retornamos solo la categoría creada
-  return data;
+  return json;
 }
