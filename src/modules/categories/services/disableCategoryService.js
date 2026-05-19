@@ -9,13 +9,11 @@ export async function disableCategoryService(id) {
     },
   );
 
-  // Validamos si la petición falló
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al eliminar la categoría");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  const data = await res.json();
-
-  // Retornamos solo la categoría eliminada o confirmación
-  return data;
+  return json;
 }
