@@ -1,7 +1,7 @@
-import SupplierActions from "./SupplierActions";
-import { userStatus } from "../../../users/constants/userStatus";
 import Icon from "../../../../globals/components/ui/Icon";
 import Avatar from "../../../../globals/components/ui/Avatar";
+import { userStatus } from "../../../users/constants/userStatus";
+import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 
 export default function SupplierItem({
   supplier,
@@ -48,8 +48,9 @@ export default function SupplierItem({
           </div>
         </address>
       </article>
+
       {/* Botones para interactuar con el proveedor */}
-      <SupplierActions
+      <ActionButtons
         moreInfoOnClick={moreInfoOnClick}
         editButtonOnClick={editButtonOnClick}
         deleteButtonOnClick={deleteButtonOnClick}
