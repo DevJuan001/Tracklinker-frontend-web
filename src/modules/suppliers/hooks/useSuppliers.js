@@ -3,7 +3,7 @@ import { getSuppliersService } from "../services/getSuppliersService";
 import { useQuery } from "@tanstack/react-query";
 
 export function useSuppliers() {
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState({});
 
   const suppliers = useQuery({
     queryKey: ["suppliers", filters],
@@ -15,6 +15,7 @@ export function useSuppliers() {
     suppliers: suppliers.data || [],
     loading: suppliers.isLoading,
     error: suppliers.error,
+    filters,
     setFilters,
   };
 }
