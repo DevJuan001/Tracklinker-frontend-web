@@ -61,7 +61,7 @@ export default function SubcategoriesPage() {
               : modalType === "filter"
                 ? "Filtrar"
                 : modalType === "add"
-                  ? "Agregar Subcategoria"
+                  ? "Crear subcategoria"
                   : modalType === "info"
                     ? ""
                     : modalType === "edit"
