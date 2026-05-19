@@ -3,23 +3,27 @@ import { useFilterProducts } from "../../hooks/useFilterProducts";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function ProductsFilterModal({ setFilters, onCloseModal }) {
+export default function ProductsFilterModal({
+  filters,
+  setFilters,
+  onClose,
+}) {
   const { categories, subcategories, inputOrders, models, brands } =
     useCatalog();
-  const { form, handleChange } = useFilterProducts();
+  const { form, handleChange } = useFilterProducts(filters);
 
   return (
     <FilterModal
       applyButtonOnClick={() => {
+        onClose();
         setFilters({ ...form });
-        onCloseModal();
       }}
       fieldName="Ingreso"
       orderByStartDateOnChange={handleChange}
       orderByStartDateValue={form.start_date}
       orderByFinishDateOnChange={handleChange}
       orderByFinishDateValue={form.end_date}
-      onClose={onCloseModal}
+      onClose={onClose}
     >
       <div className="w-full flex flex-col gap-2">
         {/* Ordenar Por Orden de entrada*/}
@@ -33,6 +37,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
             value: input_order.id,
             label: input_order.bill,
           }))}
+          minHeight="384px"
         />
 
         {/* Ordenar Por Categoría */}
@@ -47,6 +52,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
             value: category.id,
             label: category.name,
           }))}
+          minHeight="384px"
         />
 
         {/* Ordenar Por Subcategoria */}
@@ -68,6 +74,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
               value: subcategory.subcategory_id,
               label: subcategory.subcategory_name,
             }))}
+          minHeight="384px"
         />
 
         {/* Ordenar Por Marca */}
@@ -81,7 +88,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
             .filter(
               (brand) =>
                 !form.subcategory_order ||
-                brand.subcategories
+                (brand.subcategories ?? "")
                   .split(",")
                   .includes(String(form.subcategory_order)),
             )
@@ -89,6 +96,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
               value: brand.id,
               label: brand.name,
             }))}
+          minHeight="384px"
         />
 
         {/* Ordenar Por Modelo */}
@@ -104,6 +112,7 @@ export default function ProductsFilterModal({ setFilters, onCloseModal }) {
               value: model.id,
               label: model.model,
             }))}
+          minHeight="384px"
         />
 
         {/* Ordenar por estado */}

@@ -106,10 +106,10 @@ export const useFlipModal = ({
       // Cálculo de posición final del modal
       const vw = window.innerWidth;
       const vh = window.innerHeight;
-      
+
       // Margen que minimo que aplicaremos al modal container
       const margin = 20;
-      
+
       let finalLeft;
       let finalTop;
 
@@ -244,7 +244,7 @@ export const useFlipModal = ({
               height: "auto",
               clearProps: "backgroundColor,color,padding",
             });
-            
+
             // Mantenemos el trigger oculto mientras el modal siga abierto
             element.style.setProperty("opacity", "0", "important");
             element.style.setProperty("visibility", "hidden", "important");
@@ -318,11 +318,11 @@ export const useFlipModal = ({
 
       const buttonChildren = Array.from(element.children);
 
-      // Volvemos a ocultar el trigger y preparamos sus hijos para la animación de re-entrada con un efecto blur+slide
+      // Volvemos a ocultar el trigger y preparamos sus hijos para una re-entrada limpia
       gsap.set(element, { opacity: 0, visibility: "hidden" });
       if (buttonChildren.length > 0) {
-        gsap.set(buttonChildren, { clearProps: "filter,y,opacity" });
-        gsap.set(buttonChildren, { filter: "blur(8px)", y: 8, opacity: 0 });
+        gsap.set(buttonChildren, { clearProps: "opacity" });
+        gsap.set(buttonChildren, { opacity: 0 });
       }
 
       // Ocultamos overflow para que el contenido del modal no se desborde
@@ -408,7 +408,7 @@ export const useFlipModal = ({
           clearProps: "opacity,visibility",
         });
         if (buttonChildren.length > 0) {
-          gsap.set(buttonChildren, { clearProps: "filter,y,opacity" });
+          gsap.set(buttonChildren, { clearProps: "opacity" });
         }
         onClose();
       }
@@ -419,24 +419,33 @@ export const useFlipModal = ({
 
       // Desvanecemos el overlay en paralelo con el cierre del modal
       if (overlay) {
-        tl.to(overlay, { backgroundColor: "rgba(0,0,0,0)", duration: 0.15 }, 0);
+        tl.to(
+          overlay,
+          {
+            backgroundColor: "rgba(0,0,0,0)",
+            duration: 0.20,
+            ease: "power1.inOut",
+          },
+          0,
+        );
       }
 
-      // Desenfocamos el contenido del modal para un efecto de salida elegante
+      // El contenido se encoge y desvanece con un sutil empuje vertical
+      // para dar sensación de profundidad (estilo Apple)
       tl.to(
         content,
-        { filter: "blur(12px)", duration: 0.12, ease: "power2.in" },
+        { scale: 0.92, opacity: 0, y: 8, duration: 0.10, ease: "power2.in" },
         0,
       );
 
-      // Aqui animamos la modal desde su estado grande o abierto capturandolo con state 
-      // hasta el estado del trigger
+      // Aqui animamos la modal desde su estado grande o abierto capturandolo con state
+      // hasta el estado del trigger. Usamos una curva S suave (power3.inOut) estilo Apple.
       tl.add(
         Flip.from(state, {
           targets: [modal, ...modalShared],
           nested: true,
-          duration: 0.15,
-          ease: "power2.in",
+          duration: 0.25,
+          ease: "power3.inOut",
           props: "backgroundColor,color,padding",
         }),
         0,
@@ -447,32 +456,28 @@ export const useFlipModal = ({
         modal,
         {
           borderRadius: triggerStyles.borderRadius,
-          duration: 0.14,
+          duration: 0.21,
           ease: "power2.inOut",
         },
-        0.04,
+        0.025,
       );
 
-      // Fade out final del modal justo antes de que React lo desmonte
-      tl.to(modal, { opacity: 0, duration: 0.04, ease: "none" }, 0.16);
+      // Fade out final del modal — justo antes de que el Flip termine (0.25s)
+      tl.to(modal, { opacity: 0, duration: 0.02, ease: "none" }, 0.23);
 
-      // Mostramos el trigger de vuelta cuando el modal ya está casi invisible
-      tl.set(element, { opacity: 1, visibility: "visible" }, 0.2);
+      // Mostramos el trigger exactamente cuando el Flip termina para evitar saltos
+      tl.set(element, { opacity: 1, visibility: "visible" }, 0.25);
 
-      // Animamos los hijos del trigger con un efecto de re-entrada blur
-      // para reforzar la sensación de que el modal "regresó" al botón.
+      // Animamos los hijos del trigger con un fade-in limpio
       if (buttonChildren.length > 0) {
         tl.to(
           buttonChildren,
           {
-            filter: "blur(0px)",
-            y: 0,
             opacity: 1,
-            duration: 0.15,
-            ease: "power2.out",
-            stagger: 0.02,
+            duration: 0.12,
+            ease: "power1.out",
           },
-          0.17,
+          0.23,
         );
       }
     },

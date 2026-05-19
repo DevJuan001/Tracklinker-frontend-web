@@ -22,7 +22,7 @@ import ProfileModal from "../../globals/components/modals/profileModal/ProfileMo
 export default function ProductsPage() {
   const { modalType, modalData, isOpen, triggerRef, openModal, closeModal } =
     useModal();
-  const { products, setFilters } = useCatalog();
+  const { products, loading, filters, setFilters } = useCatalog();
   const [search, setSearch] = useState();
   const filteredProducts = useSearch(products ?? [], search);
 
@@ -50,7 +50,12 @@ export default function ProductsPage() {
       </TopSection>
 
       {/* Contenedor de la tabla */}
-      <ProductsTable products={filteredProducts} openModal={openModal} />
+      <ProductsTable
+        products={filteredProducts}
+        search={search}
+        loading={loading}
+        openModal={openModal}
+      />
 
       {/* Modales */}
       {isOpen && (
@@ -89,25 +94,18 @@ export default function ProductsPage() {
         >
           {modalType === "user" && <ProfileModal />}
           {modalType === "filter" && (
-            <ProductsFilterModal
-              setFilters={setFilters}
-              onCloseModal={() => closeModal()}
-            />
+            <ProductsFilterModal filters={filters} setFilters={setFilters} />
           )}
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
           {modalType === "add" && (
             <AddProductModal
-              onCloseModal={() => closeModal()}
               selectedProduct={modalData}
               openModal={openModal}
             />
           )}
           {/* Modal para editar el producto */}
           {modalType === "edit" && (
-            <EditProductModal
-              selectedProduct={modalData}
-              onCloseModal={() => closeModal()}
-            />
+            <EditProductModal selectedProduct={modalData} />
           )}
           {modalType === "disable" && (
             <DisableProductModal
@@ -125,7 +123,6 @@ export default function ProductsPage() {
             <AddWarrantyModal
               product={modalData}
               onAddSuccess={() => closeModal()}
-              onCloseModal={() => closeModal()}
             />
           )}
         </Modal>

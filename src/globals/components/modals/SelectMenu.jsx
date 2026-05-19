@@ -38,7 +38,6 @@ export default function SelectMenu({
         <div
           id={id}
           ref={triggerRef}
-          tabIndex={0}
           onClick={handleToggle}
           className={`relative w-full ${spanText ? "h-full pt-1.5" : "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
           rounded-2xl cursor-pointer text-sm
@@ -95,8 +94,10 @@ export default function SelectMenu({
           z_index="600"
         >
           <div
-            className="w-full min-h-24 max-h-96 flex flex-col gap-1 px-1 pt-1 overflow-y-auto rounded-3xl bg-[#fbf9fc]
-            dark:bg-black dark:text-white"
+            className={`w-full max-h-96 flex flex-col gap-1 px-1 pt-1 overflow-y-auto rounded-3xl bg-[#fbf9fc]
+            dark:bg-black dark:text-white  
+            ${options.length > 6 ? "min-h-96" : "min-h-24"}
+            `}
             onClick={(e) => e.stopPropagation()}
           >
             {searchable && (

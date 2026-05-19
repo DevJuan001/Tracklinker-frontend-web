@@ -11,13 +11,12 @@ export function useCreateProductBrand() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
-  const { validate } = useFormValidation();
+  const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
@@ -27,10 +26,7 @@ export function useCreateProductBrand() {
 
     const isValid = validate(form);
 
-    if (!isValid) {
-      openInnerModal("error", triggerButton);
-      return;
-    }
+    if (!isValid) return;
 
     setLoading(true);
 
@@ -38,8 +34,8 @@ export function useCreateProductBrand() {
       const response = await createProductBrandService(form);
 
       if (response.success === true) {
-        openInnerModal("success", triggerButton);
         queryClient.invalidateQueries({ queryKey: ["brands"] });
+        openInnerModal("success", triggerButton);
       } else {
         openInnerModal("error", triggerButton);
       }
@@ -50,5 +46,5 @@ export function useCreateProductBrand() {
     }
   }
 
-  return { form, loading, error, handleChange, handleSubmit };
+  return { form, loading, error, fieldError, handleChange, handleSubmit };
 }

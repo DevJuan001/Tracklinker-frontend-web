@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { getModalTrigger } from "../../../utils/getModalTrigger";
+import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 import { createInputOrderService } from "../services/createInputOrderService";
 
 export function useCreateInputOrder() {
@@ -11,23 +12,31 @@ export function useCreateInputOrder() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setForm((prevForm) => ({ ...prevForm, [name]: value }));
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
-    setLoading(true);
 
     const triggerButton = getModalTrigger(e);
 
+    const isValid = validate(form);
+
+    if (!isValid) return;
+
+    setLoading(true);
+
     try {
       const response = await createInputOrderService(form);
-      if (response.success) {
-        openInnerModal("success", triggerButton);
+
+      if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["inputOrders"] });
+        openInnerModal("success", triggerButton);
       }
     } catch (error) {
       openInnerModal("error", triggerButton);
@@ -37,5 +46,5 @@ export function useCreateInputOrder() {
     }
   }
 
-  return { form, loading, error, handleChange, handleSubmit };
+  return { form, loading, error, fieldError, handleChange, handleSubmit };
 }

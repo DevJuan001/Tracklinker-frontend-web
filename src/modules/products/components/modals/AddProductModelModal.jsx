@@ -16,7 +16,8 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
   const { brands } = useCatalog();
-  const { form, loading, handleChange, handleSubmit } = useCreateProductModel();
+  const { form, loading, fieldError, handleChange, handleSubmit } =
+    useCreateProductModel();
 
   return (
     <AddInnerModal
@@ -36,6 +37,8 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
             value: brand.id,
             label: brand.name,
           }))}
+          className={fieldError("brand_id")}
+          minHeight="384px"
         />
 
         <FormField

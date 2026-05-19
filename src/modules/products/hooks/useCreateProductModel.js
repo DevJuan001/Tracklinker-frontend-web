@@ -13,13 +13,12 @@ export function useCreateProductModel() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
-  const { validate } = useFormValidation();
+  const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
@@ -29,14 +28,13 @@ export function useCreateProductModel() {
 
     const isValid = validate(form);
 
-    if (!isValid) {
-      openInnerModal("error", triggerButton);
-      return;
-    }
+    if (!isValid) return;
 
     setLoading(true);
+
     try {
       const response = await createProductModelService(form);
+
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["models"] });
         openInnerModal("success", triggerButton);
@@ -49,5 +47,5 @@ export function useCreateProductModel() {
     }
   }
 
-  return { form, loading, error, handleChange, handleSubmit };
+  return { form, loading, error, fieldError, handleChange, handleSubmit };
 }

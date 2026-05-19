@@ -5,7 +5,7 @@ import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Icon from "../../../../globals/components/ui/Icon";
 import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
+import TagInput from "../../../../globals/components/ui/TagInput";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
@@ -17,12 +17,13 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 import AddSubcategoryModal from "../../../subcategories/components/modals/AddSubcategoryModal";
 
-export default function AddProductModal({ onCloseModal }) {
+export default function AddProductModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
 
   const { subcategories, brands, models, inputOrders } = useCatalog();
 
-  const { form, loading, handleChange, handleSubmit } = useCreateProduct();
+  const { form, loading, fieldError, handleChange, handleSubmit } =
+    useCreateProduct();
 
   return (
     <section className="w-full flex flex-col items-center gap-2">
@@ -39,6 +40,8 @@ export default function AddProductModal({ onCloseModal }) {
           value: inputOrder.id,
           label: inputOrder.bill,
         }))}
+        className={fieldError("input_order_id")}
+        minHeight="384px"
       />
 
       {/* Menú de subcategorias */}
@@ -54,6 +57,8 @@ export default function AddProductModal({ onCloseModal }) {
           value: subcategory.subcategory_id,
           label: subcategory.subcategory_name,
         }))}
+        className={fieldError("subcategory_id")}
+        minHeight="384px"
       />
 
       {/* Menú de marcas */}
@@ -69,12 +74,16 @@ export default function AddProductModal({ onCloseModal }) {
           .filter(
             (brand) =>
               !form.subcategory_id ||
-              brand.subcategories.split(",").includes(String(form.subcategory_id)),
+              (brand.subcategories ?? "")
+                .split(",")
+                .includes(String(form.subcategory_id)),
           )
           .map((brand) => ({
             value: brand.id,
             label: brand.name,
           }))}
+        className={fieldError("brand_id")}
+        minHeight="384px"
       />
 
       {/* Menú de modelos */}
@@ -93,13 +102,18 @@ export default function AddProductModal({ onCloseModal }) {
             value: model.id,
             label: model.model,
           }))}
+        className={fieldError("model_id")}
+        minHeight="384px"
       />
-      <FormField
-        name={"product_serial"}
+      
+      <TagInput
+        id={"product_serials"}
+        name={"product_serials"}
         labelText={"Serial"}
         placeholder={"10KQ340"}
-        id={"product_serial"}
+        value={form.product_serials}
         onChange={handleChange}
+        className={fieldError("product_serials")}
       />
 
       <SelectMenu
@@ -114,6 +128,7 @@ export default function AddProductModal({ onCloseModal }) {
           { value: "12", label: "12 Meses" },
           { value: "24", label: "24 Meses" },
         ]}
+        className={fieldError("warranty_time")}
       />
 
       <div className="flex items-center justify-center my-2">
@@ -125,10 +140,10 @@ export default function AddProductModal({ onCloseModal }) {
           className="flex items-center py-3 px-4 gap-2 border rounded-lg transition duration-300 
           hover:bg-gray-200
           dark:bg-[#2020226c] dark:hover:bg-[#2c2c2e] dark:border-[#101012] hover:cursor-pointer"
-          onClick={onCloseModal}
+          onClick={onClose}
           disabled
         >
-          <Icon name={"barcode_scanner"}/>
+          <Icon name={"barcode_scanner"} />
           <span className="text-sm dark:text-white">¡Proximamente!</span>
         </button>
       </section>
@@ -136,7 +151,7 @@ export default function AddProductModal({ onCloseModal }) {
       {/* Botones */}
       <ConfirmCancelButtons
         confirmText={loading ? <Loader /> : "Crear"}
-        cancelButtonOnClick={onCloseModal}
+        cancelButtonOnClick={onClose}
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
       />
 
@@ -145,7 +160,7 @@ export default function AddProductModal({ onCloseModal }) {
         <SuccessModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => (openInnerModal(null), onCloseModal())}
+          onClose={() => (openInnerModal(null), onClose())}
           confirmTitle={"Producto Creado Correctamente"}
           confirmText={"El producto ha sido creado correctamente."}
           confirmButtonText={"Volver a la página"}
