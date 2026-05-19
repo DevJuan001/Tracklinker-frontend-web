@@ -51,7 +51,7 @@ export default function SupplierItem({
 
       {/* Botones para interactuar con el proveedor */}
       <ActionButtons
-        moreInfoOnClick={moreInfoOnClick}
+        moreInfoButtonOnClick={moreInfoOnClick}
         editButtonOnClick={editButtonOnClick}
         deleteButtonOnClick={deleteButtonOnClick}
       />
