@@ -16,6 +16,11 @@ export default function FilterCategoryModal({ filters, setFilters, onClose }) {
       orderByFinishDateValue={form.end_date}
       orderByFinishDateOnChange={handleChange}
       onClose={onClose}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
+        onClose();
+      }}
     >
       <div className="flex flex-col gap-2">
         <SelectMenu
