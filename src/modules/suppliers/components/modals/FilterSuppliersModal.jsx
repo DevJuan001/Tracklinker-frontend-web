@@ -3,8 +3,8 @@ import { useFilterSuppliers } from "../../hooks/useFilterSuppliers";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function FilterSuppliersModal({ setFilters, onClose }) {
-  const { form, handleChange } = useFilterSuppliers();
+export default function FilterSuppliersModal({ filters, setFilters, onClose }) {
+  const { form, handleChange } = useFilterSuppliers(filters);
   const { cities } = useCities();
 
   return (
@@ -18,6 +18,11 @@ export default function FilterSuppliersModal({ setFilters, onClose }) {
       orderByFinishDateValue={form.end_date}
       orderByFinishDateOnChange={handleChange}
       onClose={onClose}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
+        onClose();
+      }}
     >
       <div className="flex flex-col gap-2">
         <SelectMenu
