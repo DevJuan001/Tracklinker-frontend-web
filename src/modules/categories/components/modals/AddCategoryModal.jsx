@@ -11,7 +11,8 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function AddCategoryModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, handleChange, handleSubmit } = useCreateCategory();
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
+    useCreateCategory();
 
   return (
     <section className="w-full flex flex-col items-center gap-2">
@@ -23,6 +24,7 @@ export default function AddCategoryModal({ onClose }) {
         placeholder={"Nombre"}
         id={"category_name"}
         autoComplete="off"
+        className={fieldError("name")}
       />
       <FormField
         onChange={handleChange}
@@ -31,6 +33,7 @@ export default function AddCategoryModal({ onClose }) {
         placeholder={"Que productos almacena"}
         labelText={"Descripción"}
         id={"category_description"}
+        className={fieldError("description")}
       />
 
       {/* Botones */}
@@ -63,7 +66,7 @@ export default function AddCategoryModal({ onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="No se pudo completar el registro"
-          errorText="Verifica que todos los campos estén completos y que la categoría no exista."
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />
