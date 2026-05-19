@@ -46,8 +46,13 @@ export default function ProductsTable({
                 No hay resultados para <strong>"{search}"</strong>.
               </span>
               <span className="text-lg text-center">
-                Intenta con otro nombre o agrega un nuevo producto.
+                Intenta con otro modelo o agrega un nuevo producto.
               </span>
+              <ul className="text-center text-sm mt-1">
+                <li>• Revisa que el modelo esté bien escrito</li>
+                <li>• Busca por correo marca o subcategoria</li>
+                <li>• Si no existe, agrégalo como nuevo producto</li>
+              </ul>
             </div>
           ) : (
             <div
