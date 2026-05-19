@@ -1,30 +1,38 @@
 import { useState } from "react";
 import { enableCategoryService } from "../services/enableCategoryService";
 import { useQueryClient } from "@tanstack/react-query";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useEnableCategory(id) {
-  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
 
   // Función que envía el ID al service y maneja la respuesta
-  async function handleEnable(onClose) {
+  async function handleEnable(e, openInnerModal, onClose) {
+    const triggerButton = getModalTrigger(e);
+
     setLoading(true);
 
     try {
       const response = await enableCategoryService(id);
+
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["categories"] });
         onClose();
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
-      setData(response);
-    } catch (error) {
-      setError(error);
+    } catch {
+      openInnerModal("error", triggerButton);
+      setError(
+        "Por el momento no se puede habilitar la categoría, por favor intente nuevamente más tarde.",
+      );
     } finally {
       setLoading(false);
     }
   }
 
-  return { data, loading, error, handleEnable };
+  return { loading, error, handleEnable };
 }
