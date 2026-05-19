@@ -8,8 +8,8 @@ export default {
     extend: {
       fontFamily: {
         dmsans: ["DM Sans", "sans-serif"],
-        poppins: ["Poopins", ...defaultTheme.fontFamily.sans],
-        inter: ["Inter", "sans-serif"],
+        poppins: ["Poppins", ...defaultTheme.fontFamily.sans],
+        inter: ['Inter', "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
       keyframes: {
         rotation: {
