@@ -17,6 +17,7 @@ export function useDisableSubcategory(subcategory_id) {
 
     try {
       const response = await disableSubcategoryService(subcategory_id);
+      
       if (response.success === true) {
         queryClient.invalidateQueries(["subcategories"]);
         onClose();
