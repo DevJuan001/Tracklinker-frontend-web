@@ -14,7 +14,7 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { categories } = useActiveCategories();
-  const { form, loading, error, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditSubcategory(subcategory);
 
   return (
@@ -23,7 +23,7 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
       <SelectMenu
         searchable
         value={form.category_id}
-        id={"subcategory_id_menu"}
+        id={"category_id"}
         name={"category_id"}
         spanText={"Categoria"}
         onChange={handleChange}
@@ -31,18 +31,20 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           value: category.category_id,
           label: category.category_name,
         }))}
+        className={fieldError("category_id")}
       />
       <FormField
+        id={"name"}
+        name={"subcategory_name"}
+        labelText={"Nombre"}
         value={form.subcategory_name}
         onChange={handleChange}
-        labelText={"Nombre"}
-        name={"subcategory_name"}
-        id={"name"}
+        className={fieldError("subcategory_name")}
       />
 
       {/* Botones */}
       <ConfirmCancelButtons
-        confirmText={loading ? <Loader /> : "Confirmar"}
+        confirmText={loading ? <Loader /> : "Editar"}
         cancelText={"Cancelar"}
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onClose}
@@ -66,10 +68,11 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           }}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
           location="anchored"
-          growDirection={"top-right"}
+          growDirection={"top-center"}
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="¡No se pudo editar la subcategoria!"
