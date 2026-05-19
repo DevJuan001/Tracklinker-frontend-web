@@ -1,5 +1,5 @@
 // Hooks
-import { useCategories } from "../../hooks/useCategories";
+import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useEditSubcategory } from "../../hooks/useEditSubcategory";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
@@ -12,8 +12,8 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
-  const { categories } = useCategories();
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { categories } = useActiveCategories();
   const { form, loading, error, handleChange, handleSubmit } =
     useEditSubcategory(subcategory);
 
