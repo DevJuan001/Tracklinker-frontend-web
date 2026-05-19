@@ -20,7 +20,8 @@ import SearchBar from "../../globals/components/ui/SearchBar";
 import EnableSubcategoryModal from "./components/modals/EnableSubcategoryModal";
 
 export default function SubcategoriesPage() {
-  const { subcategories, loading, error, setFilters } = useSubcategories();
+  const { subcategories, loading, error, filters, setFilters } =
+    useSubcategories();
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
   const [search, setSearch] = useState("");
@@ -73,21 +74,28 @@ export default function SubcategoriesPage() {
           isOpen={isOpen}
           triggerRef={triggerRef}
           growDirection="center"
-          location={modalType === "info" || modalType === "add" ? "center" : "anchored"}
+          location={
+            modalType === "info" || modalType === "add" ? "center" : "anchored"
+          }
           onClose={() => closeModal()}
         >
           {modalType === "user" && <ProfileModal />}
+
           {modalType === "filter" && (
             <FilterSubcategoriesModal
+              filters={filters}
               setFilters={setFilters}
               onClose={() => closeModal()}
             />
           )}
+
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
           {/* Modal para agregar una subcategoria */}
           {modalType === "add" && (
             <AddSubcategoryModal onClose={() => closeModal()} />
           )}
+
           {/* Modal para mas información de la subcategoria */}
           {modalType === "info" && (
             <MoreSubcategoryInfoModal
@@ -95,6 +103,7 @@ export default function SubcategoriesPage() {
               onClose={() => closeModal()}
             />
           )}
+
           {/* Modal para editar la información de la subcategoria */}
           {modalType === "edit" && (
             <EditSubcategoryModal
@@ -102,6 +111,7 @@ export default function SubcategoriesPage() {
               onClose={() => closeModal()}
             />
           )}
+
           {/* Modal para deshabilitar la subcategoria */}
           {modalType === "disable" && (
             <DisableSubcategoryModal
@@ -109,6 +119,7 @@ export default function SubcategoriesPage() {
               onClose={() => closeModal()}
             />
           )}
+
           {/* Modal para habilitar la subcategoria */}
           {modalType === "enable" && (
             <EnableSubcategoryModal
