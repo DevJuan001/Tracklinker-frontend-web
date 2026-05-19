@@ -22,7 +22,7 @@ import ProfileModal from "../../globals/components/modals/profileModal/ProfileMo
 export default function SuppliersPage() {
   const { modalType, triggerRef, isOpen, modalData, openModal, closeModal } =
     useModal();
-  const { suppliers, loading, error, setFilters } = useSuppliers();
+  const { suppliers, loading, error, filters, setFilters } = useSuppliers();
   const [search, setSearch] = useState("");
   const filteredSuppliers = useSearch(suppliers, search);
 
@@ -44,6 +44,7 @@ export default function SuppliersPage() {
       {/* Listado de proveedores */}
       <SuppliersList
         suppliers={filteredSuppliers}
+        search={search}
         loading={loading}
         error={error}
         openModal={openModal}
@@ -73,20 +74,28 @@ export default function SuppliersPage() {
           isOpen={isOpen}
           onClose={() => closeModal()}
           triggerRef={triggerRef}
-          location={modalType === "info" ? "center" : "anchored"}
-          z_index={modalType === "edit" ? 300 : 100}
+          location={
+            modalType === "info" || modalType === "add" || modalType === "edit"
+              ? "center"
+              : "anchored"
+          }
         >
           {modalType === "user" && <ProfileModal />}
+
           {modalType === "filter" && (
             <FilterSuppliersModal
+              filters={filters}
               setFilters={setFilters}
               onClose={() => closeModal()}
             />
           )}
+
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
           {modalType === "add" && (
             <AddSupplierModal onClose={() => closeModal()} />
           )}
+
           {/* Modal para mas información del Proveedor */}
           {modalType === "info" && (
             <MoreInfoSupplierModal
