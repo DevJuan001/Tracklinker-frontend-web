@@ -24,8 +24,8 @@ export default function ProductsTable({
 
   return (
     <section
-      className={`max-h-[92.5%] w-full border rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
-      ${noProducts || isFirstLoad ? "h-full" : "h-auto"}
+      className={`max-h-[92.5%] w-full rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      ${noProducts || isFirstLoad ? "h-full" : "h-auto border"}
       md:max-h-[94.5%]
       dark:border-[#1e1e20cb]`}
     >
