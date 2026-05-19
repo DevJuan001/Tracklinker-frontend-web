@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { editSubcategoryService } from "../services/editSubcategoryService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useEditSubcategory(subcategory) {
   const [form, setForm] = useState({
@@ -22,21 +23,17 @@ export function useEditSubcategory(subcategory) {
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
       return;
     }
 
     const changes = getChanges(subcategory, form);
 
     if (Object.keys(changes).length === 0) {
-      openInnerModal("error", triggerData);
       return;
     }
 
@@ -49,16 +46,16 @@ export function useEditSubcategory(subcategory) {
       );
       if (response.success === true) {
         queryClient.invalidateQueries(["subcategories"]);
-        openInnerModal("success", triggerData);
+        openInnerModal("success", triggerButton);
       } else {
         setError(response.error);
-        openInnerModal("error", triggerData);
+        openInnerModal("error", triggerButton);
       }
     } catch {
       setError(
         "Por el momento no se puede editar la subcategoría, por favor intente nuevamente más tarde.",
       );
-      openInnerModal("error", triggerData);
+      openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
     }
