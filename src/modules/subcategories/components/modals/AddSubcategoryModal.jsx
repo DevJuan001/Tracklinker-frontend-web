@@ -1,5 +1,5 @@
 // Hooks
-import { useCategories } from "../../hooks/useCategories";
+import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import { useCreateSubcategory } from "../../hooks/useCreateSubcategory";
 // Modales
@@ -13,7 +13,7 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 
 export default function AddSubcategoryModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { categories } = useCategories();
+  const { categories } = useActiveCategories();
   const { form, loading, error, fieldError, handleSubmit, handleChange } =
     useCreateSubcategory();
 
