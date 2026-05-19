@@ -15,6 +15,7 @@ export function useCategories() {
     categories: categories.data || [],
     loading: categories.isLoading,
     error: categories.error,
+    filters,
     setFilters,
   };
 }
