@@ -14,7 +14,7 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
   const { categories } = useCategories();
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, handleChange, handleSubmit } =
+  const { form, loading, error, handleChange, handleSubmit } =
     useEditSubcategory(subcategory);
 
   return (
@@ -73,7 +73,7 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="¡No se pudo editar la subcategoria!"
-          errorText="Verifica que todos los campos esten completos o que no exista una subcategoria con ese nombre"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />
