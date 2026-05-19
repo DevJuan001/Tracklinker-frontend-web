@@ -10,14 +10,13 @@ export function useEditSubcategory(subcategory) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { validate, getChanges } = useFormValidation();
+  const { validate, getChanges, fieldError, clearError } = useFormValidation();
   const queryClient = useQueryClient();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
@@ -49,16 +48,21 @@ export function useEditSubcategory(subcategory) {
         changes,
       );
       if (response.success === true) {
-        openInnerModal("success", triggerData);
         queryClient.invalidateQueries(["subcategories"]);
+        openInnerModal("success", triggerData);
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerData);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "Por el momento no se puede editar la subcategoría, por favor intente nuevamente más tarde.",
+      );
       openInnerModal("error", triggerData);
-      setError(error);
     } finally {
       setLoading(false);
     }
   }
 
-  return { form, loading, error, handleSubmit, handleChange };
+  return { form, loading, error, fieldError, handleSubmit, handleChange };
 }
