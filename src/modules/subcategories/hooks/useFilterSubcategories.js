@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-export function useFilterSubcategories() {
+export function useFilterSubcategories(filters) {
   const [form, setForm] = useState({
-    start_date: "",
-    end_date: "",
-    category_order: "",
-    status: "",
-    name_order: "",
+    start_date: filters.start_date || "",
+    end_date: filters.end_date || "",
+    category_order: filters.category_order || "",
+    status: filters.status || "",
+    name_order: filters.name_order || "",
   });
 
   function handleChange(e) {
