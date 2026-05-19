@@ -12,12 +12,11 @@ export async function getCategoriesService(filters = {}) {
     },
   );
 
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al obtener la categoría");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  const data = await res.json();
-
-  // Retornamos solo los datos de la categoría
-  return data.data;
+  return json.data;
 }
