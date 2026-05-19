@@ -88,7 +88,7 @@ export default function ProductsFilterModal({
             .filter(
               (brand) =>
                 !form.subcategory_order ||
-                brand.subcategories
+                (brand.subcategories ?? "")
                   .split(",")
                   .includes(String(form.subcategory_order)),
             )
