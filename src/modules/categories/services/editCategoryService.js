@@ -13,13 +13,11 @@ export async function editCategoryService(id, category_data) {
     },
   );
 
-  // Validamos si la petición falló
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al editar la categoría");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  const data = await res.json();
-
-  // Retornamos únicamente la categoría editada
-  return data;
+  return json;
 }

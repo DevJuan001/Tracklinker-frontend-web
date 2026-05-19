@@ -11,24 +11,26 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditCategoryInfoModal({ category, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditCategory(category);
 
   return (
     <section className="w-full flex flex-col items-center gap-2">
       <FormField
-        onChange={handleChange}
-        value={form.name}
+        id={"name"}
         name={"name"}
+        value={form.name}
+        onChange={handleChange}
         labelText={"Nombre de la Categoría"}
-        id={"category_name"}
+        className={fieldError("name")}
       />
       <FormField
-        onChange={handleChange}
-        value={form.description}
+        id={"description"}
         name={"description"}
+        value={form.description}
+        onChange={handleChange}
         labelText={"Descripción de la Categoría"}
-        id={"category_description"}
+        className={fieldError("description")}
       />
 
       {/* Botones */}
@@ -38,6 +40,7 @@ export default function EditCategoryInfoModal({ category, onClose }) {
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
         cancelButtonOnClick={onClose}
       />
+
       {/* Modales Internas */}
       {innerType === "success" && (
         <SuccessModal
@@ -60,7 +63,7 @@ export default function EditCategoryInfoModal({ category, onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="No se pudo completar el registro"
-          errorText="Verifica que todos los campos estén completos"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />

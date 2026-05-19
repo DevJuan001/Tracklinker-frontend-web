@@ -2,8 +2,8 @@ import { useFilterCategories } from "../../hooks/useFilterCategories";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 
-export default function FilterCategoryModal({ setFilters, onClose }) {
-  const { form, handleChange } = useFilterCategories();
+export default function FilterCategoryModal({ filters, setFilters, onClose }) {
+  const { form, handleChange } = useFilterCategories(filters);
 
   return (
     <FilterModal
@@ -16,6 +16,11 @@ export default function FilterCategoryModal({ setFilters, onClose }) {
       orderByFinishDateValue={form.end_date}
       orderByFinishDateOnChange={handleChange}
       onClose={onClose}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
+        onClose();
+      }}
     >
       <div className="flex flex-col gap-2">
         <SelectMenu

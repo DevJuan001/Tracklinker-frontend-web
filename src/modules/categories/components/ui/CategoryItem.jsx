@@ -1,7 +1,6 @@
-import { actionsIcons } from "../../../../assets/icons/actionsIcons";
-import { categoryStatusConfig } from "../../constants/categoryStatusConfig";
-import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 import Icon from "../../../../globals/components/ui/Icon";
+import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import { categoryStatusConfig } from "../../constants/categoryStatusConfig";
 
 export default function CategoryItem({
   category,
@@ -45,17 +44,8 @@ export default function CategoryItem({
           );
         }}
         visibilityIcon={categoryStatusConfig[category.status]?.visibilityIcon}
-        moreInfoOnClick={moreInfoOnClick}
-      >
-        {/* Botón de más información del usuario */}
-        <button onClick={moreInfoOnClick}>
-          <img
-            src={actionsIcons.moreInfoIcon}
-            alt=""
-            className="transition-all duration-300 hover:scale-125"
-          />
-        </button>
-      </ActionButtons>
+        moreInfoButtonOnClick={moreInfoOnClick}
+      />
     </li>
   );
 }
