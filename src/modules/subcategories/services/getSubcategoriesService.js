@@ -11,6 +11,7 @@ export async function getSubcategories(filters = {}) {
       method: "GET",
     },
   );
+  
   // Validamos si la respuesta fue OK
   if (!res.ok) {
     throw new Error("Error en la petición");
