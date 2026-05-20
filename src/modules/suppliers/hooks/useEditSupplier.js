@@ -8,20 +8,19 @@ export function useEditSupplier(supplier) {
     name: supplier.name || "",
     email: supplier.email || "",
     phone: supplier.phone || "",
-    city: supplier.city || "",
+    city: supplier.city_id || "",
     address: supplier.address || "",
     status: supplier.status || "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const quertyClient = useQueryClient();
-  const { validate, getChanges } = useFormValidation();
+  const { validate, getChanges, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
@@ -49,17 +48,23 @@ export function useEditSupplier(supplier) {
 
     try {
       const response = await editSupplierService(supplier.id, changes);
+
       if (response.success === true) {
         quertyClient.invalidateQueries({ queryKey: ["suppliers"] });
         openInnerModal("success", triggerData);
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerData);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "Por el momento no se puede editar el proveedor, por favor intente nuevamente más tarde.",
+      );
       openInnerModal("error", triggerData);
-      setError(error);
     } finally {
       setLoading(false);
     }
   }
 
-  return { form, loading, error, handleChange, handleSubmit };
+  return { form, loading, error, fieldError, handleChange, handleSubmit };
 }
