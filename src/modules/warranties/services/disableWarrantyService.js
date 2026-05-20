@@ -1,7 +1,7 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function disableWarranty(warranty_id, product_serial) {
+export async function disableWarrantyService(warranty_id, product_serial) {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.warranties}/update/${warranty_id}`,
     {
@@ -13,11 +13,11 @@ export async function disableWarranty(warranty_id, product_serial) {
     },
   );
 
-  // Validamos si la respuesta no fue OK
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error en la petición");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  // Si la API devuelve un cuerpo JSON (por ejemplo, un mensaje de éxito)
-  return await res.json();
+  return json;
 }
