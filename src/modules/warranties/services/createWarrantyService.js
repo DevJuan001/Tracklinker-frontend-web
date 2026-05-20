@@ -1,7 +1,7 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function createWarranty(data) {
+export async function createWarrantyService(data) {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.warranties}/create`,
     {
