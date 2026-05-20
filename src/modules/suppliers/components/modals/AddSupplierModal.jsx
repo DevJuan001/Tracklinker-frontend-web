@@ -13,7 +13,8 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function AddSupplierModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, handleChange, handleSubmit } = useCreateSupplier();
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
+    useCreateSupplier();
   const { cities } = useCities();
 
   return (
@@ -26,6 +27,7 @@ export default function AddSupplierModal({ onClose }) {
         placeholder={"Lenovo"}
         id={"name"}
         autoComplete="given-name"
+        className={fieldError("name")}
       />
 
       <FormField
@@ -36,6 +38,7 @@ export default function AddSupplierModal({ onClose }) {
         placeholder={"asus@asus.com"}
         id={"email"}
         autoComplete="email"
+        className={fieldError("email")}
       />
 
       <FormField
@@ -46,6 +49,7 @@ export default function AddSupplierModal({ onClose }) {
         placeholder={"300012124"}
         id={"phone"}
         autoComplete="tel"
+        className={fieldError("phone")}
       />
 
       <SelectMenu
@@ -58,6 +62,7 @@ export default function AddSupplierModal({ onClose }) {
           value: city.id,
           label: city.name,
         }))}
+        className={fieldError("city")}
       />
 
       <FormField
@@ -68,6 +73,7 @@ export default function AddSupplierModal({ onClose }) {
         placeholder={"KR 124 # 12-124"}
         id={"address"}
         autoComplete="street-address"
+        className={fieldError("address")}
       />
 
       {/* Botones */}
@@ -80,7 +86,7 @@ export default function AddSupplierModal({ onClose }) {
       {/* Modales internas */}
       {innerType === "success" && (
         <SuccessModal
-          location="anchored"
+          location="center"
           growDirection={"top-right"}
           triggerRef={innerTrigger}
           isOpen={true}
@@ -95,14 +101,15 @@ export default function AddSupplierModal({ onClose }) {
           }}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
-          location="anchored"
+          location="center"
           growDirection={"top-right"}
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="¡No se puedo crear el proveedor!"
-          errorText="Verfica que todos los campos esten completos o que no exista un proveedor con ese correo"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />
