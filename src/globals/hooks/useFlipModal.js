@@ -308,6 +308,10 @@ export const useFlipModal = ({
         return;
       }
 
+      // Si ya hay una animación de cierre en curso, ignoramos el click
+      if (modal.dataset.closing === "true") return;
+      modal.dataset.closing = "true";
+
       // Matamos tweens activos para evitar conflictos si el usuario cierra durante una apertura
       gsap.killTweensOf([modal, content, overlay, element]);
 
@@ -399,6 +403,7 @@ export const useFlipModal = ({
       // Elimina los overrides de min-height, restaura el trigger y llama a onClose
       // para que React desmonte el modal del DOM.
       function cleanup() {
+        delete modal.dataset.closing;
         modal.style.removeProperty("min-height");
         modal.style.removeProperty("min-width");
         gsap.set(modal, { willChange: "auto" });
