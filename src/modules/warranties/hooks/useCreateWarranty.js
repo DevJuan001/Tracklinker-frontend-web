@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { createWarranty } from "../services/createWarranty";
+import { createWarrantyService } from "../services/createWarrantyService";
 import { getModalTrigger } from "../../../utils/getModalTrigger";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 
@@ -39,7 +39,7 @@ export function useCreateWarranty(product) {
     setLoading(true);
 
     try {
-      const response = await createWarranty(form);
+      const response = await createWarrantyService(form);
 
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["products"] });
