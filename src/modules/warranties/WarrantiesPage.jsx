@@ -17,11 +17,12 @@ import EditWarrantyModal from "./components/modals/EditWarrantyModal";
 import DisableWarrantyModal from "./components/modals/DisableWarrantyModal";
 import FilterWarrantyModal from "./components/modals/FilterWarrantyModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
+import EditWarrantyStatusModal from "./components/modals/EditWarrantyStatusModal";
 
 export default function WarrantiesPage() {
   const { isOpen, modalData, modalType, triggerRef, openModal, closeModal } =
     useModal();
-  const { warranties, setFilters } = useWarranties();
+  const { warranties, loading, filters, setFilters } = useWarranties();
   const [search, setSearch] = useState("");
   const filteredWarranties = useSearch(warranties, search);
 
@@ -34,14 +35,19 @@ export default function WarrantiesPage() {
     >
       <TopSection
         sectionName={"Garantías"}
-        addButtonText={"Crear Garantía"}
+        addButtonText={"Crear garantía"}
         createOnClick={(e) => openModal(null, "add", null, e.currentTarget)}
         filterOnClick={(e) => openModal(null, "filter", null, e.currentTarget)}
       >
         <SearchBar value={search} onChange={setSearch} />
       </TopSection>
 
-      <WarrantiesTable warranties={filteredWarranties} openModal={openModal} />
+      <WarrantiesTable
+        warranties={filteredWarranties}
+        loading={loading}
+        search={search}
+        openModal={openModal}
+      />
 
       {/* Modales */}
       {modalType && (
@@ -57,30 +63,43 @@ export default function WarrantiesPage() {
                     ? ""
                     : modalType === "edit"
                       ? "Editar Garantía"
-                      : modalType === "disable"
-                        ? "Deshabiltitar Garantía"
-                        : "Ayuda"
+                      : modalType === "editStatus"
+                        ? ""
+                        : modalType === "disable"
+                          ? "Deshabiltitar Garantía"
+                          : "Ayuda"
           }
           type={modalType}
           isOpen={isOpen}
           onClose={closeModal}
           triggerRef={triggerRef}
           location={
-            modalType === "info" || modalType === "edit" ? "center" : "anchored"
+            modalType === "info" || modalType === "edit" || modalType === "add"
+              ? "center"
+              : "anchored"
           }
         >
           {modalType === "user" && <ProfileModal />}
+
           {modalType === "filter" && (
-            <FilterWarrantyModal setFilters={setFilters} onClose={closeModal} />
+            <FilterWarrantyModal
+              filters={filters}
+              setFilters={setFilters}
+              onClose={closeModal}
+            />
           )}
+
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
           {modalType === "add" && (
             <AddWarrantyModal onCloseModal={closeModal} />
           )}
+
           {/* Contenido del Modal de Más Información */}
           {modalType === "info" && (
             <MoreWarrantyInfo modalData={modalData} onClose={closeModal} />
           )}
+
           {/* Modal para editar una garantía */}
           {modalType === "edit" && (
             <EditWarrantyModal
@@ -88,6 +107,16 @@ export default function WarrantiesPage() {
               onClose={closeModal}
             />
           )}
+
+          {/* Modal para editar el estado la garantía */}
+          {modalType === "editStatus" && (
+            <EditWarrantyStatusModal
+              warranty={modalData}
+              openModal={openModal}
+              onClose={closeModal}
+            />
+          )}
+
           {/* Modal para eliminar una garantía */}
           {modalType === "disable" && (
             <DisableWarrantyModal
