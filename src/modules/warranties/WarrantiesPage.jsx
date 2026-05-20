@@ -65,9 +65,7 @@ export default function WarrantiesPage() {
                       ? "Editar Garantía"
                       : modalType === "editStatus"
                         ? ""
-                        : modalType === "disable"
-                          ? "Deshabiltitar Garantía"
-                          : "Ayuda"
+                        : "Ayuda"
           }
           type={modalType}
           isOpen={isOpen}
@@ -85,26 +83,29 @@ export default function WarrantiesPage() {
             <FilterWarrantyModal
               filters={filters}
               setFilters={setFilters}
-              onClose={closeModal}
+              onClose={() => closeModal}
             />
           )}
 
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
 
           {modalType === "add" && (
-            <AddWarrantyModal onCloseModal={closeModal} />
+            <AddWarrantyModal onCloseModal={() => closeModal} />
           )}
 
           {/* Contenido del Modal de Más Información */}
           {modalType === "info" && (
-            <MoreWarrantyInfo modalData={modalData} onClose={closeModal} />
+            <MoreWarrantyInfo
+              modalData={modalData}
+              onClose={() => closeModal}
+            />
           )}
 
           {/* Modal para editar una garantía */}
           {modalType === "edit" && (
             <EditWarrantyModal
               selectedWarranty={modalData}
-              onClose={closeModal}
+              onClose={() => closeModal}
             />
           )}
 
@@ -112,15 +113,6 @@ export default function WarrantiesPage() {
           {modalType === "editStatus" && (
             <EditWarrantyStatusModal
               warranty={modalData}
-              openModal={openModal}
-              onClose={closeModal}
-            />
-          )}
-
-          {/* Modal para eliminar una garantía */}
-          {modalType === "disable" && (
-            <DisableWarrantyModal
-              selectedWarranty={modalData}
               onClose={closeModal}
             />
           )}
