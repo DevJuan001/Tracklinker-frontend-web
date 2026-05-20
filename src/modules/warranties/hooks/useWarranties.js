@@ -3,7 +3,7 @@ import { getWarranties } from "../services/getWarranties";
 import { useQuery } from "@tanstack/react-query";
 
 export function useWarranties() {
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState({});
 
   const warranties = useQuery({
     queryKey: ["warranties", filters],
@@ -15,6 +15,7 @@ export function useWarranties() {
     warranties: warranties.data || [],
     loading: warranties.isLoading,
     error: warranties.error,
+    filters,
     setFilters,
   };
 }
