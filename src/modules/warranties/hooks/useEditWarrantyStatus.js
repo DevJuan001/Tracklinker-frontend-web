@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { updateWarranty } from "../services/updateWarranty";
+import { updateWarrantyService } from "../services/updateWarrantyService";
 import { useQueryClient } from "@tanstack/react-query";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 const WARRANTY_NEXT_STATUS = {
   1: 2,
@@ -13,13 +14,15 @@ export function useEditWarrantyStatus() {
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
 
-  async function handleStatusChange(warranty, onClose) {
+  async function handleStatusChange(e, warranty, openInnerModal, onClose) {
     const nextStatus = WARRANTY_NEXT_STATUS[warranty.status];
 
+    const triggerButton = getModalTrigger(e);
+
     setLoading(true);
-    
+
     try {
-      const response = await updateWarranty(warranty.id, {
+      const response = await updateWarrantyService(warranty.id, {
         status: nextStatus,
         product_serial: warranty.product_serial,
       });
@@ -27,9 +30,15 @@ export function useEditWarrantyStatus() {
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["warranties"] });
         onClose();
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
-    } catch (e) {
-      setError(e.message);
+    } catch {
+      setError(
+        " No se pudo cambiar el estado de la garantía. Por favor, intenta de nuevo más tarde.",
+      );
+      openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
     }
