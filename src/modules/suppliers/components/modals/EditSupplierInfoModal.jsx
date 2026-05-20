@@ -13,7 +13,7 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditSupplierInfoModal({ supplier, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditSupplier(supplier);
   const { cities } = useCities();
 
@@ -21,11 +21,12 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
     <section className="flex flex-col items-center">
       <form action="" className="w-full flex flex-col gap-2">
         <FormField
-          onChange={handleChange}
+          id={"name"}
           name={"name"}
+          onChange={handleChange}
           value={form.name}
           labelText={"Nombre"}
-          id={"name"}
+          className={fieldError("name")}
         />
 
         <FormField
@@ -35,6 +36,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           labelText={"Correo Electrónico"}
           id={"email"}
           autoComplete="email"
+          className={fieldError("email")}
         />
 
         <SelectMenu
@@ -48,6 +50,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
             value: city.id,
             label: city.name,
           }))}
+          className={fieldError("city")}
         />
 
         <FormField
@@ -57,6 +60,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           id={"phone"}
           name={"phone"}
           autoComplete="tel"
+          className={fieldError("phone")}
         />
 
         <FormField
@@ -65,6 +69,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           value={form.address}
           labelText={"Dirección"}
           id={"address"}
+          className={fieldError("address")}
         />
 
         <SelectMenu
@@ -76,6 +81,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
             { value: 1, label: "Deshabilitado" },
             { value: 2, label: "Activo" },
           ]}
+          className={fieldError("status")}
         />
       </form>
 
@@ -106,7 +112,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="¡No se pudo editar el proveedor!"
-          errorText="Verfica que todos los campos esten completos"
+          errorText={error}
           confirmButtonText="Volver a intentarlo"
           onClose={() => openInnerModal(null)}
         />
