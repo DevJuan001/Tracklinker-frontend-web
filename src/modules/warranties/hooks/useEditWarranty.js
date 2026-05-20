@@ -31,16 +31,11 @@ export function useEditWarranty(selectedWarranty) {
 
     const isValid = validate(form);
 
-    if (!isValid) {
-      openInnerModal("error", triggerButton);
-    }
+    if (!isValid) return;
 
     const changes = getChanges(selectedWarranty, form);
 
-    if (Object.keys(changes).length === 0) {
-      openInnerModal("error", triggerButton);
-      return;
-    }
+    if (Object.keys(changes).length === 0) return;
 
     setLoading(true);
 
@@ -49,7 +44,7 @@ export function useEditWarranty(selectedWarranty) {
         ...changes,
         product_serial: selectedWarranty.product_serial,
       });
-      
+
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["products"] });
         queryClient.invalidateQueries({ queryKey: ["warranties"] });
