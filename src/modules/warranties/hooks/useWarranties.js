@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getWarranties } from "../services/getWarranties";
+import { getWarrantiesService } from "../services/getWarrantiesService";
 import { useQuery } from "@tanstack/react-query";
 
 export function useWarranties() {
@@ -7,7 +7,7 @@ export function useWarranties() {
 
   const warranties = useQuery({
     queryKey: ["warranties", filters],
-    queryFn: () => getWarranties(filters),
+    queryFn: () => getWarrantiesService(filters),
     staleTime: 1000 * 60 * 10,
   });
 
