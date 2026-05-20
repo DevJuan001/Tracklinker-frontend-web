@@ -13,12 +13,11 @@ export async function editSupplierService(supplier_id, supplier_data) {
     },
   );
 
-  // Validamos si la respuesta no fue OK
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al editar el proveedor");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  const data = await res.json();
-
-  return data;
+  return json;
 }

@@ -7,6 +7,7 @@ export default function Skeleton({
   shineColor = "rgba(255,255,255,0.9)",
   darkModeShineColor = "rgba(255,255,255,0.1)",
   borderRadius = 6,
+  marginBottom = 8,
 }) {
   const dark = document.documentElement.classList.contains("dark");
 
@@ -21,7 +22,7 @@ export default function Skeleton({
             width: width,
             borderRadius: borderRadius,
             backgroundColor: dark ? darkModeBackgroundColor : backgroundColor,
-            marginBottom: count > 1 ? 8 : 0,
+            marginBottom: count > 1 ? marginBottom : 0,
           }}
         >
           <div

@@ -308,6 +308,10 @@ export const useFlipModal = ({
         return;
       }
 
+      // Si ya hay una animación de cierre en curso, ignoramos el click
+      if (modal.dataset.closing === "true") return;
+      modal.dataset.closing = "true";
+
       // Matamos tweens activos para evitar conflictos si el usuario cierra durante una apertura
       gsap.killTweensOf([modal, content, overlay, element]);
 
@@ -318,12 +322,8 @@ export const useFlipModal = ({
 
       const buttonChildren = Array.from(element.children);
 
-      // Volvemos a ocultar el trigger y preparamos sus hijos para una re-entrada limpia
+      // Ocultamos el trigger durante la animación
       gsap.set(element, { opacity: 0, visibility: "hidden" });
-      if (buttonChildren.length > 0) {
-        gsap.set(buttonChildren, { clearProps: "opacity" });
-        gsap.set(buttonChildren, { opacity: 0 });
-      }
 
       // Ocultamos overflow para que el contenido del modal no se desborde
       gsap.set(modal, { overflow: "hidden" });
@@ -399,6 +399,7 @@ export const useFlipModal = ({
       // Elimina los overrides de min-height, restaura el trigger y llama a onClose
       // para que React desmonte el modal del DOM.
       function cleanup() {
+        delete modal.dataset.closing;
         modal.style.removeProperty("min-height");
         modal.style.removeProperty("min-width");
         gsap.set(modal, { willChange: "auto" });
@@ -407,9 +408,6 @@ export const useFlipModal = ({
           visibility: "visible",
           clearProps: "opacity,visibility",
         });
-        if (buttonChildren.length > 0) {
-          gsap.set(buttonChildren, { clearProps: "opacity" });
-        }
         onClose();
       }
 
@@ -462,24 +460,11 @@ export const useFlipModal = ({
         0.025,
       );
 
-      // Fade out final del modal — justo antes de que el Flip termine (0.25s)
-      tl.to(modal, { opacity: 0, duration: 0.02, ease: "none" }, 0.23);
+      // Revelamos el trigger debajo del modal justo antes de que termine
+      tl.set(element, { opacity: 1, visibility: "visible" }, 0.20);
 
-      // Mostramos el trigger exactamente cuando el Flip termina para evitar saltos
-      tl.set(element, { opacity: 1, visibility: "visible" }, 0.25);
-
-      // Animamos los hijos del trigger con un fade-in limpio
-      if (buttonChildren.length > 0) {
-        tl.to(
-          buttonChildren,
-          {
-            opacity: 1,
-            duration: 0.12,
-            ease: "power1.out",
-          },
-          0.23,
-        );
-      }
+      // El modal hace fade out revelando el contenido del botón de forma natural
+      tl.to(modal, { opacity: 0, duration: 0.05, ease: "power1.inOut" }, 0.20);
     },
     [onClose, triggerRef, modalRef, contentRef, overlayRef, id],
   );

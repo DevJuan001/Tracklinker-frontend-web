@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 import { createSupplierService } from "../services/createSupplierService";
+import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useCreateSupplier() {
   const [form, setForm] = useState({
@@ -14,26 +15,22 @@ export function useCreateSupplier() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
-  const { validate } = useFormValidation();
+  const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
 
-    const buttonElement = e.currentTarget;
-    const buttonRect = buttonElement.getBoundingClientRect();
-    const triggerData = { currentTarget: buttonElement, rect: buttonRect };
+    const triggerButton = getModalTrigger(e);
 
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerData);
       return;
     }
 
@@ -41,17 +38,23 @@ export function useCreateSupplier() {
 
     try {
       const response = await createSupplierService(form);
+
       if (response.success === true) {
-        openInnerModal("success", triggerData);
+        openInnerModal("success", triggerButton);
         queryClient.invalidateQueries({ queryKey: ["suppliers"] });
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
-    } catch (error) {
-      openInnerModal("error", triggerData);
-      setError(error);
+    } catch {
+      setError(
+        "Por el momento no se puede crear el proveedor, por favor intente nuevamente más tarde.",
+      );
+      openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
     }
   }
 
-  return { form, loading, error, handleChange, handleSubmit };
+  return { form, loading, error, fieldError, handleChange, handleSubmit };
 }

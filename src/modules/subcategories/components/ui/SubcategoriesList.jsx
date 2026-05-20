@@ -80,12 +80,14 @@ export default function SubcategoriesList({
       )}
       {isFirstLoad ? (
         <Skeleton
-          height="100%"
+          height="80px"
+          count={11}
           backgroundColor={"#F3EEF5"}
           darkModeBackgroundColor={"#101012"}
           shineColor="#C5C1C7"
           darkModeShineColor="#1e1e1e"
-          borderRadius={26}
+          borderRadius={12}
+          marginBottom={2}
         />
       ) : (
         <ul className="flex flex-col gap-1">

@@ -9,12 +9,11 @@ export async function enableSupplierService(supplier_id) {
     },
   );
 
-  // Validar si la respuesta no fue ok
+  const json = await res.json();
+
   if (!res.ok) {
-    throw new Error("Error al intentar eliminar el usuario");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  const data = await res.json();
-
-  return data;
+  return json;
 }
