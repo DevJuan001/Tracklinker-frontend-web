@@ -8,6 +8,7 @@ export const warrantyStatusConfig = {
       "hover:bg-red-100 text-red-600 dark:text-[#ff00008e] dark:bg-[#ff00002f]",
     styles: "bg-gray-50 text-gray-400 dark:text-gray-300 dark:bg-[#ff00002f]",
   },
+
   2: {
     text: "Pendiente",
     optionText: "Activar",
@@ -17,6 +18,7 @@ export const warrantyStatusConfig = {
       "hover:bg-gray-200 text-gray-600 dark:text-[#ff00008e] dark:bg-[#ff00002f]",
     styles: "bg-red-50 text-red-600 dark:text-[#ff00008e] dark:bg-[#ff00002f]",
   },
+
   3: {
     text: "En Proceso",
     optionText: "Empezar",
@@ -27,6 +29,7 @@ export const warrantyStatusConfig = {
     styles:
       "bg-yellow-50 text-yellow-500 dark:text-[#eeff009d] dark:bg-[#fbff001f]",
   },
+
   4: {
     text: "Completada",
     optionText: "Marcar como completada",
