@@ -3,8 +3,8 @@ import { useFilterWarranties } from "../../hooks/useFilterWarranties";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 
-export default function FilterWarrantyModal({ setFilters, onClose }) {
-  const { form, handleChange } = useFilterWarranties();
+export default function FilterWarrantyModal({ filters, setFilters, onClose }) {
+  const { form, handleChange } = useFilterWarranties(filters);
   const { cities } = useCities();
 
   return (
@@ -16,6 +16,11 @@ export default function FilterWarrantyModal({ setFilters, onClose }) {
       onClose={onClose}
       applyButtonOnClick={() => {
         setFilters({ ...form });
+        onClose();
+      }}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
         onClose();
       }}
     >

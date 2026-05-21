@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { getWarranties } from "../services/getWarranties";
+import { getWarrantiesService } from "../services/getWarrantiesService";
 import { useQuery } from "@tanstack/react-query";
 
 export function useWarranties() {
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState({});
 
   const warranties = useQuery({
     queryKey: ["warranties", filters],
-    queryFn: () => getWarranties(filters),
+    queryFn: () => getWarrantiesService(filters),
     staleTime: 1000 * 60 * 10,
   });
 
@@ -15,6 +15,7 @@ export function useWarranties() {
     warranties: warranties.data || [],
     loading: warranties.isLoading,
     error: warranties.error,
+    filters,
     setFilters,
   };
 }

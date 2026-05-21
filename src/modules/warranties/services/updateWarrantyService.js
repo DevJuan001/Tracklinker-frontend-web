@@ -1,11 +1,11 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function createWarranty(data) {
+export async function updateWarrantyService(id, data) {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.warranties}/create`,
+    `${apiRoutes.apiUrl}${apiRoutes.warranties}/update/${id}`,
     {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

@@ -83,14 +83,14 @@ export default function Modal({
                       ? "w-[380px] md:w-[400px]"
                       : type === "menu"
                         ? "p-1 max-w-24"
-                        : type === "edit_status"
+                        : type === "editStatus"
                           ? "p-1.5 w-72 md:w-80"
                           : "p-7 w-[400px] md:w-[500px]"
           }`}
       >
         <div ref={contentRef}>
           <header
-            className={`${type === "calendar" || type === "select" || type === "menu" || type === "edit_status" ? "hidden" : ""} flex justify-between items-center mb-2`}
+            className={`${type === "calendar" || type === "select" || type === "menu" || type === "editStatus" ? "hidden" : ""} flex justify-between items-center mb-2`}
           >
             <span
               data-flip-id="modal-title"
