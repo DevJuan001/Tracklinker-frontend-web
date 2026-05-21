@@ -6,6 +6,7 @@ export function useFilterUsers(filters) {
     name_order: filters?.name_order || "",
     start_date: filters?.start_date || "",
     end_date: filters?.end_date || "",
+    city: filters?.city || "",
     status: filters?.status || "",
   });
 
