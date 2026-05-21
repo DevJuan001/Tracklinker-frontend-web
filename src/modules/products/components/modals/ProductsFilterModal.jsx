@@ -3,11 +3,7 @@ import { useFilterProducts } from "../../hooks/useFilterProducts";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function ProductsFilterModal({
-  filters,
-  setFilters,
-  onClose,
-}) {
+export default function ProductsFilterModal({ filters, setFilters, onClose }) {
   const { categories, subcategories, inputOrders, models, brands } =
     useCatalog();
   const { form, handleChange } = useFilterProducts(filters);
@@ -23,7 +19,11 @@ export default function ProductsFilterModal({
       orderByStartDateValue={form.start_date}
       orderByFinishDateOnChange={handleChange}
       orderByFinishDateValue={form.end_date}
-      onClose={onClose}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
+        onClose();
+      }}
     >
       <div className="w-full flex flex-col gap-2">
         {/* Ordenar Por Orden de entrada*/}
