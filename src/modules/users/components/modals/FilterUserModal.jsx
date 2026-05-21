@@ -4,10 +4,10 @@ import { useCities } from "../../../../globals/hooks/useCities";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 
-export default function FilterUserModal({ setFilters, onClose }) {
+export default function FilterUserModal({ filters, setFilters, onClose }) {
   const { roles } = useRoles();
   const { cities } = useCities();
-  const { form, handleChange } = useFilterUsers();
+  const { form, handleChange } = useFilterUsers(filters);
 
   return (
     <FilterModal
@@ -18,6 +18,11 @@ export default function FilterUserModal({ setFilters, onClose }) {
       onClose={onClose}
       applyButtonOnClick={() => {
         setFilters({ ...form });
+        onClose();
+      }}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
         onClose();
       }}
     >
