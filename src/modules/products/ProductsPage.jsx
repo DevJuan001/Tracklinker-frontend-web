@@ -93,32 +93,39 @@ export default function ProductsPage() {
           onClose={() => closeModal()}
         >
           {modalType === "user" && <ProfileModal />}
+
           {modalType === "filter" && (
             <ProductsFilterModal filters={filters} setFilters={setFilters} />
           )}
+
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
           {modalType === "add" && (
             <AddProductModal
               selectedProduct={modalData}
               openModal={openModal}
             />
           )}
+
           {/* Modal para editar el producto */}
           {modalType === "edit" && (
             <EditProductModal selectedProduct={modalData} />
           )}
+
           {modalType === "disable" && (
             <DisableProductModal
               product={modalData}
               onClose={() => closeModal()}
             />
           )}
+
           {modalType === "enable" && (
             <EnableProductModal
               product={modalData}
               onClose={() => closeModal()}
             />
           )}
+
           {modalType === "addWarranty" && (
             <AddWarrantyModal
               product={modalData}
