@@ -1,8 +1,8 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function createUser(user_data) {
-  const res = await fetchWithAuth(
+export async function createUserService(user_data) {
+  const response = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.users}/create`,
     {
       method: "POST",
@@ -13,9 +13,9 @@ export async function createUser(user_data) {
     },
   );
 
-  const json = await res.json();
+  const json = await response.json();
 
-  if (!res.ok) {
+  if (!response.ok) {
     return { error: json.detail || "Error en la petición", data: null };
   }
 
