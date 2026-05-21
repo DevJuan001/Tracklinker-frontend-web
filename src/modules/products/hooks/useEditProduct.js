@@ -6,7 +6,7 @@ import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 
 export function useEditProduct(product) {
   const queryClient = useQueryClient();
-  const { validate, getChanges } = useFormValidation();
+  const { validate, getChanges, fieldError, clearError } = useFormValidation();
 
   const [form, setForm] = useState({
     id: product.product_id,
@@ -23,10 +23,9 @@ export function useEditProduct(product) {
   const [error, setError] = useState(null);
 
   function handleChange(e) {
-    setForm((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    clearError(name);
   }
 
   async function handleSubmit(e, openInnerModal) {
@@ -37,14 +36,12 @@ export function useEditProduct(product) {
     const isValid = validate(form);
 
     if (!isValid) {
-      openInnerModal("error", triggerButton);
       return;
     }
 
     const changes = getChanges(product, form);
 
     if (Object.keys(changes).length === 0) {
-      openInnerModal("error", triggerButton);
       return;
     }
 
@@ -62,18 +59,19 @@ export function useEditProduct(product) {
           queryClient.invalidateQueries({ queryKey: ["products"] });
           openInnerModal("success", triggerButton);
         } else {
+          setError(response.error);
           openInnerModal("error", triggerButton);
         }
-      } else {
-        openInnerModal("error", triggerButton);
       }
-      setLoading(false);
-    } catch (err) {
-      setError(err.message);
+    } catch {
+      setError(
+        "No se pudo editar el producto. Por favor, intenta de nuevo más tarde.",
+      );
+      openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
     }
   }
 
-  return { form, loading, error, handleChange, handleSubmit };
+  return { form, loading, error, fieldError, handleChange, handleSubmit };
 }

@@ -22,7 +22,7 @@ export default function AddProductModal({ onClose }) {
 
   const { subcategories, brands, models, inputOrders } = useCatalog();
 
-  const { form, loading, fieldError, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateProduct();
 
   return (
@@ -105,7 +105,7 @@ export default function AddProductModal({ onClose }) {
         className={fieldError("model_id")}
         minHeight="384px"
       />
-      
+
       <TagInput
         id={"product_serials"}
         name={"product_serials"}
@@ -134,6 +134,7 @@ export default function AddProductModal({ onClose }) {
       <div className="flex items-center justify-center my-2">
         <span className="dark:text-white">o</span>
       </div>
+
       {/* Botón de leer código de barras */}
       <section className="flex items-center justify-center">
         <button
@@ -162,7 +163,9 @@ export default function AddProductModal({ onClose }) {
           isOpen={true}
           onClose={() => (openInnerModal(null), onClose())}
           confirmTitle={"Producto Creado Correctamente"}
-          confirmText={"El producto ha sido creado correctamente."}
+          confirmText={
+            "El producto ha sido creado correctamente, ya puedes volver y verlo en la lista de productos."
+          }
           confirmButtonText={"Volver a la página"}
         />
       )}
@@ -173,9 +176,7 @@ export default function AddProductModal({ onClose }) {
           isOpen={true}
           onClose={() => openInnerModal(null)}
           errorTitle={"Error al crear el producto"}
-          errorText={
-            "Ha ocurrido un error al intentar crear el producto, revisa que los campos no estén vacíos y que el serial no exista."
-          }
+          errorText={error}
           confirmButtonText={"Volver a intentarlo"}
         />
       )}

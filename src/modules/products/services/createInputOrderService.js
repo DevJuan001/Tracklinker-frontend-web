@@ -13,9 +13,11 @@ export async function createInputOrderService(form) {
     },
   );
 
+  const json = await response.json();
+
   if (!response.ok) {
-    throw new Error("Error al crear la orden de entrada");
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  return await response.json();
+  return json;
 }

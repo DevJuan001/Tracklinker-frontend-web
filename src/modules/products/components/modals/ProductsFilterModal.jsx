@@ -3,11 +3,7 @@ import { useFilterProducts } from "../../hooks/useFilterProducts";
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function ProductsFilterModal({
-  filters,
-  setFilters,
-  onClose,
-}) {
+export default function ProductsFilterModal({ filters, setFilters, onClose }) {
   const { categories, subcategories, inputOrders, models, brands } =
     useCatalog();
   const { form, handleChange } = useFilterProducts(filters);
@@ -23,7 +19,11 @@ export default function ProductsFilterModal({
       orderByStartDateValue={form.start_date}
       orderByFinishDateOnChange={handleChange}
       orderByFinishDateValue={form.end_date}
-      onClose={onClose}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
+        onClose();
+      }}
     >
       <div className="w-full flex flex-col gap-2">
         {/* Ordenar Por Orden de entrada*/}
@@ -37,7 +37,6 @@ export default function ProductsFilterModal({
             value: input_order.id,
             label: input_order.bill,
           }))}
-          minHeight="384px"
         />
 
         {/* Ordenar Por Categoría */}
@@ -52,7 +51,6 @@ export default function ProductsFilterModal({
             value: category.id,
             label: category.name,
           }))}
-          minHeight="384px"
         />
 
         {/* Ordenar Por Subcategoria */}
@@ -74,7 +72,6 @@ export default function ProductsFilterModal({
               value: subcategory.subcategory_id,
               label: subcategory.subcategory_name,
             }))}
-          minHeight="384px"
         />
 
         {/* Ordenar Por Marca */}
@@ -96,7 +93,6 @@ export default function ProductsFilterModal({
               value: brand.id,
               label: brand.name,
             }))}
-          minHeight="384px"
         />
 
         {/* Ordenar Por Modelo */}
@@ -112,7 +108,6 @@ export default function ProductsFilterModal({
               value: model.id,
               label: model.model,
             }))}
-          minHeight="384px"
         />
 
         {/* Ordenar por estado */}

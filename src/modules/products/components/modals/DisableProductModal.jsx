@@ -32,6 +32,7 @@ export default function DisableProductModal({ product, onClose }) {
         confirmButtonOnClick={(e) => handleSubmit(e, onClose, openInnerModal)}
         cancelButtonOnClick={onClose}
       />
+      
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}

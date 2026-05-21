@@ -1,15 +1,14 @@
-// Hooks
-import { useState } from "react";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Constants
 import { productStatusConfig } from "../../constants/productStatusConfig";
-import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 // Components
 import Icon from "../../../../globals/components/ui/Icon";
-// Modals
-import Modal from "../../../../globals/components/modals/Modal";
 import Skeleton from "../../../../globals/components/ui/Skeleton";
 import CreateButton from "../../../../globals/components/ui/CreateButton";
+import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+// Modals
+import Modal from "../../../../globals/components/modals/Modal";
+import EditProductStatusModal from "../modals/EditProductStatusModal";
+import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function ProductsTable({
   products,
@@ -17,8 +16,6 @@ export default function ProductsTable({
   search,
   openModal,
 }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const [activeProductSerial, setActiveProductSerial] = useState(null);
   const noProducts = products.length === 0 && !loading;
   const isFirstLoad = products.length === 0 && loading;
 
@@ -42,12 +39,15 @@ export default function ProductsTable({
               >
                 <Icon name={"search_off"} size={60} />
               </div>
+
               <span className="text-2xl font-medium text-center">
                 No hay resultados para <strong>"{search}"</strong>.
               </span>
+
               <span className="text-lg text-center">
                 Intenta con otro modelo o agrega un nuevo producto.
               </span>
+
               <ul className="text-center text-sm mt-1">
                 <li>• Revisa que el modelo esté bien escrito</li>
                 <li>• Busca por correo marca o subcategoria</li>
@@ -65,10 +65,12 @@ export default function ProductsTable({
               >
                 <Icon name={"shopping_cart"} size={60} />
               </div>
+
               <div className="flex flex-col items-center">
                 <span className="font-medium text-2xl">
                   Aún no hay productos
                 </span>
+
                 <span className="text-lg text-center">
                   Agrega un nuevo producto y empieza a crecer junto a tu
                   empresa.
@@ -206,53 +208,13 @@ export default function ProductsTable({
                     deleteButtonVisible={false}
                   />
                   <button
-                    onClick={(e) => {
-                      openInnerModal("editStatus", e);
-                      setActiveProductSerial(product.product_serial);
-                    }}
+                    onClick={(e) =>
+                      openModal(product, "editStatus", null, e.currentTarget)
+                    }
                     className="flex items-center bg-white p-1.5 rounded-xl dark:bg-black"
                   >
                     <Icon name={"swap_horiz"} className="dark:brightness-200" />
                   </button>
-
-                  {innerType === "editStatus" &&
-                    activeProductSerial === product.product_serial && (
-                      <Modal
-                        triggerRef={innerTrigger}
-                        isOpen={true}
-                        onClose={() => {
-                          openInnerModal(null);
-                          setActiveProductSerial(null);
-                        }}
-                        location="anchored"
-                        type={"edit_status"}
-                      >
-                        {Object.entries(productStatusConfig)
-                          .filter(([id]) => {
-                            const numId = Number(id);
-                            if (numId === product.status) return false;
-                            if (product.status === 4 && numId === 2)
-                              return false;
-                            return true;
-                          })
-                          .map(([id, config]) => (
-                            <div
-                              key={id}
-                              onClick={(e) => {
-                                openModal(
-                                  product,
-                                  config.modalType,
-                                  null,
-                                  e.currentTarget,
-                                );
-                              }}
-                              className={`${config.optionStyles} px-4 py-3.5 rounded-3xl cursor-pointer text-sm font-normal transition-all duration-200`}
-                            >
-                              <span>{config.optionText}</span>
-                            </div>
-                          ))}
-                      </Modal>
-                    )}
                 </th>
               </tr>
             ))}
