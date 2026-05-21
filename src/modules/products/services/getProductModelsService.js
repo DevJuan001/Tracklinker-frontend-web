@@ -1,7 +1,7 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getProductModels() {
+export async function getProductModelsService() {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.products}/models`,
     {
