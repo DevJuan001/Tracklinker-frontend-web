@@ -37,10 +37,15 @@ export function useCreateInputOrder() {
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["inputOrders"] });
         openInnerModal("success", triggerButton);
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "No se pudo crear la orden de entrada. Por favor, intenta de nuevo más tarde",
+      );
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }
