@@ -10,6 +10,7 @@ export const userStatus = {
     styles:
       "w-32 bg-gray-50 text-gray-400 border-gray-200 dark:border-gray-800 dark:bg-[#75777e80]",
   },
+  
   2: {
     text: "Activo",
     modalType: "disable",
