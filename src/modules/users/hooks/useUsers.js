@@ -3,7 +3,7 @@ import { getUsers } from "../services/getUsersService";
 import { useQuery } from "@tanstack/react-query";
 
 export function useUsers() {
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState({});
 
   const users = useQuery({
     queryKey: ["users", filters],
@@ -17,6 +17,7 @@ export function useUsers() {
     users: users.data || [],
     loading: users.isLoading,
     error: users.error,
+    filters,
     setFilters,
   };
 }
