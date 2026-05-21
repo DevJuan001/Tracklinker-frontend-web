@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { createUser } from "../services/createUserService";
+import { createUserService } from "../services/createUserService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 import { getModalTrigger } from "../../../utils/getModalTrigger";
 
@@ -41,8 +41,8 @@ export function useCreateUser() {
     setLoading(true);
 
     try {
-      const response = await createUser(form);
-      
+      const response = await createUserService(form);
+
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["users"] });
         openInnerModal("success", triggerButton);
@@ -50,9 +50,9 @@ export function useCreateUser() {
         setError(response.error);
         openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError("No se pudo crear el usuario. Inténtalo de nuevo más tarde.");
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }
