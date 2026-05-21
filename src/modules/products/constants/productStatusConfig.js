@@ -10,6 +10,7 @@ export const productStatusConfig = {
     styles:
       "w-32 bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400",
   },
+
   2: {
     text: "Activo",
     modalType: "enable",
@@ -21,8 +22,10 @@ export const productStatusConfig = {
     styles:
       "w-20 bg-green-100 text-green-600 dark:bg-[#00ff151f] dark:text-[#00ff3779]",
   },
+
   3: {
     text: "Vendido",
+    modalType: "sell",
     optionText: "Vender",
     optionStyles: "hover:bg-blue-100 text-blue-600 dark:hover:bg-[#1725548c]",
     visibilityIcon: true,
@@ -31,12 +34,13 @@ export const productStatusConfig = {
     styles:
       "w-20 bg-blue-100 text-blue-600 dark:bg-[#1e3a5f] dark:text-[#60a5fa]",
   },
+
   4: {
     text: "En garantía",
+    modalType: "addWarranty",
     optionText: "Agregar garantía",
     optionStyles:
       "hover:bg-amber-100 text-amber-600 dark:text-amber-400 dark:hover:bg-[#4541036b]",
-    modalType: "addWarranty",
     visibilityIcon: true,
     icon: "schedule",
     fill: false,
