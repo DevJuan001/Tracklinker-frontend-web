@@ -82,6 +82,7 @@ export default function UsersPage() {
           triggerRef={triggerRef}
         >
           {modalType === "user" && <ProfileModal />}
+
           {modalType === "filter" && (
             <FilterUserModal
               filters={filters}
@@ -89,11 +90,11 @@ export default function UsersPage() {
               onClose={() => closeModal()}
             />
           )}
+
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
           {/* Modal para agregar un usuario */}
-          {modalType === "add" && (
-            <AddUserModal onClose={() => closeModal()} openModal={openModal} />
-          )}
+          {modalType === "add" && <AddUserModal onClose={() => closeModal()} />}
 
           {modalType === "info" && (
             <MoreInfoUser user={modalData} onClose={() => closeModal} />
@@ -108,6 +109,7 @@ export default function UsersPage() {
           {modalType === "disable" && (
             <DisableUserModal user={modalData} onClose={() => closeModal()} />
           )}
+
           {/* Modal para habilitar el usuario */}
           {modalType === "enable" && (
             <EnableUserModal user={modalData} onClose={() => closeModal()} />
