@@ -16,7 +16,6 @@ export function useEditUser(user) {
     phone: user.phone || "",
     status: user.status || "",
   });
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
@@ -42,10 +41,6 @@ export function useEditUser(user) {
     const changes = getChanges(user, form);
 
     if (Object.keys(changes).length === 0) {
-      setError(
-        "No hay cambios para actualizar, modifica un campo para actualizar la información del usuario.",
-      );
-      openInnerModal("error", triggerButton);
       return;
     }
 
@@ -53,7 +48,7 @@ export function useEditUser(user) {
 
     try {
       const response = await editUserService(user.id, changes);
-      
+
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["users"] });
         openInnerModal("success", triggerButton);
@@ -61,15 +56,13 @@ export function useEditUser(user) {
         setError(response.error);
         openInnerModal("error", triggerButton);
       }
-      
-      setData(response);
-    } catch (error) {
+    } catch {
+      setError("No se pudo editar el usuario. Inténtalo de nuevo más tarde.");
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }
   }
 
-  return { handleChange, data, handleSubmit, fieldError, loading, error, form };
+  return { handleChange, handleSubmit, fieldError, loading, error, form };
 }
