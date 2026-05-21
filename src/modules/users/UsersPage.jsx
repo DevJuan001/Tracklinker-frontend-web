@@ -22,7 +22,7 @@ import MoreInfoUser from "./components/modals/MoreInfoUser";
 export default function UsersPage() {
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
-  const { users, loading, error, setFilters } = useUsers();
+  const { users, loading, error, filters, setFilters } = useUsers();
   const [search, setSearch] = useState("");
   const filteredUsers = useSearch(users, search);
 
@@ -72,7 +72,9 @@ export default function UsersPage() {
                           : "Ayuda"
           }
           location={
-            modalType === "edit" || modalType === "info" || modalType === "add" ? "center" : "anchored"
+            modalType === "edit" || modalType === "info" || modalType === "add"
+              ? "center"
+              : "anchored"
           }
           type={modalType}
           isOpen={isOpen}
@@ -82,6 +84,7 @@ export default function UsersPage() {
           {modalType === "user" && <ProfileModal />}
           {modalType === "filter" && (
             <FilterUserModal
+              filters={filters}
               setFilters={setFilters}
               onClose={() => closeModal()}
             />
