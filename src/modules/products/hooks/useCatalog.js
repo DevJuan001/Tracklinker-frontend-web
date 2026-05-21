@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 // Services
-import { getProducts } from "../services/getProducts";
-import { getProductStatus } from "../services/getProductStatus";
-import { getProductBrands } from "../services/getProductBrands";
-import { getProductModels } from "../services/getProductModels";
+import { getProductsService } from "../services/getProductsService";
 import { getInputOrdersService } from "../services/getInputOrdersService";
+import { getProductStatusService } from "../services/getProductStatusService";
+import { getProductBrandsService } from "../services/getProductBrandsService";
+import { getProductModelsService } from "../services/getProductModelsService";
 import { getCategoriesService } from "../../categories/services/getCategoriesService";
 import { getSubcategories } from "../../subcategories/services/getSubcategoriesService";
 // Status
@@ -17,7 +17,7 @@ export function useCatalog() {
 
   const products = useQuery({
     queryKey: ["products", filters],
-    queryFn: ({ signal }) => getProducts(filters, signal),
+    queryFn: ({ signal }) => getProductsService(filters, signal),
     select: (data) =>
       data.map((product) => ({
         ...product,
@@ -40,13 +40,13 @@ export function useCatalog() {
 
   const brands = useQuery({
     queryKey: ["brands"],
-    queryFn: getProductBrands,
+    queryFn: getProductBrandsService,
     staleTime: 1000 * 60 * 10,
   });
 
   const models = useQuery({
     queryKey: ["models"],
-    queryFn: getProductModels,
+    queryFn: getProductModelsService,
     staleTime: 1000 * 60 * 10,
   });
 
@@ -58,7 +58,7 @@ export function useCatalog() {
 
   const productStatus = useQuery({
     queryKey: ["productStatus"],
-    queryFn: getProductStatus,
+    queryFn: getProductStatusService,
     staleTime: 1000 * 60 * 10,
   });
 
