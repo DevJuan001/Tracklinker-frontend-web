@@ -16,7 +16,7 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 export default function EditProductModal({ selectedProduct, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
   const { subcategories, brands, models, inputOrders } = useCatalog();
-  const { form, loading, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditProduct(selectedProduct);
 
   return (
@@ -32,6 +32,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
           value: input_order.id,
           label: input_order.bill,
         }))}
+        className={fieldError("input_order_id")}
       />
 
       <SelectMenu
@@ -44,6 +45,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
           value: subcategory.subcategory_id,
           label: subcategory.subcategory_name,
         }))}
+        className={fieldError("subcategory_id")}
       />
 
       <SelectMenu
@@ -65,6 +67,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
             value: brand.id,
             label: brand.name,
           }))}
+        className={fieldError("brand_id")}
       />
 
       <SelectMenu
@@ -80,6 +83,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
             value: model.id,
             label: model.model,
           }))}
+        className={fieldError("model_id")}
       />
 
       <FormField
@@ -88,6 +92,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
         labelText={"Serial"}
         value={form.product_serial}
         onChange={handleChange}
+        className={fieldError("product_serial")}
       />
 
       <DateField
@@ -96,6 +101,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
         value={form.warranty_time}
         spanText={"Tiempo de garantía"}
         onChange={handleChange}
+        className={fieldError("warranty_time")}
       />
 
       <SelectMenu
@@ -110,6 +116,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
           { value: 3, label: "Vendido" },
           { value: 4, label: "En garantía" },
         ]}
+        className={fieldError("status")}
       />
 
       {/* Botones */}
@@ -136,19 +143,20 @@ export default function EditProductModal({ selectedProduct, onClose }) {
             onClose();
           }}
           confirmTitle={"Producto Editado Correctamente"}
-          confirmText={"El producto ha sido editado correctamente."}
+          confirmText={
+            "El producto ha sido editado correctamente, ya puedes volver y verlo en la lista de productos."
+          }
           confirmButtonText={"Volver a la página"}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
           onClose={() => openInnerModal(null)}
           errorTitle={"Error al editar el producto"}
-          errorText={
-            "Revisa que hayas hecho cambios y que ningún campo esté vacío."
-          }
+          errorText={error}
           confirmButtonText={"Volver a intentarlo"}
         />
       )}
