@@ -85,7 +85,7 @@ export default function ProductsPage() {
               ? "anchored"
               : "center"
           }
-          growDirection={"center"}
+          growDirection={"bottom"}
           onClose={() => closeModal()}
         >
           {modalType === "user" && <ProfileModal />}
