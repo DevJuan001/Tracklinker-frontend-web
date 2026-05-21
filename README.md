@@ -12,6 +12,7 @@ Aplicación web del sistema de gestión de inventario **Tracklinker**, construid
 - [Variables de Entorno](#variables-de-entorno)
 - [Ejecución](#ejecución)
 - [Estructura del Proyecto](#estructura-del-proyecto)
+- [pnpm - Gestor de Paquetes](#pnpm---gestor-de-paquetes)
 - [Arquitectura](#arquitectura)
 - [Convenciones de Código](#convenciones-de-código)
 - [Contribuciones](#contribuciones)
@@ -20,17 +21,18 @@ Aplicación web del sistema de gestión de inventario **Tracklinker**, construid
 
 ## Tech Stack
 
-| Tecnología | Versión | Descripción |
-| ---------- | ------- | ----------- |
-| [Node.js](https://nodejs.org/) | `>= 20` | Entorno de ejecución para las herramientas de desarrollo |
-| [React](https://react.dev/) | `^19.2.0` | Librería principal para construcción de interfaces |
-| [Vite](https://vitejs.dev/) | `^7.2.4` | Bundler y servidor de desarrollo |
-| [React Router DOM](https://reactrouter.com/) | `^7.13.0` | Enrutamiento del lado del cliente (SPA) |
-| [TanStack Query](https://tanstack.com/query) | `^5.99.2` | Fetching, caché y sincronización de datos del servidor |
-| [GSAP](https://gsap.com/) | `^3.15.0` | Animaciones de alta performance (modales, transiciones) |
-| [Recharts](https://recharts.org/) | `^3.7.0` | Gráficos y visualización de datos en el dashboard |
-| [TailwindCSS](https://tailwindcss.com/) | `^3.4.19` | Framework de utilidades CSS |
-| [Docker](https://www.docker.com/) | `latest` | Contenedorización y despliegue con Nginx |
+| Tecnología                                   | Versión   | Descripción                                              |
+| -------------------------------------------- | --------- | -------------------------------------------------------- |
+| [Node.js](https://nodejs.org/)               | `>= 20`   | Entorno de ejecución para las herramientas de desarrollo |
+| [pnpm](https://pnpm.io/)                     | `>= 8`    | Gestor de paquetes eficiente y reproducible              |
+| [React](https://react.dev/)                  | `^19.2.0` | Librería principal para construcción de interfaces       |
+| [Vite](https://vitejs.dev/)                  | `^7.2.4`  | Bundler y servidor de desarrollo                         |
+| [React Router DOM](https://reactrouter.com/) | `^7.13.0` | Enrutamiento del lado del cliente (SPA)                  |
+| [TanStack Query](https://tanstack.com/query) | `^5.99.2` | Fetching, caché y sincronización de datos del servidor   |
+| [GSAP](https://gsap.com/)                    | `^3.15.0` | Animaciones de alta performance (modales, transiciones)  |
+| [Recharts](https://recharts.org/)            | `^3.7.0`  | Gráficos y visualización de datos en el dashboard        |
+| [TailwindCSS](https://tailwindcss.com/)      | `^3.4.19` | Framework de utilidades CSS                              |
+| [Docker](https://www.docker.com/)            | `latest`  | Contenedorización y despliegue con Nginx                 |
 
 ---
 
@@ -39,8 +41,43 @@ Aplicación web del sistema de gestión de inventario **Tracklinker**, construid
 Antes de comenzar, asegúrate de tener instalado:
 
 - [Node.js](https://nodejs.org/) `>= 20`
-- [npm](https://www.npmjs.com/) (incluido con Node.js)
-- [Docker](https://www.docker.com/) *(opcional, solo para contenedorización)*
+- [pnpm](https://pnpm.io/) `>= 8` (gestor de paquetes recomendado)
+- [Docker](https://www.docker.com/) _(opcional, solo para contenedorización)_
+
+### Instalación de pnpm
+
+Si aún no tienes pnpm instalado, puedes instalarlo de varias formas:
+
+#### Opción 1: Con npm (recomendado)
+
+```bash
+npm install -g pnpm
+```
+
+#### Opción 2: Con Corepack (incluido con Node.js 16.13+)
+
+```bash
+corepack enable
+corepack prepare pnpm@latest --activate
+```
+
+#### Opción 3: Con Homebrew (macOS)
+
+```bash
+brew install pnpm
+```
+
+#### Opción 4: Con Chocolatey (Windows)
+
+```bash
+choco install pnpm
+```
+
+Verifica la instalación:
+
+```bash
+pnpm --version
+```
 
 ---
 
@@ -51,13 +88,15 @@ Antes de comenzar, asegúrate de tener instalado:
 git clone https://github.com/DevJuan001/Tracklinker-frontend-web.git
 cd Tracklinker-frontend-web
 
-# 2. Instalar dependencias
-npm install
+# 2. Instalar dependencias con pnpm
+pnpm install
 
 # 3. Configurar variables de entorno
 cp .env.example .env
 # Editar .env con los valores correspondientes
 ```
+
+> **Nota:** Este proyecto utiliza **pnpm workspace** (`pnpm-workspace.yaml`) para gestionar las dependencias de forma eficiente.
 
 ---
 
@@ -65,8 +104,8 @@ cp .env.example .env
 
 Crea un archivo `.env` en la raíz del proyecto basándote en `.env.example`:
 
-| Variable | Tipo | Descripción |
-| -------- | ---- | ----------- |
+| Variable       | Tipo     | Descripción                                                       |
+| -------------- | -------- | ----------------------------------------------------------------- |
 | `VITE_API_URL` | `string` | URL base de la API REST del backend (ej: `http://localhost:8000`) |
 
 > **Nota:** Todas las variables del frontend deben comenzar con el prefijo `VITE_` para ser accesibles en el código del cliente.
@@ -75,18 +114,20 @@ Crea un archivo `.env` en la raíz del proyecto basándote en `.env.example`:
 
 ## Ejecución
 
+### Scripts disponibles
+
 ```bash
 # Servidor de desarrollo (con hot reload)
-npm run dev
+pnpm dev
 
 # Lint del código
-npm run lint
+pnpm lint
 
 # Build de producción
-npm run build
+pnpm build
 
 # Preview del build de producción
-npm run preview
+pnpm preview
 ```
 
 ### Con Docker
@@ -98,6 +139,8 @@ docker build -t tracklinker-web .
 # Ejecutar el contenedor (accesible en http://localhost:80)
 docker run -p 80:80 tracklinker-web
 ```
+
+> **Nota:** El Dockerfile está configurado para usar npm. Si prefieres usar pnpm en Docker, ver la sección de [Customización del Dockerfile](#customización-del-dockerfile) más abajo.
 
 ---
 
@@ -298,6 +341,66 @@ Tracklinker-frontend-web/
 
 ---
 
+## pnpm - Gestor de Paquetes
+
+### ¿Por qué pnpm?
+
+Este proyecto utiliza **pnpm** como gestor de paquetes preferido por las siguientes ventajas:
+
+| Ventaja | Descripción |
+| ------- | ----------- |
+| **Eficiencia de espacio** | Utiliza hard links y content-addressable storage, reduciendo el uso de disco en un ~60% |
+| **Rendimiento** | Instalación más rápida gracias a su arquitectura optimizada |
+| **Seguridad** | Estructura de node_modules más estricta que previene acceso a dependencias no declaradas |
+| **Monorepo** | Soporte nativo para workspaces (`pnpm-workspace.yaml`) |
+| **Reproducibilidad** | `pnpm-lock.yaml` garantiza instalaciones idénticas en diferentes máquinas |
+
+### Comandos comunes con pnpm
+
+| Comando | Descripción |
+| ------- | ----------- |
+| `pnpm install` | Instala todas las dependencias |
+| `pnpm add <package>` | Añade una nueva dependencia |
+| `pnpm add <package> -D` | Añade una dependencia de desarrollo |
+| `pnpm remove <package>` | Elimina una dependencia |
+| `pnpm update` | Actualiza todas las dependencias |
+| `pnpm list` | Lista todas las dependencias instaladas |
+| `pnpm exec <command>` | Ejecuta un comando en el contexto del proyecto |
+
+### Customización del Dockerfile
+
+Si deseas usar **pnpm** en el Dockerfile, reemplaza el `Dockerfile` con lo siguiente:
+
+```dockerfile
+# Stage 1: Build the React app with pnpm
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Instalar pnpm
+RUN npm install -g pnpm
+
+# Copiar archivos de lock y package
+COPY pnpm-lock.yaml ./
+COPY package.json ./
+
+# Instalar dependencias
+RUN pnpm install --frozen-lockfile
+
+# Copiar el resto del código
+COPY . .
+
+# Build
+RUN pnpm build
+
+# Stage 2: Serve the React app with Nginx
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+---
+
 ## Arquitectura
 
 El proyecto sigue una **arquitectura modular por dominio de negocio**, donde cada módulo es autónomo y contiene todo lo necesario para funcionar:
@@ -306,13 +409,13 @@ El proyecto sigue una **arquitectura modular por dominio de negocio**, donde cad
 Página (Page) → Hook → Servicio (Service) → API
 ```
 
-| Capa | Responsabilidad |
-| ---- | --------------- |
-| **Page** | Componente de ruta raíz que orquesta los hooks y renderiza la UI |
-| **Components** | Componentes de presentación (tablas, modales, formularios) |
-| **Hooks** | Lógica de negocio del cliente: estado, mutaciones y efecto secundarios |
-| **Services** | Funciones de comunicación con la API REST |
-| **globals/** | Componentes, hooks y servicios reutilizables entre todos los módulos |
+| Capa           | Responsabilidad                                                        |
+| -------------- | ---------------------------------------------------------------------- |
+| **Page**       | Componente de ruta raíz que orquesta los hooks y renderiza la UI       |
+| **Components** | Componentes de presentación (tablas, modales, formularios)             |
+| **Hooks**      | Lógica de negocio del cliente: estado, mutaciones y efecto secundarios |
+| **Services**   | Funciones de comunicación con la API REST                              |
+| **globals/**   | Componentes, hooks y servicios reutilizables entre todos los módulos   |
 
 ### Flujo de una mutación (crear/editar)
 
@@ -327,37 +430,37 @@ Usuario → Componente (formulario) → Hook (useMutation de React Query)
 
 ### Nombres de archivos y carpetas
 
-| Elemento | Convención | Ejemplo |
-| -------- | ---------- | ------- |
-| Componentes React | `PascalCase` | `ProductsPage.jsx`, `Modal.jsx` |
-| Hooks | `camelCase` con prefijo `use` | `useCreateProduct.js` |
-| Servicios | `camelCase` con verbo + entidad | `createProductService.js` |
-| Constantes | `camelCase` | `routesConfig.js`, `asideMenuItems.js` |
-| Estilos CSS | `kebab-case` | `global.css`, `loader.css` |
-| Carpetas de módulos | `kebab-case` | `products/`, `output-orders/` |
+| Elemento            | Convención                      | Ejemplo                                |
+| ------------------- | ------------------------------- | -------------------------------------- |
+| Componentes React   | `PascalCase`                    | `ProductsPage.jsx`, `Modal.jsx`        |
+| Hooks               | `camelCase` con prefijo `use`   | `useCreateProduct.js`                  |
+| Servicios           | `camelCase` con verbo + entidad | `createProductService.js`              |
+| Constantes          | `camelCase`                     | `routesConfig.js`, `asideMenuItems.js` |
+| Estilos CSS         | `kebab-case`                    | `global.css`, `loader.css`             |
+| Carpetas de módulos | `kebab-case`                    | `products/`, `output-orders/`          |
 
 ### Nomenclatura de Hooks
 
 Los hooks siguen el patrón `use` + acción + entidad según su responsabilidad:
 
-| Patrón | Uso | Ejemplo |
-| ------- | --- | ------- |
-| `use<Entidad>s` | Listado y fetching de datos | `useWarranties`, `useProducts` |
-| `useCreate<Entidad>` | Creación de un recurso | `useCreateProduct`, `useCreateWarranty` |
-| `useEdit<Entidad>` | Edición de un recurso | `useEditProduct`, `useEditWarranty` |
-| `useFilter<Entidad>s` | Manejo del estado de filtros | `useFilterProducts`, `useFilterWarranties` |
-| `useUpdate<Entidad>Status` | Cambio de estado/estatus | `useUpdateProductStatus` |
+| Patrón                     | Uso                          | Ejemplo                                    |
+| -------------------------- | ---------------------------- | ------------------------------------------ |
+| `use<Entidad>s`            | Listado y fetching de datos  | `useWarranties`, `useProducts`             |
+| `useCreate<Entidad>`       | Creación de un recurso       | `useCreateProduct`, `useCreateWarranty`    |
+| `useEdit<Entidad>`         | Edición de un recurso        | `useEditProduct`, `useEditWarranty`        |
+| `useFilter<Entidad>s`      | Manejo del estado de filtros | `useFilterProducts`, `useFilterWarranties` |
+| `useUpdate<Entidad>Status` | Cambio de estado/estatus     | `useUpdateProductStatus`                   |
 
 ### Nomenclatura de Servicios
 
 Los servicios siguen el patrón verbo HTTP + entidad:
 
-| Patrón | Verbo HTTP | Ejemplo |
-| ------- | ---------- | ------- |
-| `get<Entidad>s` | `GET` | `getProducts.js`, `getWarranties.js` |
-| `create<Entidad>` | `POST` | `createProductService.js` |
-| `update<Entidad>` | `PUT` / `PATCH` | `updateWarranty.js` |
-| `disable<Entidad>` | `PATCH` (cambio de estado) | `disableWarranty.js` |
+| Patrón             | Verbo HTTP                 | Ejemplo                              |
+| ------------------ | -------------------------- | ------------------------------------ |
+| `get<Entidad>s`    | `GET`                      | `getProducts.js`, `getWarranties.js` |
+| `create<Entidad>`  | `POST`                     | `createProductService.js`            |
+| `update<Entidad>`  | `PUT` / `PATCH`            | `updateWarranty.js`                  |
+| `disable<Entidad>` | `PATCH` (cambio de estado) | `disableWarranty.js`                 |
 
 ---
 
