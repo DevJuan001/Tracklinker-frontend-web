@@ -29,36 +29,42 @@ export function useCatalog() {
   const categories = useQuery({
     queryKey: ["categories"],
     queryFn: getCategoriesService,
+    select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
   });
 
   const subcategories = useQuery({
     queryKey: ["subcategories"],
     queryFn: getSubcategories,
+    select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
   });
 
   const brands = useQuery({
     queryKey: ["brands"],
     queryFn: getProductBrandsService,
+    select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
   });
 
   const models = useQuery({
     queryKey: ["models"],
     queryFn: getProductModelsService,
+    select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
   });
 
   const inputOrders = useQuery({
     queryKey: ["inputOrders"],
     queryFn: getInputOrdersService,
+    select: (data) => data ?? [],
     staleTime: 1000 * 60 * 5,
   });
 
   const productStatus = useQuery({
     queryKey: ["productStatus"],
     queryFn: getProductStatusService,
+    select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
   });
 
