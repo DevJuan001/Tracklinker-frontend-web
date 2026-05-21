@@ -1,14 +1,16 @@
 // Hooks
 import { useDisableUser } from "../../hooks/useDisableUser";
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function DisableUserModal({ user, onClose }) {
-  const { handleSubmit, loading } = useDisableUser(user.id);
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { loading, error, handleSubmit } = useDisableUser(user.id);
+
   return (
     <section className="flex flex-col justify-center items-center dark:text-white">
       <p>
@@ -25,9 +27,22 @@ export default function DisableUserModal({ user, onClose }) {
         confirmBgColor="red-600"
         confirmDarkBgColor=""
         cancelText={"Cancelar"}
-        confirmButtonOnClick={(e) => handleSubmit(e, onClose)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
         cancelButtonOnClick={onClose}
       />
+
+      {innerType === "error" && (
+        <ErrorModal
+          location="anchored"
+          growDirection={"top-right"}
+          triggerRef={innerTrigger}
+          isOpen={true}
+          errorTitle="¡No se pudo deshabilitar el usuario!"
+          errorText={error}
+          confirmButtonText="Volver a intentarlo"
+          onClose={() => openInnerModal(null)}
+        />
+      )}
     </section>
   );
 }
