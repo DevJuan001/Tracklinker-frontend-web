@@ -73,20 +73,21 @@ export default function UsersList({ users, loading, search, openModal }) {
           />
         </div>
       )}
-      <ul className="h-full flex flex-col gap-1">
-        {isFirstLoad ? (
-          <Skeleton
-            height="80px"
-            count={11}
-            backgroundColor={"#F3EEF5"}
-            darkModeBackgroundColor={"#101012"}
-            shineColor="#C5C1C7"
-            darkModeShineColor="#1e1e1e"
-            borderRadius={12}
-            marginBottom={2}
-          />
-        ) : (
-          users.map((user) => (
+
+      {isFirstLoad ? (
+        <Skeleton
+          height="80px"
+          count={11}
+          backgroundColor={"#F3EEF5"}
+          darkModeBackgroundColor={"#101012"}
+          shineColor="#C5C1C7"
+          darkModeShineColor="#1e1e1e"
+          borderRadius={12}
+          marginBottom={2}
+        />
+      ) : (
+        <ul className="h-full flex flex-col gap-1">
+          {users.map((user) => (
             // Usuarios
             <UserItem
               key={user.id}
@@ -101,9 +102,9 @@ export default function UsersList({ users, loading, search, openModal }) {
                 openModal(user, "edit", null, e.currentTarget);
               }}
             />
-          ))
-        )}
-      </ul>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
