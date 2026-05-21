@@ -41,10 +41,15 @@ export function useCreateProduct() {
       if (response.success == true) {
         await queryClient.invalidateQueries({ queryKey: ["products"] });
         openInnerModal("success", triggerButton);
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "No se pudo crear el producto. Por favor, intenta de nuevo más tarde",
+      );
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }
