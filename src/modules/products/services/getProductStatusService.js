@@ -1,7 +1,7 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getProductStatus() {
+export async function getProductStatusService() {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.products}/status`,
     {
