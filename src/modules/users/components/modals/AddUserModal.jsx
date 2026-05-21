@@ -125,25 +125,24 @@ export default function AddUserModal({ onClose }) {
       {/* Modales Internas */}
       {innerType === "success" && (
         <SuccessModal
-          location="anchored"
-          growDirection={"top-right"}
+          location="center"
           triggerRef={innerTrigger}
           isOpen={true}
           confirmTitle={"Usuario creado con éxito!"}
           confirmText={
-            "Se ha creado correctamente el usuario, toca el botón de volver a la pagina para verlo, ¡Bienvenido!"
+            "Se ha creado correctamente el usuario, toca el botón de volver a la pagina para verlo."
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            onClose();
             openInnerModal(null);
+            onClose();
           }}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
-          location="anchored"
-          growDirection={"top-right"}
+          location="center"
           triggerRef={innerTrigger}
           isOpen={true}
           errorTitle="No se pudo completar el registro!"
