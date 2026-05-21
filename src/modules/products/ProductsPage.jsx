@@ -13,10 +13,8 @@ import Modal from "../../globals/components/modals/Modal";
 import HelpModal from "../../globals/components/modals/HelpModal";
 import AddProductModal from "./components/modals/AddProductModal";
 import EditProductModal from "./components/modals/EditProductModal";
-import EnableProductModal from "./components/modals/EnableProductModal";
 import ProductsFilterModal from "./components/modals/ProductsFilterModal";
-import DisableProductModal from "./components/modals/DisableProductModal";
-import AddWarrantyModal from "../warranties/components/modals/AddWarrantyModal";
+import EditProductStatusModal from "./components/modals/EditProductStatusModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function ProductsPage() {
@@ -83,9 +81,7 @@ export default function ProductsPage() {
           isOpen={isOpen}
           triggerRef={triggerRef}
           location={
-            modalType === "filter" ||
-            modalType === "enable" ||
-            modalType === "disable"
+            modalType === "filter" || modalType === "editStatus"
               ? "anchored"
               : "center"
           }
@@ -112,24 +108,10 @@ export default function ProductsPage() {
             <EditProductModal selectedProduct={modalData} />
           )}
 
-          {modalType === "disable" && (
-            <DisableProductModal
+          {modalType === "editStatus" && (
+            <EditProductStatusModal
               product={modalData}
               onClose={() => closeModal()}
-            />
-          )}
-
-          {modalType === "enable" && (
-            <EnableProductModal
-              product={modalData}
-              onClose={() => closeModal()}
-            />
-          )}
-
-          {modalType === "addWarranty" && (
-            <AddWarrantyModal
-              product={modalData}
-              onAddSuccess={() => closeModal()}
             />
           )}
         </Modal>
