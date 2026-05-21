@@ -16,7 +16,7 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
   const { suppliers } = useSuppliers();
-  const { form, loading, fieldError, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateInputOrder();
 
   return (
@@ -57,6 +57,7 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
           cancelButtonOnClick={onClose}
         />
       </section>
+
       {/* Modales Internas */}
       {innerType === "success" && (
         <SuccessModal
@@ -73,6 +74,7 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
           }
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
@@ -80,9 +82,7 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
           onClose={() => openInnerModal(null)}
           confirmButtonText={"Volver a intentarlo"}
           errorTitle={"!No se pudo crear la orden!"}
-          errorText={
-            "Revisa que todos los campos tengan datos y vuelve a intentarlo"
-          }
+          errorText={error}
         />
       )}
     </AddInnerModal>

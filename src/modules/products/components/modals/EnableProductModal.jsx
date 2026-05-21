@@ -1,14 +1,15 @@
 // Hooks
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import { useUpdateProductStatus } from "../../hooks/useUpdateProductStatus";
 // Components
 import Loader from "../../../../globals/components/ui/Loader";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modals
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EnableProductModal({ product, onClose }) {
-  const { handleSubmit, loading } = useUpdateProductStatus({
+  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { loading, error, handleSubmit } = useUpdateProductStatus({
     product_id: product.product_id,
     product_serial: product.product_serial,
     status: 2,
@@ -26,9 +27,22 @@ export default function EnableProductModal({ product, onClose }) {
         confirmText={loading ? <Loader /> : "Habilitar"}
         confirmDarkBgColor=""
         cancelText={"Cancelar"}
-        confirmButtonOnClick={(e) => handleSubmit(e, onClose)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
         cancelButtonOnClick={onClose}
       />
+
+      {innerType === "error" && (
+        <ErrorModal
+          triggerRef={innerTrigger}
+          isOpen={true}
+          location="anchored"
+          growDirection={"center"}
+          confirmButtonText={"Volver a intentarlo"}
+          errorTitle={"¡No se pudo habilitar el producto!"}
+          errorText={error}
+          onClose={() => openInnerModal(null)}
+        />
+      )}
     </section>
   );
 }

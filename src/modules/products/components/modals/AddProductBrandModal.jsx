@@ -12,7 +12,7 @@ import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, fieldError, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateProductBrand();
 
   return (
@@ -59,6 +59,7 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
           confirmButtonText={"Volver"}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
@@ -66,7 +67,7 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
           onClose={() => openInnerModal(null)}
           confirmButtonText={"Volver a intentarlo"}
           errorTitle={"!No se pudo crear la marca!"}
-          errorText={"Revisa que el campo tenga datos y vuelve a intentarlo"}
+          errorText={error}
         />
       )}
     </AddInnerModal>

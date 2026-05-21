@@ -16,7 +16,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
   const { brands } = useCatalog();
-  const { form, loading, fieldError, handleChange, handleSubmit } =
+  const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateProductModel();
 
   return (
@@ -38,7 +38,6 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
             label: brand.name,
           }))}
           className={fieldError("brand_id")}
-          minHeight="384px"
         />
 
         <FormField
@@ -48,6 +47,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
           labelText={"Modelo"}
           onChange={handleChange}
           placeholder={"Impresora a color"}
+          className={fieldError("model")}
         />
 
         <FormField
@@ -57,7 +57,8 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
           labelText={"Descripción"}
           name={"description"}
           onChange={handleChange}
-          placeholder={"Impresora multicolor "}
+          placeholder={"Impresora multicolor"}
+          className={fieldError("description")}
         />
 
         <ConfirmCancelButtons
@@ -87,9 +88,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
             onClose={() => closeInnerModal()}
             confirmButtonText={"Volver a intentarlo"}
             errorTitle={"!No se pudo crear el modelo!"}
-            errorText={
-              "Revisa que los campos tengan datos y vuelve a intentarlo"
-            }
+            errorText={error}
           />
         )}
       </section>

@@ -13,10 +13,8 @@ import Modal from "../../globals/components/modals/Modal";
 import HelpModal from "../../globals/components/modals/HelpModal";
 import AddProductModal from "./components/modals/AddProductModal";
 import EditProductModal from "./components/modals/EditProductModal";
-import EnableProductModal from "./components/modals/EnableProductModal";
 import ProductsFilterModal from "./components/modals/ProductsFilterModal";
-import DisableProductModal from "./components/modals/DisableProductModal";
-import AddWarrantyModal from "../warranties/components/modals/AddWarrantyModal";
+import EditProductStatusModal from "./components/modals/EditProductStatusModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function ProductsPage() {
@@ -83,46 +81,37 @@ export default function ProductsPage() {
           isOpen={isOpen}
           triggerRef={triggerRef}
           location={
-            modalType === "filter" ||
-            modalType === "enable" ||
-            modalType === "disable"
+            modalType === "filter" || modalType === "editStatus"
               ? "anchored"
               : "center"
           }
-          growDirection={"center"}
+          growDirection={"bottom"}
           onClose={() => closeModal()}
         >
           {modalType === "user" && <ProfileModal />}
+
           {modalType === "filter" && (
             <ProductsFilterModal filters={filters} setFilters={setFilters} />
           )}
+
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
           {modalType === "add" && (
             <AddProductModal
               selectedProduct={modalData}
               openModal={openModal}
             />
           )}
+
           {/* Modal para editar el producto */}
           {modalType === "edit" && (
             <EditProductModal selectedProduct={modalData} />
           )}
-          {modalType === "disable" && (
-            <DisableProductModal
+
+          {modalType === "editStatus" && (
+            <EditProductStatusModal
               product={modalData}
               onClose={() => closeModal()}
-            />
-          )}
-          {modalType === "enable" && (
-            <EnableProductModal
-              product={modalData}
-              onClose={() => closeModal()}
-            />
-          )}
-          {modalType === "addWarranty" && (
-            <AddWarrantyModal
-              product={modalData}
-              onAddSuccess={() => closeModal()}
             />
           )}
         </Modal>

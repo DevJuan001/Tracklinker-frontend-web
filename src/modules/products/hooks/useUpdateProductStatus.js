@@ -9,7 +9,7 @@ export function useUpdateProductStatus(product_data) {
   const [error, setError] = useState(null);
   const queryClient = useQueryClient();
 
-  async function handleSubmit(e, onClose, openInnerModal) {
+  async function handleSubmit(e, openInnerModal, onClose) {
     e.preventDefault();
 
     const triggerButton = getModalTrigger(e);
@@ -22,13 +22,15 @@ export function useUpdateProductStatus(product_data) {
         queryClient.invalidateQueries({ queryKey: ["products"] });
         onClose();
       } else {
+        setError(response.error);
         openInnerModal("error", triggerButton);
-        setError(response.error)
       }
       setLoading(false);
-    } catch (err) {
+    } catch {
+      setError(
+        "No se pudo editar el estado del producto. Por favor, intenta de nuevo más tarde",
+      );
       openInnerModal("error", triggerButton);
-      setError(err.message);
     } finally {
       setLoading(false);
     }

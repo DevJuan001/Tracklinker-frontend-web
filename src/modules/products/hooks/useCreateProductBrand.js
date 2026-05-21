@@ -37,10 +37,14 @@ export function useCreateProductBrand() {
         queryClient.invalidateQueries({ queryKey: ["brands"] });
         openInnerModal("success", triggerButton);
       } else {
+        setError(response.error);
         openInnerModal("error", triggerButton);
       }
-    } catch (error) {
-      setError(error);
+    } catch {
+      setError(
+        "No se pudo crear la marca. Por favor, intenta de nuevo más tarde",
+      );
+      openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
     }

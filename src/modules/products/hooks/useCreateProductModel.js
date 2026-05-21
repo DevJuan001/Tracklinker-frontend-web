@@ -38,9 +38,14 @@ export function useCreateProductModel() {
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["models"] });
         openInnerModal("success", triggerButton);
+      } else {
+        setError(response.error);
+        openInnerModal("error", triggerButton);
       }
-    } catch (error) {
-      setError(error);
+    } catch {
+      setError(
+        "No se pudo crear el modelo. Por favor, intenta de nuevo más tarde",
+      );
       openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
