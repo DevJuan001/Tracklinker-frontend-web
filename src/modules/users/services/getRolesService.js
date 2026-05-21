@@ -1,7 +1,7 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getRoles() {
+export async function getRolesService() {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.users}/roles`,
     {

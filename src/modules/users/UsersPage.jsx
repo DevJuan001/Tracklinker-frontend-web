@@ -13,16 +13,16 @@ import EditUserInfoModal from "./components/modals/EditUserInfoModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 // Componentes
 import UsersList from "./components/ui/UsersList";
+import MoreInfoUser from "./components/modals/MoreInfoUser";
 import Layout from "../../globals/components/Layout/Layout";
 import SearchBar from "../../globals/components/ui/SearchBar";
 import TopSection from "../../globals/components/ui/TopSection";
 import EnableUserModal from "./components/modals/EnableUserModal";
-import MoreInfoUser from "./components/modals/MoreInfoUser";
 
 export default function UsersPage() {
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
-  const { users, loading, error, setFilters } = useUsers();
+  const { users, loading, error, filters, setFilters } = useUsers();
   const [search, setSearch] = useState("");
   const filteredUsers = useSearch(users, search);
 
@@ -72,7 +72,9 @@ export default function UsersPage() {
                           : "Ayuda"
           }
           location={
-            modalType === "edit" || modalType === "info" || modalType === "add" ? "center" : "anchored"
+            modalType === "edit" || modalType === "info" || modalType === "add"
+              ? "center"
+              : "anchored"
           }
           type={modalType}
           isOpen={isOpen}
@@ -80,17 +82,19 @@ export default function UsersPage() {
           triggerRef={triggerRef}
         >
           {modalType === "user" && <ProfileModal />}
+
           {modalType === "filter" && (
             <FilterUserModal
+              filters={filters}
               setFilters={setFilters}
               onClose={() => closeModal()}
             />
           )}
+
           {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
           {/* Modal para agregar un usuario */}
-          {modalType === "add" && (
-            <AddUserModal onClose={() => closeModal()} openModal={openModal} />
-          )}
+          {modalType === "add" && <AddUserModal onClose={() => closeModal()} />}
 
           {modalType === "info" && (
             <MoreInfoUser user={modalData} onClose={() => closeModal} />
@@ -105,6 +109,7 @@ export default function UsersPage() {
           {modalType === "disable" && (
             <DisableUserModal user={modalData} onClose={() => closeModal()} />
           )}
+
           {/* Modal para habilitar el usuario */}
           {modalType === "enable" && (
             <EnableUserModal user={modalData} onClose={() => closeModal()} />

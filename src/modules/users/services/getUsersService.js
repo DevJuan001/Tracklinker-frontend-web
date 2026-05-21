@@ -2,7 +2,7 @@ import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 import { buildQueryParams } from "../../../utils/buildQueryParams";
 
-export async function getUsers(signal, filters = {}) {
+export async function getUsersService(signal, filters = {}) {
   const params = buildQueryParams(filters);
 
   const res = await fetchWithAuth(

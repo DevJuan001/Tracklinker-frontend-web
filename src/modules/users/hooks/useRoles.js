@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { getRoles } from "../services/getRolesService";
+import { getRolesService } from "../services/getRolesService";
 
 export function useRoles() {
   const roles = useQuery({
     queryKey: ["roles"],
     queryFn: async ({ signal }) => {
-      return getRoles(signal);
+      return getRolesService(signal);
     },
     staleTime: 1000 * 60 * 30
   });

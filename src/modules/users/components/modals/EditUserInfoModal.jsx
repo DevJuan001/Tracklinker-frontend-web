@@ -133,8 +133,9 @@ export default function EditUserInfoModal({ user, onClose }) {
       {/* Modales Internas */}
       {innerType === "success" && (
         <SuccessModal
-          triggerRef={innerTrigger}
           isOpen={true}
+          location="center"
+          triggerRef={innerTrigger}
           confirmTitle={"Información editada con éxito!"}
           confirmText={
             "Se ha editado correctamente el usuario, toca el botón de volver a la pagina para verlo"
@@ -146,10 +147,12 @@ export default function EditUserInfoModal({ user, onClose }) {
           }}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
-          triggerRef={innerTrigger}
           isOpen={true}
+          location="center"
+          triggerRef={innerTrigger}
           errorTitle="¡No se pudo actualizar el usuario!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
