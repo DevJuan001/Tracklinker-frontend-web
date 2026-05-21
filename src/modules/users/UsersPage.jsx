@@ -13,11 +13,11 @@ import EditUserInfoModal from "./components/modals/EditUserInfoModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 // Componentes
 import UsersList from "./components/ui/UsersList";
+import MoreInfoUser from "./components/modals/MoreInfoUser";
 import Layout from "../../globals/components/Layout/Layout";
 import SearchBar from "../../globals/components/ui/SearchBar";
 import TopSection from "../../globals/components/ui/TopSection";
 import EnableUserModal from "./components/modals/EnableUserModal";
-import MoreInfoUser from "./components/modals/MoreInfoUser";
 
 export default function UsersPage() {
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
