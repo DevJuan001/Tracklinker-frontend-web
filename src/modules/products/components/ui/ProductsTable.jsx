@@ -225,7 +225,7 @@ export default function ProductsTable({
                           setActiveProductSerial(null);
                         }}
                         location="anchored"
-                        type={"edit_status"}
+                        type={"editStatus"}
                       >
                         {Object.entries(productStatusConfig)
                           .filter(([id]) => {
