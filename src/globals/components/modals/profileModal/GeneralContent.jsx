@@ -1,14 +1,12 @@
 // Hooks
-import { useNavigate } from "react-router-dom";
-// Services
-import { logout } from "../../../../modules/login/services/authService";
+import { useLogout } from "../../../hooks/useLogout";
 // Componentes
 import Icon from "../../ui/Icon";
 // Icons
 import { asideIcons } from "../../../../assets/icons/asideIcons";
 
 export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
-  const navigate = useNavigate();
+  const { logout } = useLogout();
 
   return (
     <div className="h-full w-full flex flex-col gap-7 animate-blurUp dark:text-white">
@@ -39,11 +37,7 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
           className="flex items-center gap-1.5 px-4 py-3 rounded-lg bg-black text-white
           dark:bg-[#20202296] dark:hover:text-gray-300"
         >
-          <Icon
-            name={"app_registration"}
-            color={"#fff"}
-            size={21}
-          />
+          <Icon name={"app_registration"} color={"#fff"} size={21} />
 
           <span className="text-sm font-medium">Editar</span>
         </button>
@@ -59,11 +53,7 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
           className="flex items-center gap-1.5 px-4 py-3 rounded-lg bg-black text-sm bg-blacktransition text-white
           dark:bg-[#20202296] dark:text-white dark:hover:text-gray-300"
         >
-          <Icon
-            name={"edit_square"}
-            color={"#fff"}
-            size={20}
-          />
+          <Icon name={"edit_square"} color={"#fff"} size={20} />
 
           <span className="font-medium">Cambiar</span>
         </button>
@@ -77,15 +67,11 @@ export default function GeneralContent({ user, onEditClick, onPasswordClick }) {
           </span>
         </section>
         <button
-          onClick={() => logout(navigate)}
+          onClick={() => logout()}
           className="flex items-center gap-1.5 px-4 py-3 rounded-lg bg-black text-sm bg-blacktransition text-white
           dark:bg-[#20202296] dark:text-white dark:hover:text-gray-300"
         >
-          <Icon
-            name="logout"
-            size={22}
-            color={"#fff"}
-          />
+          <Icon name="logout" size={22} color={"#fff"} />
           <span className="font-medium">Cerrar Sesion</span>
         </button>
       </section>
