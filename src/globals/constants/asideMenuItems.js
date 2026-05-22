@@ -1,6 +1,4 @@
-// Aqui se almacenan constantes que su contenido son listas fijas y cosas que casi nunca cambian
-import { asideIcons } from "../assets/icons/asideIcons";
-import { logout } from "../modules/login/services/authService";
+import { asideIcons } from "../../assets/icons/asideIcons";
 
 export const avatarItem = {
   name: "avatar",
@@ -17,7 +15,7 @@ export const firstSectionItems = [
   },
   {
     name: "Panel",
-    nameTwo: "De Control",
+    secondName: "De Control",
     path: "/dashboard",
     icon: "space_dashboard",
   },
@@ -72,7 +70,6 @@ export const secondSectionItems = [
     name: "Cerrar Sesión",
     path: "/",
     icon: "logout",
-    onClick: logout || null,
   },
 ];
 
@@ -126,9 +123,12 @@ export const mobileItems = [
     icon: "shuffle",
   },
   {
+    name: "Ayuda",
+    icon: "feedback",
+  },
+  {
     name: "Salir",
     path: "/",
     icon: "logout",
-    onClick: logout,
   },
 ];
