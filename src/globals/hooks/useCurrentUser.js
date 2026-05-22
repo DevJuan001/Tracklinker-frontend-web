@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCurrentUserService } from "../services/getCurrentUserService";
 
-export function useUser() {
+export function useCurrentUser() {
   const currentUser = useQuery({
     queryKey: ["currentUser"],
     queryFn: getCurrentUserService,
     staleTime: 1000 * 60 * 60,
   });
 
-  const userData = currentUser.data?.data?.[0] || null;
+  const userData = currentUser.data?.data?.[0] || [];
 
   function hasRole(roles) {
     if (!userData?.role) return false;
@@ -17,7 +17,7 @@ export function useUser() {
   }
 
   return {
-    user: userData || [],
+    user: userData,
     hasRole,
     loading: currentUser.isLoading,
     error: currentUser.error,
