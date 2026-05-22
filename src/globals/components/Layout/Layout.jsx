@@ -1,4 +1,4 @@
-import Aside from "./Aside";
+import Aside from "./aside/Aside";
 
 export default function Layout({ avatarOnClick, helpOnClick, children }) {
   return (
