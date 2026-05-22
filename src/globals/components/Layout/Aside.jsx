@@ -1,5 +1,5 @@
 // Hooks
-import { useUser } from "../../hooks/useUser";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useModal } from "../../hooks/useModal";
 import { NavLink } from "react-router-dom";
 // Constants
@@ -16,7 +16,7 @@ import Modal from "../modals/Modal";
 
 // Menú lateral principal de opciones
 export default function Aside({ avatarOnClick, helpOnClick }) {
-  const { user } = useUser();
+  const { user } = useCurrentUser();
   const { modalType, isOpen, triggerRef, openModal, closeModal } = useModal();
 
   return (
