@@ -7,7 +7,7 @@ export default function ProtectedRoutes({ roles }) {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["roles-verification", roles],
     queryFn: async () => {
-      const res = await fetchWithAuth(
+      const response = await fetchWithAuth(
         `${apiRoutes.apiUrl}${apiRoutes.auth}/verify-roles`,
         {
           method: "POST",
@@ -17,13 +17,14 @@ export default function ProtectedRoutes({ roles }) {
         },
       );
 
-      if (!res.ok) throw new Error("Not authorized");
-      const result = await res.json();
+      if (!response.ok) throw new Error("Not authorized");
+
+      const result = await response.json();
+
       return result.success === true;
     },
-    // Cacheamos la verificación por 30 minutos para evitar peticiones en cada clic
     staleTime: 1000 * 60 * 30,
-    gcTime: 0,
+    gcTime: 1000 * 60 * 30,
     retry: false,
   });
 
