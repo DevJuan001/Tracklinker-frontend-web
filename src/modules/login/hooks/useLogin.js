@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
+import { useLogout } from "../../../globals/hooks/useLogout";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 
 export function useLogin(openModal) {
@@ -12,6 +13,7 @@ export function useLogin(openModal) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const { logout } = useLogout();
   const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
@@ -32,6 +34,8 @@ export function useLogin(openModal) {
     setLoading(true);
 
     try {
+      await logout();
+
       const response = await login(form);
 
       if (response.success === true) {
