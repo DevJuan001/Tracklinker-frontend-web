@@ -1,5 +1,5 @@
 // Hooks
-import { useUser } from "../../globals/hooks/useUser";
+import { useCurrentUser } from "../../globals/hooks/useCurrentUser";
 import { useModal } from "../../globals/hooks/useModal";
 // Components
 import Layout from "../../globals/components/Layout/Layout";
@@ -11,9 +11,9 @@ import ProfileModal from "../../globals/components/modals/profileModal/ProfileMo
 
 export default function HomePage() {
   const { modalType, isOpen, triggerRef, openModal, closeModal } = useModal();
-  const { user } = useUser();
+  const { user } = useCurrentUser();
 
-  return (
+  return (  
     <Layout
       avatarOnClick={(e) => openModal(null, "user", null, e.currentTarget)}
       helpOnClick={(e) => {
@@ -21,9 +21,10 @@ export default function HomePage() {
       }}
     >
       <h1
+        id="welcome-message"
         className="h-[10%] p-5 text-3xl font-medium dark:text-white
-      md:text-4xl
-      xl:text-5xl
+        md:text-4xl
+        xl:text-5xl
       "
       >
         Bienvenido, {user.name}

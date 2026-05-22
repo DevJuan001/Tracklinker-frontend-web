@@ -1,7 +1,7 @@
 // Hooks
 import { useState } from "react";
-import { useUser } from "../../../hooks/useUser";
 import { useInnerModal } from "../../../hooks/useInnerModal";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
 // Components
 import Icon from "../../ui/Icon";
 import GeneralContent from "./GeneralContent";
@@ -12,7 +12,7 @@ import EditInfoModal from "./EditInfoModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 
 export default function ProfileModal() {
-  const { user } = useUser();
+  const { user } = useCurrentUser();
   const [activeSection, setActiveSection] = useState("general");
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
 

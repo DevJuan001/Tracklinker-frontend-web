@@ -13,7 +13,7 @@ export const routesConfig = [
   {
     path: "/home",
     component: HomePage,
-    roles: ["Admin"],
+    roles: ["Admin", "Almacén", "Técnico"],
   },
   {
     path: "/dashboard",
@@ -28,27 +28,27 @@ export const routesConfig = [
   {
     path: "/products",
     component: ProductsPage,
-    roles: ["Admin"],
+    roles: ["Admin", "Almacén", "Técnico"],
   },
   {
     path: "/categories",
     component: CategoriesPage,
-    roles: ["Admin"],
+    roles: ["Admin", "Almacén", "Técnico"],
   },
   {
     path: "/subcategories",
     component: SubcategoriesPage,
-    roles: ["Admin"],
+    roles: ["Admin", "Almacén", "Técnico"],
   },
   {
     path: "/reports",
     component: ReportsPage,
-    roles: ["Admin"],
+    roles: ["Admin", "Almacén", "Técnico"],
   },
   {
     path: "/warranties",
     component: WarrantiesPage,
-    roles: ["Admin"],
+    roles: ["Admin", "Técnico"],
   },
   {
     path: "/suppliers",
@@ -58,6 +58,6 @@ export const routesConfig = [
   {
     path: "/output-orders",
     component: OutputOrdersPage,
-    roles: ["Admin"],
+    roles: ["Admin", "Almacén", "Técnico"],
   },
 ];
