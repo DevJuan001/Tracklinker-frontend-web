@@ -13,7 +13,7 @@ export function useCurrentUser() {
   function hasRole(roles) {
     if (!userData?.role) return false;
     const allowed = Array.isArray(roles) ? roles : [roles];
-    return allowed.includes(userData.rol);
+    return allowed.includes(userData.role);
   }
 
   return {
