@@ -6,7 +6,7 @@ import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useEditUser(user) {
   const [form, setForm] = useState({
-    rol_id: user.rol_id || "",
+    role_id: user.role_id || "",
     name: user.name || "",
     first_surname: user.first_surname || "",
     second_surname: user.second_surname || "",
