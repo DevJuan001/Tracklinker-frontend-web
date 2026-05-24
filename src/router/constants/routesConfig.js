@@ -53,7 +53,7 @@ export const routesConfig = [
   {
     path: "/suppliers",
     component: SuppliersPage,
-    roles: ["Admin"],
+    roles: ["Admin", "Almacén"],
   },
   {
     path: "/output-orders",
