@@ -5,11 +5,10 @@ import { mobileRelevantItems } from "../../../constants/asideMenuItems";
 // Componentes
 import NavItem from "./NavItem";
 import Icon from "../../ui/Icon";
-import { NavLink } from "react-router-dom";
 // Modales
 import MobileMenuModal from "./MobileMenuModal";
 
-export default function MobileNav({ avatarOnClick, helpOnClick }) {
+export default function MobileNav({ hasRole, avatarOnClick, helpOnClick }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
 
   return (
@@ -22,11 +21,13 @@ export default function MobileNav({ avatarOnClick, helpOnClick }) {
         className="w-auto h-full flex px-1 gap-0.5 rounded-full shadow-[1px_1px_10px_5px_#00000014] bg-white
         dark:bg-black dark:shadow-[1px_1px_1px_4px_#ffffff14]"
       >
-        {mobileRelevantItems.map((item) => (
-          <li key={item.name} className="py-1.5 rounded-full">
-            <NavItem path={item.path} name={item.name} icon={item.icon} />
-          </li>
-        ))}
+        {mobileRelevantItems
+          .filter((item) => hasRole(item.roles))
+          .map((item) => (
+            <li key={item.name} className="py-1.5 rounded-full">
+              <NavItem path={item.path} name={item.name} icon={item.icon} />
+            </li>
+          ))}
       </ul>
 
       <button
@@ -45,8 +46,9 @@ export default function MobileNav({ avatarOnClick, helpOnClick }) {
           isOpen={true}
           triggerRef={innerTrigger}
           onClose={() => openInnerModal(null)}
-          avatarOnClick={avatarOnClick}
           helpOnClick={helpOnClick}
+          hasRole={hasRole}
+          avatarOnClick={avatarOnClick}
         />
       )}
     </section>
