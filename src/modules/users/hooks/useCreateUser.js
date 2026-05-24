@@ -6,7 +6,7 @@ import { getModalTrigger } from "../../../utils/getModalTrigger";
 
 export function useCreateUser() {
   const [form, setForm] = useState({
-    rol_id: "",
+    role_id: "",
     name: "",
     first_surname: "",
     second_surname: "",
