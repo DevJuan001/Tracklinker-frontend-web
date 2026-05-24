@@ -25,16 +25,16 @@ export default function AddUserModal({ onClose }) {
       <form action="" className="w-full flex flex-col gap-2.5">
         {/* Menú de roles */}
         <SelectMenu
-          value={form.rol_id}
-          id={"user_rol_menu"}
-          name={"rol_id"}
+          value={form.role_id}
+          id={"role_menu"}
+          name={"role_id"}
           spanText={"Rol"}
           onChange={handleChange}
-          options={roles.map((rol) => ({
-            value: rol.id,
-            label: rol.name,
+          options={roles.map((role) => ({
+            value: role.id,
+            label: role.name,
           }))}
-          className={fieldError("rol_id")}
+          className={fieldError("role_id")}
         />
 
         <FormField

@@ -38,7 +38,7 @@ export default function MoreInfoUser({ user, onClose }) {
 
         <div className="flex flex-col mt-2">
           <span className="text-[#75777E] text-sm">Rol</span>
-          <span className="dark:text-white">{user.rol_name}</span>
+          <span className="dark:text-white">{user.role_name}</span>
         </div>
 
         <div className="flex flex-col">
