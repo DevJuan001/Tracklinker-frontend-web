@@ -31,7 +31,7 @@ export default function UserItem({
 
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
             <Icon name={"person"} size={22} />
-            <span>{user.rol_name}</span>
+            <span>{user.role_name}</span>
           </div>
 
           <div
