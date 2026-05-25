@@ -9,6 +9,7 @@ export const productStatusConfig = {
     fill: false,
     styles:
       "w-32 bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400",
+    roles: ["Admin", "Almacén"],
   },
 
   2: {
@@ -21,6 +22,7 @@ export const productStatusConfig = {
     fill: true,
     styles:
       "w-20 bg-green-100 text-green-600 dark:bg-[#00ff151f] dark:text-[#00ff3779]",
+    roles: ["Admin", "Almacén"],
   },
 
   3: {
@@ -33,6 +35,7 @@ export const productStatusConfig = {
     fill: false,
     styles:
       "w-20 bg-blue-100 text-blue-600 dark:bg-[#1e3a5f] dark:text-[#60a5fa]",
+    roles: ["Admin", "Almacén"],
   },
 
   4: {
@@ -46,5 +49,6 @@ export const productStatusConfig = {
     fill: false,
     styles:
       "w-28 bg-amber-100 text-amber-600 dark:bg-[#2d1f00] dark:text-[#fbbe24b6]",
+    roles: ["Admin", "Técnico"],
   },
 };

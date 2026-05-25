@@ -2,14 +2,14 @@ import Icon from "./Icon";
 
 export default function ActionButtons({
   children,
+  backgroundColor = "#F5F3F6",
+  visibilityIcon = true,
+  editButtonVisible = true,
   editButtonOnClick,
   deleteButtonVisible = true,
-  visibilityIcon = true,
   deleteButtonOnClick,
-  backgroundColor = "#F5F3F6",
   moreInfoButtonOnClick,
   moreInfoButtonVisible = true,
-  editButtonVisible = true,
 }) {
   return (
     <section className="flex items-center justify-center gap-3 dark:invert">
@@ -18,7 +18,8 @@ export default function ActionButtons({
       {moreInfoButtonVisible && (
         <button
           onClick={moreInfoButtonOnClick}
-          className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}] hover:bg-[#969292a8]"
+          className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}]
+          hover:bg-[#969292a8]"
         >
           <Icon name={"arrow_outward"} />
         </button>
@@ -27,7 +28,8 @@ export default function ActionButtons({
       {editButtonVisible && (
         <button
           onClick={editButtonOnClick}
-          className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}] hover:bg-[#969292a8]`}
+          className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}]
+          hover:bg-[#969292a8]`}
         >
           <Icon name={"edit"} />
         </button>
@@ -36,7 +38,8 @@ export default function ActionButtons({
       {deleteButtonVisible && (
         <button
           onClick={deleteButtonOnClick}
-          className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}] hover:bg-[#969292a8]"
+          className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}] 
+          hover:bg-[#969292a8]`}
         >
           <Icon name={`${visibilityIcon ? "visibility" : "visibility_off"}`} />
         </button>
