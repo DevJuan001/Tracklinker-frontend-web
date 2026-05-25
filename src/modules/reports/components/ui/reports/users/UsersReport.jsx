@@ -15,7 +15,7 @@ import ReportsTopSection from "../../ReportsTopSection";
 
 export default function UsersReport({ setReport }) {
   const { usersData } = useUsersData();
-  const [period, setPeriod] = useState("30d");
+  const [period, setPeriod] = useState("1a");
   const { startDate, endDate } = getDateRange(period);
 
   return (
@@ -29,7 +29,7 @@ export default function UsersReport({ setReport }) {
 
       {usersData.map((item) => (
         <ReportsContainer
-          key={"users-container"}
+          key={"users-reports-container"}
           reportsName={"Usuarios"}
           reportsDate={`${startDate} - ${endDate}`}
         >
