@@ -26,8 +26,10 @@ export default function SuppliersReport({ setReport }) {
         setPeriod={setPeriod}
         currentPeriod={period}
       />
+
       {suppliersData.map((item) => (
         <ReportsContainer
+          key={"suppliers-reports-container"}
           reportsName={"Proveedores"}
           reportsDate={`${startDate} - ${endDate}`}
         >
