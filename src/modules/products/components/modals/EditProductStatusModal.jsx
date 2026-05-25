@@ -2,7 +2,6 @@
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Constantes
 import { productStatusConfig } from "../../constants/productStatusConfig";
-// Componentes
 // Modales
 import EnableProductModal from "./EnableProductModal";
 import DisableProductModal from "./DisableProductModal";
@@ -39,7 +38,10 @@ export default function EditProductStatusModal({ product, onClose }) {
           title={"Habilitar Producto"}
           location={"anchored"}
           triggerRef={innerTrigger}
-          onClose={() => openInnerModal(null)}
+          onClose={() => {
+            openInnerModal(null);
+            onClose();
+          }}
         >
           <EnableProductModal
             product={product}
@@ -57,7 +59,10 @@ export default function EditProductStatusModal({ product, onClose }) {
           title={"Deshabilitar Producto"}
           location={"anchored"}
           triggerRef={innerTrigger}
-          onClose={() => openInnerModal(null)}
+          onClose={() => {
+            openInnerModal(null);
+            onClose();
+          }}
         >
           <DisableProductModal
             product={product}
@@ -75,7 +80,10 @@ export default function EditProductStatusModal({ product, onClose }) {
           title={"Agregar Garantía"}
           location={"center"}
           triggerRef={innerTrigger}
-          onClose={() => openInnerModal(null)}
+          onClose={() => {
+            openInnerModal(null);
+            onClose();
+          }}
         >
           <AddWarrantyModal
             product={product}
