@@ -1,16 +1,16 @@
 // Hooks
-import { useCategoriesData } from "../../../../hooks/categories/useCategoriesData";
 import { useState } from "react";
+import { useCategoriesData } from "../../../../hooks/categories/useCategoriesData";
 // Utils
 import { getDateRange } from "../../../../../../utils/getDateRange";
 // Components
+import TableCard from "../../TableCard";
+import ReportCard from "../../ReportCard";
+import CategoriesTable from "./CategoriesTable";
 import KpisContainer from "../../KpisContainer";
 import ReportsContainer from "../../ReportsContainer";
 import ReportsTopSection from "../../ReportsTopSection";
-import TableCard from "../../TableCard";
-import ReportCard from "../../ReportCard";
 import CategoriesAreaChart from "./CategoriesAreaChart";
-import CategoriesTable from "./CategoriesTable";
 
 export default function CategoriesReport({ setReport }) {
   const { categoriesData } = useCategoriesData();
