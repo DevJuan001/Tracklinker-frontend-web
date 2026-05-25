@@ -26,8 +26,10 @@ export default function SubcategoriesReport({ setReport }) {
         setPeriod={setPeriod}
         currentPeriod={period}
       />
+
       {subcategoriesData.map((item) => (
         <ReportsContainer
+          key={"subcategories-reports-container"}
           reportsName={"Subcategorias"}
           reportsDate={`${startDate} - ${endDate}`}
         >
