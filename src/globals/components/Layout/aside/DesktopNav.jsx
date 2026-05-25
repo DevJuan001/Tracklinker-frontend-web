@@ -1,5 +1,3 @@
-// Hooks
-import { useCurrentUser } from "../../../hooks/useCurrentUser";
 // Constantes
 import {
   firstSectionItems,
@@ -8,14 +6,15 @@ import {
 // Componentes
 import NavItem from "./NavItem";
 import Icon from "../../ui/Icon";
-import { NavLink } from "react-router-dom";
 import AvatarButton from "./AvatarButton";
 
-export default function DesktopNav({ avatarOnClick, helpOnClick }) {
-  const { user } = useCurrentUser();
-
+export default function DesktopNav({
+  user,
+  hasRole,
+  avatarOnClick,
+  helpOnClick,
+}) {
   return (
-    /* Menú de opciones - Desktop */
     <nav className="hidden h-full md:flex flex-col justify-between gap-1 order-1">
       {/* Primera Sección */}
       <section className="flex flex-col">
@@ -31,16 +30,18 @@ export default function DesktopNav({ avatarOnClick, helpOnClick }) {
             xl:flex-col"
         >
           {/* Primer sección de opciones */}
-          {firstSectionItems.map((item) => (
-            <li key={item.name}>
-              <NavItem
-                path={item.path}
-                name={item.name}
-                secondName={item.secondName}
-                icon={item.icon}
-              />
-            </li>
-          ))}
+          {firstSectionItems
+            .filter((item) => hasRole(item.roles))
+            .map((item) => (
+              <li key={item.name}>
+                <NavItem
+                  path={item.path}
+                  name={item.name}
+                  secondName={item.secondName}
+                  icon={item.icon}
+                />
+              </li>
+            ))}
         </ul>
       </section>
 
@@ -55,8 +56,8 @@ export default function DesktopNav({ avatarOnClick, helpOnClick }) {
             <li
               key={item.name}
               className="rounded-2xl transition duration-300 text-[#75777E] font-normal
-                hover:bg-[#e5e7eb96]
-                dark:text-[#7E8088] dark:hover:bg-[#181818]"
+              hover:bg-[#e5e7eb96]
+              dark:text-[#7E8088] dark:hover:bg-[#181818]"
             >
               {item.path ? (
                 <NavItem path={item.path} name={item.name} icon={item.icon} />
@@ -75,6 +76,7 @@ export default function DesktopNav({ avatarOnClick, helpOnClick }) {
                         group-hover:text-black group-hover:[--icon-weight:500]
                         dark:group-hover:text-white`}
                     />
+
                     <span
                       className="hidden font-medium group-hover:text-black dark:group-hover:text-white 
                         xl:block"
