@@ -1,37 +1,50 @@
 // Hooks
 import { useState } from "react";
 import { useSuppliersData } from "../../../../hooks/suppliers/useSuppliersData";
+import { useSuppliersTableData } from "../../../../hooks/suppliers/useSuppliersTableData";
 // Utils
 import { getDateRange } from "../../../../../../utils/getDateRange";
 // Components
 import KpisContainer from "../../KpisContainer";
 import ReportsContainer from "../../ReportsContainer";
-import ReportsTopSection from "../../ReportsTopSection";
 import TableCard from "../../TableCard";
 import ReportCard from "../../ReportCard";
 import SuppliersAreaChart from "./SuppliersAreaChart";
 import SuppliersPieChart from "./SuppliersPieChart";
 import SuppliersTable from "./SuppliersTable";
 
-export default function SuppliersReport({ setReport }) {
+export default function SuppliersReport({ setReport, openModal }) {
   const { suppliersData } = useSuppliersData();
+  const { suppliers: tableData } = useSuppliersTableData();
   const [period, setPeriod] = useState("1a");
   const { startDate, endDate } = getDateRange(period);
 
   return (
-    <section className="w-full h-full flex flex-col gap-2 animate-blurUp">
-      <ReportsTopSection
-        setReport={setReport}
-        periods={["7d", "30d", "6m", "1a"]}
-        setPeriod={setPeriod}
-        currentPeriod={period}
-      />
-
+    <>
       {suppliersData.map((item) => (
         <ReportsContainer
           key={"suppliers-reports-container"}
           reportsName={"Proveedores"}
           reportsDate={`${startDate} - ${endDate}`}
+          setReport={setReport}
+          setPeriod={setPeriod}
+          periods={["7d", "30d", "6m", "1a"]}
+          currentPeriod={period}
+          openModal={openModal}
+          exportData={{
+            reportName: "Proveedores",
+            period,
+            startDate,
+            endDate,
+            kpis: {
+              "Total": item.total_suppliers,
+              "Recientes": item.recent_suppliers,
+              "Inactivos": item.inactive_suppliers,
+              "Activos": item.active_suppliers,
+            },
+            tableData,
+            type: "suppliers",
+          }}
         >
           {/* Cards o KPIs principales */}
           <KpisContainer
@@ -54,10 +67,10 @@ export default function SuppliersReport({ setReport }) {
           </ReportCard>
 
           <TableCard tableTitle={"Proveedores recientes"}>
-            <SuppliersTable />
+            <SuppliersTable data={tableData} />
           </TableCard>
         </ReportsContainer>
       ))}
-    </section>
+    </>
   );
 }
