@@ -29,7 +29,7 @@ export default function DisableProductModal({ product, onClose }) {
         confirmBgColor="red-600"
         itemsPosition="end"
         cancelText={"Cancelar"}
-        confirmButtonOnClick={(e) => handleSubmit(e, onClose, openInnerModal)}
+        confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
         cancelButtonOnClick={onClose}
       />
       
