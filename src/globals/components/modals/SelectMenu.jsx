@@ -15,6 +15,7 @@ export default function SelectMenu({
   searchable = false,
   growDirection = "center",
   className,
+  showAllOption = false,
 }) {
   const {
     open,
@@ -26,11 +27,15 @@ export default function SelectMenu({
     handleToggle,
   } = useSelectMenu();
 
+  const allOptions = showAllOption
+    ? [{ value: "", label: "Todos" }, ...options]
+    : options;
+
   const filteredOptions = searchable
-    ? options.filter((opt) =>
+    ? allOptions.filter((opt) =>
         opt.label.toLowerCase().includes(search.toLowerCase()),
       )
-    : options;
+    : allOptions;
 
   return (
     <section className="relative w-full flex flex-col gap-1">
@@ -56,7 +61,7 @@ export default function SelectMenu({
             className={`w-full h-full flex pl-4 ${spanText ? "pt-3" : "pt-0"} dark:text-[#E4E2E5]`}
           >
             <div className="w-full flex items-center text-base">
-              {options.find((opt) => {
+              {allOptions.find((opt) => {
                 if (opt.value !== "" && !isNaN(opt.value)) {
                   return Number(opt.value) === Number(value);
                 }
