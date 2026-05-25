@@ -22,7 +22,7 @@ export function useExportFile() {
           ],
           rows: tableData.map((user) => [
             `${user.name || ""} ${user.surname || ""}`.trim(),
-            user.email || "N/A",lo 
+            user.email || "N/A",
             user.phone || "N/A",
             user.date || "N/A",
             userStatus[user.status].text,
