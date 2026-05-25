@@ -1,4 +1,5 @@
 import ReportSectionCard from "./ReportSectionCard";
+import { useCurrentUser } from "../../../../globals/hooks/useCurrentUser";
 
 export default function SectionsContainer({
   sections,
@@ -6,6 +7,8 @@ export default function SectionsContainer({
   setTopSectionVisiblity,
 }) {
   setTopSectionVisiblity(true);
+  const { hasRole } = useCurrentUser();
+
   return (
     <section
       className="
@@ -23,18 +26,20 @@ export default function SectionsContainer({
         sm:p-[50px_50px_200px_50px]
         "
     >
-      {sections.map((section) => (
-        <ReportSectionCard
-          key={section.name}
-          sectionOnClick={() => {
-            setReport(`${section.name}`);
-            setTopSectionVisiblity(false);
-          }}
-          sectionKey={section.name}
-          sectionIcon={section.icon}
-          sectionName={section.cardName}
-        />
-      ))}
+      {sections
+        .filter((item) => hasRole(item.roles))
+        .map((section) => (
+          <ReportSectionCard
+            key={section.name}
+            sectionOnClick={() => {
+              setReport(`${section.name}`);
+              setTopSectionVisiblity(false);
+            }}
+            sectionKey={section.name}
+            sectionIcon={section.icon}
+            sectionName={section.cardName}
+          />
+        ))}
     </section>
   );
 }
