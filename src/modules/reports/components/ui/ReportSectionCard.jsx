@@ -10,12 +10,12 @@ export default function ReportSectionCard({
     <button
       onClick={sectionOnClick}
       key={sectionKey}
-      className="flex flex-col h-36 w-36 place-items-center gap-2 transition duration-300
+      className="flex flex-col h-auto w-36 place-items-center gap-2 transition duration-300
       hover:scale-[1.05]
       xl:h-48 xl:w-32"
     >
       <div
-        className="h-20 w-20 rounded-xl bg-[#eae8eb] flex items-center justify-center
+        className="h-24 w-24 rounded-xl bg-[#eae8eb] flex items-center justify-center
           dark:bg-[#101012]
           xl:h-32 xl:w-32
           sm:h-28 sm:w-28"
