@@ -1,12 +1,11 @@
 import { apiRoutes } from "../../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../../utils/fetchWithAuth";
 
-export async function getCategoriesTableDataService(signal) {
+export async function getCategoriesTableDataService() {
   const response = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.reports}/get_recent_categories`,
     {
       method: "GET",
-      signal,
     },
   );
 

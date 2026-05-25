@@ -1,35 +1,50 @@
 // Hooks
 import { useState } from "react";
 import { useOutputsData } from "../../../../hooks/outputs/useOutputsData";
+import { useOutputsTableData } from "../../../../hooks/outputs/useOutputsTableData";
 // Utils
 import { getDateRange } from "../../../../../../utils/getDateRange";
 // Components
 import KpisContainer from "../../KpisContainer";
 import ReportsContainer from "../../ReportsContainer";
-import ReportsTopSection from "../../ReportsTopSection";
 import TableCard from "../../TableCard";
 import ReportCard from "../../ReportCard";
 import OutputsAreaChart from "./OutputsAreaChart";
 import OutputsPieChart from "./OutputsPieChart";
 import OutputsTable from "./OutputsTable";
 
-export default function OutputsReport({ setReport }) {
+export default function OutputsReport({ setReport, openModal }) {
   const { outputsData } = useOutputsData();
+  const { outputs: tableData } = useOutputsTableData();
   const [period, setPeriod] = useState("1a");
   const { startDate, endDate } = getDateRange(period);
 
   return (
-    <section className="w-full h-full flex flex-col gap-2 animate-blurUp">
-      <ReportsTopSection
-        setReport={setReport}
-        periods={["7d", "30d", "6m", "1a"]}
-        setPeriod={setPeriod}
-        currentPeriod={period}
-      />
+    <>
       {outputsData.map((item) => (
         <ReportsContainer
+          key={"outputs-reports-container"}
           reportsName={"Salidas"}
           reportsDate={`${startDate} - ${endDate}`}
+          setReport={setReport}
+          setPeriod={setPeriod}
+          periods={["7d", "30d", "6m", "1a"]}
+          currentPeriod={period}
+          openModal={openModal}
+          exportData={{
+            reportName: "Salidas",
+            period,
+            startDate,
+            endDate,
+            kpis: {
+              Total: item.total_outputs,
+              Recientes: item.recent_outputs,
+              Inactivas: item.inactive_outputs,
+              Activas: item.active_outputs,
+            },
+            tableData,
+            type: "outputs",
+          }}
         >
           {/* Cards o KPIs principales */}
           <KpisContainer
@@ -52,10 +67,10 @@ export default function OutputsReport({ setReport }) {
           </ReportCard>
 
           <TableCard tableTitle={"Salidas recientes"}>
-            <OutputsTable />
+            <OutputsTable data={tableData} />
           </TableCard>
         </ReportsContainer>
       ))}
-    </section>
+    </>
   );
 }

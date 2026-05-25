@@ -24,7 +24,7 @@ export default function SuppliersPieChart({ period }) {
           outerRadius="140"
         >
           {suppliersData.map((item) => (
-            <Cell key={item.name} fill={item.color} stroke="#1447e6" />
+            <Cell key={item.brand} fill={item.color} stroke="#1447e6" />
           ))}
         </Pie>
       </PieChart>

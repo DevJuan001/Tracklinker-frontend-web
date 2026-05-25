@@ -10,6 +10,7 @@ import { useCategoriesAreaData } from "../../../../hooks/categories/useCategorie
 
 export default function CategoriesAreaChart({ period }) {
   const { categoriesData } = useCategoriesAreaData(period);
+
   return (
     <ResponsiveContainer width={"100%"} height={290}>
       <AreaChart

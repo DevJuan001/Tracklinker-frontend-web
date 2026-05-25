@@ -1,35 +1,50 @@
 // Hooks
 import { useState } from "react";
 import { useSubcategoriesData } from "../../../../hooks/subcategories/useSubcategoriesData";
+import { useSubcategoriesTableData } from "../../../../hooks/subcategories/useSubCategoriesTableData";
 // Utils
 import { getDateRange } from "../../../../../../utils/getDateRange";
 // Components
 import KpisContainer from "../../KpisContainer";
 import ReportsContainer from "../../ReportsContainer";
-import ReportsTopSection from "../../ReportsTopSection";
 import TableCard from "../../TableCard";
 import ReportCard from "../../ReportCard";
 import SubcategoriesAreaChart from "./SubcategoriesAreaChart";
 import SubcategoriesTable from "./SubcategoriesTable";
 import SubcategoriesPieChart from "./SubcategoriesPieChart";
 
-export default function SubcategoriesReport({ setReport }) {
+export default function SubcategoriesReport({ setReport, openModal }) {
   const { subcategoriesData } = useSubcategoriesData();
+  const { subcategoriesData: tableData } = useSubcategoriesTableData();
   const [period, setPeriod] = useState("1a");
   const { startDate, endDate } = getDateRange(period);
 
   return (
-    <section className="w-full h-full flex flex-col gap-2 animate-blurUp">
-      <ReportsTopSection
-        setReport={setReport}
-        periods={["7d", "30d", "6m", "1a"]}
-        setPeriod={setPeriod}
-        currentPeriod={period}
-      />
+    <>
       {subcategoriesData.map((item) => (
         <ReportsContainer
+          key={"subcategories-reports-container"}
           reportsName={"Subcategorias"}
           reportsDate={`${startDate} - ${endDate}`}
+          setReport={setReport}
+          setPeriod={setPeriod}
+          periods={["7d", "30d", "6m", "1a"]}
+          currentPeriod={period}
+          openModal={openModal}
+          exportData={{
+            reportName: "Subcategorías",
+            period,
+            startDate,
+            endDate,
+            kpis: {
+              "Totales": item.total_subcategories,
+              "Recientes": item.recent_subcategories,
+              "Inactivas": item.inactive_subcategories,
+              "Activas": item.active_subcategories,
+            },
+            tableData,
+            type: "subcategories",
+          }}
         >
           {/* Cards o KPIs principales */}
           <KpisContainer
@@ -52,10 +67,10 @@ export default function SubcategoriesReport({ setReport }) {
           </ReportCard>
 
           <TableCard tableTitle={"Subcategorias recientes"}>
-            <SubcategoriesTable />
+            <SubcategoriesTable data={tableData} />
           </TableCard>
         </ReportsContainer>
       ))}
-    </section>
+    </>
   );
 }

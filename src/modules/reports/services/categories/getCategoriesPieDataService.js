@@ -1,13 +1,12 @@
 import { apiRoutes } from "../../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../../utils/fetchWithAuth";
 
-export async function getCategoriesPieDataService(period, signal) {
+export async function getCategoriesPieDataService(period) {
   const response = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.reports}/get_categories_by_brand/${period}`,
     {
       method: "GET",
       credentials: "include",
-      signal,
     },
   );
 

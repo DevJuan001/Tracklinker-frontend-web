@@ -2,26 +2,35 @@ import Icon from "../../../../../../globals/components/ui/Icon";
 import { userStatus } from "../../../../../users/constants/userStatus";
 import { useCategoriesTableData } from "../../../../hooks/categories/useCategoriesTableData";
 
-export default function CategoriesTable() {
-  const { categoriesData } = useCategoriesTableData();
+export default function CategoriesTable({ data }) {
+  const hookData = useCategoriesTableData();
+  const categoriesData = data || hookData.categoriesData || [];
+
   return (
     <table className="w-full h-full pt-2">
-      <thead className="h-[30px]">
+      <thead className="h-10">
         <tr className="border-b pb-1 text-sm dark:border-[#94909028]">
           <th className="font-normal text-start pl-4">Nombre</th>
-          <th className="font-normal text-start pl-4">Descripción</th>
+          <th className="hidden md:table-cell font-normal text-start pl-4">Descripción</th>
           <th className="font-normal text-start pl-4">Fecha de creación</th>
           <th className="font-normal text-start pl-4">Estado</th>
         </tr>
       </thead>
-      {categoriesData.map((category) => (
-        <tbody>
-          <tr className="pb-1 text-sm border-b dark:border-[#94909028]">
+
+      <tbody>
+        {categoriesData.map((category) => (
+          <tr
+            key={category.name}
+            className="h-10 pb-1 text-sm border-b dark:border-[#94909028]"
+          >
             <th className="font-normal text-start pl-4">{category.name}</th>
-            <th className="font-normal text-start pl-4">
+            
+            <th className="hidden md:table-cell font-normal text-start pl-4">
               {category.description}
             </th>
+            
             <th className="font-normal text-start pl-4">{category.date}</th>
+            
             <th className="font-normal text-start pl-4">
               <div
                 className={`flex items-center px-2 py-1 gap-1 rounded-md ${userStatus[category.status]?.styles}`}
@@ -35,8 +44,8 @@ export default function CategoriesTable() {
               </div>
             </th>
           </tr>
-        </tbody>
-      ))}
+        ))}
+      </tbody>
     </table>
   );
 }

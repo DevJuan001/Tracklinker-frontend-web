@@ -10,6 +10,7 @@ import { useUsersAreaData } from "../../../../hooks/users/useUsersAreaData";
 
 export default function UsersAreaChart({ period }) {
   const { usersData } = useUsersAreaData(period);
+  
   return (
     <ResponsiveContainer width={"100%"} height={290}>
       <AreaChart
