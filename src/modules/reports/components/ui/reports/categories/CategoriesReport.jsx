@@ -28,6 +28,7 @@ export default function CategoriesReport({ setReport }) {
 
       {categoriesData.map((item) => (
         <ReportsContainer
+          key={"categories-reports-container"}
           reportsName={"Categorias"}
           reportsDate={`${startDate} - ${endDate}`}
         >
