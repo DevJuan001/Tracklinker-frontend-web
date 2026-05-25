@@ -14,7 +14,7 @@ import SuppliersReport from "./components/ui/reports/suppliers/SuppliersReport";
 import CategoriesReport from "./components/ui/reports/categories/CategoriesReport";
 import WarrantiesReport from "./components/ui/reports/warranties/WarrantiesReport";
 import SubcategoriesReport from "./components/ui/reports/subcategories/SubcategoriesReport";
-import TransformationsReport from "./components/ui/reports/transformations/TransformationsReport.jsx";
+import TransformationsReport from "./components/ui/reports/transformations/TransformationsReport";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
 import HelpModal from "../../globals/components/modals/HelpModal";
