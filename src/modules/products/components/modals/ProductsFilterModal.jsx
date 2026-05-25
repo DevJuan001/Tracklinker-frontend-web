@@ -28,7 +28,9 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
       <div className="w-full flex flex-col gap-2">
         {/* Ordenar Por Orden de entrada*/}
         <SelectMenu
+          showAllOption
           searchable
+          id={"filter-input-order-menu"}
           name={"input_order"}
           spanText={"Orden de entrada"}
           value={form.input_order}
@@ -41,8 +43,9 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
 
         {/* Ordenar Por Categoría */}
         <SelectMenu
+          showAllOption
           searchable
-          id={"order-by-category-menu"}
+          id={"filter-category-menu"}
           name={"category_order"}
           spanText={"Categoria"}
           value={form.category_order}
@@ -55,11 +58,12 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
 
         {/* Ordenar Por Subcategoria */}
         <SelectMenu
+          showAllOption
           searchable
           width={"w-full"}
           spanText={"Subcategoria"}
           value={form.subcategory_order}
-          id={"order-by-subcategory-menu"}
+          id={"filter-subcategory-menu"}
           onChange={handleChange}
           name={"subcategory_order"}
           options={subcategories
@@ -76,7 +80,9 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
 
         {/* Ordenar Por Marca */}
         <SelectMenu
+          showAllOption
           searchable
+          id={"filter-brand-menu"}
           name={"brand"}
           spanText={"Marca"}
           value={form.brand}
@@ -97,7 +103,9 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
 
         {/* Ordenar Por Modelo */}
         <SelectMenu
+          showAllOption
           searchable
+          id={"filter-model-menu"}
           name={"product_model"}
           spanText={"Modelo"}
           value={form.product_model}
@@ -112,8 +120,10 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
 
         {/* Ordenar por estado */}
         <SelectMenu
-          spanText={"Estado"}
+          showAllOption
+          id={"filter-status-menu"}
           name={"product_status"}
+          spanText={"Estado"}
           value={form.product_status}
           onChange={handleChange}
           options={[
@@ -126,8 +136,9 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
 
         {/* Ordenar por Tiempo de Garantía */}
         <SelectMenu
-          spanText={"Tiempo de garantía restante"}
+          showAllOption
           id={"order-by-warranty-menu"}
+          spanText={"Tiempo de garantía restante"}
           name={"warranty_time"}
           value={form.warranty_time}
           onChange={handleChange}
