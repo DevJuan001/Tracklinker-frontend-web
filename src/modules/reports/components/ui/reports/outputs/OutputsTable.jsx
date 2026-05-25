@@ -10,22 +10,26 @@ export default function OutputsTable() {
       <thead className="h-[30px]">
         <tr className="border-b pb-1 text-sm dark:border-[#94909028]">
           <th className="font-normal text-start pl-4">Seriales</th>
-          <th className="font-normal text-start pl-4">Marca</th>
-          <th className="font-normal text-start pl-4">Modelo</th>
-          <th className="font-normal text-start pl-4">
+          <th className="hidden md:table-cell font-normal text-start pl-4">Marca</th>
+          <th className="hidden md:table-cell font-normal text-start pl-4">Modelo</th>
+          <th className="hidden md:table-cell font-normal text-start pl-4">
             Fecha final de garantía
           </th>
           <th className="font-normal text-start pl-4">Fecha de creación</th>
           <th className="font-normal text-start pl-4">Estado</th>
         </tr>
       </thead>
-      {outputs.map((output) => (
-        <tbody>
-          <tr className="pb-1 text-sm border-b dark:border-[#94909028]">
+
+      <tbody>
+        {outputs.map((output, index) => (
+          <tr
+            key={index}
+            className="pb-1 text-sm border-b dark:border-[#94909028]"
+          >
             <th className="font-normal text-start pl-4">{output.serial}</th>
-            <th className="font-normal text-start pl-4">{output.brand}</th>
-            <th className="font-normal text-start pl-4">{output.model}</th>
-            <th className="font-normal text-start pl-4">
+            <th className="hidden md:table-cell font-normal text-start pl-4">{output.brand}</th>
+            <th className="hidden md:table-cell font-normal text-start pl-4">{output.model}</th>
+            <th className="hidden md:table-cell font-normal text-start pl-4">
               {output.warranty_time}
             </th>
             <th className="font-normal text-start pl-4">{output.date}</th>
@@ -42,8 +46,8 @@ export default function OutputsTable() {
               </div>
             </th>
           </tr>
-        </tbody>
-      ))}
+        ))}
+      </tbody>
     </table>
   );
 }
