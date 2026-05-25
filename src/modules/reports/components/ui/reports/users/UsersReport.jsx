@@ -17,6 +17,7 @@ export default function UsersReport({ setReport }) {
   const { usersData } = useUsersData();
   const [period, setPeriod] = useState("30d");
   const { startDate, endDate } = getDateRange(period);
+
   return (
     <section className="w-full h-full flex flex-col gap-2 animate-blurUp">
       <ReportsTopSection
@@ -28,6 +29,7 @@ export default function UsersReport({ setReport }) {
 
       {usersData.map((item) => (
         <ReportsContainer
+          key={"users-container"}
           reportsName={"Usuarios"}
           reportsDate={`${startDate} - ${endDate}`}
         >
