@@ -26,8 +26,10 @@ export default function WarrantiesReport({ setReport }) {
         setPeriod={setPeriod}
         currentPeriod={period}
       />
+
       {warrantiesData.map((item) => (
         <ReportsContainer
+          key={"warranties-reports-container"}
           reportsName={"Garantías"}
           reportsDate={`${startDate} - ${endDate}`}
         >
