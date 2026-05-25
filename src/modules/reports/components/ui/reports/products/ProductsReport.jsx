@@ -1,37 +1,50 @@
 // Hooks
 import { useState } from "react";
 import { useProductsData } from "../../../../hooks/products/useProductsData";
+import { useProductsTableData } from "../../../../hooks/products/useProductsTableData";
 // Utils
 import { getDateRange } from "../../../../../../utils/getDateRange";
 // Components
 import KpisContainer from "../../KpisContainer";
 import ReportsContainer from "../../ReportsContainer";
-import ReportsTopSection from "../../ReportsTopSection";
 import TableCard from "../../TableCard";
 import ReportCard from "../../ReportCard";
 import ProductsTable from "./ProductsTable";
 import ProductsPieChart from "./ProductsPieChart";
 import ProductsAreaChart from "./ProductsAreaChart";
 
-export default function ProductsReport({ setReport }) {
+export default function ProductsReport({ setReport, openModal }) {
   const { productsData } = useProductsData();
+  const { productsData: tableData } = useProductsTableData();
   const [period, setPeriod] = useState("1a");
   const { startDate, endDate } = getDateRange(period);
 
   return (
-    <section className="w-full h-full flex flex-col gap-2 animate-blurUp">
-      <ReportsTopSection
-        setReport={setReport}
-        periods={["7d", "30d", "6m", "1a"]}
-        setPeriod={setPeriod}
-        currentPeriod={period}
-      />
-
+    <>
       {productsData.map((item) => (
         <ReportsContainer
           key={"product-reports-container"}
           reportsName={"Productos"}
           reportsDate={`${startDate} - ${endDate}`}
+          setReport={setReport}
+          setPeriod={setPeriod}
+          periods={["7d", "30d", "6m", "1a"]}
+          currentPeriod={period}
+          openModal={openModal}
+          exportData={{
+            reportName: "Productos",
+            period,
+            startDate,
+            endDate,
+            kpis: {
+              "Total productos": item.total_products,
+              "Recientes": item.recent_products,
+              "En garantía": item.warranties_products,
+              "Vendidos": item.sold_products,
+            },
+            tableData,
+            type: "products",
+          }}
         >
           {/* Cards o KPIs principales */}
           <KpisContainer
@@ -54,10 +67,10 @@ export default function ProductsReport({ setReport }) {
           </ReportCard>
 
           <TableCard tableTitle={"Productos recientes"}>
-            <ProductsTable />
+            <ProductsTable data={tableData} />
           </TableCard>
         </ReportsContainer>
       ))}
-    </section>
+    </>
   );
 }
