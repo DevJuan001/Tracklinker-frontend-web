@@ -5,9 +5,8 @@ export default function ReportsContainer({
 }) {
   return (
     <section
-      className="h-full w-full grid p-3 pt-2
-        xl:grid-cols-[repeat(16,_1fr)] xl:grid-rows-7
-        gap-3"
+      className="h-full w-full grid grid-cols-1 p-3 pt-2 gap-3 overflow-x-auto overflow-y-auto overflow-hidden
+      xl:grid-cols-[repeat(16,_1fr)] xl:grid-rows-7"
     >
       <section className="col-span-4 row-span-1 flex flex-col justify-center items-start dark:text-white">
         <span className="text-2xl font-medium">Reporte de {reportsName}</span>
