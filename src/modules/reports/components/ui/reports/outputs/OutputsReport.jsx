@@ -26,8 +26,10 @@ export default function OutputsReport({ setReport }) {
         setPeriod={setPeriod}
         currentPeriod={period}
       />
+      
       {outputsData.map((item) => (
         <ReportsContainer
+          key={"outputs-reports-container"}
           reportsName={"Salidas"}
           reportsDate={`${startDate} - ${endDate}`}
         >
