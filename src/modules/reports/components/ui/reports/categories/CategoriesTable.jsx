@@ -4,6 +4,7 @@ import { useCategoriesTableData } from "../../../../hooks/categories/useCategori
 
 export default function CategoriesTable() {
   const { categoriesData } = useCategoriesTableData();
+
   return (
     <table className="w-full h-full pt-2">
       <thead className="h-[30px]">
@@ -14,6 +15,7 @@ export default function CategoriesTable() {
           <th className="font-normal text-start pl-4">Estado</th>
         </tr>
       </thead>
+      
       {categoriesData.map((category) => (
         <tbody>
           <tr className="pb-1 text-sm border-b dark:border-[#94909028]">
