@@ -10,8 +10,8 @@ export default function UsersTable() {
       <thead className="h-[30px]">
         <tr className="border-b pb-1 text-sm dark:border-[#94909028]">
           <th className="font-normal text-start pl-4">Nombre</th>
-          <th className="font-normal text-start pl-4">Correo</th>
-          <th className="font-normal text-start pl-4">Número</th>
+          <th className="hidden md:table-cell font-normal text-start pl-4">Correo</th>
+          <th className="hidden md:table-cell font-normal text-start pl-4">Número</th>
           <th className="font-normal text-start pl-4">Fecha de creación</th>
           <th className="font-normal text-start pl-4">Estado</th>
         </tr>
@@ -21,16 +21,16 @@ export default function UsersTable() {
         {users.map((user) => (
           <tr
             key={user.email}
-            className="pb-1 text-sm border-b
+            className="h-10 pb-1 text-sm border-b
             dark:border-[#94909028]"
           >
             <th className="font-normal text-start pl-4">
               {user.name} {user.surname}
             </th>
 
-            <th className="font-normal text-start pl-4">{user.email}</th>
+            <th className="hidden md:table-cell font-normal text-start pl-4">{user.email}</th>
 
-            <th className="font-normal text-start pl-4">{user.phone}</th>
+            <th className="hidden md:table-cell font-normal text-start pl-4">{user.phone}</th>
 
             <th className="font-normal text-start pl-4">{user.date}</th>
 
