@@ -12,7 +12,7 @@ export default function ExportButton() {
         alt=""
         className="w-5 h-5 dark:invert"
       />
-      <span>Exportar</span>
+      <span className="hidden sm:block">Exportar</span>
     </button>
   );
 }
