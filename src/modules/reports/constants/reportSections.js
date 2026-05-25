@@ -42,7 +42,7 @@ export const sections = [
     roles: ["Admin", "Almacén", "Técnico"],
   },
   {
-    name: "tranformations",
+    name: "transformations",
     cardName: "Reporte de transformaciones",
     icon: "swap_horiz",
     roles: ["Admin", "Almacén", "Técnico"],
