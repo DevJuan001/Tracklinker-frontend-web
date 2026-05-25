@@ -29,6 +29,7 @@ export default function ProductsReport({ setReport }) {
 
       {productsData.map((item) => (
         <ReportsContainer
+          key={"product-reports-container"}
           reportsName={"Productos"}
           reportsDate={`${startDate} - ${endDate}`}
         >
