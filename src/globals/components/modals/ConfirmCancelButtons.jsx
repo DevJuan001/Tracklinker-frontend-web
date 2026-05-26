@@ -19,6 +19,7 @@ export default function ConfirmCancelButtons({
       className={`flex ${flexDirection} items-center self-${itemsPosition} pt-5 gap-2`}
     >
       <button
+        id="confirm-button"
         ref={confirmBtnRef}
         onClick={confirmButtonOnClick}
         disabled={disabled}
@@ -35,6 +36,7 @@ export default function ConfirmCancelButtons({
       </button>
 
       <button
+        id="cancel-button"
         disabled={disabled}
         onClick={cancelButtonOnClick}
         className={`${cancelButtonWidth} h-11 px-5 py-2.5 rounded-2xl text-sm transition duration-300 bg-[#F5F3F6]
