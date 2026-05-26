@@ -68,15 +68,15 @@ export default function Modal({
           visibility: "hidden",
         }}
         ref={modalRef}
-        className={`bg-[#fbf9fc] rounded-[32px] shadow-lg dark:border dark:border-[#1e1e209f]
-          dark:bg-black 
+        className={`bg-[#fbf9fc] rounded-[32px] shadow-lg dark:border
+          dark:bg-black dark:border-[#1e1e209f]
           ${
             type === "user"
               ? "p-7 w-full h-screen md:w-[650px] md:h-[550px]"
               : type === "help"
-                ? "p-7 md:w-[600px] h-max"
+                ? "p-7 w-[380px] md:w-[600px] h-max"
                 : type === "filter"
-                  ? "p-7 md:w-[400px]"
+                  ? "p-7 w-[365px] sm:w-[450px] md:w-[400px]"
                   : type === "select"
                     ? "p-1 w-[350px] md:w-[400px]"
                     : type === "calendar"
