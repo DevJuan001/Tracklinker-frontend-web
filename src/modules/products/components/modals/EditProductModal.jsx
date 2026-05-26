@@ -23,11 +23,11 @@ export default function EditProductModal({ selectedProduct, onClose }) {
     <section className="w-full flex flex-col items-center gap-2.5">
       <SelectMenu
         searchable
-        onChange={handleChange}
+        id={"input_order"}
+        name={"input_order_id"}
         value={form.input_order_id}
         spanText={"Orden de entrada"}
-        name={"input_order_id"}
-        id={"input_order_id"}
+        onChange={handleChange}
         options={inputOrders.map((input_order) => ({
           value: input_order.id,
           label: input_order.bill,
@@ -37,8 +37,9 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        value={form.subcategory_id}
+        id={"subcategory"}
         name={"subcategory_id"}
+        value={form.subcategory_id}
         spanText={"Subcategoria"}
         onChange={handleChange}
         options={subcategories.map((subcategory) => ({
@@ -50,11 +51,11 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        onChange={handleChange}
+        id={"brand"}
+        name={"brand_id"}
         value={form.brand_id}
         spanText={"Marca"}
-        name={"brand_id"}
-        id={"brand_id"}
+        onChange={handleChange}
         options={brands
           .filter(
             (brand) =>
@@ -72,11 +73,11 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        onChange={handleChange}
+        id={"model"}
+        name={"model_id"}
         value={form.model_id}
         spanText={"Modelo"}
-        name={"model_id"}
-        id={"model_id"}
+        onChange={handleChange}
         options={models
           .filter((model) => !form.brand_id || model.brand === form.brand_id)
           .map((model) => ({
