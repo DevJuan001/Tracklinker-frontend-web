@@ -5,10 +5,6 @@ import Icon from "../../../../globals/components/ui/Icon";
 import Skeleton from "../../../../globals/components/ui/Skeleton";
 import CreateButton from "../../../../globals/components/ui/CreateButton";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
-// Modals
-import Modal from "../../../../globals/components/modals/Modal";
-import EditProductStatusModal from "../modals/EditProductStatusModal";
-import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function ProductsTable({
   products,
