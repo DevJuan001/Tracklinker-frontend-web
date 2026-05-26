@@ -1,7 +1,7 @@
 // Hooks
 import { useRoles } from "../../hooks/useRoles";
-import { useCities } from "../../../../globals/hooks/useCities";
 import { useCreateUser } from "../../hooks/useCreateUser";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
@@ -20,99 +20,96 @@ export default function AddUserModal({ onClose }) {
     useCreateUser();
 
   return (
-    <section className="flex flex-col items-center">
-      {/* Formulario para la informacion del nuevo usuario */}
-      <form action="" className="w-full flex flex-col gap-2.5">
-        {/* Menú de roles */}
-        <SelectMenu
-          value={form.role_id}
-          id={"role_menu"}
-          name={"role_id"}
-          spanText={"Rol"}
-          onChange={handleChange}
-          options={roles.map((role) => ({
-            value: role.id,
-            label: role.name,
-          }))}
-          className={fieldError("role_id")}
-        />
+    <section className="flex flex-col items-center gap-2">
+      {/* Menú de roles */}
+      <SelectMenu
+        value={form.role_id}
+        id={"role_menu"}
+        name={"role_id"}
+        spanText={"Rol"}
+        onChange={handleChange}
+        options={roles.map((role) => ({
+          value: role.id,
+          label: role.name,
+        }))}
+        className={fieldError("role_id")}
+      />
 
-        <FormField
-          value={form.name}
-          labelText={"Nombre"}
-          placeholder={"Felipe"}
-          id={"name"}
-          name={"name"}
-          onChange={handleChange}
-          autoComplete="given-name"
-          className={fieldError("name")}
-        />
+      <FormField
+        value={form.name}
+        labelText={"Nombre"}
+        placeholder={"Felipe"}
+        id={"name"}
+        name={"name"}
+        onChange={handleChange}
+        autoComplete="given-name"
+        className={fieldError("name")}
+      />
 
-        <FormField
-          value={form.first_surname}
-          labelText={"Primer Apellido"}
-          placeholder={"Contreras"}
-          id={"first_surname"}
-          name={"first_surname"}
-          onChange={handleChange}
-          autoComplete="family-name"
-          className={fieldError("first_surname")}
-        />
+      <FormField
+        value={form.first_surname}
+        labelText={"Primer Apellido"}
+        placeholder={"Contreras"}
+        id={"first_surname"}
+        name={"first_surname"}
+        onChange={handleChange}
+        autoComplete="family-name"
+        className={fieldError("first_surname")}
+      />
 
-        <FormField
-          value={form.second_surname}
-          labelText={"Segundo Apellido"}
-          placeholder={"Aguilar"}
-          id={"second_surname"}
-          name={"second_surname"}
-          onChange={handleChange}
-          autoComplete="name"
-          className={fieldError("second_surname")}
-        />
+      <FormField
+        value={form.second_surname}
+        labelText={"Segundo Apellido"}
+        placeholder={"Aguilar"}
+        id={"second_surname"}
+        name={"second_surname"}
+        onChange={handleChange}
+        autoComplete="name"
+        className={fieldError("second_surname")}
+      />
 
-        <SelectMenu
-          searchable
-          spanText={"Ciudad"}
-          value={form.city}
-          onChange={handleChange}
-          name={"city"}
-          options={cities.map((city) => ({ value: city.id, label: city.name }))}
-          className={fieldError("city")}
-        />
+      <SelectMenu
+        searchable
+        spanText={"Ciudad"}
+        value={form.city}
+        onChange={handleChange}
+        name={"city"}
+        options={cities.map((city) => ({ value: city.id, label: city.name }))}
+        className={fieldError("city")}
+      />
 
-        <FormField
-          value={form.phone}
-          labelText={"Número"}
-          placeholder={"300012124"}
-          id={"phone"}
-          name={"phone"}
-          onChange={handleChange}
-          autoComplete="tel"
-          className={fieldError("phone")}
-        />
+      <FormField
+        value={form.phone}
+        labelText={"Número"}
+        placeholder={"300012124"}
+        id={"phone"}
+        name={"phone"}
+        onChange={handleChange}
+        autoComplete="tel"
+        className={fieldError("phone")}
+      />
 
-        <FormField
-          value={form.email}
-          labelText={"Email"}
-          placeholder={"pepito@gmail.com"}
-          id={"email"}
-          name={"email"}
-          onChange={handleChange}
-          autoComplete="email"
-          className={fieldError("email")}
-        />
+      <FormField
+        value={form.email}
+        labelText={"Email"}
+        placeholder={"pepito@gmail.com"}
+        id={"email"}
+        name={"email"}
+        onChange={handleChange}
+        autoComplete="email"
+        className={fieldError("email")}
+      />
 
-        <FormField
-          value={form.address}
-          labelText={"Dirección"}
-          placeholder={"KR 124 # 12-124"}
-          id={"address"}
-          name={"address"}
-          onChange={handleChange}
-          autoComplete="street-address"
-          className={fieldError("address")}
-        />
-      </form>
+      <FormField
+        value={form.address}
+        labelText={"Dirección"}
+        placeholder={"KR 124 # 12-124"}
+        id={"address"}
+        name={"address"}
+        onChange={handleChange}
+        autoComplete="street-address"
+        className={fieldError("address")}
+      />
 
       {/* Botones */}
       <ConfirmCancelButtons
