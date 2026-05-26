@@ -40,14 +40,14 @@ export default function SelectMenu({
   return (
     <section className="relative w-full flex flex-col gap-1">
       <div className="h-[66px] w-full flex items-center gap-1.5">
-        <div
+        <button
           id={id}
           ref={triggerRef}
           onClick={handleToggle}
           className={`relative w-full ${spanText ? "h-full pt-1.5" : "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
-          rounded-2xl cursor-pointer text-sm
-          dark:bg-black dark:border-[#1e1e20cb]
-          ${className}`}
+            rounded-2xl cursor-pointer text-sm
+            dark:bg-black dark:border-[#1e1e20cb]
+            ${className}`}
         >
           {spanText && (
             <div className="absolute top-2 left-3 px-1">
@@ -71,7 +71,8 @@ export default function SelectMenu({
           </div>
 
           <Icon name={"arrow_drop_down"} className={`dark:text-[#7e8088]`} />
-        </div>
+        </button>
+
         <button
           ref={addIconRef}
           onClick={(e) => {
@@ -81,9 +82,9 @@ export default function SelectMenu({
           disabled={addButtonInvisible}
           type="button"
           className={`h-16 flex items-center justify-center px-5 border rounded-2xl transition-colors duration-200 bg-[#FBF9FC] shadow-sm
-          ${addButtonInvisible ? "hidden" : "opacity-100"}
-          hover:bg-gray-200
-          dark:bg-black dark:border-[#1e1e20cb]`}
+            ${addButtonInvisible ? "hidden" : "opacity-100"}
+            hover:bg-gray-200
+            dark:bg-black dark:border-[#1e1e20cb]`}
         >
           <Icon name={"add"} size={22} className="dark:text-[#7e8088]" />
         </button>
@@ -137,9 +138,9 @@ export default function SelectMenu({
                     key={option.value}
                     onClick={() => handleSelect(option, name, onChange)}
                     className={`min-h-[52px] flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
-                    hover:bg-[#efedf0] hover:font-medium  
-                    dark:hover:bg-[#ffffff15]
-                    ${isSelected ? "bg-[#efedf0] font-medium dark:bg-[#ffffff15]" : ""}`}
+                      hover:bg-[#efedf0] hover:font-medium  
+                      dark:hover:bg-[#ffffff15]
+                      ${isSelected ? "bg-[#efedf0] font-medium dark:bg-[#ffffff15]" : ""}`}
                   >
                     <span>{option.label}</span>
                   </div>
