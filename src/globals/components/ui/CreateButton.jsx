@@ -8,6 +8,7 @@ export default function CreateButton({
 }) {
   return (
     <button
+      id="create-button"
       className={`flex items-center px-5 py-5 gap-2 rounded-[40px] bg-black transition duration-500 ${createButtonVisibility ? "block" : "hidden"}
       lg:rounded-3xl lg:py-3
       hover:bg-black/90 hover:shadow-black/20
