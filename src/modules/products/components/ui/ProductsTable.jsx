@@ -200,6 +200,7 @@ export default function ProductsTable({
                 {/* Botones */}
                 <th className="relative flex items-center justify-center h-14 pr-4 gap-3">
                   <ActionButtons
+                    editButtonId={`edit-product-${product.product_serial}-button`}
                     moreInfoButtonVisible={false}
                     backgroundColor="#FFFFFF"
                     editButtonOnClick={(e) => {
@@ -208,6 +209,7 @@ export default function ProductsTable({
                     deleteButtonVisible={false}
                   />
                   <button
+                    id={`edit-product-status-${product.product_serial}-button`}
                     onClick={(e) =>
                       openModal(product, "editStatus", null, e.currentTarget)
                     }
