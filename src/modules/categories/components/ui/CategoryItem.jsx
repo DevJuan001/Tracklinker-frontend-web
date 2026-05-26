@@ -33,6 +33,8 @@ export default function CategoryItem({
       </article>
 
       <ActionButtons
+        editButtonId={`edit-category-${category.id}-button`}
+        deleteButtonId={`${categoryStatusConfig[category.status]?.modalType}-category-${category.id}-button`}
         editButtonOnClick={editButtonOnClick}
         deleteButtonOnClick={(e) => {
           e.stopPropagation();

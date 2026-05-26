@@ -4,7 +4,6 @@ import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import TagInput from "../../../../globals/components/ui/TagInput";
-import FormField from "../../../../globals/components/ui/FormField";
 import DateField from "../../../../globals/components/ui/DateField";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
@@ -20,10 +19,10 @@ export default function AddOutputOrderModal({ onClose }) {
   return (
     <section className="flex flex-col items-center gap-2">
       <DateField
-        onChange={handleChange}
         id={"output_product_garanty"}
         name="output_product_garanty"
         spanText={"Tiempo de garantia"}
+        onChange={handleChange}
         value={form.output_product_garanty || "yyyy-mm-dd"}
         className={fieldError("output_product_garanty")}
       />

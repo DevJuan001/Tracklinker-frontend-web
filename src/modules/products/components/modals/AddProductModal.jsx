@@ -30,10 +30,11 @@ export default function AddProductModal({ onClose }) {
       {/* Menú de ordenes de entrada */}
       <SelectMenu
         searchable
+        id={"input-orders-menu"}
+        name={"input_order_id"}
         value={form.input_order_id}
         spanText={"Orden de entrada"}
         onChange={handleChange}
-        name={"input_order_id"}
         addIconFunction={(e) => openInnerModal("addInputOrder", e)}
         addButtonInvisible={false}
         options={inputOrders.map((inputOrder) => ({
@@ -47,8 +48,9 @@ export default function AddProductModal({ onClose }) {
       {/* Menú de subcategorias */}
       <SelectMenu
         searchable
-        value={form.subcategory_id}
+        id={"subcategories-menu"}
         name={"subcategory_id"}
+        value={form.subcategory_id}
         spanText={"Subcategoria"}
         onChange={handleChange}
         addIconFunction={(e) => openInnerModal("addSubcategory", e)}
@@ -64,9 +66,10 @@ export default function AddProductModal({ onClose }) {
       {/* Menú de marcas */}
       <SelectMenu
         searchable
+        id={"brands-menu"}
+        name={"brand_id"}
         value={form.brand_id}
         spanText={"Marca"}
-        name={"brand_id"}
         onChange={handleChange}
         addIconFunction={(e) => openInnerModal("addBrand", e)}
         addButtonInvisible={false}
@@ -89,11 +92,11 @@ export default function AddProductModal({ onClose }) {
       {/* Menú de modelos */}
       <SelectMenu
         searchable
-        value={form.model_id}
-        spanText={"Modelo"}
+        id={"models-menu"}
         name={"model_id"}
+        spanText={"Modelo"}
+        value={form.model_id}
         onChange={handleChange}
-        id={"model"}
         addIconFunction={(e) => openInnerModal("addModel", e)}
         addButtonInvisible={false}
         options={models
@@ -109,7 +112,7 @@ export default function AddProductModal({ onClose }) {
       <TagInput
         id={"product_serials"}
         name={"product_serials"}
-        labelText={"Serial"}
+        labelText={"Serial/es"}
         placeholder={"10KQ340"}
         value={form.product_serials}
         onChange={handleChange}
@@ -117,6 +120,7 @@ export default function AddProductModal({ onClose }) {
       />
 
       <SelectMenu
+        id={"warranty-times-menu"}
         name={"warranty_time"}
         onChange={handleChange}
         value={form.warranty_time}
@@ -145,6 +149,7 @@ export default function AddProductModal({ onClose }) {
           disabled
         >
           <Icon name={"barcode_scanner"} />
+
           <span className="text-sm dark:text-white">¡Proximamente!</span>
         </button>
       </section>

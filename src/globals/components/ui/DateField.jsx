@@ -14,7 +14,8 @@ export default function DateField({
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
 
   return (
-    <div
+    <button
+      id={id}
       onClick={(e) => openInnerModal("calendar", e)}
       className={`relative w-full h-[66px] flex px-4 rounded-2xl border outline-[#00000028] text-center text-sm cursor-pointer
       focus:shadow-[0_0_2px_1px_#e5e7eb]
@@ -52,6 +53,6 @@ export default function DateField({
           onClose={() => openInnerModal(null)}
         />
       )}
-    </div>
+    </button>
   );
 }

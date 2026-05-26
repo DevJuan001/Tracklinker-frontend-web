@@ -6,7 +6,6 @@ import Loader from "../../../../globals/components/ui/Loader";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modals
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function DisableProductModal({ product, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();

@@ -4,8 +4,10 @@ export default function ActionButtons({
   children,
   backgroundColor = "#F5F3F6",
   visibilityIcon = true,
+  editButtonId,
   editButtonVisible = true,
   editButtonOnClick,
+  deleteButtonId,
   deleteButtonVisible = true,
   deleteButtonOnClick,
   moreInfoButtonOnClick,
@@ -27,6 +29,7 @@ export default function ActionButtons({
 
       {editButtonVisible && (
         <button
+          id={editButtonId}
           onClick={editButtonOnClick}
           className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}]
           hover:bg-[#969292a8]`}
@@ -37,6 +40,7 @@ export default function ActionButtons({
 
       {deleteButtonVisible && (
         <button
+          id={deleteButtonId}
           onClick={deleteButtonOnClick}
           className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}] 
           hover:bg-[#969292a8]`}
