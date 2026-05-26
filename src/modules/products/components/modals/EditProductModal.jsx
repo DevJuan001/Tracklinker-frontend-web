@@ -23,7 +23,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
     <section className="w-full flex flex-col items-center gap-2.5">
       <SelectMenu
         searchable
-        id={"input-order-menu"}
+        id={"input-orders-menu"}
         name={"input_order_id"}
         value={form.input_order_id}
         spanText={"Orden de entrada"}
@@ -37,7 +37,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        id={"subcategory-menu"}
+        id={"subcategories-menu"}
         name={"subcategory_id"}
         value={form.subcategory_id}
         spanText={"Subcategoria"}
@@ -51,7 +51,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        id={"brand-menu"}
+        id={"brands-menu"}
         name={"brand_id"}
         value={form.brand_id}
         spanText={"Marca"}
@@ -73,7 +73,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        id={"model-menu"}
+        id={"models-menu"}
         name={"model_id"}
         value={form.model_id}
         spanText={"Modelo"}
@@ -97,7 +97,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
       />
 
       <DateField
-        id={"warranty_time"}
+        id={"warranty_times-menu"}
         name={"warranty_time"}
         value={form.warranty_time}
         spanText={"Tiempo de garantía"}
