@@ -79,7 +79,6 @@ export default function OutputOrdersPage() {
               ? "center"
               : "anchored"
           }
-          growDirection="center"
         >
           {modalType === "user" && <ProfileModal />}
           {modalType === "filter" && (
