@@ -23,10 +23,10 @@ export default function AddUserModal({ onClose }) {
     <section className="flex flex-col items-center gap-2">
       {/* Menú de roles */}
       <SelectMenu
-        value={form.role_id}
-        id={"role_menu"}
+        id={"roles_menu"}
         name={"role_id"}
         spanText={"Rol"}
+        value={form.role_id}
         onChange={handleChange}
         options={roles.map((role) => ({
           value: role.id,
@@ -36,33 +36,33 @@ export default function AddUserModal({ onClose }) {
       />
 
       <FormField
+        id={"name"}
+        name={"name"}
         value={form.name}
         labelText={"Nombre"}
         placeholder={"Felipe"}
-        id={"name"}
-        name={"name"}
         onChange={handleChange}
         autoComplete="given-name"
         className={fieldError("name")}
       />
 
       <FormField
+        id={"first_surname"}
+        name={"first_surname"}
         value={form.first_surname}
         labelText={"Primer Apellido"}
         placeholder={"Contreras"}
-        id={"first_surname"}
-        name={"first_surname"}
         onChange={handleChange}
         autoComplete="family-name"
         className={fieldError("first_surname")}
       />
 
       <FormField
+        id={"second_surname"}
+        name={"second_surname"}
         value={form.second_surname}
         labelText={"Segundo Apellido"}
         placeholder={"Aguilar"}
-        id={"second_surname"}
-        name={"second_surname"}
         onChange={handleChange}
         autoComplete="name"
         className={fieldError("second_surname")}
@@ -70,42 +70,43 @@ export default function AddUserModal({ onClose }) {
 
       <SelectMenu
         searchable
+        id={"city"}
+        name={"city"}
         spanText={"Ciudad"}
         value={form.city}
         onChange={handleChange}
-        name={"city"}
         options={cities.map((city) => ({ value: city.id, label: city.name }))}
         className={fieldError("city")}
       />
 
       <FormField
+        id={"phone"}
+        name={"phone"}
         value={form.phone}
         labelText={"Número"}
         placeholder={"300012124"}
-        id={"phone"}
-        name={"phone"}
         onChange={handleChange}
         autoComplete="tel"
         className={fieldError("phone")}
       />
 
       <FormField
+        id={"email"}
+        name={"email"}
         value={form.email}
         labelText={"Email"}
         placeholder={"pepito@gmail.com"}
-        id={"email"}
-        name={"email"}
         onChange={handleChange}
         autoComplete="email"
         className={fieldError("email")}
       />
 
       <FormField
+        id={"address"}
+        name={"address"}
         value={form.address}
         labelText={"Dirección"}
         placeholder={"KR 124 # 12-124"}
-        id={"address"}
-        name={"address"}
         onChange={handleChange}
         autoComplete="street-address"
         className={fieldError("address")}
