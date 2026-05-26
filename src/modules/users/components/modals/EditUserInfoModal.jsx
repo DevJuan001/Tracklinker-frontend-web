@@ -1,7 +1,7 @@
 // Hooks
 import { useRoles } from "../../hooks/useRoles";
-import { useCities } from "../../../../globals/hooks/useCities";
 import { useEditUser } from "../../hooks/useEditUser";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
@@ -20,107 +20,106 @@ export default function EditUserInfoModal({ user, onClose }) {
     useEditUser(user);
 
   return (
-    <section className="flex flex-col items-center">
-      <form action="" className="w-full flex flex-col gap-2.5">
-        <SelectMenu
-          name={"role_id"}
-          value={form.role_id}
-          id={"role_menu"}
-          spanText={"Rol"}
-          onChange={handleChange}
-          options={roles.map((role) => ({
-            value: role.id,
-            label: role.name,
-          }))}
-          className={fieldError("role_id")}
-        />
+    <section className="flex flex-col items-center gap-2">
+      <SelectMenu
+        id={"roles_menu"}
+        name={"role_id"}
+        value={form.role_id}
+        spanText={"Rol"}
+        onChange={handleChange}
+        options={roles.map((role) => ({
+          value: role.id,
+          label: role.name,
+        }))}
+        className={fieldError("role_id")}
+      />
 
-        <FormField
-          name={"name"}
-          value={form.name}
-          labelText={"Nombre"}
-          onChange={handleChange}
-          id={"name"}
-          autoComplete="given-name"
-          className={fieldError("name")}
-        />
+      <FormField
+        id={"name"}
+        name={"name"}
+        value={form.name}
+        labelText={"Nombre"}
+        onChange={handleChange}
+        autoComplete="given-name"
+        className={fieldError("name")}
+      />
 
-        <FormField
-          name={"first_surname"}
-          value={form.first_surname}
-          labelText={"Primer Apellido"}
-          id={"first_surname"}
-          onChange={handleChange}
-          autoComplete="family-name"
-          className={fieldError("first_surname")}
-        />
+      <FormField
+        id={"first_surname"}
+        name={"first_surname"}
+        value={form.first_surname}
+        labelText={"Primer Apellido"}
+        onChange={handleChange}
+        autoComplete="family-name"
+        className={fieldError("first_surname")}
+      />
 
-        <FormField
-          name={"second_surname"}
-          value={form.second_surname}
-          labelText={"Segundo Apellido"}
-          id={"second_surname"}
-          onChange={handleChange}
-          autoComplete="family-name"
-          className={fieldError("second_surname")}
-        />
+      <FormField
+        id={"second_surname"}
+        name={"second_surname"}
+        value={form.second_surname}
+        labelText={"Segundo Apellido"}
+        onChange={handleChange}
+        autoComplete="family-name"
+        className={fieldError("second_surname")}
+      />
 
-        <SelectMenu
-          searchable
-          value={form.city}
-          name={"city"}
-          spanText={"Ciudad"}
-          onChange={handleChange}
-          options={cities.map((city) => ({
-            value: city.id,
-            label: city.name,
-          }))}
-          className={fieldError("city")}
-        />
+      <SelectMenu
+        searchable
+        id={"cities_menu"}
+        name={"city"}
+        value={form.city}
+        spanText={"Ciudad"}
+        onChange={handleChange}
+        options={cities.map((city) => ({
+          value: city.id,
+          label: city.name,
+        }))}
+        className={fieldError("city")}
+      />
 
-        <FormField
-          name={"phone"}
-          value={form.phone}
-          labelText={"Número"}
-          id={"phone"}
-          onChange={handleChange}
-          autoComplete="tel"
-          className={fieldError("phone")}
-        />
+      <FormField
+        id={"phone"}
+        name={"phone"}
+        value={form.phone}
+        labelText={"Número"}
+        onChange={handleChange}
+        autoComplete="tel"
+        className={fieldError("phone")}
+      />
 
-        <FormField
-          name={"email"}
-          isRequired={true}
-          value={form.email}
-          labelText={"Correo Electrónico"}
-          id={"email"}
-          onChange={handleChange}
-          autoComplete="email"
-          className={fieldError("email")}
-        />
+      <FormField
+        id={"email"}
+        name={"email"}
+        value={form.email}
+        labelText={"Correo Electrónico"}
+        onChange={handleChange}
+        autoComplete="email"
+        className={fieldError("email")}
+      />
 
-        <FormField
-          name={"address"}
-          value={form.address}
-          labelText={"Dirección"}
-          id={"address"}
-          onChange={handleChange}
-          autoComplete="street-address"
-          className={fieldError("address")}
-        />
+      <FormField
+        id={"address"}
+        name={"address"}
+        value={form.address}
+        labelText={"Dirección"}
+        onChange={handleChange}
+        autoComplete="street-address"
+        className={fieldError("address")}
+      />
 
-        <SelectMenu
-          name={"status"}
-          value={form.status}
-          spanText={"Estado"}
-          onChange={handleChange}
-          options={[
-            { value: 1, label: "Deshabilitado" },
-            { value: 2, label: "Activo" },
-          ]}
-          className={fieldError("status")}
-        />
-      </form>
+      <SelectMenu
+        id={"status_menu"}
+        name={"status"}
+        value={form.status}
+        spanText={"Estado"}
+        onChange={handleChange}
+        options={[
+          { value: 1, label: "Deshabilitado" },
+          { value: 2, label: "Activo" },
+        ]}
+        className={fieldError("status")}
+      />
 
       {/* Botones */}
       <ConfirmCancelButtons
@@ -136,7 +135,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           isOpen={true}
           location="center"
           triggerRef={innerTrigger}
-          confirmTitle={"Información editada con éxito!"}
+          confirmTitle={"Usuario editado con éxito"}
           confirmText={
             "Se ha editado correctamente el usuario, toca el botón de volver a la pagina para verlo"
           }

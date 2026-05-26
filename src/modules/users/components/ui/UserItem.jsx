@@ -1,7 +1,6 @@
 import { userStatus } from "../../constants/userStatus";
-import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 import Icon from "../../../../globals/components/ui/Icon";
-import Avatar from "../../../../globals/components/ui/Avatar";
+import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 
 export default function UserItem({
   user,
@@ -11,11 +10,11 @@ export default function UserItem({
 }) {
   return (
     <li
+      key={user.id}
+      onClick={itemOnClick}
       className="flex items-center justify-between p-5 bg-[#F5F3F6] rounded-lg transition duration-300 cursor-pointer
       hover:bg-[#9692923b]
       dark:bg-[#0f0f11] dark:hover:bg-[#212125]"
-      key={user.id}
-      onClick={itemOnClick}
     >
       {/* Datos del Usuario */}
       <article>
@@ -26,11 +25,13 @@ export default function UserItem({
 
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
             <Icon name={"phone"} size={22} />
+
             <span>{user.phone}</span>
           </div>
 
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center">
             <Icon name={"person"} size={22} />
+
             <span>{user.role_name}</span>
           </div>
 
@@ -39,15 +40,18 @@ export default function UserItem({
           >
             <Icon
               name={userStatus[user.status]?.icon}
-              size={14}
               fill={userStatus[user.status]?.fill}
+              size={14}
             />
+
             <span>{userStatus[user.status]?.text}</span>
           </div>
         </address>
       </article>
 
       <ActionButtons
+        editButtonId={`edit-user-${user.id}-button`}
+        deleteButtonId={`${userStatus[user.status]?.modalType}-user-${user.id}-button`}
         editButtonOnClick={editButtonOnClick}
         deleteButtonOnClick={(e) => {
           e.stopPropagation();

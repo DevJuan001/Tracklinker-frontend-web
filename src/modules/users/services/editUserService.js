@@ -15,8 +15,18 @@ export async function editUserService(user_id, user_data) {
 
   const json = await response.json();
 
+  const emailError = json.detail.map((err) =>
+    err.msg.replace(
+      /value is not a valid email address:.+/i,
+      "El correo electrónico no es válido, revisa que este bien escrito e intentalo nuevamente",
+    ),
+  );
+
   if (!response.ok) {
-    return { error: json.detail || "Error en la petición", data: null };
+    return {
+      error: emailError || json.detail || "Error en la petición",
+      data: null,
+    };
   }
 
   return json;

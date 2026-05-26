@@ -11,13 +11,13 @@ export default function EnableUserModal({ user, onClose }) {
 
   return (
     <section className="flex flex-col justify-center items-center dark:text-white">
-      <p>
+      <span>
         ¿Seguro/a que deseas habilitar a{" "}
         <span className="font-medium">
           {user.name} {user.first_surname}
         </span>
         ?
-      </p>
+      </span>
 
       {/* Botones */}
       <ConfirmCancelButtons

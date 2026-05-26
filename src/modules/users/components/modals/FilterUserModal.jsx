@@ -28,6 +28,8 @@ export default function FilterUserModal({ filters, setFilters, onClose }) {
     >
       <div className="flex flex-col gap-2">
         <SelectMenu
+          showAllOption
+          id={"name_order_menu"}
           name={"name_order"}
           value={form.name_order}
           onChange={handleChange}
@@ -39,6 +41,8 @@ export default function FilterUserModal({ filters, setFilters, onClose }) {
         />
 
         <SelectMenu
+          showAllOption
+          id={"role_order_menu"}
           name={"role_order"}
           value={form.role_order}
           onChange={handleChange}
@@ -51,6 +55,8 @@ export default function FilterUserModal({ filters, setFilters, onClose }) {
 
         <SelectMenu
           searchable
+          showAllOption
+          id={"cities_menu"}
           name={"city"}
           value={form.city}
           onChange={handleChange}
@@ -62,6 +68,8 @@ export default function FilterUserModal({ filters, setFilters, onClose }) {
         />
 
         <SelectMenu
+          showAllOption
+          id={"status_menu"}
           name={"status"}
           value={form.status}
           onChange={handleChange}
