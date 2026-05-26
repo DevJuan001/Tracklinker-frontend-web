@@ -133,12 +133,13 @@ export default function SelectMenu({
 
                 return (
                   <div
+                    id={option.label}
                     key={option.value}
                     onClick={() => handleSelect(option, name, onChange)}
                     className={`min-h-[52px] flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
-                  hover:bg-[#efedf0] hover:font-medium  
-                  dark:hover:bg-[#ffffff15]
-                  ${isSelected ? "bg-[#efedf0] font-medium dark:bg-[#ffffff15]" : ""}`}
+                    hover:bg-[#efedf0] hover:font-medium  
+                    dark:hover:bg-[#ffffff15]
+                    ${isSelected ? "bg-[#efedf0] font-medium dark:bg-[#ffffff15]" : ""}`}
                   >
                     <span>{option.label}</span>
                   </div>
