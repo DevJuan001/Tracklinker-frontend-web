@@ -1,7 +1,7 @@
 // Hooks
 import { useRoles } from "../../hooks/useRoles";
-import { useCities } from "../../../../globals/hooks/useCities";
 import { useEditUser } from "../../hooks/useEditUser";
+import { useCities } from "../../../../globals/hooks/useCities";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
@@ -20,107 +20,105 @@ export default function EditUserInfoModal({ user, onClose }) {
     useEditUser(user);
 
   return (
-    <section className="flex flex-col items-center">
-      <form action="" className="w-full flex flex-col gap-2.5">
-        <SelectMenu
-          name={"role_id"}
-          value={form.role_id}
-          id={"role_menu"}
-          spanText={"Rol"}
-          onChange={handleChange}
-          options={roles.map((role) => ({
-            value: role.id,
-            label: role.name,
-          }))}
-          className={fieldError("role_id")}
-        />
+    <section className="flex flex-col items-center gap-2">
+      <SelectMenu
+        name={"role_id"}
+        value={form.role_id}
+        id={"role_menu"}
+        spanText={"Rol"}
+        onChange={handleChange}
+        options={roles.map((role) => ({
+          value: role.id,
+          label: role.name,
+        }))}
+        className={fieldError("role_id")}
+      />
 
-        <FormField
-          name={"name"}
-          value={form.name}
-          labelText={"Nombre"}
-          onChange={handleChange}
-          id={"name"}
-          autoComplete="given-name"
-          className={fieldError("name")}
-        />
+      <FormField
+        name={"name"}
+        value={form.name}
+        labelText={"Nombre"}
+        onChange={handleChange}
+        id={"name"}
+        autoComplete="given-name"
+        className={fieldError("name")}
+      />
 
-        <FormField
-          name={"first_surname"}
-          value={form.first_surname}
-          labelText={"Primer Apellido"}
-          id={"first_surname"}
-          onChange={handleChange}
-          autoComplete="family-name"
-          className={fieldError("first_surname")}
-        />
+      <FormField
+        name={"first_surname"}
+        value={form.first_surname}
+        labelText={"Primer Apellido"}
+        id={"first_surname"}
+        onChange={handleChange}
+        autoComplete="family-name"
+        className={fieldError("first_surname")}
+      />
 
-        <FormField
-          name={"second_surname"}
-          value={form.second_surname}
-          labelText={"Segundo Apellido"}
-          id={"second_surname"}
-          onChange={handleChange}
-          autoComplete="family-name"
-          className={fieldError("second_surname")}
-        />
+      <FormField
+        name={"second_surname"}
+        value={form.second_surname}
+        labelText={"Segundo Apellido"}
+        id={"second_surname"}
+        onChange={handleChange}
+        autoComplete="family-name"
+        className={fieldError("second_surname")}
+      />
 
-        <SelectMenu
-          searchable
-          value={form.city}
-          name={"city"}
-          spanText={"Ciudad"}
-          onChange={handleChange}
-          options={cities.map((city) => ({
-            value: city.id,
-            label: city.name,
-          }))}
-          className={fieldError("city")}
-        />
+      <SelectMenu
+        searchable
+        value={form.city}
+        name={"city"}
+        spanText={"Ciudad"}
+        onChange={handleChange}
+        options={cities.map((city) => ({
+          value: city.id,
+          label: city.name,
+        }))}
+        className={fieldError("city")}
+      />
 
-        <FormField
-          name={"phone"}
-          value={form.phone}
-          labelText={"Número"}
-          id={"phone"}
-          onChange={handleChange}
-          autoComplete="tel"
-          className={fieldError("phone")}
-        />
+      <FormField
+        name={"phone"}
+        value={form.phone}
+        labelText={"Número"}
+        id={"phone"}
+        onChange={handleChange}
+        autoComplete="tel"
+        className={fieldError("phone")}
+      />
 
-        <FormField
-          name={"email"}
-          isRequired={true}
-          value={form.email}
-          labelText={"Correo Electrónico"}
-          id={"email"}
-          onChange={handleChange}
-          autoComplete="email"
-          className={fieldError("email")}
-        />
+      <FormField
+        name={"email"}
+        isRequired={true}
+        value={form.email}
+        labelText={"Correo Electrónico"}
+        id={"email"}
+        onChange={handleChange}
+        autoComplete="email"
+        className={fieldError("email")}
+      />
 
-        <FormField
-          name={"address"}
-          value={form.address}
-          labelText={"Dirección"}
-          id={"address"}
-          onChange={handleChange}
-          autoComplete="street-address"
-          className={fieldError("address")}
-        />
+      <FormField
+        name={"address"}
+        value={form.address}
+        labelText={"Dirección"}
+        id={"address"}
+        onChange={handleChange}
+        autoComplete="street-address"
+        className={fieldError("address")}
+      />
 
-        <SelectMenu
-          name={"status"}
-          value={form.status}
-          spanText={"Estado"}
-          onChange={handleChange}
-          options={[
-            { value: 1, label: "Deshabilitado" },
-            { value: 2, label: "Activo" },
-          ]}
-          className={fieldError("status")}
-        />
-      </form>
+      <SelectMenu
+        name={"status"}
+        value={form.status}
+        spanText={"Estado"}
+        onChange={handleChange}
+        options={[
+          { value: 1, label: "Deshabilitado" },
+          { value: 2, label: "Activo" },
+        ]}
+        className={fieldError("status")}
+      />
 
       {/* Botones */}
       <ConfirmCancelButtons
