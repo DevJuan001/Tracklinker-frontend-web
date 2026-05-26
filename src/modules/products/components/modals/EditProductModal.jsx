@@ -23,7 +23,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
     <section className="w-full flex flex-col items-center gap-2.5">
       <SelectMenu
         searchable
-        id={"input_order"}
+        id={"input-order-menu"}
         name={"input_order_id"}
         value={form.input_order_id}
         spanText={"Orden de entrada"}
@@ -37,7 +37,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        id={"subcategory"}
+        id={"subcategory-menu"}
         name={"subcategory_id"}
         value={form.subcategory_id}
         spanText={"Subcategoria"}
@@ -51,7 +51,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        id={"brand"}
+        id={"brand-menu"}
         name={"brand_id"}
         value={form.brand_id}
         spanText={"Marca"}
@@ -73,7 +73,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       <SelectMenu
         searchable
-        id={"model"}
+        id={"model-menu"}
         name={"model_id"}
         value={form.model_id}
         spanText={"Modelo"}
@@ -106,11 +106,11 @@ export default function EditProductModal({ selectedProduct, onClose }) {
       />
 
       <SelectMenu
-        onChange={handleChange}
-        value={form.status}
-        spanText={"Estado"}
+        id={"status-menu"}
         name={"status"}
-        id={"status"}
+        spanText={"Estado"}
+        value={form.status}
+        onChange={handleChange}
         options={[
           { value: 1, label: "Deshabilitado" },
           { value: 2, label: "Activo" },
