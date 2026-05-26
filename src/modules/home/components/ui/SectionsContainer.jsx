@@ -4,11 +4,12 @@ import ActionCard from "./ActionCard";
 export default function SectionsContainer() {
   return (
     <section
-      className="min-h-[90%] grid grid-cols-4 grid-rows-2 p-[100px_13px] gap-[20px_12px] place-items-center
-      2xl:p-[140px_250px_240px_300px]
-      xl:p-[140px_190px_240px_190px]
-      lg:p-[100px_150px_250px_150px]
-      md:p-[50px_50px_200px_50px]"
+      className="min-h-[90%] grid grid-cols-3 grid-rows-3 p-[40px_13px_20px] gap-[20px_12px] place-items-center
+      md:grid-cols-5 md:grid-rows-2 md:p-[50px_10px_200px_10px]
+      lg:p-[100px_100px_250px_100px]
+      xl:p-[140px_80px_240px_80px]
+      2xl:p-[140px_250px_240px_250px]
+      "
     >
       {items.map((item) => (
         <ActionCard
