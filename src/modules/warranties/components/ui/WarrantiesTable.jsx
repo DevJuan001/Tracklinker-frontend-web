@@ -63,6 +63,7 @@ export default function WarrantiesTable({
               >
                 <Icon name={"shopping_cart"} size={60} />
               </div>
+
               <div className="flex flex-col items-center">
                 <span className="font-medium text-2xl">
                   Aún no hay garantías
@@ -108,15 +109,25 @@ export default function WarrantiesTable({
           >
             <tr className="h-[40px] dark:border-[#303033] text-sm">
               <th className="font-medium text-start pl-4">Estado</th>
+
               <th className="font-medium text-start pl-4">Fecha de creación</th>
+
               <th className="font-medium text-start pl-4">Creada por</th>
+
               <th className="font-medium text-start pl-4">Asignada a</th>
+
               <th className="font-medium text-start pl-5">Cliente</th>
+
               <th className="font-medium text-start pl-4">Descripción</th>
+
               <th className="font-medium text-start pl-4">Serial Producto</th>
+
               <th className="font-medium text-start pl-4">Teléfono</th>
+
               <th className="font-medium text-start pl-4">Ciudad</th>
+
               <th className="font-medium text-start pl-4">Dirección</th>
+
               <th className="font-medium text-center">Acción</th>
             </tr>
           </thead>
@@ -127,8 +138,8 @@ export default function WarrantiesTable({
               <tr
                 key={warranty.id}
                 className="relative h-12 text-base overflow-x-auto overflow-y-auto transition duration-75 text-[#45474d]
-            hover:bg-[#F5F3F6]
-            dark:hover:bg-[#2d2d30] dark:text-white"
+                hover:bg-[#F5F3F6]
+                dark:hover:bg-[#2d2d30] dark:text-white"
               >
                 <th className="font-normal text-start pl-3 text-sm">
                   <div
@@ -141,6 +152,7 @@ export default function WarrantiesTable({
                       size={16}
                       fill={warrantyStatusConfig[warranty.status]?.fill}
                     />
+
                     <span
                       className={`text-nowrap ${warrantyStatusConfig[warranty.status]?.textColor}`}
                     >
@@ -203,21 +215,13 @@ export default function WarrantiesTable({
                 {/* Botones de acción */}
                 <th className="relative flex items-center justify-center gap-3 pt-1.5 text-end text-sm">
                   <ActionButtons
+                    editButtonId={`edit-warranty-${warranty.id}-button`}
                     backgroundColor="#FFFFFF"
                     editButtonOnClick={(e) => {
                       e.stopPropagation();
                       openModal(warranty, "edit", null, e.currentTarget);
                     }}
                     deleteButtonVisible={false}
-                    deleteButtonOnClick={(e) => {
-                      e.stopPropagation();
-                      openModal(
-                        warranty,
-                        warrantyStatusConfig[warranty.status]?.modalType,
-                        null,
-                        e.currentTarget,
-                      );
-                    }}
                     moreInfoButtonOnClick={(e) => {
                       e.stopPropagation();
                       openModal(warranty, "info", null, e.currentTarget);
@@ -225,6 +229,7 @@ export default function WarrantiesTable({
                   />
 
                   <button
+                    id={`edit-warranty-${warranty.status}-status-button`}
                     onClick={(e) => {
                       openModal(warranty, "editStatus", null, e.currentTarget);
                     }}
