@@ -22,9 +22,9 @@ export default function EditUserInfoModal({ user, onClose }) {
   return (
     <section className="flex flex-col items-center gap-2">
       <SelectMenu
+        id={"roles_menu"}
         name={"role_id"}
         value={form.role_id}
-        id={"role_menu"}
         spanText={"Rol"}
         onChange={handleChange}
         options={roles.map((role) => ({
@@ -35,30 +35,30 @@ export default function EditUserInfoModal({ user, onClose }) {
       />
 
       <FormField
+        id={"name"}
         name={"name"}
         value={form.name}
         labelText={"Nombre"}
         onChange={handleChange}
-        id={"name"}
         autoComplete="given-name"
         className={fieldError("name")}
       />
 
       <FormField
+        id={"first_surname"}
         name={"first_surname"}
         value={form.first_surname}
         labelText={"Primer Apellido"}
-        id={"first_surname"}
         onChange={handleChange}
         autoComplete="family-name"
         className={fieldError("first_surname")}
       />
 
       <FormField
+        id={"second_surname"}
         name={"second_surname"}
         value={form.second_surname}
         labelText={"Segundo Apellido"}
-        id={"second_surname"}
         onChange={handleChange}
         autoComplete="family-name"
         className={fieldError("second_surname")}
@@ -66,8 +66,9 @@ export default function EditUserInfoModal({ user, onClose }) {
 
       <SelectMenu
         searchable
-        value={form.city}
+        id={"cities_menu"}
         name={"city"}
+        value={form.city}
         spanText={"Ciudad"}
         onChange={handleChange}
         options={cities.map((city) => ({
@@ -78,37 +79,37 @@ export default function EditUserInfoModal({ user, onClose }) {
       />
 
       <FormField
+        id={"phone"}
         name={"phone"}
         value={form.phone}
         labelText={"Número"}
-        id={"phone"}
         onChange={handleChange}
         autoComplete="tel"
         className={fieldError("phone")}
       />
 
       <FormField
+        id={"email"}
         name={"email"}
-        isRequired={true}
         value={form.email}
         labelText={"Correo Electrónico"}
-        id={"email"}
         onChange={handleChange}
         autoComplete="email"
         className={fieldError("email")}
       />
 
       <FormField
+        id={"address"}
         name={"address"}
         value={form.address}
         labelText={"Dirección"}
-        id={"address"}
         onChange={handleChange}
         autoComplete="street-address"
         className={fieldError("address")}
       />
 
       <SelectMenu
+        id={"status_menu"}
         name={"status"}
         value={form.status}
         spanText={"Estado"}
@@ -134,7 +135,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           isOpen={true}
           location="center"
           triggerRef={innerTrigger}
-          confirmTitle={"Información editada con éxito!"}
+          confirmTitle={"Usuario editado con éxito"}
           confirmText={
             "Se ha editado correctamente el usuario, toca el botón de volver a la pagina para verlo"
           }
