@@ -30,7 +30,7 @@ export default function AddProductModal({ onClose }) {
       {/* Menú de ordenes de entrada */}
       <SelectMenu
         searchable
-        id={"input-order-menu"}
+        id={"input-orders-menu"}
         name={"input_order_id"}
         value={form.input_order_id}
         spanText={"Orden de entrada"}
@@ -48,7 +48,7 @@ export default function AddProductModal({ onClose }) {
       {/* Menú de subcategorias */}
       <SelectMenu
         searchable
-        id={"subcategory-menu"}
+        id={"subcategories-menu"}
         name={"subcategory_id"}
         value={form.subcategory_id}
         spanText={"Subcategoria"}
@@ -66,7 +66,7 @@ export default function AddProductModal({ onClose }) {
       {/* Menú de marcas */}
       <SelectMenu
         searchable
-        id={"brand-menu"}
+        id={"brands-menu"}
         name={"brand_id"}
         value={form.brand_id}
         spanText={"Marca"}
@@ -92,7 +92,7 @@ export default function AddProductModal({ onClose }) {
       {/* Menú de modelos */}
       <SelectMenu
         searchable
-        id={"model-menu"}
+        id={"models-menu"}
         name={"model_id"}
         spanText={"Modelo"}
         value={form.model_id}
@@ -120,7 +120,7 @@ export default function AddProductModal({ onClose }) {
       />
 
       <SelectMenu
-        id={"warranty-time-menu"}
+        id={"warranty-times-menu"}
         name={"warranty_time"}
         onChange={handleChange}
         value={form.warranty_time}
