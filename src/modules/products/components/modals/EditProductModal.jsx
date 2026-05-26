@@ -97,7 +97,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
       />
 
       <DateField
-        id={"warranty_times-menu"}
+        id={"edit-warranty-time"}
         name={"warranty_time"}
         value={form.warranty_time}
         spanText={"Tiempo de garantía"}
