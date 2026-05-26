@@ -13,13 +13,13 @@ export default function DisableUserModal({ user, onClose }) {
 
   return (
     <section className="flex flex-col justify-center items-center dark:text-white">
-      <p>
+      <span>
         ¿Estás segur@ que deseas deshabilitar a{" "}
         <span className="font-medium">
           {user.name} {user.first_surname}
         </span>
         ?
-      </p>
+      </span>
 
       {/* Botones */}
       <ConfirmCancelButtons
