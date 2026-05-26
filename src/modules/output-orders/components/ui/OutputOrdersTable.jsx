@@ -1,8 +1,8 @@
 import Icon from "../../../../globals/components/ui/Icon";
 import { userStatus } from "../../../users/constants/userStatus";
+import Skeleton from "../../../../globals/components/ui/Skeleton";
 import CreateButton from "../../../../globals/components/ui/CreateButton";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
-import Skeleton from "../../../../globals/components/ui/Skeleton";
 
 export default function OutputOrdersTable({
   outputOrders,
@@ -33,6 +33,7 @@ export default function OutputOrdersTable({
               >
                 <Icon name={"search_off"} size={60} />
               </div>
+
               <span className="text-xl font-medium text-center">
                 No hay resultados para <strong>"{search}"</strong>. Intenta con
                 otro nombre o N° o crea una nueva.
@@ -49,10 +50,12 @@ export default function OutputOrdersTable({
               >
                 <Icon name={"shuffle"} size={60} />
               </div>
+
               <div className="flex flex-col items-center">
                 <span className="font-medium text-2xl">
                   Aún no hay ordenes de salida
                 </span>
+
                 <span className="text-lg text-center">
                   Crea tu primera orden de salida para empezar a organizar tus
                   productos.
@@ -87,17 +90,25 @@ export default function OutputOrdersTable({
               dark:text-white dark:border-[#303033]"
             >
               <th className="font-medium pl-4 text-start">Estado</th>
+
               <th className="font-medium pl-4 text-start">N°</th>
+
               <th className="font-medium pl-4 text-start">Fecha de registro</th>
+
               <th className="font-medium pl-4 text-start">Serial</th>
+
               <th className="font-medium pl-4 text-start">Marca</th>
+
               <th className="font-medium pl-4 text-start">Modelo</th>
+
               <th className="font-medium pl-4 text-start">
                 Tiempo de garantía
               </th>
+
               <th className="font-medium pl-4 text-center">Acciones</th>
             </tr>
           </thead>
+
           {/* Cuerpo de la tabla */}
           <tbody className="font-normal dark:text-white">
             {outputOrders.map((outputOrder, index) => (
@@ -116,31 +127,41 @@ export default function OutputOrdersTable({
                       fill={userStatus[outputOrder.output_order_status]?.fill}
                       size={14}
                     />
+
                     <span>
                       {userStatus[outputOrder.output_order_status]?.text}
                     </span>
                   </div>
                 </th>
+
                 <th className="font-normal text-start pl-4 text-sm">
                   {outputOrder.output_order_id}
                 </th>
+
                 <th className="font-normal text-start pl-4 text-sm">
                   {outputOrder.output_order_date}
                 </th>
+
                 <th className="font-normal text-start pl-4 text-sm">
                   {outputOrder.product_serial}
                 </th>
+
                 <th className="font-normal text-start pl-4 text-sm">
                   {outputOrder.product_brand_name}
                 </th>
+
                 <th className="font-normal text-start pl-4 text-sm">
                   {outputOrder.product_model_name}
                 </th>
+
                 <th className="font-normal text-start pl-4 text-sm">
                   {outputOrder.output_product_garanty}
                 </th>
+
                 <th className="relative">
                   <ActionButtons
+                    editButtonId={`edit-output-${1}-button`}
+                    deleteButtonId={`${userStatus[outputOrder.output_order_status]?.modalType}-output-${outputOrder.output_order_id}-button`}
                     backgroundColor="#FFFFFF"
                     editButtonOnClick={(e) => {
                       e.stopPropagation();
