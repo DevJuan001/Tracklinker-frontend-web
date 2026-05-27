@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../services/authService";
+import { loginService } from "../services/loginService";
 import { useLogout } from "../../../globals/hooks/useLogout";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 
@@ -36,7 +36,7 @@ export function useLogin(openModal) {
     try {
       await logout();
 
-      const response = await login(form);
+      const response = await loginService(form);
 
       if (response.success === true) {
         navigate("/home");

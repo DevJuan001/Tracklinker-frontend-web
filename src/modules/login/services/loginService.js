@@ -1,6 +1,6 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 
-export async function login(form) {
+export async function loginService(form) {
   const res = await fetch(`${apiRoutes.apiUrl}${apiRoutes.auth}/login`, {
     method: "POST",
     credentials: "include",
