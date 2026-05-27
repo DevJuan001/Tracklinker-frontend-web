@@ -35,6 +35,7 @@ export default function DesktopNav({
             .map((item) => (
               <li key={item.name}>
                 <NavItem
+                  itemId={item.itemId}
                   path={item.path}
                   name={item.name}
                   secondName={item.secondName}
@@ -60,7 +61,12 @@ export default function DesktopNav({
               dark:text-[#7E8088] dark:hover:bg-[#181818]"
             >
               {item.path ? (
-                <NavItem path={item.path} name={item.name} icon={item.icon} />
+                <NavItem
+                  itemId={item.itemId}
+                  path={item.path}
+                  name={item.name}
+                  icon={item.icon}
+                />
               ) : (
                 <button onClick={helpOnClick} className="w-full">
                   <section
