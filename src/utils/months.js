@@ -12,3 +12,18 @@ export const months = [
   "Noviembre",
   "Diciembre",
 ];
+
+export const monthsShort = [
+  "Ene",
+  "Feb",
+  "Mar",
+  "Abr",
+  "May",
+  "Jun",
+  "Jul",
+  "Ago",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dic",
+];
