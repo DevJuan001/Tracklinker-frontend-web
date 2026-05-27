@@ -122,7 +122,7 @@ export default function SelectMenu({
               <div className="min-h-[50px] flex items-center justify-center text-[#7E777E] gap-2.5">
                 <Icon name={"search_off"} />
                 <span className="text-center text-sm py-6">
-                  No encontraron resultados
+                  No se encontraron resultados
                 </span>
               </div>
             ) : (

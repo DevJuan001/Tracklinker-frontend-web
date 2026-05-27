@@ -8,7 +8,7 @@ export function useCurrentUser() {
     staleTime: 1000 * 60 * 60,
   });
 
-  const userData = currentUser.data?.data?.[0] || [];
+  const userData = currentUser.data?.data?.[0] || null;
 
   function hasRole(roles) {
     if (!userData?.role) return false;

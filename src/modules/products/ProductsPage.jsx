@@ -21,7 +21,7 @@ export default function ProductsPage() {
   const { modalType, modalData, isOpen, triggerRef, openModal, closeModal } =
     useModal();
   const { products, loading, filters, setFilters } = useCatalog();
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const filteredProducts = useSearch(products ?? [], search);
 
   return (

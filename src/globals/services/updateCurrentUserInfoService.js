@@ -14,7 +14,7 @@ export async function updateCurrentUserInfoService(user_data) {
   );
 
   if (!response.ok) {
-    throw new Error("Error al intentar obtener tu información");
+    throw new Error("Error al intentar actualizar tu información");
   }
 
   return await response.json();

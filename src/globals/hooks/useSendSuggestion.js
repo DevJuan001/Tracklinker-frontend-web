@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { sendSuggestionService } from "../services/sendSuggestionService";
+import { getModalTrigger } from "../../utils/getModalTrigger";
 
 export default function useSendSuggestion() {
   const [form, setForm] = useState({
@@ -15,20 +16,22 @@ export default function useSendSuggestion() {
     }));
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
     setLoading(true);
+
+    const triggerButton = getModalTrigger(e);
 
     try {
       const response = await sendSuggestionService(form);
       if (response.success) {
-        //setInnerModal("success");
+        openInnerModal("success", triggerButton);
       } else {
-        //setInnerModal("error");
+        openInnerModal("error", triggerButton);
       }
-    } catch (error) {
-      //setInnerModal("error");
-      setError(error);
+    } catch (err) {
+      openInnerModal("error", triggerButton);
+      setError(err);
     } finally {
       setLoading(false);
     }

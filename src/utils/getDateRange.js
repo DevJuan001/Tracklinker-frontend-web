@@ -20,7 +20,7 @@ export const getDateRange = (period) => {
   }
 
   return {
-    startDate: `${start.getDate()} De ${months[start.getMonth()]} del ${start.getFullYear()}`,
-    endDate: `${end.getDate()} De ${months[end.getMonth()]} del ${end.getFullYear()}`,
+    startDate: `${start.getDate()} de ${months[start.getMonth()]} del ${start.getFullYear()}`,
+    endDate: `${end.getDate()} de ${months[end.getMonth()]} del ${end.getFullYear()}`,
   };
 };

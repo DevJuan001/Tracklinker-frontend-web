@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
+import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
   darkMode: "class",
@@ -143,7 +143,7 @@ export default {
     "z-100",
     "z-150",
     "animate-modalFadeOut",
-    "animate-modelFadeIn",
+    "animate-modalFadeIn",
     "animate-blurUp",
     "users-background",
     "bg-green-500",

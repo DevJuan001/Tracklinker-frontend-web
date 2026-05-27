@@ -97,7 +97,7 @@ export default function UsersPage() {
           {modalType === "add" && <AddUserModal onClose={() => closeModal()} />}
 
           {modalType === "info" && (
-            <MoreInfoUser user={modalData} onClose={() => closeModal} />
+            <MoreInfoUser user={modalData} onClose={() => closeModal()} />
           )}
 
           {/* Modal para editar el usuario */}

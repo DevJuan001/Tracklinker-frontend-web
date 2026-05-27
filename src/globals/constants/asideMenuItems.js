@@ -38,14 +38,14 @@ export const firstSectionItems = [
   },
   {
     itemId: "categories",
-    name: "Categorias",
+    name: "Categorías",
     path: "/categories",
     icon: "folder_open",
     roles: ["Admin", "Almacén", "Técnico"],
   },
   {
     itemId: "subcategories",
-    name: "Subcategorias",
+    name: "Subcategorías",
     path: "/subcategories",
     icon: "folder_copy",
     roles: ["Admin", "Almacén", "Técnico"],
@@ -73,7 +73,7 @@ export const firstSectionItems = [
   },
   {
     itemId: "outputs",
-    name: "Ordenes",
+    name: "Órdenes",
     secondName: "de salida",
     path: "/output-orders",
     icon: "shuffle",
@@ -129,14 +129,14 @@ export const mobileRelevantItems = [
 export const mobileItems = [
   {
     itemId: "categories",
-    name: "Categorias",
+    name: "Categorías",
     path: "/categories",
     icon: "folder_open",
     roles: ["Admin", "Almacén", "Técnico"],
   },
   {
     itemId: "subcategories",
-    name: "Subcategorias",
+    name: "Subcategorías",
     path: "/subcategories",
     icon: "folder_copy",
     roles: ["Admin", "Almacén", "Técnico"],
@@ -157,7 +157,7 @@ export const mobileItems = [
   },
   {
     itemId: "outputs",
-    name: "Ordenes",
+    name: "Órdenes",
     path: "/output-orders",
     icon: "shuffle",
     roles: ["Admin", "Almacén", "Técnico"],
