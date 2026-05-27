@@ -25,7 +25,12 @@ export default function MobileNav({ hasRole, avatarOnClick, helpOnClick }) {
           .filter((item) => hasRole(item.roles))
           .map((item) => (
             <li key={item.name} className="py-1.5 rounded-full">
-              <NavItem path={item.path} name={item.name} icon={item.icon} />
+              <NavItem
+                itemId={item.itemId}
+                path={item.path}
+                name={item.name}
+                icon={item.icon}
+              />
             </li>
           ))}
       </ul>

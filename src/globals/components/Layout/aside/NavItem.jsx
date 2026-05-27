@@ -1,9 +1,9 @@
 import Icon from "../../ui/Icon";
 import { NavLink } from "react-router-dom";
 
-export default function NavItem({ path, name, secondName, icon }) {
+export default function NavItem({ itemId, path, name, secondName, icon }) {
   return (
-    <NavLink id={`${name}-aside-button`} to={path}>
+    <NavLink id={`${itemId}-aside-button`} to={path}>
       {({ isActive }) => (
         <div
           className={`w-auto h-14 flex flex-col items-center py-3 px-6 justify-center subpixel-antialiased rounded-full transition duration-300 group

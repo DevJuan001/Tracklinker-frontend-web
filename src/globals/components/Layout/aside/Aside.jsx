@@ -18,6 +18,7 @@ export default function Aside({ avatarOnClick, helpOnClick }) {
         avatarOnClick={avatarOnClick}
         helpOnClick={helpOnClick}
       />
+      
       <MobileNav
         hasRole={hasRole}
         avatarOnClick={avatarOnClick}
