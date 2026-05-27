@@ -35,7 +35,7 @@ export default function DesktopNav({
             .map((item) => (
               <li key={item.name}>
                 <NavItem
-                  itemId={item.itemId}
+                  itemId={`${item.itemId}-desktop`}
                   path={item.path}
                   name={item.name}
                   secondName={item.secondName}
@@ -62,7 +62,7 @@ export default function DesktopNav({
             >
               {item.path ? (
                 <NavItem
-                  itemId={item.itemId}
+                  itemId={`${item.itemId}-desktop`}
                   path={item.path}
                   name={item.name}
                   icon={item.icon}
