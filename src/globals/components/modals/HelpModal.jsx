@@ -1,9 +1,11 @@
 import useSendSuggestion from "../../hooks/useSendSuggestion";
 import Loader from "../ui/Loader";
+import TextArea from "../ui/TextArea";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
 
 export default function HelpModal({ onClose }) {
   const { form, loading, handleChange, handleSubmit } = useSendSuggestion();
+
   return (
     <section className="flex flex-col items-center justify-center gap-4">
       <span className="text-[#75777E] text-sm">
@@ -20,12 +22,14 @@ export default function HelpModal({ onClose }) {
           name="suggestion"
           value={form.sugggestion}
           onChange={handleChange}
-          className="w-full h-40 outline-none bg-[#fbf9fc]
+          className="w-full h-40 text-sm outline-none bg-[#fbf9fc]
+          md:text-base
           placeholder:text-gray-800
           dark:bg-transparent dark:placeholder:text-[#7E8088]"
           placeholder="Escribe aquí tu problema o sugerencia"
         />
       </div>
+
       <ConfirmCancelButtons
         itemsPosition="end"
         confirmText={loading ? <Loader /> : "Enviar"}
