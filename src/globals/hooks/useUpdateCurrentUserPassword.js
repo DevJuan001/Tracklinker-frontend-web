@@ -48,7 +48,7 @@ export function useUpdateCurrentUserPassword() {
 
     try {
       const response = await updateCurrentUserPasswordService(passwordData);
-      if (response.success == true) {
+      if (response.success === true) {
         openInnerModal("success", triggerButton);
       } else {
         openInnerModal("error", triggerButton);
