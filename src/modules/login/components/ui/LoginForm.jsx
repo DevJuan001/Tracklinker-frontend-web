@@ -22,16 +22,19 @@ export default function LoginForm({ openModal }) {
   return (
     <section className="w-full h-full flex items-center justify-center">
       {/* Container del formulario */}
-      <div className="min-w-full flex flex-col items-center px-4 py-8">
+      <div className="w-full flex flex-col items-center px-4 py-8">
         {/* Icono de Tracklinker */}
         <img
           src={loginIcons.tracklinkerIcon}
           alt=""
           className="w-[150px] h-[150px] dark:invert dark:brightness-0"
         />
+        
         <form
           onSubmit={(e) => e.preventDefault()}
-          className="w-[400px] flex flex-col gap-2 dark:text-white"
+          className="w-[360px] flex flex-col gap-2 
+          sm:w-[440px]
+          dark:text-white"
         >
           {/* Campo del correo */}
           <FormField
