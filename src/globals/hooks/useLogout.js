@@ -10,6 +10,8 @@ export function useLogout() {
   const [error, setError] = useState(null);
 
   async function logout() {
+    setLoading(true);
+    
     try {
       const response = await logoutService();
 
