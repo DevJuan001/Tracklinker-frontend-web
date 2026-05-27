@@ -22,7 +22,7 @@ export default function ProfileModal() {
       md:h-[445px] md:grid md:grid-cols-[150px_1fr]"
     >
       <aside
-        className="h-[20%] justify-self-end w-full border-gray-300
+        className="h-[30%] justify-self-end w-full border-gray-300
         dark:border-[#3a3d43]
         md:h-full md:justify-self-start md:self-start"
       >
@@ -45,6 +45,7 @@ export default function ProfileModal() {
               <span className="text-xs md:text-sm"> General </span>
             </button>
           </li>
+
           <li>
             <button
               className={`w-full flex flex-col items-center py-2.5 px-3 rounded-xl gap-2 transition duration-300
@@ -59,9 +60,11 @@ export default function ProfileModal() {
               onClick={() => setActiveSection("appearance")}
             >
               <Icon name={"palette"} size={24} />
+
               <span className="text-xs md:text-sm"> Apariencia </span>
             </button>
           </li>
+
           <li>
             <button
               className={`w-full flex flex-col items-center py-2.5 px-3 rounded-xl gap-2 transition duration-300
@@ -76,15 +79,18 @@ export default function ProfileModal() {
               onClick={() => setActiveSection("credits")}
             >
               <Icon name={"psychology"} size={24} />
+
               <span className="text-xs md:text-sm"> Creditos </span>
             </button>
           </li>
         </ul>
       </aside>
-      <section className="h-[80%] w-full flex flex-col gap-7 animate-blurUp
-      dark:text-white
-      md:h-[100%]
-      ">
+
+      <section
+        className="h-[80%] w-full flex flex-col gap-7 animate-blurUp
+        md:h-[100%]
+        dark:text-white"
+      >
         {/* Contenido de la sección seleccionada */}
         {activeSection === "general" && (
           <GeneralContent
@@ -98,7 +104,9 @@ export default function ProfileModal() {
             }}
           />
         )}
+
         {activeSection === "appearance" && <AppearanceContent />}
+
         {activeSection === "credits" && <CreditsContent />}
 
         {/* Modales Internas */}
@@ -112,6 +120,7 @@ export default function ProfileModal() {
             }}
           />
         )}
+
         {innerType === "changePassword" && (
           <ChangePasswordModal
             triggerRef={innerTrigger}
