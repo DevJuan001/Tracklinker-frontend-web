@@ -3,9 +3,10 @@ import { NavLink } from "react-router-dom";
 
 export default function NavItem({ itemId, path, name, secondName, icon }) {
   return (
-    <NavLink id={`${itemId}-aside-button`} to={path}>
+    <NavLink to={path}>
       {({ isActive }) => (
         <div
+          id={`${itemId}-aside-button`}
           className={`w-auto h-14 flex flex-col items-center py-3 px-6 justify-center subpixel-antialiased rounded-full transition duration-300 group
             md:rounded-2xl md:w-full md:h-full md:py-4
             xl:flex-row xl:pl-6 xl:py-2.5 xl:gap-2.5 xl:justify-start
