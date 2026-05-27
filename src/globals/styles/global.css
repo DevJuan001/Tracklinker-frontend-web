@@ -27,21 +27,6 @@
 /* Importar estilos para el auto completado */
 @import url("autofill.css");
 
-/* Importar Fuentes Mediante archivos locales */
-@font-face {
-  font-family: "Poppins";
-  src:
-    url("../../assets/fonts/Poppins-Regular.ttf") format("truetype"),
-    url("../../assets/fonts/Poppins-Medium.ttf") format("truetype"),
-    url("../../assets/fonts/Poppins-Black.ttf") format("truetype"),
-    url("../../assets/fonts/Poppins-Bold.ttf") format("truetype"),
-    url("../../assets/fonts/Poppins-ExtraBold.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-
 /* Estilos para formatear los estilos por defecto del navegador */
 * {
   box-sizing: border-box;
