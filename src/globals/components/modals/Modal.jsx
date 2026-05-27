@@ -1,18 +1,19 @@
+import Icon from "../ui/Icon";
+import { createPortal } from "react-dom";
 import React, { useRef, useId } from "react";
 import { useFlipModal } from "../../hooks/useFlipModal";
-import { createPortal } from "react-dom";
-import Icon from "../ui/Icon";
+import { modal_styles } from "../../constants/modalStyles";
 
 export default function Modal({
   isOpen,
+  type,
+  triggerRef,
+  z_index = "50",
+  location = "anchored",
+  growDirection = "bottom-right",
   title,
   children,
   onClose,
-  type,
-  location = "anchored",
-  growDirection = "bottom-right",
-  triggerRef,
-  z_index = "50",
   disableClose = false,
 }) {
   const modalRef = useRef();
@@ -68,44 +69,28 @@ export default function Modal({
           visibility: "hidden",
         }}
         ref={modalRef}
-        className={`bg-[#fbf9fc] rounded-[32px] shadow-lg dark:border dark:border-[#1e1e209f]
-          dark:bg-black 
-          ${
-            type === "user"
-              ? "p-7 w-full h-screen md:w-[650px] md:h-[550px]"
-              : type === "help"
-                ? "p-7 md:w-[600px] h-max"
-                : type === "filter"
-                  ? "p-7 md:w-[400px]"
-                  : type === "select"
-                    ? "p-1 w-[350px] md:w-[400px]"
-                    : type === "calendar"
-                      ? "w-[380px] md:w-[400px]"
-                      : type === "menu"
-                        ? "p-1 max-w-24"
-                        : type === "editStatus"
-                          ? "p-1.5 w-72 md:w-80"
-                          : "p-7 w-[400px] md:w-[500px]"
-          }`}
+        className={`${modal_styles[type] ?? modal_styles.default} bg-[#fbf9fc] rounded-[32px] shadow-lg
+        dark:border dark:bg-black dark:border-[#1e1e209f]`}
       >
         <div ref={contentRef}>
-          <header
-            className={`${type === "calendar" || type === "select" || type === "menu" || type === "editStatus" ? "hidden" : ""} flex justify-between items-center mb-2`}
-          >
-            <span
-              data-flip-id="modal-title"
-              className="min-w-56 font-medium text-lg dark:text-[#e4e2e5]"
-            >
-              {title}
-            </span>
-            <button
-              onClick={closeModal}
-              className="w-10 h-10 p-2.5 self-end flex items-center justify-center
+          {!["calendar", "select", "menu", "editStatus"].includes(type) && (
+            <header className="flex justify-between items-center mb-2">
+              <span
+                data-flip-id="modal-title"
+                className="min-w-56 font-medium text-lg dark:text-[#e4e2e5]"
+              >
+                {title}
+              </span>
+
+              <button
+                onClick={closeModal}
+                className="w-10 h-10 p-2.5 self-end flex items-center justify-center
               hover:bg-[#49454f21] dark:hover:bg-[#28282bbd] rounded-full"
-            >
-              <Icon name={"close"} size={24} className="dark:invert" />
-            </button>
-          </header>
+              >
+                <Icon name={"close"} size={24} className="dark:invert" />
+              </button>
+            </header>
+          )}
 
           {enhancedChildren}
         </div>

@@ -15,11 +15,12 @@ export default function ActionCard({ itemName, itemPath, itemIcon }) {
         sm:h-36 sm:w-32"
       >
         <section
-          className="h-20 w-20 rounded-xl bg-[#eae8eb] flex items-center justify-center
+          className="h-24 w-24 rounded-xl bg-[#eae8eb] flex items-center justify-center
           dark:bg-[#101012]
+          sm:h-40 sm:w-32
+          md:h-32 md:w-32
           xl:h-40 xl:w-32
-          md:h-40 md:w-32
-          sm:h-40 sm:w-32"
+          "
         >
           <Icon
             name={itemIcon}
@@ -30,13 +31,14 @@ export default function ActionCard({ itemName, itemPath, itemIcon }) {
             md:w-11 md:h-11"
           />
         </section>
-        <p
+
+        <span
           className="text-xs font-medium text-center dark:text-white
-        md:text-base
-        xl:text-base"
+          md:text-base
+          xl:text-base"
         >
           {itemName}
-        </p>
+        </span>
       </NavLink>
     </section>
   );
