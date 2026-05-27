@@ -29,6 +29,7 @@ export default function HomePage() {
       >
         Bienvenido, {user.name}
       </h1>
+      
       {/* Contenedor de las cards de los modúlos */}
       <SectionsContainer />
 
