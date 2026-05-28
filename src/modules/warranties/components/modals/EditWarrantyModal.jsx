@@ -55,8 +55,9 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
 
       <SelectMenu
         searchable
-        spanText={"Ciudad"}
+        id={"cities-menu"}
         name={"city"}
+        spanText={"Ciudad"}
         value={form.city}
         onChange={handleChange}
         options={cities.map((city) => ({
@@ -66,14 +67,14 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
       />
 
       <TextArea
+        id={"description"}
+        name={"description"}
         labelText={"Descripción"}
         placeholder={
           "Descripción detallada del estado del producto y que se debería modificar del producto"
         }
         onChange={handleChange}
         value={form.description}
-        id={"description"}
-        name={"description"}
       />
 
       <FormField
@@ -85,8 +86,9 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
       />
 
       <SelectMenu
-        spanText={"Estado"}
+        id={"warranty-status-menu"}
         name={"status"}
+        spanText={"Estado"}
         value={form.status}
         onChange={handleChange}
         options={[
