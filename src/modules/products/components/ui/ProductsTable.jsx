@@ -209,9 +209,10 @@ export default function ProductsTable({
                     onClick={(e) =>
                       openModal(product, "editStatus", null, e.currentTarget)
                     }
-                    className="flex items-center bg-white p-1.5 rounded-xl dark:bg-black"
+                    className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[#FFFFFF]
+                    hover:bg-[#969292a8] dark:invert`}
                   >
-                    <Icon name={"swap_horiz"} className="dark:brightness-200" />
+                    <Icon name={"swap_horiz"} className="dark:brightness-0" />
                   </button>
                 </th>
               </tr>
