@@ -62,7 +62,8 @@ export default function TagInput({
         {tags.map((tag, i) => (
           <span
             key={i}
-            className="flex items-center gap-1.5 pl-2.5 pr-1 py-1 border text-sm rounded-xl"
+            className="mt-1 mb-0.5 flex items-center gap-1.5 pl-2.5 pr-1 py-1 border text-sm rounded-xl
+            dark:bg-[#101012] dark:text-[#E4E2E5] dark:border-[#1e1e20cb]"
           >
             {tag}
             <button
@@ -73,7 +74,12 @@ export default function TagInput({
               className="flex items-center rounded-full p-1
               hover:bg-[#49454f21] dark:hover:bg-[#28282bbd]"
             >
-              <Icon name={"close"} color={"#000"} size={15} />
+              <Icon
+                name={"close"}
+                color={"#000"}
+                size={15}
+                className={"dark:invert"}
+              />
             </button>
           </span>
         ))}
@@ -91,7 +97,7 @@ export default function TagInput({
           onChange={handleInputChange}
           autoComplete={autoComplete}
           className={`
-          w-auto outline-none
+          w-auto h-8 outline-none
           bg-transparent rounded-xl
           transition-all duration-200
           dark:text-[#E4E2E5] dark:placeholder:text-[#b4aab4]

@@ -23,7 +23,7 @@ export default function AddUserModal({ onClose }) {
     <section className="flex flex-col items-center gap-2">
       {/* Menú de roles */}
       <SelectMenu
-        id={"roles_menu"}
+        id={"roles-menu"}
         name={"role_id"}
         spanText={"Rol"}
         value={form.role_id}
@@ -70,7 +70,7 @@ export default function AddUserModal({ onClose }) {
 
       <SelectMenu
         searchable
-        id={"city"}
+        id={"cities-menu"}
         name={"city"}
         spanText={"Ciudad"}
         value={form.city}
