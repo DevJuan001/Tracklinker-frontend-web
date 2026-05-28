@@ -36,13 +36,12 @@ export default function AddProductModal({ onClose }) {
         spanText={"Orden de entrada"}
         onChange={handleChange}
         addIconFunction={(e) => openInnerModal("addInputOrder", e)}
-        addButtonInvisible={false}
+        seeAddButton={true}
         options={inputOrders.map((inputOrder) => ({
           value: inputOrder.id,
           label: inputOrder.bill,
         }))}
         className={fieldError("input_order_id")}
-        minHeight="384px"
       />
 
       {/* Menú de subcategorias */}
@@ -54,13 +53,12 @@ export default function AddProductModal({ onClose }) {
         spanText={"Subcategoria"}
         onChange={handleChange}
         addIconFunction={(e) => openInnerModal("addSubcategory", e)}
-        addButtonInvisible={false}
+        seeAddButton={true}
         options={subcategories.map((subcategory) => ({
           value: subcategory.subcategory_id,
           label: subcategory.subcategory_name,
         }))}
         className={fieldError("subcategory_id")}
-        minHeight="384px"
       />
 
       {/* Menú de marcas */}
@@ -72,7 +70,7 @@ export default function AddProductModal({ onClose }) {
         spanText={"Marca"}
         onChange={handleChange}
         addIconFunction={(e) => openInnerModal("addBrand", e)}
-        addButtonInvisible={false}
+        seeAddButton={true}
         options={brands
           .filter(
             (brand) =>
@@ -86,7 +84,6 @@ export default function AddProductModal({ onClose }) {
             label: brand.name,
           }))}
         className={fieldError("brand_id")}
-        minHeight="384px"
       />
 
       {/* Menú de modelos */}
@@ -98,7 +95,7 @@ export default function AddProductModal({ onClose }) {
         value={form.model_id}
         onChange={handleChange}
         addIconFunction={(e) => openInnerModal("addModel", e)}
-        addButtonInvisible={false}
+        seeAddButton={true}
         options={models
           .filter((model) => !form.brand_id || model.brand === form.brand_id)
           .map((model) => ({
@@ -106,7 +103,6 @@ export default function AddProductModal({ onClose }) {
             label: model.model,
           }))}
         className={fieldError("model_id")}
-        minHeight="384px"
       />
 
       <TagInput
@@ -140,19 +136,19 @@ export default function AddProductModal({ onClose }) {
       </div>
 
       {/* Botón de leer código de barras */}
-      <section className="flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <button
-          className="flex items-center py-3 px-4 gap-2 border rounded-lg transition duration-300 
+          className="flex items-center py-3 px-4 gap-2 border rounded-2xl transition duration-300 
           hover:bg-gray-200
           dark:bg-[#2020226c] dark:hover:bg-[#2c2c2e] dark:border-[#101012] hover:cursor-pointer"
           onClick={onClose}
           disabled
         >
-          <Icon name={"barcode_scanner"} />
+          <Icon name={"barcode_scanner"} className={"dark:invert"} />
 
           <span className="text-sm dark:text-white">¡Proximamente!</span>
         </button>
-      </section>
+      </div>
 
       {/* Botones */}
       <ConfirmCancelButtons
