@@ -109,7 +109,7 @@ export default function EditUserInfoModal({ user, onClose }) {
       />
 
       <SelectMenu
-        id={"status_menu"}
+        id={"status-menu"}
         name={"status"}
         value={form.status}
         spanText={"Estado"}
