@@ -62,6 +62,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
 
       <SelectMenu
         searchable
+        id={"cities-menu"}
         name={"city"}
         spanText={"Ciudad"}
         value={form.city}
