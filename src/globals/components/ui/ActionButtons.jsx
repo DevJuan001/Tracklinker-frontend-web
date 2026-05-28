@@ -20,10 +20,10 @@ export default function ActionButtons({
       {moreInfoButtonVisible && (
         <button
           onClick={moreInfoButtonOnClick}
-          className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}]
-          hover:bg-[#969292a8]"
+          className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}]
+          hover:bg-[#969292a8]`}
         >
-          <Icon name={"arrow_outward"} />
+          <Icon name={"arrow_outward"} className="dark:brightness-0" />
         </button>
       )}
 
@@ -34,7 +34,7 @@ export default function ActionButtons({
           className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}]
           hover:bg-[#969292a8]`}
         >
-          <Icon name={"edit"} />
+          <Icon name={"edit"} className="dark:brightness-0" />
         </button>
       )}
 
@@ -45,7 +45,10 @@ export default function ActionButtons({
           className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[${backgroundColor}] 
           hover:bg-[#969292a8]`}
         >
-          <Icon name={`${visibilityIcon ? "visibility" : "visibility_off"}`} />
+          <Icon
+            name={`${visibilityIcon ? "visibility" : "visibility_off"}`}
+            className="dark:brightness-0"
+          />
         </button>
       )}
     </section>
