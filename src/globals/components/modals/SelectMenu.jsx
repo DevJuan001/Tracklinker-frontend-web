@@ -11,7 +11,7 @@ export default function SelectMenu({
   options = [],
   addIconFunction,
   addIconRef,
-  addButtonInvisible = true,
+  seeAddButton = false,
   searchable = false,
   growDirection = "center",
   className,
@@ -73,21 +73,21 @@ export default function SelectMenu({
           <Icon name={"arrow_drop_down"} className={`dark:text-[#7e8088]`} />
         </button>
 
-        <button
-          ref={addIconRef}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (addIconFunction) addIconFunction(e);
-          }}
-          disabled={addButtonInvisible}
-          type="button"
-          className={`h-16 flex items-center justify-center px-5 border rounded-2xl transition-colors duration-200 bg-[#FBF9FC] shadow-sm
-            ${addButtonInvisible ? "hidden" : "opacity-100"}
-            hover:bg-gray-200
-            dark:bg-black dark:border-[#1e1e20cb]`}
-        >
-          <Icon name={"add"} size={22} className="dark:text-[#7e8088]" />
-        </button>
+        {seeAddButton && (
+          <button
+            ref={addIconRef}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (addIconFunction) addIconFunction(e);
+            }}
+            type="button"
+            className={`h-16 flex items-center justify-center px-5 border rounded-2xl transition-colors duration-200 bg-[#FBF9FC] shadow-sm
+            hover:bg-gray-200 hover:cursor-pointer
+            dark:bg-black dark:border-[#1e1e20cb] dark:hover:bg-[#28282bbd]`}
+          >
+            <Icon name={"add"} size={22} className="dark:text-[#E4E2E5]" />
+          </button>
+        )}
       </div>
 
       {open && (
