@@ -22,7 +22,7 @@ export default function EditUserInfoModal({ user, onClose }) {
   return (
     <section className="flex flex-col items-center gap-2">
       <SelectMenu
-        id={"roles_menu"}
+        id={"roles-menu"}
         name={"role_id"}
         value={form.role_id}
         spanText={"Rol"}
@@ -66,7 +66,7 @@ export default function EditUserInfoModal({ user, onClose }) {
 
       <SelectMenu
         searchable
-        id={"cities_menu"}
+        id={"cities-menu"}
         name={"city"}
         value={form.city}
         spanText={"Ciudad"}
