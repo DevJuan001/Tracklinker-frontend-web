@@ -4,10 +4,8 @@ import { warrantyStatusConfig } from "../../constants/warrantyStatus";
 import Icon from "../../../../globals/components/ui/Icon";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 // Modales
-import Avatar from "../../../../globals/components/ui/Avatar";
-import Modal from "../../../../globals/components/modals/Modal";
-import CreateButton from "../../../../globals/components/ui/CreateButton";
 import Skeleton from "../../../../globals/components/ui/Skeleton";
+import CreateButton from "../../../../globals/components/ui/CreateButton";
 
 export default function WarrantiesTable({
   warranties,
@@ -233,11 +231,10 @@ export default function WarrantiesTable({
                     onClick={(e) => {
                       openModal(warranty, "editStatus", null, e.currentTarget);
                     }}
-                    className="flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-white
-                    hover:bg-[#969292a8]
-                    dark:bg-black"
+                    className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-[#FFFFFF]
+                    hover:bg-[#969292a8] dark:invert`}
                   >
-                    <Icon name={"shuffle"} />
+                    <Icon name={"shuffle"} className={"dark:brightness-0"} />
                   </button>
                 </th>
               </tr>

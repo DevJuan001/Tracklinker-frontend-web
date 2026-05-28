@@ -14,10 +14,9 @@ import HelpModal from "../../globals/components/modals/HelpModal";
 import MoreWarrantyInfo from "./components/modals/MoreWarrantyInfo";
 import AddWarrantyModal from "./components/modals/AddWarrantyModal";
 import EditWarrantyModal from "./components/modals/EditWarrantyModal";
-import DisableWarrantyModal from "./components/modals/DisableWarrantyModal";
 import FilterWarrantyModal from "./components/modals/FilterWarrantyModal";
-import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 import EditWarrantyStatusModal from "./components/modals/EditWarrantyStatusModal";
+import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function WarrantiesPage() {
   const { isOpen, modalData, modalType, triggerRef, openModal, closeModal } =

@@ -24,6 +24,7 @@ export default function EditWarrantyStatusModal({ warranty, onClose }) {
         })
         .map(([id, config]) => (
           <div
+            id={`edit-warranty-status-${id}-option`}
             key={id}
             onClick={(e) => {
               if (id === "1") {
@@ -35,7 +36,11 @@ export default function EditWarrantyStatusModal({ warranty, onClose }) {
             className={`${config.optionStyles} px-4 py-3.5 rounded-3xl cursor-pointer text-sm font-normal transition-all duration-200
             dark:hover:bg-[#333]`}
           >
-            {loading ? <Loader invert={true} /> : <span>{config.optionText}</span>}
+            {loading ? (
+              <Loader invert={true} />
+            ) : (
+              <span>{config.optionText}</span>
+            )}
           </div>
         ))}
 

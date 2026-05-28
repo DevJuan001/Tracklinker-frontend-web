@@ -5,6 +5,7 @@ export function useFilterWarranties(filters) {
     start_date: filters.start_date || "",
     end_date: filters.end_date || "",
     status: filters.status || "",
+    city: filters.city || "",
   });
 
   function handleChange(e) {

@@ -54,7 +54,7 @@ export default function FilterModal({
             onClick={cleanFiltersOnClick}
             className="h-11 flex items-center px-3 py-2.5 gap-1 text-[#c0392b] rounded-2xl border
             hover:bg-red-100 transition-colors duration-200
-            dark:hover:bg-[#450a0a96]
+            dark:hover:bg-[#450a0a96] dark:border-[#28282ba1]
           "
           >
             <Icon name={"filter_list_off"} size={20} />
