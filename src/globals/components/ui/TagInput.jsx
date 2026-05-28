@@ -97,7 +97,7 @@ export default function TagInput({
           onChange={handleInputChange}
           autoComplete={autoComplete}
           className={`
-          w-auto outline-none
+          w-auto h-8 outline-none
           bg-transparent rounded-xl
           transition-all duration-200
           dark:text-[#E4E2E5] dark:placeholder:text-[#b4aab4]
