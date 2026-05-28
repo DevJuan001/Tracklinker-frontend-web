@@ -121,6 +121,7 @@ export default function SelectMenu({
             {filteredOptions.length === 0 ? (
               <div className="min-h-[50px] flex items-center justify-center text-[#7E777E] gap-2.5">
                 <Icon name={"search_off"} />
+
                 <span className="text-center text-sm py-6">
                   No se encontraron resultados
                 </span>
@@ -133,8 +134,8 @@ export default function SelectMenu({
                     : String(option.value) === String(value);
 
                 return (
-                  <div
-                    id={option.label}
+                  <button
+                    id={`${id}-${option.value}-option`}
                     key={option.value}
                     onClick={() => handleSelect(option, name, onChange)}
                     className={`min-h-[52px] flex items-center px-5 cursor-pointer text-sm rounded-full transition-colors
@@ -143,7 +144,7 @@ export default function SelectMenu({
                       ${isSelected ? "bg-[#efedf0] font-medium dark:bg-[#ffffff15]" : ""}`}
                   >
                     <span>{option.label}</span>
-                  </div>
+                  </button>
                 );
               })
             )}
