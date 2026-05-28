@@ -34,6 +34,7 @@ export default function MobileMenuModal({
         .map((item) =>
           item.path ? (
             <NavItem
+              itemId={`${item.itemId}-mobile`}
               key={item.path}
               path={item.path}
               name={item.name}
