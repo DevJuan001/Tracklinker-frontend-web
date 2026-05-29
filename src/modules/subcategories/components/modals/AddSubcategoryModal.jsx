@@ -22,8 +22,8 @@ export default function AddSubcategoryModal({ onClose }) {
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
         searchable
+        id={"subcategories-menu"}
         value={form.category_id}
-        id={"subcategory_id_menu"}
         name={"category_id"}
         spanText={"Categoria"}
         onChange={handleChange}
@@ -35,9 +35,9 @@ export default function AddSubcategoryModal({ onClose }) {
       />
 
       <FormField
+        id={"subcategory-name"}
         labelText={"Nombre de la Subcategoria"}
         placeholder={"Computadores"}
-        id={"subcategory_name"}
         name={"subcategory_name"}
         value={form.subcategory_name}
         autoComplete="off"
