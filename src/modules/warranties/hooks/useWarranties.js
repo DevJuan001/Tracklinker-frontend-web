@@ -8,7 +8,9 @@ export function useWarranties() {
   const warranties = useQuery({
     queryKey: ["warranties", filters],
     queryFn: () => getWarrantiesService(filters),
-    staleTime: 1000 * 60 * 10,
+    staleTime: 1000 * 20,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
   });
 
   return {
