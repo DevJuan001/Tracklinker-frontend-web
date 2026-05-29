@@ -22,9 +22,9 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
         searchable
-        value={form.category_id}
-        id={"category_id"}
+        id={"categories-menu"}
         name={"category_id"}
+        value={form.category_id}
         spanText={"Categoria"}
         onChange={handleChange}
         options={categories.map((category) => ({
