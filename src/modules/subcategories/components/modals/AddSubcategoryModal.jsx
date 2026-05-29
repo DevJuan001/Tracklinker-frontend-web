@@ -22,7 +22,7 @@ export default function AddSubcategoryModal({ onClose }) {
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
         searchable
-        id={"subcategories-menu"}
+        id={"categories-menu"}
         value={form.category_id}
         name={"category_id"}
         spanText={"Categoria"}
