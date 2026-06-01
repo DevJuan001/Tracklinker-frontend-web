@@ -102,7 +102,7 @@ export default function OutputOrdersTable({
 
               <th className="font-medium pl-4 text-start">N°</th>
 
-              <th className="font-medium pl-4 text-start">Fecha de registro</th>
+              <th className="font-medium pl-4 text-start">Fecha de creación</th>
 
               <th className="font-medium pl-4 text-start">Productos</th>
 
