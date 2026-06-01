@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export function useFilterOutputOrders() {
+export function useFilterOutputOrders(filters) {
   const [form, setForm] = useState({
-    start_date: "",
-    end_date: "",
-    status: "",
+    start_date: filters?.start_date || "",
+    end_date: filters?.end_date || "",
+    status: filters?.status || "",
   });
 
   function handleChange(e) {
