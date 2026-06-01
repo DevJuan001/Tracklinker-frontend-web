@@ -1,10 +1,14 @@
-import Icon from "../../../../globals/components/ui/Icon";
+// Hooks
+import { useState } from "react";
+// Constantes
 import { userStatus } from "../../../users/constants/userStatus";
+// Componentes
+import { Fragment } from "react";
+import Icon from "../../../../globals/components/ui/Icon";
+import OutputOrderProductsTable from "./OutputOrderProductsTable";
 import Skeleton from "../../../../globals/components/ui/Skeleton";
 import CreateButton from "../../../../globals/components/ui/CreateButton";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
-import { useState } from "react";
-import { Fragment } from "react";
 
 export default function OutputOrdersTable({
   outputOrders,
@@ -100,6 +104,8 @@ export default function OutputOrdersTable({
 
               <th className="font-medium pl-4 text-start">Fecha de registro</th>
 
+              <th className="font-medium pl-4 text-start">Productos</th>
+
               <th className="font-medium pl-4 text-center">Acciones</th>
             </tr>
           </thead>
@@ -118,8 +124,8 @@ export default function OutputOrdersTable({
                     )
                   }
                   className="relative h-12 text-base overflow-x-auto overflow-y-auto transition duration-75 text-[#45474d]
-                hover:bg-[#F5F3F6]
-                dark:hover:bg-[#101012] dark:text-white"
+                  hover:bg-[#F5F3F6]
+                  dark:hover:bg-[#101012] dark:text-white"
                 >
                   <th className="w-16">
                     <Icon
@@ -156,6 +162,16 @@ export default function OutputOrdersTable({
                     {outputOrder.output_order_date}
                   </th>
 
+                  <th className="font-normal text-start pl-4 text-sm">
+                    <div className="flex">
+                      <span>
+                        {outputOrder.products.length > 1
+                          ? `${outputOrder.products.length} Productos`
+                          : `${outputOrder.products.length} Producto`}
+                      </span>
+                    </div>
+                  </th>
+
                   <th className="relative">
                     <ActionButtons
                       editButtonId={`edit-output-${outputOrder.output_order_id}-button`}
@@ -185,68 +201,7 @@ export default function OutputOrdersTable({
                 </tr>
 
                 {selectedOutputOrder === outputOrder.output_order_id && (
-                  <tr
-                    key={`${outputOrder.output_order_id}-expanded`}
-                    className="bg-[#FAFAFA] dark:bg-[#0d0d0f]"
-                  >
-                    <td
-                      colSpan={5}
-                      className="px-6 py-4 border-gray-200 dark:border-[#1e1e20cb]"
-                    >
-                      <div className="w-full">
-                        <span className="text-sm">Productos de la orden</span>
-
-                        <div className="border rounded-xl w-fit">
-                          <table>
-                            <thead className="border-b p-2 text-nowrap">
-                              <tr>
-                                <th className="text-start pl-2 py-1 text-sm">
-                                  Serial
-                                </th>
-
-                                <th className="text-start pl-6 py-1 text-sm">
-                                  Marca
-                                </th>
-
-                                <th className="text-start pl-6 py-1 text-sm">
-                                  Modelo
-                                </th>
-
-                                <th className="text-start px-6 py-1 text-sm">
-                                  Tiempo de garantía
-                                </th>
-                              </tr>
-                            </thead>
-
-                            <tbody>
-                              {outputOrder.products.map((product) => (
-                                <tr
-                                  key={product.output_details_id}
-                                  className="h-10"
-                                >
-                                  <td className="text-start pl-2 py-1 text-sm">
-                                    {product.product_serial}
-                                  </td>
-
-                                  <td className="text-start pl-6 py-1 text-sm">
-                                    {product.product_brand_name}
-                                  </td>
-
-                                  <td className="text-start pl-6 py-1 text-sm">
-                                    {product.product_model_name}
-                                  </td>
-
-                                  <td className="text-start px-6 py-1 text-sm">
-                                    {product.output_product_garanty}
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                  <OutputOrderProductsTable outputOrder={outputOrder} />
                 )}
               </Fragment>
             ))}
