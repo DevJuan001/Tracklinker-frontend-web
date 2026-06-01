@@ -6,7 +6,7 @@ export default function TextArea({
   onChange,
   name,
   children,
-  className
+  className,
 }) {
   return (
     <div
@@ -29,7 +29,7 @@ export default function TextArea({
           bg-transparent rounded-xl
           transition-all duration-200
           autofill:bg-white autofill:shadow-[inset_0_0_0px_1000px_white]
-          dark:text-[#E4E2E5]
+          dark:text-[#E4E2E5] dark:placeholder:text-[#b4aab4]
         "
       />
       <label
