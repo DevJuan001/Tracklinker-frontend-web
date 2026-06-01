@@ -3,7 +3,6 @@ import { useEditOutputOrder } from "../../hooks/useEditOutputOrder";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
 // Modals
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
@@ -14,30 +13,30 @@ import TagInput from "../../../../globals/components/ui/TagInput";
 
 export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
-  const { form, loading, handleChange, handleSubmit } =
+  const { form, error, loading, handleChange, handleSubmit } =
     useEditOutputOrder(selectedOutputOrder);
 
   return (
     <section className="flex flex-col items-center gap-2">
       <DateField
-        id={"output_product_garanty"}
-        name="output_product_garanty"
+        id={"output-product-garanty"}
+        name="output_order_date"
         onChange={handleChange}
-        value={form.output_product_garanty}
+        value={form.output_order_date}
         spanText="Fecha de finalización de la garantía"
       />
 
-      <FormField
-        id={"product_serial"}
-        name="product_serial"
-        labelText="Serial del producto"
+      <TagInput
+        id={"product-serials"}
+        name="product_serials"
+        labelText="Seriales"
         placeholder="ABC123"
-        value={form.product_serial}
+        value={form.product_serials}
         onChange={handleChange}
       />
 
       <SelectMenu
-        id={"status"}
+        id={"status-menu"}
         spanText={"Estado"}
         value={form.output_order_status}
         name={"output_order_status"}
@@ -73,8 +72,8 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
         <ErrorModal
           isOpen={true}
           triggerRef={innerTrigger}
-          errorTitle="Error al actualizar la orden de salida"
-          errorText="Verifica los datos e inténtalo nuevamente."
+          errorTitle="No se pudo actualizar la orden de salida"
+          errorText={error}
           confirmButtonText="Volver"
           onClose={() => openInnerModal(null)}
         />

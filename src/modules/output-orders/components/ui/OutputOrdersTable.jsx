@@ -1,5 +1,11 @@
-import Icon from "../../../../globals/components/ui/Icon";
+// Hooks
+import { useState } from "react";
+// Constantes
 import { userStatus } from "../../../users/constants/userStatus";
+// Componentes
+import { Fragment } from "react";
+import Icon from "../../../../globals/components/ui/Icon";
+import OutputOrderProductsTable from "./OutputOrderProductsTable";
 import Skeleton from "../../../../globals/components/ui/Skeleton";
 import CreateButton from "../../../../globals/components/ui/CreateButton";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
@@ -10,15 +16,16 @@ export default function OutputOrdersTable({
   search,
   openModal,
 }) {
+  const [selectedOutputOrder, setSelectedOutputOrder] = useState(null);
   const noOutputOrders = outputOrders.length === 0 && !loading;
   const isFirstLoad = outputOrders.length === 0 && loading;
 
   return (
     <section
-      className={`max-h-[92.5%] w-full border border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
-      ${noOutputOrders || isFirstLoad ? "h-full" : "h-auto"}
+      className={`max-h-[92.5%] w-full border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      ${noOutputOrders || isFirstLoad ? "h-full" : "h-auto border"}
       md:max-h-[94.5%]
-      dark:border-[#303033]`}
+      dark:border-[#1e1e20cb]`}
     >
       {noOutputOrders && (
         <div className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-5">
@@ -87,23 +94,17 @@ export default function OutputOrdersTable({
           >
             <tr
               className="h-[40px] border-b border-gray-200 text-sm
-              dark:text-white dark:border-[#303033]"
+              dark:text-white dark:border-[#1e1e20cb]"
             >
+              <th className="w-16 font-medium pl-4 text-start"></th>
+
               <th className="font-medium pl-4 text-start">Estado</th>
 
               <th className="font-medium pl-4 text-start">N°</th>
 
-              <th className="font-medium pl-4 text-start">Fecha de registro</th>
+              <th className="font-medium pl-4 text-start">Fecha de creación</th>
 
-              <th className="font-medium pl-4 text-start">Serial</th>
-
-              <th className="font-medium pl-4 text-start">Marca</th>
-
-              <th className="font-medium pl-4 text-start">Modelo</th>
-
-              <th className="font-medium pl-4 text-start">
-                Tiempo de garantía
-              </th>
+              <th className="font-medium pl-4 text-start">Productos</th>
 
               <th className="font-medium pl-4 text-center">Acciones</th>
             </tr>
@@ -111,82 +112,98 @@ export default function OutputOrdersTable({
 
           {/* Cuerpo de la tabla */}
           <tbody className="font-normal dark:text-white">
-            {outputOrders.map((outputOrder, index) => (
-              <tr
-                key={index}
-                className="relative h-12 text-base overflow-x-auto overflow-y-auto transition duration-75 text-[#45474d]
-                hover:bg-[#F5F3F6]
-                dark:hover:bg-[#2d2d30] dark:text-white"
-              >
-                <th className="w-20 font-normal text-start pl-4 text-sm">
-                  <div
-                    className={`flex items-center px-2 py-0.5 gap-1 rounded-full border text-xs ${userStatus[outputOrder.output_order_status]?.styles}`}
-                  >
+            {outputOrders.map((outputOrder) => (
+              <Fragment key={outputOrder.output_order_id}>
+                <tr
+                  key={outputOrder.output_order_id}
+                  onClick={() =>
+                    setSelectedOutputOrder((prev) =>
+                      prev === outputOrder.output_order_id
+                        ? null
+                        : outputOrder.output_order_id,
+                    )
+                  }
+                  className="relative h-12 text-base overflow-x-auto overflow-y-auto transition duration-75 text-[#45474d]
+                  hover:bg-[#F5F3F6]
+                  dark:hover:bg-[#101012] dark:text-white"
+                >
+                  <th className="w-16">
                     <Icon
-                      name={userStatus[outputOrder.output_order_status]?.icon}
-                      fill={userStatus[outputOrder.output_order_status]?.fill}
-                      size={14}
+                      name={
+                        selectedOutputOrder === outputOrder.output_order_id
+                          ? "keyboard_arrow_up"
+                          : "keyboard_arrow_down"
+                      }
+                      size={26}
                     />
+                  </th>
 
-                    <span>
-                      {userStatus[outputOrder.output_order_status]?.text}
-                    </span>
-                  </div>
-                </th>
+                  <th className="w-20 font-normal text-start pl-4 text-sm">
+                    <div
+                      className={`flex items-center px-2 py-0.5 gap-1 rounded-full border text-xs ${userStatus[outputOrder.output_order_status]?.styles}`}
+                    >
+                      <Icon
+                        name={userStatus[outputOrder.output_order_status]?.icon}
+                        fill={userStatus[outputOrder.output_order_status]?.fill}
+                        size={14}
+                      />
 
-                <th className="font-normal text-start pl-4 text-sm">
-                  {outputOrder.output_order_id}
-                </th>
+                      <span>
+                        {userStatus[outputOrder.output_order_status]?.text}
+                      </span>
+                    </div>
+                  </th>
 
-                <th className="font-normal text-start pl-4 text-sm">
-                  {outputOrder.output_order_date}
-                </th>
+                  <th className="font-normal text-start pl-4 text-sm">
+                    {outputOrder.output_order_id}
+                  </th>
 
-                <th className="font-normal text-start pl-4 text-sm">
-                  {outputOrder.product_serial}
-                </th>
+                  <th className="font-normal text-start pl-4 text-sm">
+                    {outputOrder.output_order_date}
+                  </th>
 
-                <th className="font-normal text-start pl-4 text-sm">
-                  {outputOrder.product_brand_name}
-                </th>
+                  <th className="font-normal text-start pl-4 text-sm">
+                    <div className="flex">
+                      <span>
+                        {outputOrder.products.length > 1
+                          ? `${outputOrder.products.length} Productos`
+                          : `${outputOrder.products.length} Producto`}
+                      </span>
+                    </div>
+                  </th>
 
-                <th className="font-normal text-start pl-4 text-sm">
-                  {outputOrder.product_model_name}
-                </th>
+                  <th className="relative">
+                    <ActionButtons
+                      editButtonId={`edit-output-${outputOrder.output_order_id}-button`}
+                      deleteButtonId={`${userStatus[outputOrder.output_order_status]?.modalType}-output-${outputOrder.output_order_id}-button`}
+                      moreInfoButtonVisible={false}
+                      backgroundColor="#FFFFFF"
+                      editButtonOnClick={(e) => {
+                        e.stopPropagation();
+                        openModal(outputOrder, "edit", null, e.currentTarget);
+                      }}
+                      deleteButtonOnClick={(e) => {
+                        e.stopPropagation();
+                        openModal(
+                          outputOrder,
+                          userStatus[outputOrder.output_order_status]
+                            ?.modalType,
+                          null,
+                          e.currentTarget,
+                        );
+                      }}
+                      visibilityIcon={
+                        userStatus[outputOrder.output_order_status]
+                          ?.visibilityIcon
+                      }
+                    />
+                  </th>
+                </tr>
 
-                <th className="font-normal text-start pl-4 text-sm">
-                  {outputOrder.output_product_garanty}
-                </th>
-
-                <th className="relative">
-                  <ActionButtons
-                    editButtonId={`edit-output-${1}-button`}
-                    deleteButtonId={`${userStatus[outputOrder.output_order_status]?.modalType}-output-${outputOrder.output_order_id}-button`}
-                    backgroundColor="#FFFFFF"
-                    editButtonOnClick={(e) => {
-                      e.stopPropagation();
-                      openModal(outputOrder, "edit", null, e.currentTarget);
-                    }}
-                    deleteButtonOnClick={(e) => {
-                      e.stopPropagation();
-                      openModal(
-                        outputOrder,
-                        userStatus[outputOrder.output_order_status]?.modalType,
-                        null,
-                        e.currentTarget,
-                      );
-                    }}
-                    visibilityIcon={
-                      userStatus[outputOrder.output_order_status]
-                        ?.visibilityIcon
-                    }
-                    moreInfoButtonOnClick={(e) => {
-                      e.stopPropagation();
-                      openModal(outputOrder, "moreInfo", null, e.currentTarget);
-                    }}
-                  />
-                </th>
-              </tr>
+                {selectedOutputOrder === outputOrder.output_order_id && (
+                  <OutputOrderProductsTable outputOrder={outputOrder} />
+                )}
+              </Fragment>
             ))}
           </tbody>
         </table>

@@ -2,8 +2,12 @@ import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import { useFilterOutputOrders } from "../../hooks/useFilterOutputOrders";
 
-export default function FilterOutputOrderModal({ setFilters, onClose }) {
-  const { form, handleChange } = useFilterOutputOrders();
+export default function FilterOutputOrderModal({
+  filters,
+  setFilters,
+  onClose,
+}) {
+  const { form, handleChange } = useFilterOutputOrders(filters);
 
   return (
     <FilterModal
@@ -14,6 +18,11 @@ export default function FilterOutputOrderModal({ setFilters, onClose }) {
       orderByFinishDateOnChange={handleChange}
       applyButtonOnClick={() => {
         setFilters({ ...form });
+        onClose();
+      }}
+      seeCleanFiltersButton={Object.keys(filters).length > 0}
+      cleanFiltersOnClick={() => {
+        setFilters({});
         onClose();
       }}
     >

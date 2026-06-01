@@ -40,9 +40,11 @@ export function useCreateOutputOrder() {
       } else {
         openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "No se pudo crear la orden de salida. inténtalo nuevamente más tarde.",
+      );
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }
