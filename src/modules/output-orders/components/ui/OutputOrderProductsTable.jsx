@@ -20,15 +20,15 @@ export default function OutputOrderProductsTable({ outputOrder }) {
                 <tr>
                   <th className="text-start pl-4 py-1 text-sm">Serial</th>
 
-                  <th className="text-start py-1 text-sm">Marca</th>
+                  <th className="text-start pl-4 py-1 text-sm">Marca</th>
 
-                  <th className="text-start py-1 text-sm">Modelo</th>
+                  <th className="text-start pl-4 py-1 text-sm">Modelo</th>
 
-                  <th className="text-start py-1 text-sm">
+                  <th className="text-start pl-4 py-1 text-sm">
                     Tiempo de garantía
                   </th>
 
-                  <th className="text-start py-1 text-sm">Estado</th>
+                  <th className="text-start pl-4 py-1 text-sm">Estado</th>
                 </tr>
               </thead>
 
@@ -39,19 +39,19 @@ export default function OutputOrderProductsTable({ outputOrder }) {
                       {product.product_serial}
                     </td>
 
-                    <td className="text-start py-1 text-sm">
+                    <td className="text-start pl-4 py-1 text-sm">
                       {product.product_brand_name}
                     </td>
 
-                    <td className="text-start py-1 text-sm">
+                    <td className="text-start pl-4 py-1 text-sm">
                       {product.product_model_name}
                     </td>
 
-                    <td className="text-start py-1 text-sm">
+                    <td className="text-start pl-4 py-1 text-sm">
                       {product.output_product_garanty}
                     </td>
 
-                    <td className="text-start py-1 text-xs">
+                    <td className="text-start px-4 py-1 text-xs">
                       <div
                         className={`flex items-center py-1 px-2 gap-1 border rounded-2xl
                             ${productStatusConfig[product.product_status].styles}`}
