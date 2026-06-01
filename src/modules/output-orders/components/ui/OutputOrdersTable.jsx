@@ -124,18 +124,24 @@ export default function OutputOrdersTable({
                     )
                   }
                   className="relative h-12 text-base overflow-x-auto overflow-y-auto transition duration-75 text-[#45474d]
-                  hover:bg-[#F5F3F6]
+                  hover:bg-[#F5F3F6] hover:cursor-pointer
                   dark:hover:bg-[#101012] dark:text-white"
                 >
-                  <th className="w-16">
-                    <Icon
-                      name={
-                        selectedOutputOrder === outputOrder.output_order_id
-                          ? "keyboard_arrow_up"
-                          : "keyboard_arrow_down"
-                      }
-                      size={26}
-                    />
+                  <th className="w-16 pl-2">
+                    <button
+                      className={`flex items-center transition-colors duration-300 rounded-xl p-1.5 bg-white
+                      hover:bg-[#969292a8]
+                      dark:bg-black`}
+                    >
+                      <Icon
+                        name={
+                          selectedOutputOrder === outputOrder.output_order_id
+                            ? "keyboard_arrow_up"
+                            : "keyboard_arrow_down"
+                        }
+                        size={26}
+                      />
+                    </button>
                   </th>
 
                   <th className="w-20 font-normal text-start pl-4 text-sm">
