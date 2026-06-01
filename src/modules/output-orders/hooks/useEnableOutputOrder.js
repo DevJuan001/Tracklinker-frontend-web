@@ -27,7 +27,7 @@ export function useEnableOutputOrder(id) {
       }
     } catch {
       setError(
-        "No se pudo realizar esta acción intentalo de nuevo en un momento.",
+        "No se pudo habilitar la orden de salida. inténtalo nuevamente más tarde.",
       );
       openInnerModal("error", triggerButton);
     } finally {
