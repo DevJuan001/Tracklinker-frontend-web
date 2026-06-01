@@ -7,8 +7,10 @@ import { useQueryClient } from "@tanstack/react-query";
 export function useEditOutputOrder(selectedOutputOrder) {
   const [form, setForm] = useState({
     output_order_id: selectedOutputOrder.output_order_id || "",
-    output_product_garanty: selectedOutputOrder.output_product_garanty || "",
-    product_serial: selectedOutputOrder.products.product_serial || "",
+    output_order_date: selectedOutputOrder.output_order_date || "",
+    product_serials:
+      selectedOutputOrder.products?.map((product) => product.product_serial) ??
+      [],
     output_order_status: selectedOutputOrder.output_order_status || "",
   });
   const [loading, setLoading] = useState(false);
