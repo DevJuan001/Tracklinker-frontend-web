@@ -8,7 +8,7 @@ export function useEditOutputOrder(selectedOutputOrder) {
   const [form, setForm] = useState({
     output_order_id: selectedOutputOrder.output_order_id || "",
     output_product_garanty: selectedOutputOrder.output_product_garanty || "",
-    product_serial: selectedOutputOrder.product_serial || "",
+    product_serial: selectedOutputOrder.products.product_serial || "",
     output_order_status: selectedOutputOrder.output_order_status || "",
   });
   const [loading, setLoading] = useState(false);
@@ -55,13 +55,15 @@ export function useEditOutputOrder(selectedOutputOrder) {
       } else {
         openInnerModal("error", triggerButton);
       }
-    } catch (error) {
+    } catch {
+      setError(
+        "No se pudo editar la orden de salida. inténtalo nuevamente más tarde.",
+      );
       openInnerModal("error", triggerButton);
-      setError(error);
     } finally {
       setLoading(false);
     }
   }
 
-  return { handleChange, handleSubmit, fieldError, loading, error, form };
+  return { loading, error, form, handleChange, handleSubmit, fieldError };
 }
