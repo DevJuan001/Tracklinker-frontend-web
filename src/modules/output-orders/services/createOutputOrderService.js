@@ -2,7 +2,7 @@ import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
 export async function createOutputOrderService(outputOrderData) {
-  const res = await fetchWithAuth(
+  const response = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.outputOrders}/create`,
     {
       method: "POST",
@@ -13,9 +13,11 @@ export async function createOutputOrderService(outputOrderData) {
     },
   );
 
-  if (!res.ok) {
-    throw new Error("Error en la petición");
+  const json = await response.json();
+
+  if (!response.ok) {
+    return { error: json.detail || "Error en la petición", data: null };
   }
 
-  return await res.json();
+  return json;
 }
