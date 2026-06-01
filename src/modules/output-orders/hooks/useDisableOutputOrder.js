@@ -27,7 +27,7 @@ export function useDisableOutputOrder(id) {
       }
     } catch {
       setError(
-        "No se pudo realizar esta acción intentalo de nuevo en un momento.",
+        "No se pudo deshabilitar la orden de salida. inténtalo nuevamente más tarde.",
       );
       openInnerModal("error", triggerButton);
     } finally {
