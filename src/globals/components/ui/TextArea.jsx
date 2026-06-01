@@ -25,7 +25,7 @@ export default function TextArea({
         value={value}
         id={id}
         className="
-          w-full h-28 px-4 pt-7 pb-2 outline-none
+          w-full h-28 px-4 pt-8 pb-2 outline-none
           bg-transparent rounded-xl
           transition-all duration-200
           autofill:bg-white autofill:shadow-[inset_0_0_0px_1000px_white]
