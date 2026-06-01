@@ -14,9 +14,9 @@ export default function OutputOrderProductsTable({ outputOrder }) {
         <div className="w-full flex flex-col gap-2">
           <span className="text-sm">Productos de la orden</span>
 
-          <div className="border rounded-xl w-full">
+          <div className="border rounded-xl w-full dark:border-[#1e1e20cb]">
             <table className="h-full w-full">
-              <thead className="h-10 border-b text-nowrap">
+              <thead className="h-10 border-b text-nowrap dark:border-[#1e1e20cb]">
                 <tr>
                   <th className="text-start pl-4 py-1 text-sm">Serial</th>
 
@@ -54,7 +54,8 @@ export default function OutputOrderProductsTable({ outputOrder }) {
                     <td className="text-start px-4 py-1 text-xs">
                       <div
                         className={`flex items-center py-1 px-2 gap-1 border rounded-2xl
-                            ${productStatusConfig[product.product_status].styles}`}
+                        ${productStatusConfig[product.product_status].styles}
+                        dark:border-none`}
                       >
                         <Icon
                           name={
