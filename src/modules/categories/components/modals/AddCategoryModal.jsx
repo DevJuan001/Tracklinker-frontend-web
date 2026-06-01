@@ -27,13 +27,13 @@ export default function AddCategoryModal({ onClose }) {
         autoComplete="off"
         className={fieldError("name")}
       />
-      
+
       <TextArea
         onChange={handleChange}
         value={form.description}
         name={"description"}
-        placeholder={"Que productos almacena"}
         labelText={"Descripción"}
+        placeholder={"Descripción detallada sobre que productos almacena o etc"}
         id={"category_description"}
         className={fieldError("description")}
       />
