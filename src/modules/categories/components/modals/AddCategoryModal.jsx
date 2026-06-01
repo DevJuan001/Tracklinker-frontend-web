@@ -3,6 +3,7 @@ import { useCreateCategory } from "../../hooks/useCreateCategory";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
+import TextArea from "../../../../globals/components/ui/TextArea";
 import FormField from "../../../../globals/components/ui/FormField";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
@@ -26,7 +27,8 @@ export default function AddCategoryModal({ onClose }) {
         autoComplete="off"
         className={fieldError("name")}
       />
-      <FormField
+      
+      <TextArea
         onChange={handleChange}
         value={form.description}
         name={"description"}
