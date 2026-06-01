@@ -16,11 +16,10 @@ import EditOutputOrderModal from "./components/modals/EditOutputOrderModal";
 import EnableOutputOrderModal from "./components/modals/EnableOutputOrderModal";
 import FilterOutputOrderModal from "./components/modals/FilterOutputOrdersModal";
 import DisableOutputOrderModal from "./components/modals/DisableOutputOrderModal";
-import MoreInfoOutputOrderModal from "./components/modals/MoreInfoOutputOrderModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function OutputOrdersPage() {
-  const { outputOrders, loading, setFilters } = useOutputOrders();
+  const { outputOrders, loading, filters, setFilters } = useOutputOrders();
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
   const [search, setSearch] = useState("");
@@ -81,8 +80,10 @@ export default function OutputOrdersPage() {
           }
         >
           {modalType === "user" && <ProfileModal />}
+
           {modalType === "filter" && (
             <FilterOutputOrderModal
+              filters={filters}
               setFilters={setFilters}
               onClose={closeModal}
             />
@@ -111,10 +112,6 @@ export default function OutputOrdersPage() {
               selectedOutputOrder={modalData}
               onClose={closeModal}
             />
-          )}
-
-          {modalType === "moreInfo" && modalData && (
-            <MoreInfoOutputOrderModal selectedOutputOrder={modalData} />
           )}
         </Modal>
       )}
