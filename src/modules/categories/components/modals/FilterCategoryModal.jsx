@@ -24,8 +24,10 @@ export default function FilterCategoryModal({ filters, setFilters, onClose }) {
     >
       <div className="flex flex-col gap-2">
         <SelectMenu
-          spanText={"Nombres"}
+          showAllOption
+          id={"name-order-menu"}
           name={"name_order"}
+          spanText={"Nombres"}
           onChange={handleChange}
           value={form.name_order}
           options={[
@@ -35,9 +37,11 @@ export default function FilterCategoryModal({ filters, setFilters, onClose }) {
         />
 
         <SelectMenu
-          spanText={"Estado"}
-          value={form.status}
+          showAllOption
+          id={"status-menu"}
           name={"status"}
+          value={form.status}
+          spanText={"Estado"}
           onChange={handleChange}
           options={[
             { value: 1, label: "Deshabilitada" },
