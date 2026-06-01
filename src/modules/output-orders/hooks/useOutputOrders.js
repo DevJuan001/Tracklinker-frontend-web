@@ -3,7 +3,7 @@ import { getOutputOrdersService } from "../services/getOutputOrdersService";
 import { useQuery } from "@tanstack/react-query";
 
 export function useOutputOrders() {
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState({});
 
   const outputOrders = useQuery({
     queryKey: ["outputOrders", filters],
@@ -15,6 +15,7 @@ export function useOutputOrders() {
     outputOrders: outputOrders.data || [],
     loading: outputOrders.isLoading,
     error: outputOrders.error,
+    filters,
     setFilters,
   };
 }
