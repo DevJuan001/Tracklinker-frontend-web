@@ -9,7 +9,7 @@ export function useCategories() {
     queryKey: ["categories", filters],
     queryFn: () => getCategoriesService(filters),
     staleTime: 1000 * 60 * 5,
-    refetchInterval: 1000 * 30,
+    refetchInterval: 1000 * 35,
     refetchIntervalInBackground: false,
   });
 
