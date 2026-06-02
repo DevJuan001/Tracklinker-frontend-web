@@ -29,7 +29,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
       <section className="w-full flex flex-col items-center gap-2.5">
         <SelectMenu
           searchable
-          id={"brand"}
+          id={"brand-menu"}
           value={form.brand_id}
           name="brand_id"
           spanText={"Marca"}
@@ -42,7 +42,7 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
         />
 
         <FormField
-          id={"model_name"}
+          id={"model-name"}
           name="model"
           value={form.model}
           labelText={"Modelo"}
