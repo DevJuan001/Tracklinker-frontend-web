@@ -31,8 +31,10 @@ export default function FilterSubcategoriesModal({
       <div className="flex flex-col gap-2">
         <SelectMenu
           searchable
-          spanText={"Categoría"}
+          showAllOption
+          id={"categories-order-menu"}
           name={"category_order"}
+          spanText={"Categoría"}
           value={form.category_order}
           onChange={handleChange}
           options={categories.map((category) => ({
@@ -42,8 +44,10 @@ export default function FilterSubcategoriesModal({
         />
 
         <SelectMenu
-          spanText={"Nombres"}
+          showAllOption
+          id={"name-order-menu"}
           name={"name_order"}
+          spanText={"Nombres"}
           onChange={handleChange}
           value={form.name_order}
           options={[
@@ -53,9 +57,11 @@ export default function FilterSubcategoriesModal({
         />
 
         <SelectMenu
-          spanText={"Estado"}
-          value={form.status}
+          showAllOption
+          id={"status-menu"}
           name={"status"}
+          value={form.status}
+          spanText={"Estado"}
           onChange={handleChange}
           options={[
             { value: 1, label: "Deshabilitada" },
