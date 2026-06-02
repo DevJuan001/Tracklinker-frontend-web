@@ -29,24 +29,23 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
       <section className="w-full flex flex-col items-center gap-2.5">
         <SelectMenu
           searchable
-          value={form.supplier_id}
+          id={"suppliers-menu"}
           name={"supplier_id"}
+          value={form.supplier_id}
           spanText={"Proveedor"}
-          id={"supplier_id"}
           onChange={handleChange}
           options={suppliers.map((supplier) => ({
             value: supplier.id,
             label: supplier.name,
           }))}
           className={fieldError("supplier_id")}
-          minHeight="384px"
         />
 
         <FormField
+          id={"input-order-bill"}
           name={"input_order_bill"}
           labelText={"Factura a la que pertenece"}
-          placeholder={"Ej: INP0001"}
-          id={"input_order_bill"}
+          placeholder={"INP0001"}
           onChange={handleChange}
           className={fieldError("input_order_bill")}
         />

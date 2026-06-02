@@ -24,6 +24,8 @@ export function useCatalog() {
         status_text: productStatusConfig[product.status]?.text,
       })),
     staleTime: 1000 * 60 * 3,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
   });
 
   const categories = useQuery({
@@ -31,6 +33,8 @@ export function useCatalog() {
     queryFn: getCategoriesService,
     select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
   });
 
   const subcategories = useQuery({
@@ -38,6 +42,8 @@ export function useCatalog() {
     queryFn: getSubcategories,
     select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
   });
 
   const brands = useQuery({
@@ -45,6 +51,8 @@ export function useCatalog() {
     queryFn: getProductBrandsService,
     select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
   });
 
   const models = useQuery({
@@ -52,6 +60,8 @@ export function useCatalog() {
     queryFn: getProductModelsService,
     select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
   });
 
   const inputOrders = useQuery({
@@ -59,6 +69,8 @@ export function useCatalog() {
     queryFn: getInputOrdersService,
     select: (data) => data ?? [],
     staleTime: 1000 * 60 * 5,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
   });
 
   const productStatus = useQuery({
@@ -66,6 +78,8 @@ export function useCatalog() {
     queryFn: getProductStatusService,
     select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
+    refetchInterval: 1000 * 20,
+    refetchIntervalInBackground: false,
   });
 
   return {
