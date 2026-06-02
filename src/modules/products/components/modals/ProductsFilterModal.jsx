@@ -24,6 +24,7 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
         setFilters({});
         onClose();
       }}
+      onClose={onClose}
     >
       <div className="w-full flex flex-col gap-2">
         {/* Ordenar Por Orden de entrada*/}
