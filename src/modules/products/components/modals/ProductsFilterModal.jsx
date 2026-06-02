@@ -61,7 +61,6 @@ export default function ProductsFilterModal({ filters, setFilters, onClose }) {
         <SelectMenu
           showAllOption
           searchable
-          width={"w-full"}
           spanText={"Subcategoria"}
           value={form.subcategory_order}
           id={"filter-subcategory-menu"}
