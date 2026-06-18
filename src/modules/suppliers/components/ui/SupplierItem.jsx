@@ -1,5 +1,4 @@
 import Icon from "../../../../globals/components/ui/Icon";
-import Avatar from "../../../../globals/components/ui/Avatar";
 import { userStatus } from "../../../users/constants/userStatus";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 
@@ -20,30 +19,29 @@ export default function SupplierItem({
       {/* Información del proveedor */}
       <article className="flex dark:text-white">
         <address className="flex items-center gap-5 not-italic font-medium">
-          <div className="flex items-center gap-2">
-            <Avatar user={supplier} size={35} />
-
-            <span className="text-[22px]">{supplier.name}</span>
-          </div>
+          <span className="text-[22px]">{supplier.name}</span>
 
           <div className="hidden sm:flex md:flex lg:flex xl:flex items-center gap-1">
             <Icon size={22} name={"phone"} />
+
             <span>{supplier.phone}</span>
           </div>
 
           <div className="hidden md:flex lg:flex xl:flex items-center gap-1">
             <Icon name={"globe_location_pin"} size={20} fill />
+
             <span>{supplier.city_name}</span>
           </div>
 
           <div
-            className={`flex items-center px-2 py-1 gap-1 rounded-lg border text-xs ${userStatus[supplier.status]?.styles}`}
+            className={`flex items-center px-2 py-1 gap-1 rounded-xl border text-xs ${userStatus[supplier.status]?.styles}`}
           >
             <Icon
               size={14}
               name={userStatus[supplier.status]?.icon}
               fill={userStatus[supplier.status]?.fill}
             />
+
             <span>{userStatus[supplier.status]?.text}</span>
           </div>
         </address>
