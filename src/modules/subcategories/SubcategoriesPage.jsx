@@ -75,7 +75,6 @@ export default function SubcategoriesPage() {
           type={modalType}
           isOpen={isOpen}
           triggerRef={triggerRef}
-          growDirection="center"
           location={
             modalType === "info" || modalType === "add" ? "center" : "anchored"
           }
