@@ -71,9 +71,9 @@ export default function DesktopNav({
                 <button onClick={helpOnClick} className="w-full">
                   <section
                     className="w-full h-14 flex items-center justify-center gap-2.5 py-2.5 subpixel-antialiased group
-                      dark:text-[#7E8088]
-                      md:pl-0
-                      xl:w-full xl:h-auto xl:justify-start xl:pl-7"
+                    md:pl-0
+                    xl:w-full xl:h-auto xl:justify-start xl:pl-7
+                    dark:text-[#7E8088]"
                   >
                     <Icon
                       name={item.icon}
