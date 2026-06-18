@@ -4,12 +4,8 @@ let isRefreshing = false;
 let refreshPromise = null;
 
 export async function fetchWithAuth(url, options = {}) {
-  let response = await fetch(url, {
-    ...options,
-    credentials: "include",
-  });
+  let response = await fetch(url, { ...options, credentials: "include" });
 
-  // Si el access_token venció, intenta refrescar
   if (response.status === 401) {
     if (isRefreshing) {
       try {
@@ -27,20 +23,28 @@ export async function fetchWithAuth(url, options = {}) {
           method: "POST",
           credentials: "include",
         },
-      ).then((res) => {
-        isRefreshing = false;
-        if (!res.ok) {
+      )
+        .then((res) => {
+          isRefreshing = false;
+          if (!res.ok) {
+            refreshPromise = null;
+            console.error(
+              `[Tracklinker] Token refresh failed (${res.status} ${res.statusText}). ` +
+                "The refresh_token cookie was not accepted by the API. " +
+                "Check that the backend sets it with HttpOnly; Secure; SameSite=None; Path=/. " +
+                "See the `auth` skill for the full diagnosis.",
+            );
+            window.location.href = "/login";
+            throw new Error("Refresh token expirado o cookie no enviado");
+          }
           refreshPromise = null;
-          window.location.href = "/login";
-          throw new Error("Refresh token expirado");
-        }
-        refreshPromise = null;
-        return res;
-      }).catch((err) => {
-        isRefreshing = false;
-        refreshPromise = null;
-        throw err;
-      });
+          return res;
+        })
+        .catch((err) => {
+          isRefreshing = false;
+          refreshPromise = null;
+          throw err;
+        });
 
       try {
         await refreshPromise;
@@ -49,11 +53,7 @@ export async function fetchWithAuth(url, options = {}) {
       }
     }
 
-    // Token refrescado exitosamente, reintentamos la request original
-    response = await fetch(url, {
-      ...options,
-      credentials: "include",
-    });
+    response = await fetch(url, { ...options, credentials: "include" });
   }
 
   return response;
