@@ -1,6 +1,6 @@
 ---
 name: index
-description: Use FIRST when working on the Tracklinker Web frontend (React 19 + Vite 7 + React Router 7 + React Query 5 + Tailwind 3 + GSAP). Acts as the index that maps every task to a more specific skill (flow, architecture, stack, routing, ui, modals, modules, conventions, assets, docker, env, spa-routing, commands, prs). Trigger on AGENTS.md, .agents/, src/, the Dockerfile, Vite/Tailwind/ESLint config or any change inside the repo; do NOT use for unrelated repos.
+description: Use FIRST when working on the Tracklinker Web frontend (React 19 + Vite 7 + React Router 7 + React Query 5 + Tailwind 3 + GSAP). Acts as the index that maps every task to a more specific skill (flow, architecture, stack, routing, auth, ui, modals, modules, conventions, assets, docker, env, spa-routing, commands, prs). Trigger on AGENTS.md, .agents/, src/, the Dockerfile, Vite/Tailwind/ESLint config or any change inside the repo; do NOT use for unrelated repos.
 ---
 
 # Tracklinker Web — frontend skill (index)
@@ -27,6 +27,7 @@ cubre un área y se activa por sus keywords.
 | `architecture` | Razonar sobre la forma general del proyecto, `Page → Hook → Service → API`, `globals/` vs `modules/`, flujo de mutación. |
 | `stack` | Tocar `package.json`, `vite.config.js`, `tailwind.config.js`, `postcss.config.js`, `eslint.config.js`, `index.html`, `pnpm-workspace.yaml` o la variable `VITE_API_URL`. |
 | `routing` | Tocar `AppRouter`, `ProtectedRoutes`, `routesConfig`, `useCurrentUser`, `fetchWithAuth`, `loginService`, `useLogout`, refresh del token, guards de rol, `hasRole`. |
+| `auth` | El usuario se desloguea inesperadamente, sale "no encuentra el refresh token" en el teléfono, o estás tocando el flujo de cookies (`Set-Cookie`, `SameSite`, httpOnly, refresh coalescing). |
 | `ui` | Tocar `Layout`, `Aside`, primitivos de `globals/components/ui/*` (FormField, Icon, Calendar, SearchBar, Skeleton, etc.) o decidir si algo va en `globals/` o en un módulo. |
 | `modals` | Tocar `Modal.jsx`, `useFlipModal`, `AddInnerModal`, `ConfirmCancelButtons`, `ErrorModal`, `SuccessModal`, `FilterModal`, `HelpModal`, `SelectMenu`, `profileModal/*` o añadir un tipo de modal nuevo (`modalStyles.js` + `z_index` + `growDirection`). |
 | `modules` | Trabajar dentro de `src/modules/<x>/` (login, home, dashboard, products, categories, subcategories, suppliers, users, warranties, output-orders, reports). |
@@ -52,7 +53,8 @@ cubre un área y se activa por sus keywords.
 - Si vas a tocar el sistema de modales, ve directo a
   `modals`.
 - Si vas a tocar rutas, menús, login, refresh o roles, ve a
-  `routing`.
+  `routing` (y `auth` para el detalle del flujo de cookies y los
+  problemas de `SameSite` en mobile).
 - Para detalles globales reutilizables (Layout, iconos, tema), abre
   `ui` y `assets`.
 - Si vas a crear o revisar una PR, ve a `prs`.
