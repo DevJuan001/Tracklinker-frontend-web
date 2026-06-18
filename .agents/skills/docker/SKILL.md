@@ -33,9 +33,13 @@ Notas:
 - Copia `package.json` y `package-lock.json` con `package*.json`.
 - La imagen final es `nginx:alpine` sirviendo `/usr/share/nginx/html`
   en puerto 80.
-- No hay `nginx.conf` propio → usa el default de la imagen, que sirve
-  cualquier archivo de `/usr/share/nginx/html` y hace fallback a
-  `index.html` para SPA routing.
+- **Sí** hay `nginx.conf` propio (en la raíz del repo) que sobreescribe
+  el default de la imagen. La razón: el default de `nginx:alpine` no
+  tiene `try_files`, así que cualquier ruta que no sea un archivo
+  físico (ej. `/login`, `/dashboard`) devuelve **404** al refrescar.
+  El `nginx.conf` propio añade el SPA fallback
+  (`try_files $uri $uri/ /index.html`) y los headers de cache correctos.
+  Ver skill `spa-routing` para el detalle.
 
 ### Customización para pnpm
 
@@ -52,7 +56,9 @@ COPY . .
 RUN pnpm build
 ```
 
-(Y mantén el segundo stage tal cual.)
+(Y mantén el segundo stage tal cual. Si cambias el build command a
+`pnpm build`, recuerda también exponer `VITE_API_URL` en build time,
+ver skill `env`.)
 
 ## `.dockerignore`
 
@@ -89,27 +95,38 @@ docker build \
 > Si quieres leer variables en runtime, necesitas un proxy reverso o
 > un truco con `window.__API_URL__`; este repo **no** lo hace. Trata
 > `VITE_API_URL` como fija al momento de build.
+>
+> El detalle completo (Render, Vercel, Netlify, anti-patrones) está
+> en la skill `env`.
 
 ## Nginx
 
-El default de `nginx:alpine` ya cubre:
+El repo trae un `nginx.conf` propio (en la raíz) que sobreescribe
+el default de la imagen. Incluye:
 
-- Servir estáticos.
-- Fallback a `index.html` para cualquier ruta desconocida
-  (`try_files $uri /index.html;` implícito en la config default
-  para `location /`).
+- `try_files $uri $uri/ /index.html;` → SPA fallback para
+  `react-router` (ver skill `spa-routing`).
+- `Cache-Control: public, immutable` por 1 año para assets con hash
+  (`assets/index-abc123.js`, etc.).
+- `Cache-Control: no-store` para `index.html` (así un deploy nuevo
+  se ve siempre, sin cachear el HTML viejo).
+- `gzip` para reducir el peso de los assets de texto.
 
-No hace falta config personalizada para el routing SPA estándar.
-**Caveat:** si alguna vez sirves bajo un sub-path (`/app/`), tendrás
-que añadir un `nginx.conf` con la config apropiada.
+Si alguna vez sirves bajo un sub-path (`/app/`), tendrás que
+ajustar la config para que el fallback use el prefijo.
 
 ## Build y run
 
 ```bash
-docker build -t tracklinker-web .
+docker build \
+  --build-arg VITE_API_URL=https://api.example.com \
+  -t tracklinker-web .
 docker run -p 80:80 tracklinker-web
 # abrir http://localhost
 ```
+
+Para verificar el SPA fallback localmente, ver la sección
+"Verificación local" en la skill `spa-routing`.
 
 ## Cookies httpOnly y CORS
 
@@ -135,6 +152,10 @@ httpOnly. Esto significa:
 
 ## Skills relacionadas
 
+- `spa-routing` — el `nginx.conf`, el SPA fallback y los headers de
+  cache. **Lee esta skill** si ves 404 al refrescar la página.
+- `env` — cómo se inyecta `VITE_API_URL` en cada plataforma de
+  deploy (Render, Vercel, Netlify, Docker).
 - `stack` — qué hay en `package.json` y por qué el `Dockerfile`
   copia `package*.json`.
 - `routing` — `fetchWithAuth` y por qué el `credentials: "include"`

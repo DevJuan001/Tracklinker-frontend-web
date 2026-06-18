@@ -1,6 +1,6 @@
 ---
 name: index
-description: Use FIRST when working on the Tracklinker Web frontend (React 19 + Vite 7 + React Router 7 + React Query 5 + Tailwind 3 + GSAP). Acts as the index that maps every task to a more specific skill (flow, architecture, stack, routing, ui, modals, modules, conventions, assets, docker, commands, prs). Trigger on AGENTS.md, .agents/, src/, the Dockerfile, Vite/Tailwind/ESLint config or any change inside the repo; do NOT use for unrelated repos.
+description: Use FIRST when working on the Tracklinker Web frontend (React 19 + Vite 7 + React Router 7 + React Query 5 + Tailwind 3 + GSAP). Acts as the index that maps every task to a more specific skill (flow, architecture, stack, routing, ui, modals, modules, conventions, assets, docker, env, spa-routing, commands, prs). Trigger on AGENTS.md, .agents/, src/, the Dockerfile, Vite/Tailwind/ESLint config or any change inside the repo; do NOT use for unrelated repos.
 ---
 
 # Tracklinker Web — frontend skill (index)
@@ -33,6 +33,8 @@ cubre un área y se activa por sus keywords.
 | `conventions` | Nombrar archivos / hooks / services / tipos de modal, propagar roles en rutas/menú/home/reports/statusConfig, ESLint, regla "no comments", checklist de módulo nuevo. |
 | `assets` | Tocar `src/assets/icons/*`, `src/assets/fonts/*`, `globals/styles/*`, `tailwind.config.js` (animaciones + safelist), `useTheme`, o añadir un color con su variante `dark:`. |
 | `docker` | Tocar el `Dockerfile` multi-stage, `.dockerignore`, Nginx, build args, CORS para las cookies del token, build-time vs runtime. |
+| `env` | `VITE_API_URL` (u otra `VITE_*`) sale `undefined` en producción, o tienes que añadir una var de entorno nueva. Cubre Render, Vercel, Netlify y Docker. |
+| `spa-routing` | 404 al refrescar la página o al abrir una URL directa en producción. Cubre el `nginx.conf`, los headers de cache, y equivalentes en otros hosts. |
 | `commands` | Ejecutar scripts de `pnpm` (install/dev/build/preview/lint), validar antes de commitear, o hacer greps rápidos (rutas, roles, `useQuery`, `useModal`, `fetchWithAuth`). |
 | `prs` | Abrir un pull request: nombre de rama (`feat/<scope>`), Conventional Commits, estilo del título/cuerpo, workflow de `gh`, errores comunes. |
 
