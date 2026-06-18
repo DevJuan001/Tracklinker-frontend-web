@@ -80,13 +80,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRoutes({ roles }) {
   const { hasRole, loading, error } = useCurrentUser();
-  if (loading) {
-    return (
-      <div className="w-full h-screen flex items-center justify-center bg-[#FBF9FC] dark:bg-black">
-        <span className="w-8 h-8 rounded-full border-2 border-black border-b-transparent animate-rotation dark:border-white dark:border-b-transparent" />
-      </div>
-    );
-  }
+  if (loading) return null;
   if (error || !hasRole(roles)) return <Navigate to={"/login"} replace />;
   return <Outlet />;
 }
@@ -94,16 +88,10 @@ export default function ProtectedRoutes({ roles }) {
 
 Reglas:
 
-- Mientras carga el usuario actual muestra un spinner theme-aware
-  (no un flash de pantalla en blanco, que en redes móviles lentas
-  se nota).
+- Mientras carga el usuario actual, no renderiza nada (evita parpadeos).
 - Si falla la carga o el rol del usuario no está en la lista, manda a
   `/login` con `replace`.
 - Si pasa, renderiza `<Outlet />` con la ruta hija.
-- Si `useCurrentUser` falla porque no hay sesión (cookie de refresh
-  no se envió, ver skill `auth`), redirige a `/login` — es el camino
-  feliz cuando el usuario abre la app por primera vez en un dispositivo
-  nuevo.
 
 ## `useCurrentUser` (`globals/hooks/useCurrentUser.js`)
 
@@ -224,10 +212,9 @@ anterior se filtren a la siguiente sesión.
 
 ## Skills relacionadas
 
-- `auth` — el flujo de cookies, el refresh coalescing, el bug típico
-  de "no encuentra el refresh token" en mobile, y los atributos que
-  el backend tiene que poner en `Set-Cookie`.
-- `architecture` — flujo general Page → Hook → Service → API.
-- `modals` — el `HelpModal` y `ProfileModal` que aparecen desde el
-  Layout usan el mismo sistema.
-- `conventions` — cómo propagar roles al añadir una ruta.
+- `architecture` — flujo general Page → Hook →
+  Service → API.
+- `modals` — el `HelpModal` y `ProfileModal` que
+  aparecen desde el Layout usan el mismo sistema.
+- `conventions` — cómo propagar roles al añadir
+  una ruta.
