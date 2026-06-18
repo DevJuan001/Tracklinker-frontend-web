@@ -2,7 +2,7 @@ import { useState } from "react";
 import { sendSuggestionService } from "../services/sendSuggestionService";
 import { getModalTrigger } from "../../utils/getModalTrigger";
 
-export default function useSendSuggestion() {
+export function useSendSuggestion() {
   const [form, setForm] = useState({
     suggestion: "",
   });
@@ -18,12 +18,14 @@ export default function useSendSuggestion() {
 
   async function handleSubmit(e, openInnerModal) {
     e.preventDefault();
+
     setLoading(true);
 
     const triggerButton = getModalTrigger(e);
 
     try {
       const response = await sendSuggestionService(form);
+
       if (response.success) {
         openInnerModal("success", triggerButton);
       } else {

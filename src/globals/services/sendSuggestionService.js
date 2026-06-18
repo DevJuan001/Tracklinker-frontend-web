@@ -13,4 +13,6 @@ export async function sendSuggestionService(suggestion) {
   if (!response.ok) {
     throw new Error("No se pudo enviar la sugerencia");
   }
+
+  return await response.json();
 }
