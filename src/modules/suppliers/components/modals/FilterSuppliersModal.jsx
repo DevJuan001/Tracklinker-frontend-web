@@ -1,7 +1,10 @@
+// Hooks
 import { useCities } from "../../../../globals/hooks/useCities";
 import { useFilterSuppliers } from "../../hooks/useFilterSuppliers";
-import FilterModal from "../../../../globals/components/modals/FilterModal";
+// Componentes
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
+// Modales
+import FilterModal from "../../../../globals/components/modals/FilterModal";
 
 export default function FilterSuppliersModal({ filters, setFilters, onClose }) {
   const { form, handleChange } = useFilterSuppliers(filters);
@@ -26,6 +29,7 @@ export default function FilterSuppliersModal({ filters, setFilters, onClose }) {
     >
       <div className="flex flex-col gap-2">
         <SelectMenu
+          showAllOption
           spanText={"Nombres"}
           name={"name_order"}
           onChange={handleChange}
@@ -38,6 +42,7 @@ export default function FilterSuppliersModal({ filters, setFilters, onClose }) {
 
         <SelectMenu
           searchable
+          showAllOption
           spanText={"Ciudad"}
           name={"city"}
           onChange={handleChange}
@@ -49,6 +54,7 @@ export default function FilterSuppliersModal({ filters, setFilters, onClose }) {
         />
 
         <SelectMenu
+          showAllOption
           spanText={"Estado"}
           name={"status"}
           onChange={handleChange}
