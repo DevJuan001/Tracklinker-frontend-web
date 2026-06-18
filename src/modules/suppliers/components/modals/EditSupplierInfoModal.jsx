@@ -58,6 +58,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
       <FormField
         onChange={handleChange}
         value={form.phone}
+        type="number"
         labelText={"Número"}
         id={"phone"}
         name={"phone"}
