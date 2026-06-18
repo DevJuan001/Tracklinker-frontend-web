@@ -34,7 +34,7 @@ export default function ChartCard({
         <SeeReportButton />
       </section>
       <img src={chart} alt="" className={`${imageSize} ${imageDisplay}`} />
-      <div className="h-full">{children}</div>
+      <div className="w-full min-h-[150px] flex-1">{children}</div>
     </section>
   );
 }
