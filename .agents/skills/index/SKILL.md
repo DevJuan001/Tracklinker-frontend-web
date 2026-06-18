@@ -1,6 +1,6 @@
 ---
 name: index
-description: Use FIRST when working on the Tracklinker Web frontend (React 19 + Vite 7 + React Router 7 + React Query 5 + Tailwind 3 + GSAP). Acts as the index that maps every task to a more specific skill (architecture, stack, routing, ui, modals, modules, conventions, assets, docker, commands, prs). Trigger on AGENTS.md, .agents/, src/, the Dockerfile, Vite/Tailwind/ESLint config or any change inside the repo; do NOT use for unrelated repos.
+description: Use FIRST when working on the Tracklinker Web frontend (React 19 + Vite 7 + React Router 7 + React Query 5 + Tailwind 3 + GSAP). Acts as the index that maps every task to a more specific skill (flow, architecture, stack, routing, ui, modals, modules, conventions, assets, docker, commands, prs). Trigger on AGENTS.md, .agents/, src/, the Dockerfile, Vite/Tailwind/ESLint config or any change inside the repo; do NOT use for unrelated repos.
 ---
 
 # Tracklinker Web — frontend skill (index)
@@ -23,6 +23,7 @@ cubre un área y se activa por sus keywords.
 
 | Skill | Cuándo cargarla |
 | --- | --- |
+| `flow` | Cualquier pedido del usuario (fix, refactor, feature, cambio cosmético). Obliga a pasar por `requirement → design → implement` antes de escribir código. |
 | `architecture` | Razonar sobre la forma general del proyecto, `Page → Hook → Service → API`, `globals/` vs `modules/`, flujo de mutación. |
 | `stack` | Tocar `package.json`, `vite.config.js`, `tailwind.config.js`, `postcss.config.js`, `eslint.config.js`, `index.html`, `pnpm-workspace.yaml` o la variable `VITE_API_URL`. |
 | `routing` | Tocar `AppRouter`, `ProtectedRoutes`, `routesConfig`, `useCurrentUser`, `fetchWithAuth`, `loginService`, `useLogout`, refresh del token, guards de rol, `hasRole`. |
@@ -39,6 +40,9 @@ cubre un área y se activa por sus keywords.
 
 - Si acabas de entrar al repo, lee **primero** `AGENTS.md` (en la raíz)
   para una vista de un solo archivo.
+- Para cualquier pedido del usuario (fix, refactor, feature, cambio),
+  carga **`flow`** primero. Te guía por `requirement → design → implement`
+  y desde ahí salta a la skill del área concreta.
 - Si vas a tocar un módulo específico (p. ej. "agrega un campo al
   formulario de crear producto"), empieza por
   `architecture` y luego abre la sección del
