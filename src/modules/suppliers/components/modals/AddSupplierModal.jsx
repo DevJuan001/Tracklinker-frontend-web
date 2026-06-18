@@ -18,7 +18,10 @@ export default function AddSupplierModal({ onClose }) {
   const { cities } = useCities();
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       <FormField
         onChange={handleChange}
         name={"name"}
@@ -44,6 +47,7 @@ export default function AddSupplierModal({ onClose }) {
       <FormField
         onChange={handleChange}
         value={form.phone}
+        type="number"
         name={"phone"}
         labelText={"Número"}
         placeholder={"300012124"}
@@ -114,6 +118,6 @@ export default function AddSupplierModal({ onClose }) {
           onClose={() => openInnerModal(null)}
         />
       )}
-    </section>
+    </form>
   );
 }
