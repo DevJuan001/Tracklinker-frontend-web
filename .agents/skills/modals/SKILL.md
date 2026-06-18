@@ -1,3 +1,8 @@
+---
+name: modals
+description: Use when editing Modal.jsx, useFlipModal, AddInnerModal, ConfirmCancelButtons, ErrorModal, SuccessModal, FilterModal, HelpModal, SelectMenu, profileModal/*, or when adding a new modal type (modalStyles.js entry + z_index + growDirection + location). Also when debugging the GSAP Flip animation, shared elements with data-flip-id, or inner modals opened from a parent modal. Triggered by keywords "modal", "Modal.jsx", "useFlipModal", "GSAP Flip", "useInnerModal", "openModal", "closeModal", "EditInfoModal", "ChangePasswordModal", "ProfileModal".
+---
+
 # Modales y animaciones
 
 El sistema de modales es **una de las partes más opinadas** del código.
@@ -213,3 +218,11 @@ y `useUpdateCurrentUserPassword` respectivamente, y abren
 6. Si necesitas estado independiente del modal padre, usa otro
    `useModal()` en el componente (p. ej. `Login.jsx` tiene su propio
    `useModal` y `ProfileModal` tiene su propio `useInnerModal`).
+
+## Skills relacionadas
+
+- `ui` — `useModal`, `useInnerModal`, `useFormValidation`, íconos y
+  primitivos que viven en los modales.
+- `assets` — qué z-index, colores y animaciones están disponibles.
+- `architecture` — flujo general de mutación que termina en
+  `openInnerModal(success|error)`.

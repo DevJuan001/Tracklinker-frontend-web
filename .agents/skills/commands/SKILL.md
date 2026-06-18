@@ -1,3 +1,8 @@
+---
+name: commands
+description: Use when running pnpm scripts (install / dev / build / preview / lint), validating before commit, or doing quick greps for routes, roles, useQuery, useModal, fetchWithAuth across the repo. Triggered by keywords "pnpm install", "pnpm dev", "pnpm build", "pnpm lint", "docker build", "docker run", "validate before commit", "grep".
+---
+
 # Comandos, lint y validación
 
 ## Scripts (`package.json`)
@@ -80,7 +85,7 @@ docker build \
   -t tracklinker-web:prod .
 ```
 
-Ver `docker-and-deploy.md` para más detalles.
+Ver skill `docker` para más detalles.
 
 ## Búsquedas rápidas en el repo
 
@@ -110,4 +115,11 @@ Ver `docker-and-deploy.md` para más detalles.
 
 > **No hacer `git commit` sin que el usuario lo pida explícitamente.**
 
-Ver `conventions-and-naming.md` para el resto de reglas.
+Ver skill `conventions` para el resto de reglas.
+
+## Skills relacionadas
+
+- `prs` — flujo completo para abrir un PR (incluye `pnpm lint` y
+  `pnpm build` como precondición).
+- `stack` — qué scripts y qué versiones hay.
+- `docker` — comandos de Docker para build y run.

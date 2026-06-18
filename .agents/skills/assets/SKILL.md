@@ -1,3 +1,8 @@
+---
+name: assets
+description: Use when touching src/assets/icons/* (asideIcons, loginIcons, modalIcons, productsIcons, usersIcons, warrantiesIcons, dashboardIcons, headerIcons, actionsIcons), src/assets/fonts/* (Poppins), globals/styles/*, or tailwind.config.js (animations + safelist). Also when adding a new color that needs a dark: variant and possibly a safelist entry, or when touching useTheme / AppearanceContent for the light/dark/system switch. Triggered by keywords "icons", "fonts", "Poppins", "Tailwind safelist", "dark mode", "useTheme", "tailwind.config.js", "animation", "background-charts-icons".
+---
+
 # Assets y estilos
 
 ## `src/assets/`
@@ -151,3 +156,10 @@ className="bg-[#FBF9FC] text-black border-[#a1a1a131]
 > 2. Si la clase es **dinámica** (concatenada en runtime,
 >    p. ej. `bg-${color}`), añadirla al `safelist` de
 >    `tailwind.config.js`.
+
+## Skills relacionadas
+
+- `ui` — los primitivos que viven en `globals/components/ui/` consumen
+  los `*Icons.js` y los estilos globales.
+- `modals` — usa `animate-modalFadeIn`, `animate-blurUp`, etc.
+- `stack` — qué hay en `tailwind.config.js` y por qué.

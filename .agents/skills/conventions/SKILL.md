@@ -1,3 +1,8 @@
+---
+name: conventions
+description: Use when naming files, hooks, services or modal types; when propagating roles across routes, aside menu, home cards, report cards and <module>StatusConfig; when consulting ESLint rules or the "no comments in code" project rule; or when following the checklist to add a new module. Triggered by keywords "convention", "naming", "role", "ESLint", "checklist", "no comments", "new module".
+---
+
 # Convenciones y naming
 
 ## Nombres de archivos y carpetas
@@ -117,3 +122,9 @@ actualízalos.
    `src/modules/<nombre>/constants/`.
 7. Añade los endpoints nuevos (si los hay) en
    `src/config/apiRoutes.js`.
+
+## Skills relacionadas
+
+- `routing` — qué rutas existen y qué roles las ven.
+- `modals` — sistema de modales y sus tipos.
+- `architecture` — la regla de oro y el split `globals/` vs `modules/`.

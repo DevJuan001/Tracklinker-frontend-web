@@ -1,3 +1,8 @@
+---
+name: modules
+description: Use when working inside src/modules/<x>/ (login, home, dashboard, products, categories, subcategories, suppliers, users, warranties, output-orders, reports). Lists per-module pages, hooks, services, modals and the unique quirks of each one. Triggered by module names: "ProductsPage", "CategoriesPage", "SubcategoriesPage", "WarrantiesPage", "OutputOrdersPage", "useCatalog", "useExportFile", "ReportsPage", "DashboardPage", "LoginForm".
+---
+
 # Modules
 
 Cada módulo vive en `src/modules/<nombre>/` y tiene la misma forma:
@@ -119,7 +124,8 @@ El módulo más completo. Maneja catálogo de productos, **marcas**,
   (los `roles` indican qué usuarios pueden cambiar a ese estado).
 - Particularidades:
   - `useCreateProduct` recibe `openInnerModal` por argumento del
-    `handleSubmit(e, openInnerModal)`. Ver patrón en `architecture.md`.
+    `handleSubmit(e, openInnerModal)`. Ver patrón en skill
+    `architecture`.
   - `useEditProduct` valida que `Object.keys(changes).length > 1` antes
     de enviar (porque incluye `id` y `product_details_id`).
   - `EditProductStatusModal` abre con `type="editStatus"` (ver
@@ -284,3 +290,11 @@ de negocio) y un sistema de exportación a **PDF** y **Excel**.
     `constants` de `users`, `warranties` y `products`. Esto cruza
     límites de módulo pero está aceptado por el patrón existente; si
     vas a refactorizar, tenlo en cuenta.
+
+## Skills relacionadas
+
+- `architecture` — patrón `Page → Hook → Service → API` aplicado aquí.
+- `modals` — todos los modales que usan los módulos (incluido el
+  `ExportReportModal` que abre con `type="editStatus"`).
+- `routing` — qué roles ven cada ruta/módulo.
+- `conventions` — naming, no-comment, checklist para añadir un módulo.

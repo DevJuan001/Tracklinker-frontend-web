@@ -1,3 +1,8 @@
+---
+name: architecture
+description: Use when reasoning about Tracklinker Web's overall shape, the Page → Hook → Service → API flow, the split between src/globals/ (reusable) and src/modules/ (one per business domain), the React Query mutation pattern (validate → service → invalidate → innerModal), or when adding a new module/hook/service/constant. Triggered by keywords like "architecture", "module structure", "where to put X", "create a new module", "page hook service".
+---
+
 # Architecture
 
 ## Regla de oro
@@ -92,7 +97,7 @@ Tipos comunes: `add`, `edit`, `filter`, `info`, `enable`, `disable`,
 ### Iconos
 
 - Iconografía UI: `<Icon name="add" />` con Material Symbols Rounded
-  (ver `globals-and-ui.md`).
+  (ver skill `ui`).
 - Iconografía decorativa/asset: `src/assets/icons/<area>Icons.js`
   reexporta SVGs como objeto (`asideIcons`, `loginIcons`, …).
 
@@ -178,3 +183,11 @@ async function handleSubmit(e, openInnerModal) {
   }
 }
 ```
+
+## Skills relacionadas
+
+- `modules` — qué hay en cada `src/modules/<x>/`.
+- `routing` — cómo se enrutan y protegen las
+  páginas.
+- `modals` — sistema de modales y `useFlipModal`.
+- `conventions` — naming y reglas duras.

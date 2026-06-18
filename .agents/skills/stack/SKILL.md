@@ -1,3 +1,8 @@
+---
+name: stack
+description: Use when touching package.json, vite.config.js, tailwind.config.js, postcss.config.js, eslint.config.js, index.html, pnpm-workspace.yaml, .env, or the VITE_API_URL variable. Covers exact dependency versions, the Tailwind safelist, the ESLint flat config and the pnpm workspace allowBuilds. Triggered by keywords like "package.json", "vite", "tailwind", "eslint", "pnpm", "env", "VITE_API_URL".
+---
+
 # Stack y configuración
 
 ## Dependencias (`package.json`)
@@ -176,3 +181,11 @@ VITE_API_URL =
 constantes (rutas base) son strings simples en `apiRoutes.js`.
 
 `.env` está en `.gitignore` y `.dockerignore` (nunca commitear credenciales).
+
+## Skills relacionadas
+
+- `assets` — qué se hace con el `safelist` y los
+  colores dinámicos cuando añades un color nuevo.
+- `docker` — cómo se inyecta `VITE_API_URL` en
+  el build de Docker.
+- `commands` — qué scripts correr y cuándo.

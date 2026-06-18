@@ -1,3 +1,8 @@
+---
+name: ui
+description: Use when touching src/globals/components/Layout, src/globals/components/ui/* (FormField, Icon, Calendar, SearchBar, Skeleton, TagInput, TopSection, ActionButtons, Avatar, CreateButton, DateField, DateInput, DisabledFormField, FilterButton, InputWithDataList, Loader, TextArea) or any of the global hooks/services/constants/styles. Also use when deciding whether a primitive belongs in globals/ vs in a module. Triggered by keywords "FormField", "Icon", "Calendar", "SearchBar", "Layout", "Aside", "Layout", "useModal", "useTheme", "useFormValidation".
+---
+
 # Globals y primitivos de UI
 
 Todo lo que está aquí es **compartido entre módulos**. Antes de añadir
@@ -90,7 +95,7 @@ Botón que abre el modal de perfil (modal type `"user"`).
 | `useFormValidation({ rules, optionalFields })` | `{ validate, getChanges, clearError, clearErrors, fieldError, errors }`. |
 | `useInnerModal()` | Estado de modal anidado (`{ type, trigger }`). Una sola instancia por componente (p. ej. `ProfileModal` o `Login`). |
 | `useLogout()` | `logoutService` + `queryClient.clear()` + `navigate("/login")`. |
-| `useModal()` | Estado de modal principal por página (ver `architecture.md`). |
+| `useModal()` | Estado de modal principal por página (ver skill `architecture`). |
 | `useSearch(data, search)` | Filtro client-side por substring sobre `Object.values(item)`. |
 | `useSelectMenu()` | Estado de `SelectMenu` (open, search, triggerRef, handleSelect, …). |
 | `useSendSuggestion()` | Form + submit para `sendSuggestionService`. Devuelve `{ form, loading, handleChange, handleSubmit }`. |
@@ -162,3 +167,11 @@ Google Fonts (Poppins, DM Sans, Inter). En `main.jsx` solo se importa
 4. Si necesitas una clase de estilo nueva con variantes
    `dark:`, recuerda añadir las clases de safelist en
    `tailwind.config.js` si son dinámicas.
+
+## Skills relacionadas
+
+- `architecture` — qué cuenta como "reutilizable" entre módulos.
+- `modals` — `Modal`, `AddInnerModal`, `SelectMenu`, etc. viven aquí
+  por una buena razón.
+- `assets` — cómo se reparten íconos entre `Icon` (Material Symbols) y
+  los `*Icons.js` (SVGs).

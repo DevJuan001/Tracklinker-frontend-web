@@ -1,3 +1,8 @@
+---
+name: routing
+description: Use when editing AppRouter, ProtectedRoutes, routesConfig, useCurrentUser, fetchWithAuth, loginService, useLogout, or anything tied to the access-token refresh flow, role-based route guards, or hasRole checks. Also when changing the role set of a route, adding/removing a route, or propagating roles across the route table, aside menu, home cards and report cards. Triggered by keywords "router", "route", "login", "logout", "refresh token", "401", "hasRole", "guard", "protected".
+---
+
 # Routing y autenticación
 
 ## Archivos clave
@@ -204,3 +209,12 @@ anterior se filtren a la siguiente sesión.
 
 `useLogin` está dentro del módulo, pero reutiliza hooks globales
 (`useLogout`, `useFormValidation`).
+
+## Skills relacionadas
+
+- `architecture` — flujo general Page → Hook →
+  Service → API.
+- `modals` — el `HelpModal` y `ProfileModal` que
+  aparecen desde el Layout usan el mismo sistema.
+- `conventions` — cómo propagar roles al añadir
+  una ruta.

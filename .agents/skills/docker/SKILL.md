@@ -1,3 +1,8 @@
+---
+name: docker
+description: Use when editing the multi-stage Dockerfile, .dockerignore, Nginx config, build args, the VITE_API_URL injection at build time, or when configuring CORS for the access/refresh token cookies. Covers build-time vs runtime env vars, the SPA fallback that lets react-router take over, and the pnpm variant. Triggered by keywords "Dockerfile", "docker build", "docker run", "nginx", "VITE_API_URL build", "SPA fallback", "CORS cookies", "dockerignore".
+---
+
 # Docker y despliegue
 
 ## `Dockerfile`
@@ -127,3 +132,11 @@ httpOnly. Esto significa:
 - Si quieres cachear `node_modules` entre builds, cambia el orden
   para copiar primero `package.json` y `package-lock.json` antes que
   el resto (ya está así).
+
+## Skills relacionadas
+
+- `stack` — qué hay en `package.json` y por qué el `Dockerfile`
+  copia `package*.json`.
+- `routing` — `fetchWithAuth` y por qué el `credentials: "include"`
+  es clave.
+- `commands` — `pnpm build`, `docker build`, `docker run`.

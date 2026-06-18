@@ -317,6 +317,7 @@ debe replicarse en **rutas + menú lateral + hooks** según corresponda.
 ## 12. Recursos adicionales en este repo
 
 - `README.md` → versión extensa de esta guía (orientada a humanos).
-- `.agents/skills/tracklinker-frontend/` → skill específica con
-  detalle extendido por área (arquitectura, routing, modales, módulos,
-  assets, deploy, etc.). Cárgala cuando la tarea toque áreas concretas.
+- `.agents/skills/` → cada skill vive en su propia carpeta con su
+  propio `SKILL.md`. Empieza por `index` (mapa de skills) y entra en
+  la que toque: `architecture`, `stack`, `routing`, `ui`, `modals`,
+  `modules`, `conventions`, `assets`, `docker`, `commands`, `prs`.

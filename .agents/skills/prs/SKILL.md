@@ -1,3 +1,8 @@
+---
+name: prs
+description: Use when opening a pull request: branch naming (feat/<scope>), Conventional Commits, PR title/body style matching previous PRs (e.g. #63 feat(products)), gh CLI workflow, common pitfalls. Triggered by keywords "create a PR", "open a PR", "PR template", "PULL_REQUEST_TEMPLATE", "conventional commit", "gh pr create", "feat/<scope>".
+---
+
 # Creating pull requests
 
 This file is the how-to for opening a PR against
@@ -70,6 +75,21 @@ If you don't want to pass `--body-file`, just run `gh pr create` and
 answer the prompts. GitHub will pre-fill the description with the
 template; you fill in the placeholders.
 
+### Labels
+
+Pass labels with `--label` (or `--labels` for several). **Do not**
+include labels in the body — they are a separate concern.
+
+```bash
+gh pr create \
+  --base main \
+  --head feat/<scope> \
+  --title "feat(<scope>): <summary>" \
+  --label documentation \
+  --label enhancement \
+  --body-file .github/PULL_REQUEST_TEMPLATE_BODY.md
+```
+
 ### When the PR is reviewable
 
 - `pnpm lint` must pass.
@@ -121,6 +141,7 @@ Tips that match this repo's voice:
   `homeSections.js` **and** `reportSections.js`.
 - ❌ Forgetting the `dark:` variant on a new color class, or
   forgetting to add a dynamic class to the Tailwind `safelist`.
+- ❌ Putting label names inside the PR body.
 
 ## After the PR is merged
 
@@ -131,3 +152,9 @@ GitHub auto-deletes the head branch if the repo setting
 
 If you need to keep the branch (e.g. for stacked PRs), push it again
 manually after the merge.
+
+## Skills relacionadas
+
+- `conventions` — naming, no-comments, y checklist de módulo nuevo.
+- `commands` — `pnpm lint`, `pnpm build`, `docker build`.
+- `docker` — `VITE_API_URL` en el build, `docker build` con build-args.
