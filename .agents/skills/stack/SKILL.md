@@ -177,13 +177,20 @@ VITE_API_URL =
 ```
 
 `VITE_API_URL` es la única variable obligatoria y se lee con
-`import.meta.env.VITE_API_URL` en `src/config/apiRoutes.js`. El resto de
+`import.meta.env.VITE_API_URL` en `src/config/apiRoutes.js` (que tiene
+un guard que lanza un error claro si está vacía). El resto de
 constantes (rutas base) son strings simples en `apiRoutes.js`.
 
 `.env` está en `.gitignore` y `.dockerignore` (nunca commitear credenciales).
 
+> Vite inyecta las `VITE_*` en **build time**, no en runtime. La
+> guía completa de cómo configurar `VITE_API_URL` en cada plataforma
+> de deploy (Render, Vercel, Netlify, Docker) está en la skill `env`.
+
 ## Skills relacionadas
 
+- `env` — cómo se configura `VITE_API_URL` en cada plataforma de
+  deploy y por qué falla con "VITE_API_URL is not defined".
 - `assets` — qué se hace con el `safelist` y los
   colores dinámicos cuando añades un color nuevo.
 - `docker` — cómo se inyecta `VITE_API_URL` en
