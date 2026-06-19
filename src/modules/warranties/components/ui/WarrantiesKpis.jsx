@@ -32,7 +32,7 @@ export default function WarrantiesKpis() {
           md:flex-nowrap md:gap-4"
         >
           <Kpi
-            title={"Sin Completar"}
+            title={"Pendientes"}
             value={data?.[0]?.without_make_warranties}
           />
 
