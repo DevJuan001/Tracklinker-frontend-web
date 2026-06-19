@@ -23,20 +23,27 @@ export default function WarrantiesTable({
       dark:border-[#17171a]`}
     >
       {noWarranties && (
-        <div className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-5">
+        <div
+          className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-5
+          md:max-h-[83%]"
+        >
           {search !== "" ? (
             <div
               className="flex flex-col items-center justify-center gap-0.5 text-[#7E8088]
               dark:text-[#E4E2E5]"
             >
               <div
-                className="flex items-center justify-center bg-[#F5F3F6] w-28 h-28 rounded-full 
+                className="flex items-center justify-center bg-[#F5F3F6] w-16 h-16 rounded-full
+                md:w-28 md:h-28
                 dark:bg-[#101012]"
               >
                 <Icon name={"search_off"} size={60} />
               </div>
 
-              <span className="text-2xl font-medium text-center">
+              <span
+                className="text-lg font-medium text-center
+                md:text-2xl"
+              >
                 No hay resultados para <strong>"{search}"</strong>.
               </span>
 
@@ -58,25 +65,34 @@ export default function WarrantiesTable({
               dark:text-[#E4E2E5]"
             >
               <div
-                className="flex items-center justify-center bg-[#F5F3F6] w-28 h-28 rounded-full
+                className="flex items-center justify-center bg-[#F5F3F6] w-16 h-16 rounded-full
+                md:w-28 md:h-28
                 dark:bg-[#101012]"
               >
-                <Icon name={"shopping_cart"} size={60} />
+                <Icon name={"service_toolbox"} size={40} />
               </div>
 
               <div className="flex flex-col items-center">
-                <span className="font-medium text-2xl">
+                <span
+                  className="font-medium text-lg
+                  md:text-2xl"
+                >
                   Aún no hay garantías
                 </span>
 
-                <span className="text-lg text-center">
+                <span
+                  className="max-w-xs text-sm text-center
+                  md:w-full md:text-lg"
+                >
                   Agrega una nueva garantía y empieza a crecer junto a tu
                   empresa.
                 </span>
 
                 <ul className="text-center text-sm mt-1">
                   <li>• Asigna garantías a tus productos</li>
+
                   <li>• Gestiona el inventario de manera eficiente</li>
+
                   <li>• Crea garantías con un solo click</li>
                 </ul>
               </div>
@@ -92,7 +108,7 @@ export default function WarrantiesTable({
 
       {isFirstLoad ? (
         <Skeleton
-          height="84%"
+          height="100%"
           borderRadius={28}
           backgroundColor={"#F3EEF5"}
           darkModeBackgroundColor={"#101012"}
