@@ -18,25 +18,32 @@ export default function WarrantiesTable({
 
   return (
     <section
-      className={`${noWarranties || isFirstLoad ? "h-full" : "h-auto border"} w-full border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
-      md:max-h-[94.5%]
-      dark:border-[#303033]`}
+      className={`${noWarranties || isFirstLoad ? "h-full" : "h-auto border"} w-full max-h-[55%] border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      md:max-h-[83%]
+      dark:border-[#17171a]`}
     >
       {noWarranties && (
-        <div className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-5">
+        <div
+          className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-5
+          md:max-h-[83%]"
+        >
           {search !== "" ? (
             <div
               className="flex flex-col items-center justify-center gap-0.5 text-[#7E8088]
               dark:text-[#E4E2E5]"
             >
               <div
-                className="flex items-center justify-center bg-[#F5F3F6] w-28 h-28 rounded-full 
+                className="flex items-center justify-center bg-[#F5F3F6] w-16 h-16 rounded-full
+                md:w-28 md:h-28
                 dark:bg-[#101012]"
               >
                 <Icon name={"search_off"} size={60} />
               </div>
 
-              <span className="text-2xl font-medium text-center">
+              <span
+                className="text-lg font-medium text-center
+                md:text-2xl"
+              >
                 No hay resultados para <strong>"{search}"</strong>.
               </span>
 
@@ -46,7 +53,9 @@ export default function WarrantiesTable({
 
               <ul className="text-center text-sm mt-1">
                 <li>• Revisa que el serial esté bien escrito</li>
+
                 <li>• Busca por modelo, marca o fecha de creación</li>
+
                 <li>• Si no existe, crea una nueva garantía</li>
               </ul>
             </div>
@@ -56,25 +65,34 @@ export default function WarrantiesTable({
               dark:text-[#E4E2E5]"
             >
               <div
-                className="flex items-center justify-center bg-[#F5F3F6] w-28 h-28 rounded-full
+                className="flex items-center justify-center bg-[#F5F3F6] w-16 h-16 rounded-full
+                md:w-28 md:h-28
                 dark:bg-[#101012]"
               >
-                <Icon name={"shopping_cart"} size={60} />
+                <Icon name={"service_toolbox"} size={40} />
               </div>
 
               <div className="flex flex-col items-center">
-                <span className="font-medium text-2xl">
+                <span
+                  className="font-medium text-lg
+                  md:text-2xl"
+                >
                   Aún no hay garantías
                 </span>
 
-                <span className="text-lg text-center">
+                <span
+                  className="max-w-xs text-sm text-center
+                  md:w-full md:text-lg"
+                >
                   Agrega una nueva garantía y empieza a crecer junto a tu
                   empresa.
                 </span>
 
                 <ul className="text-center text-sm mt-1">
                   <li>• Asigna garantías a tus productos</li>
+
                   <li>• Gestiona el inventario de manera eficiente</li>
+
                   <li>• Crea garantías con un solo click</li>
                 </ul>
               </div>
@@ -91,6 +109,7 @@ export default function WarrantiesTable({
       {isFirstLoad ? (
         <Skeleton
           height="100%"
+          borderRadius={28}
           backgroundColor={"#F3EEF5"}
           darkModeBackgroundColor={"#101012"}
           shineColor="#C5C1C7"
@@ -98,14 +117,14 @@ export default function WarrantiesTable({
         />
       ) : (
         <table
-          className={`${noWarranties ? "hidden" : ""} w-full h-auto border-collapse
+          className={`${noWarranties ? "hidden" : "w-full h-auto"} border-collapse
           dark:text-white`}
         >
           <thead
-            className="sticky -top-0 z-10 bg-white border-b border-gray-200
-          dark:bg-black dark:border-[#303033]"
+            className="sticky top-0 z-10 bg-white border-b border-gray-200
+            dark:bg-black dark:border-[#17171a]"
           >
-            <tr className="h-[40px] dark:border-[#303033] text-sm">
+            <tr className="h-10 text-sm text-nowrap">
               <th className="font-medium text-start pl-4">Estado</th>
 
               <th className="font-medium text-start pl-4">Fecha de creación</th>
@@ -126,12 +145,15 @@ export default function WarrantiesTable({
 
               <th className="font-medium text-start pl-4">Dirección</th>
 
-              <th className="font-medium text-center">Acción</th>
+              <th className="font-medium text-center">Acciones</th>
             </tr>
           </thead>
 
           {/* Cuerpo de la tabla */}
-          <tbody className="font-normal dark:text-white">
+          <tbody
+            className="font-normal 
+            dark:text-white"
+          >
             {warranties.map((warranty) => (
               <tr
                 key={warranty.id}
@@ -141,9 +163,7 @@ export default function WarrantiesTable({
               >
                 <th className="font-normal text-start pl-3 text-sm">
                   <div
-                    className={`w-fit flex items-center pl-1.5 pr-3 py-0.5 gap-1.5 rounded-full border dark:border-transparent
-                    ${warrantyStatusConfig[warranty.status]?.styles}
-                    `}
+                    className={`${warrantyStatusConfig[warranty.status]?.styles}`}
                   >
                     <Icon
                       name={warrantyStatusConfig[warranty.status]?.icon}
@@ -220,10 +240,7 @@ export default function WarrantiesTable({
                       openModal(warranty, "edit", null, e.currentTarget);
                     }}
                     deleteButtonVisible={false}
-                    moreInfoButtonOnClick={(e) => {
-                      e.stopPropagation();
-                      openModal(warranty, "info", null, e.currentTarget);
-                    }}
+                    moreInfoButtonVisible={false}
                   />
 
                   <button

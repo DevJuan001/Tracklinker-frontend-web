@@ -27,6 +27,7 @@ export default function FilterWarrantyModal({ filters, setFilters, onClose }) {
       <div className="flex flex-col gap-2">
         <SelectMenu
           searchable
+          showAllOption
           name={"city"}
           spanText={"Ciudad"}
           value={form.city}
@@ -38,6 +39,7 @@ export default function FilterWarrantyModal({ filters, setFilters, onClose }) {
         />
 
         <SelectMenu
+          showAllOption
           name={"status"}
           value={form.status}
           onChange={handleChange}

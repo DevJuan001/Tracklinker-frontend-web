@@ -28,7 +28,9 @@ export function useEditWarrantyStatus() {
       });
 
       if (response.success === true) {
+        queryClient.invalidateQueries({ queryKey: ["products"] });
         queryClient.invalidateQueries({ queryKey: ["warranties"] });
+        queryClient.invalidateQueries({ queryKey: ["warrantiesByStatus"] });
         onClose();
       } else {
         setError(response.error);

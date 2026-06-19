@@ -6,20 +6,24 @@ import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import Loader from "../../../../globals/components/ui/Loader";
 import TextArea from "../../../../globals/components/ui/TextArea";
 import FormField from "../../../../globals/components/ui/FormField";
+import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 
-export default function AddWarrantyModal({ product, onCloseModal }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+export default function AddWarrantyModal({ product, onClose }) {
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateWarranty(product);
   const { cities } = useCities();
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       <FormField
         id={"serial"}
         placeholder={"QTYC99999"}
@@ -43,6 +47,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
       <FormField
         id={"phone"}
         name={"phone"}
+        type="number"
         labelText={"Teléfono"}
         value={form.phone}
         onChange={handleChange}
@@ -97,7 +102,7 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
 
       <ConfirmCancelButtons
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
-        cancelButtonOnClick={onCloseModal}
+        cancelButtonOnClick={onClose}
         disabled={loading}
         confirmText={loading ? <Loader /> : "Crear"}
       />
@@ -111,8 +116,8 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
           confirmText="La garantía se ha guardado correctamente."
           confirmButtonText="Volver"
           onClose={() => {
-            openInnerModal(null);
-            onCloseModal();
+            closeInnerModal();
+            onClose();
           }}
         />
       )}
@@ -128,6 +133,6 @@ export default function AddWarrantyModal({ product, onCloseModal }) {
           onClose={() => openInnerModal(null)}
         />
       )}
-    </section>
+    </form>
   );
 }
