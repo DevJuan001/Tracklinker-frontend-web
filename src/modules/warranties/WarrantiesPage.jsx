@@ -3,15 +3,17 @@ import { useState } from "react";
 import { useWarranties } from "./hooks/useWarranties";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
+// Constantes
+import { modalTitles } from "./constants/modalTitles";
 // Componentes
+import WarrantiesKpis from "./components/ui/WarrantiesKpis";
 import Layout from "../../globals/components/Layout/Layout";
-import SearchBar from "../../globals/components/ui/SearchBar";
 import WarrantiesTable from "./components/ui/WarrantiesTable";
+import SearchBar from "../../globals/components/ui/SearchBar";
 import TopSection from "../../globals/components/ui/TopSection";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
 import HelpModal from "../../globals/components/modals/HelpModal";
-import MoreWarrantyInfo from "./components/modals/MoreWarrantyInfo";
 import AddWarrantyModal from "./components/modals/AddWarrantyModal";
 import EditWarrantyModal from "./components/modals/EditWarrantyModal";
 import FilterWarrantyModal from "./components/modals/FilterWarrantyModal";
@@ -41,6 +43,8 @@ export default function WarrantiesPage() {
         <SearchBar value={search} onChange={setSearch} />
       </TopSection>
 
+      <WarrantiesKpis />
+
       <WarrantiesTable
         warranties={filteredWarranties}
         loading={loading}
@@ -51,21 +55,7 @@ export default function WarrantiesPage() {
       {/* Modales */}
       {modalType && (
         <Modal
-          title={
-            modalType === "user"
-              ? "Configuración"
-              : modalType === "filter"
-                ? "Filtrar"
-                : modalType === "add"
-                  ? "Agregar Garantía"
-                  : modalType === "info"
-                    ? ""
-                    : modalType === "edit"
-                      ? "Editar Garantía"
-                      : modalType === "editStatus"
-                        ? ""
-                        : "Ayuda"
-          }
+          title={modalTitles[modalType]}
           type={modalType}
           isOpen={isOpen}
           onClose={closeModal}
@@ -82,29 +72,19 @@ export default function WarrantiesPage() {
             <FilterWarrantyModal
               filters={filters}
               setFilters={setFilters}
-              onClose={() => closeModal}
+              onClose={closeModal}
             />
           )}
 
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
 
-          {modalType === "add" && (
-            <AddWarrantyModal onCloseModal={() => closeModal} />
-          )}
-
-          {/* Contenido del Modal de Más Información */}
-          {modalType === "info" && (
-            <MoreWarrantyInfo
-              modalData={modalData}
-              onClose={() => closeModal}
-            />
-          )}
+          {modalType === "add" && <AddWarrantyModal onClose={closeModal} />}
 
           {/* Modal para editar una garantía */}
           {modalType === "edit" && (
             <EditWarrantyModal
               selectedWarranty={modalData}
-              onClose={() => closeModal}
+              onClose={closeModal}
             />
           )}
 
