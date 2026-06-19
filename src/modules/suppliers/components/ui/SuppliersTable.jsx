@@ -17,8 +17,9 @@ export default function SuppliersTable({
 
   return (
     <section
-      className="relative w-full h-fit max-h-[82%] border rounded-3xl overflow-hidden overflow-y-auto
-      dark:border-[#303033]"
+      className={`${noSuppliers || isFirstLoad ? "h-full" : "h-auto border"} w-full max-h-[55%] border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      md:max-h-[83%]
+      dark:border-[#17171a]`}
     >
       {noSuppliers && (
         <div className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-5">
@@ -93,8 +94,7 @@ export default function SuppliersTable({
 
       {isFirstLoad ? (
         <Skeleton
-          height="80px"
-          count={11}
+          height="100%"
           backgroundColor={"#F3EEF5"}
           darkModeBackgroundColor={"#101012"}
           shineColor="#C5C1C7"
@@ -104,15 +104,14 @@ export default function SuppliersTable({
         />
       ) : (
         <table
-          className="h-full w-full
-          dark:bg-black"
+          className={`${noSuppliers ? "hidden" : "w-full h-auto"} border-collapse
+          dark:text-white`}
         >
           <thead
-            className="sticky h-10 top-0 z-10 border-b bg-white
-            hover:bg-[#f5f3f6]
-            dark:bg-black dark:border-[#17171a] dark:text-[#E4E2E5] dark:hover:bg-[#101012]"
+            className="sticky top-0 z-10 bg-white border-b border-gray-200
+            dark:bg-black dark:border-[#17171a]"
           >
-            <tr>
+            <tr className="h-10 text-sm text-nowrap">
               <th className="font-medium text-sm pl-4 text-start">Nombre</th>
 
               <th className="font-medium text-sm pl-4 text-start">Estado</th>
@@ -178,7 +177,7 @@ export default function SuppliersTable({
                   {supplier.date}
                 </th>
 
-                <th className="relative h-full flex items-center">
+                <th className="relative flex items-center justify-center gap-3 pt-1.5">
                   <ActionButtons
                     moreInfoButtonVisible={false}
                     backgroundColor="#FFFFFF"

@@ -9,11 +9,12 @@ import ConfirmCancelButtons from "../ConfirmCancelButtons";
 // Modals
 import Modal from "../Modal";
 import ErrorModal from "../ErrorModal";
-import SuccessModal from "../SuccessModal";
 import SelectMenu from "../SelectMenu";
+import SuccessModal from "../SuccessModal";
 
 export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { cities } = useCities();
   const { handleChange, handleSubmit, userData, loading } =
     useUpdateCurrentUserInfo(user);
@@ -28,7 +29,10 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
       onClose={onClose}
       triggerRef={triggerRef}
     >
-      <section className="flex flex-col items-center gap-2">
+      <form
+        action={(e) => handleSubmit(e, openInnerModal)}
+        className="flex flex-col items-center gap-2"
+      >
         <FormField
           id={"name"}
           name={"name"}
@@ -75,6 +79,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
         />
 
         <SelectMenu
+          searchable
           id={"city"}
           name={"city"}
           spanText={"Ciudad"}
@@ -101,7 +106,8 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
           cancelButtonOnClick={onClose}
         />
-      </section>
+      </form>
+
       {/* Modales Internas */}
       {innerType === "success" && (
         <SuccessModal
@@ -113,11 +119,12 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
@@ -125,7 +132,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           errorTitle="¡No se pudo completar el registro!"
           errorText="Verfica que todos los campos esten completos y que el correo electronico es el correcto"
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={() => closeInnerModal()}
         />
       )}
     </Modal>

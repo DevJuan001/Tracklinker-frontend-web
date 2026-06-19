@@ -34,11 +34,15 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
       location="center"
       triggerRef={triggerRef}
     >
-      <section className="flex flex-col items-center w-full gap-2">
+      <form
+        action={(e) => handleSubmit(e, openInnerModal)}
+        className="flex flex-col items-center w-full gap-2"
+      >
         <FormField
           id={"old_password"}
           type={showPasswords.old ? "text" : "password"}
           name="old_password"
+          placeholder={"Escribe aquí tu contraseña actual"}
           labelText={"Contraseña actual"}
           onChange={handleChange}
           className={fieldError("old_password")}
@@ -52,6 +56,7 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
           id={"new_password"}
           type={showPasswords.new ? "text" : "password"}
           name="new_password"
+          placeholder={"Escribe aquí tu contraseña nueva"}
           labelText={"Nueva contraseña"}
           onChange={handleChange}
           className={fieldError("new_password")}
@@ -65,7 +70,8 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
           id={"repeat_password"}
           type={showPasswords.repeat ? "text" : "password"}
           name="repeat_password"
-          labelText={"Repita la nueva contraseña"}
+          placeholder={"Repite tu contraseña nueva"}
+          labelText={"Repite la nueva contraseña"}
           onChange={handleChange}
           className={fieldError("repeat_password")}
         >
@@ -88,6 +94,7 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
           cancelButtonOnClick={onClose}
           disabled={!passwordsMatch}
         />
+
         {innerType === "success" && (
           <SuccessModal
             triggerRef={innerTrigger}
@@ -97,6 +104,7 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
             onClose={onClose}
           />
         )}
+
         {innerType === "error" && (
           <ErrorModal
             triggerRef={innerTrigger}
@@ -109,7 +117,7 @@ export default function ChangePasswordModal({ isOpen, onClose, triggerRef }) {
             onClose={() => openInnerModal(null)}
           />
         )}
-      </section>
+      </form>
     </Modal>
   );
 }
