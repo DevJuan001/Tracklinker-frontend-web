@@ -19,7 +19,7 @@ export default function WarrantiesTable({
   return (
     <section
       className={`${noWarranties || isFirstLoad ? "h-full" : "h-auto border"} w-full max-h-[55%] border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
-      md:max-h-[98%]
+      md:max-h-[83%]
       dark:border-[#17171a]`}
     >
       {noWarranties && (
