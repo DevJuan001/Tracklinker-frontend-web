@@ -126,7 +126,7 @@ export default function WarrantiesTable({
 
               <th className="font-medium text-start pl-4">Dirección</th>
 
-              <th className="font-medium text-center">Acción</th>
+              <th className="font-medium text-center">Acciones</th>
             </tr>
           </thead>
 
@@ -141,9 +141,7 @@ export default function WarrantiesTable({
               >
                 <th className="font-normal text-start pl-3 text-sm">
                   <div
-                    className={`w-fit flex items-center pl-1.5 pr-3 py-0.5 gap-1.5 rounded-full border dark:border-transparent
-                    ${warrantyStatusConfig[warranty.status]?.styles}
-                    `}
+                    className={`${warrantyStatusConfig[warranty.status]?.styles}`}
                   >
                     <Icon
                       name={warrantyStatusConfig[warranty.status]?.icon}
@@ -220,10 +218,7 @@ export default function WarrantiesTable({
                       openModal(warranty, "edit", null, e.currentTarget);
                     }}
                     deleteButtonVisible={false}
-                    moreInfoButtonOnClick={(e) => {
-                      e.stopPropagation();
-                      openModal(warranty, "info", null, e.currentTarget);
-                    }}
+                    moreInfoButtonVisible={false}
                   />
 
                   <button
