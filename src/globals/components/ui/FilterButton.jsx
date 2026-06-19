@@ -5,9 +5,8 @@ export default function FilterButton({ onClick, filterButtonVisibility }) {
     <button
       id="filter-button"
       onClick={onClick}
-      className={`flex items-center px-5 py-2.5 gap-2 rounded-[40px] bg-[#FBF9FC] transition-all duration-200 border border-gray-200
+      className={`flex items-center px-5 py-2.5 gap-2 rounded-3xl bg-[#FBF9FC] transition-all duration-200 border border-gray-200
         ${filterButtonVisibility ? "block" : "hidden"}
-        lg:rounded-3xl
         hover:bg-gray-300
         dark:bg-[#101012] dark:hover:bg-[#38383b9f] dark:shadow-none dark:border-none`}
     >
