@@ -6,9 +6,15 @@ export default function SupliersKpis() {
   const { data, loading } = useSuppliersByStatus();
 
   return (
-    <section className="h-[10%] mb-3">
+    <section
+      className="h-[30%] mb-3 p-1
+      md:h-[10%] md:p-0"
+    >
       {loading ? (
-        <div className="flex items-center gap-4">
+        <div
+          className="h-full flex flex-wrap items-center gap-1
+          md:flex-nowrap md:gap-4"
+        >
           <Skeleton
             count={4}
             width="460px"
@@ -21,7 +27,10 @@ export default function SupliersKpis() {
           />
         </div>
       ) : (
-        <div className="h-full flex items-center gap-4">
+        <div
+          className="h-full flex flex-wrap items-center gap-1
+          md:flex-nowrap md:gap-4"
+        >
           <Kpi
             title={"Creados recientemente"}
             value={data?.[0]?.recent_suppliers}
