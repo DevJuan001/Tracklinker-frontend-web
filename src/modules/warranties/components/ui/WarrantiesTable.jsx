@@ -18,7 +18,7 @@ export default function WarrantiesTable({
 
   return (
     <section
-      className={`${noWarranties || isFirstLoad ? "h-full" : "h-auto border"} w-full border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      className={`${noWarranties || isFirstLoad ? "h-full" : "h-auto border"} w-full max-h-[70%] border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
       md:max-h-[94.5%]
       dark:border-[#303033]`}
     >
@@ -46,7 +46,9 @@ export default function WarrantiesTable({
 
               <ul className="text-center text-sm mt-1">
                 <li>• Revisa que el serial esté bien escrito</li>
+
                 <li>• Busca por modelo, marca o fecha de creación</li>
+
                 <li>• Si no existe, crea una nueva garantía</li>
               </ul>
             </div>
