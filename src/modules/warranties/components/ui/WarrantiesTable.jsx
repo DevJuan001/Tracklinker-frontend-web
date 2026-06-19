@@ -18,9 +18,9 @@ export default function WarrantiesTable({
 
   return (
     <section
-      className={`${noWarranties || isFirstLoad ? "h-full" : "h-auto border"} w-full max-h-[70%] border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
-      md:max-h-[94.5%]
-      dark:border-[#303033]`}
+      className={`${noWarranties || isFirstLoad ? "h-full" : "h-auto border"} w-full max-h-[55%] border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
+      md:max-h-[98%]
+      dark:border-[#17171a]`}
     >
       {noWarranties && (
         <div className="w-full h-full flex flex-col items-center justify-center rounded-3xl gap-5">
@@ -92,7 +92,8 @@ export default function WarrantiesTable({
 
       {isFirstLoad ? (
         <Skeleton
-          height="100%"
+          height="84%"
+          borderRadius={28}
           backgroundColor={"#F3EEF5"}
           darkModeBackgroundColor={"#101012"}
           shineColor="#C5C1C7"
@@ -100,14 +101,14 @@ export default function WarrantiesTable({
         />
       ) : (
         <table
-          className={`${noWarranties ? "hidden" : ""} w-full h-auto border-collapse
+          className={`${noWarranties ? "hidden" : "w-full h-auto"} border-collapse
           dark:text-white`}
         >
           <thead
-            className="sticky -top-0 z-10 bg-white border-b border-gray-200
-          dark:bg-black dark:border-[#303033]"
+            className="sticky top-0 z-10 bg-white border-b border-gray-200
+            dark:bg-black dark:border-[#17171a]"
           >
-            <tr className="h-[40px] dark:border-[#303033] text-sm">
+            <tr className="h-10 text-sm text-nowrap">
               <th className="font-medium text-start pl-4">Estado</th>
 
               <th className="font-medium text-start pl-4">Fecha de creación</th>
@@ -133,7 +134,10 @@ export default function WarrantiesTable({
           </thead>
 
           {/* Cuerpo de la tabla */}
-          <tbody className="font-normal dark:text-white">
+          <tbody
+            className="font-normal 
+            dark:text-white"
+          >
             {warranties.map((warranty) => (
               <tr
                 key={warranty.id}
