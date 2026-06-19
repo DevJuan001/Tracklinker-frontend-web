@@ -7,13 +7,13 @@ export default function WarrantiesKpis() {
 
   return (
     <section
-      className="h-[15%] mb-3
-      md:h-[10%]"
+      className="h-[30%] mb-3 p-1
+      md:h-[10%] md:p-0"
     >
       {loading ? (
         <div
-          className="flex items-center gap-2
-          md:gap-4"
+          className="h-full flex flex-wrap items-center gap-1
+          md:flex-nowrap md:gap-4"
         >
           <Skeleton
             count={4}
@@ -28,8 +28,8 @@ export default function WarrantiesKpis() {
         </div>
       ) : (
         <div
-          className="h-full flex items-center gap-2
-          md:gap-4"
+          className="h-full flex flex-wrap items-center gap-1
+          md:flex-nowrap md:gap-4"
         >
           <Kpi title={"Total"} value={data?.[0]?.total_warranties} />
 
