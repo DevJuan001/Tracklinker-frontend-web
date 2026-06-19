@@ -3,19 +3,21 @@ import { useState } from "react";
 import { useSuppliers } from "./hooks/useSuppliers";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
+// Constantes
+import { modalTitles } from "./constants/modalTitles";
 // Componentes
-import SuppliersList from "./components/ui/SuppliersList";
+import SupliersKpis from "./components/ui/SuppliersKpis";
+import SuppliersTable from "./components/ui/SuppliersTable";
 import Layout from "../../globals/components/Layout/Layout";
+import SearchBar from "../../globals/components/ui/SearchBar";
 import TopSection from "../../globals/components/ui/TopSection";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
-import SearchBar from "../../globals/components/ui/SearchBar";
 import HelpModal from "../../globals/components/modals/HelpModal";
 import AddSupplierModal from "./components/modals/AddSupplierModal";
 import EnableSupplierModal from "./components/modals/EnableSupplierModal";
 import DisableSupplierModal from "./components/modals/DisableSupplierModal";
 import FilterSuppliersModal from "./components/modals/FilterSuppliersModal";
-import MoreInfoSupplierModal from "./components/modals/MoreInfoSupplierModal";
 import EditSupplierInfoModal from "./components/modals/EditSupplierInfoModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
@@ -41,8 +43,12 @@ export default function SuppliersPage() {
       >
         <SearchBar value={search} onChange={setSearch} />
       </TopSection>
-      {/* Listado de proveedores */}
-      <SuppliersList
+
+      {/* Kpis de proveedores */}
+      <SupliersKpis />
+
+      {/* Tabla de proveedores */}
+      <SuppliersTable
         suppliers={filteredSuppliers}
         search={search}
         loading={loading}
@@ -53,23 +59,7 @@ export default function SuppliersPage() {
       {/* Modales */}
       {modalType && (
         <Modal
-          title={
-            modalType === "user"
-              ? "Configuración"
-              : modalType === "filter"
-                ? "Filtrar"
-                : modalType === "add"
-                  ? "Agregar Proveedor"
-                  : modalType === "info"
-                    ? ""
-                    : modalType === "edit"
-                      ? "Editar Proveedor"
-                      : modalType === "disable"
-                        ? "Deshabilitar Proveedor"
-                        : modalType === "enable"
-                          ? "Habilitar Proveedor"
-                          : "Ayuda"
-          }
+          title={modalTitles[modalType]}
           type={modalType}
           isOpen={isOpen}
           onClose={() => closeModal()}
@@ -94,14 +84,6 @@ export default function SuppliersPage() {
 
           {modalType === "add" && (
             <AddSupplierModal onClose={() => closeModal()} />
-          )}
-
-          {/* Modal para mas información del Proveedor */}
-          {modalType === "info" && (
-            <MoreInfoSupplierModal
-              supplier={modalData}
-              onClose={() => closeModal()}
-            />
           )}
 
           {/* Modal para editar el Proveedor */}

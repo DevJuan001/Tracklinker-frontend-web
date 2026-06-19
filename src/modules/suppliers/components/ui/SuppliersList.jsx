@@ -39,7 +39,9 @@ export default function SuppliersList({
 
               <ul className="text-center text-sm mt-1">
                 <li>• Revisa que el nombre esté bien escrito</li>
+
                 <li>• Busca por ciudad o número de teléfono</li>
+
                 <li>• Si no existe, crea un nuevo proveedor</li>
               </ul>
             </div>
@@ -54,6 +56,7 @@ export default function SuppliersList({
               >
                 <Icon name={"folder_copy"} size={60} fill />
               </div>
+
               <div className="flex flex-col items-center">
                 <span className="font-medium text-2xl">
                   Aún no hay proveedores registrados
@@ -68,7 +71,9 @@ export default function SuppliersList({
                   <li>
                     • Crea proveedores para organizar tus órdenes de entrada
                   </li>
+
                   <li>• Gestiona tu inventario de manera eficiente</li>
+
                   <li>• Crea y edita proveedores fácilmente</li>
                 </ul>
               </div>

@@ -4,6 +4,7 @@ import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+// Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function EnableSupplierModal({ supplier, onClose }) {

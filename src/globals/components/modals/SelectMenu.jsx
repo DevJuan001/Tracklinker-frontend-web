@@ -10,7 +10,6 @@ export default function SelectMenu({
   spanText,
   options = [],
   addIconFunction,
-  addIconRef,
   seeAddButton = false,
   searchable = false,
   growDirection = "center",
@@ -42,6 +41,7 @@ export default function SelectMenu({
       <div className="h-[66px] w-full flex items-center gap-1.5">
         <button
           id={id}
+          type="button"
           ref={triggerRef}
           onClick={handleToggle}
           className={`relative w-full ${spanText ? "h-full pt-1.5" : "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
@@ -75,12 +75,11 @@ export default function SelectMenu({
 
         {seeAddButton && (
           <button
-            ref={addIconRef}
+            type="button"
             onClick={(e) => {
               e.stopPropagation();
               if (addIconFunction) addIconFunction(e);
             }}
-            type="button"
             className={`h-16 flex items-center justify-center px-5 border rounded-2xl transition-colors duration-200 bg-[#FBF9FC] shadow-sm
             hover:bg-gray-200 hover:cursor-pointer
             dark:bg-black dark:border-[#1e1e20cb] dark:hover:bg-[#28282bbd]`}

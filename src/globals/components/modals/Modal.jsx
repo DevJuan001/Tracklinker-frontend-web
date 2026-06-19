@@ -70,7 +70,7 @@ export default function Modal({
         }}
         ref={modalRef}
         className={`${modal_styles[type] ?? modal_styles.default} bg-[#fbf9fc] rounded-[32px] shadow-lg
-        dark:border dark:bg-black dark:border-[#1e1e209f]`}
+        dark:border-2 dark:bg-black dark:border-[#1e1e209f]`}
       >
         <div ref={contentRef}>
           {!["calendar", "select", "menu", "editStatus"].includes(type) && (

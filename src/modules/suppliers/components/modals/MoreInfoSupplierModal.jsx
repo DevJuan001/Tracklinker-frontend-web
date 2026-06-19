@@ -11,10 +11,14 @@ import EditSupplierInfoModal from "./EditSupplierInfoModal";
 import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function MoreInfoSupplierModal({ supplier, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
 
   return (
-    <section className="flex flex-col items-center dark:text-white">
+    <section
+      className="flex flex-col items-center
+      dark:text-[#E2E4E5]"
+    >
       <div className="w-full self-start flex flex-col gap-1.5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -26,7 +30,7 @@ export default function MoreInfoSupplierModal({ supplier, onClose }) {
           </div>
 
           <div
-            className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg
+            className={`flex items-center gap-1.5 px-2 py-1.5 rounded-xl
             ${userStatus[supplier.status]?.styles}`}
           >
             <Icon
@@ -42,37 +46,57 @@ export default function MoreInfoSupplierModal({ supplier, onClose }) {
         </div>
 
         <div className="flex flex-col mt-3">
-          <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
+          <span
+            className="text-sm text-[#7e777ed0] 
+            dark:text-[#b4aab4]"
+          >
             Teléfono
           </span>
+
           <span>{supplier.phone}</span>
         </div>
 
         <div className="flex flex-col">
-          <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
+          <span
+            className="text-sm text-[#7e777ed0] 
+            dark:text-[#b4aab4]"
+          >
             Correo electrónico
           </span>
+
           <span>{supplier.email}</span>
         </div>
 
         <div className="flex flex-col">
-          <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
+          <span
+            className="text-sm text-[#7e777ed0] 
+            dark:text-[#b4aab4]"
+          >
             Ciudad
           </span>
+
           <span>{supplier.city_name}</span>
         </div>
 
         <div className="flex flex-col">
-          <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
+          <span
+            className="text-sm text-[#7e777ed0] 
+            dark:text-[#b4aab4]"
+          >
             Dirección
           </span>
+
           <span>{supplier.address}</span>
         </div>
 
         <div className="flex flex-col">
-          <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
+          <span
+            className="text-sm text-[#7e777ed0] 
+            dark:text-[#b4aab4]"
+          >
             Fecha de creación
           </span>
+
           <span>{supplier.date}</span>
         </div>
       </div>
@@ -86,13 +110,19 @@ export default function MoreInfoSupplierModal({ supplier, onClose }) {
       {innerType === "edit" && (
         <AddInnerModal
           isOpen={true}
-          onClose={() => openInnerModal(null)}
-          title={"Editar Usuario"}
+          onClose={() => {
+            closeInnerModal();
+            onClose();
+          }}
+          title={"Editar Proveedor"}
           triggerRef={innerTrigger}
         >
           <EditSupplierInfoModal
             supplier={supplier}
-            onClose={() => openInnerModal(null)}
+            onClose={() => {
+              closeInnerModal();
+              onClose();
+            }}
           />
         </AddInnerModal>
       )}

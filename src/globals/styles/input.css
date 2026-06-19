@@ -10,3 +10,26 @@ input[type="file"]::file-selector-button {
 input[type="file"]::file-selector-button:hover {
   color: #9ca3af;
 }
+
+/* Estilos para los spinners de los inputs de tipo number (flechas de incremento/decremento) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  opacity: 1;
+  height: auto;
+  cursor: pointer;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.dark input[type="number"]::-webkit-outer-spin-button,
+.dark input[type="number"]::-webkit-inner-spin-button {
+  filter: invert(1);
+  opacity: 1;
+}
+
+.dark input[type="number"]::-webkit-outer-spin-button:hover,
+.dark input[type="number"]::-webkit-inner-spin-button:hover {
+  opacity: 1;
+}
