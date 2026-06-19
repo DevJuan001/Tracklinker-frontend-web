@@ -31,8 +31,6 @@ export default function WarrantiesKpis() {
           className="h-full flex flex-wrap items-center gap-1
           md:flex-nowrap md:gap-4"
         >
-          <Kpi title={"Total"} value={data?.[0]?.total_warranties} />
-
           <Kpi
             title={"Sin Completar"}
             value={data?.[0]?.without_make_warranties}
@@ -41,6 +39,8 @@ export default function WarrantiesKpis() {
           <Kpi title={"En Proceso"} value={data?.[0]?.inprocess_warranties} />
 
           <Kpi title={"Completadas"} value={data?.[0]?.complete_warranties} />
+
+          <Kpi title={"Total"} value={data?.[0]?.total_warranties} />
         </div>
       )}
     </section>
