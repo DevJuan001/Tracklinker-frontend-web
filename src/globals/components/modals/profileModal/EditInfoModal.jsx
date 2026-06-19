@@ -106,6 +106,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           cancelButtonOnClick={onClose}
         />
       </form>
+      
       {/* Modales Internas */}
       {innerType === "success" && (
         <SuccessModal
@@ -122,6 +123,7 @@ export default function EditInfoModal({ isOpen, onClose, user, triggerRef }) {
           }}
         />
       )}
+      
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
