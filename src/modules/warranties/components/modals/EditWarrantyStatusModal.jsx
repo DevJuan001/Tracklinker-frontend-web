@@ -1,11 +1,13 @@
-import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import Modal from "../../../../globals/components/modals/Modal";
-import Loader from "../../../../globals/components/ui/Loader";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+// Hooks
 import { warrantyStatusConfig } from "../../constants/warrantyStatus";
+import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import { useEditWarrantyStatus } from "../../hooks/useEditWarrantyStatus";
+// Componentes
+import Loader from "../../../../globals/components/ui/Loader";
+// Modales
 import DisableWarrantyModal from "./DisableWarrantyModal";
+import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function EditWarrantyStatusModal({ warranty, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
