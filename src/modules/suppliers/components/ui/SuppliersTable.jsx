@@ -17,7 +17,7 @@ export default function SuppliersTable({
 
   return (
     <section
-      className="relative w-full h-[82%] border rounded-3xl overflow-hidden overflow-y-auto
+      className="relative w-full h-fit max-h-[82%] border rounded-3xl overflow-hidden overflow-y-auto
       dark:border-[#303033]"
     >
       {noSuppliers && (
