@@ -101,6 +101,16 @@ export default function OutputOrdersTable({
 
               <th className="font-medium pl-4 text-start">N°</th>
 
+              <th className="font-medium pl-4 text-start">Cliente</th>
+
+              <th className="font-medium pl-4 text-start">
+                Correo del cliente
+              </th>
+
+              <th className="font-medium pl-4 text-start">
+                Telefóno del cliente
+              </th>
+
               <th className="font-medium pl-4 text-start">Fecha de creación</th>
 
               <th className="font-medium pl-4 text-start">Productos</th>
@@ -165,6 +175,18 @@ export default function OutputOrdersTable({
 
                   <th className="font-normal text-start pl-4 text-sm">
                     {outputOrder.output_order_id}
+                  </th>
+
+                  <th className="font-normal text-start pl-4 text-sm">
+                    {`${outputOrder.client.client_name} ${outputOrder.client.client_first_surname} ${outputOrder.client.client_second_surname}`}
+                  </th>
+
+                  <th className="font-normal text-start pl-4 text-sm">
+                    {outputOrder.client.client_email}
+                  </th>
+
+                  <th className="font-normal text-start pl-4 text-sm">
+                    {outputOrder.client.client_phone}
                   </th>
 
                   <th className="font-normal text-start pl-4 text-sm">
