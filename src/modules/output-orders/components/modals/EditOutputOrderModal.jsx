@@ -1,4 +1,5 @@
 // Hooks
+import { useActiveClients } from "../../hooks/useActiveClients";
 import { useEditOutputOrder } from "../../hooks/useEditOutputOrder";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
@@ -12,6 +13,7 @@ import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
+  const { clients } = useActiveClients();
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
   const { form, error, loading, handleChange, handleSubmit } =
@@ -22,6 +24,21 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
       action={(e) => handleSubmit(e, openInnerModal)}
       className="flex flex-col items-center gap-2"
     >
+      <SelectMenu
+        searchable
+        seeAddButton
+        id={"clients-menu"}
+        name={"client_id"}
+        spanText={"Cliente"}
+        value={form.client_id}
+        onChange={handleChange}
+        options={clients.map((client) => ({
+          value: client.id,
+          label:
+            `${client.name} ${client.first_surname ?? ""} ${client.second_surname ?? ""}`.trim(),
+        }))}
+      />
+
       <DateField
         id={"output-product-garanty"}
         name="output_product_garanty"
