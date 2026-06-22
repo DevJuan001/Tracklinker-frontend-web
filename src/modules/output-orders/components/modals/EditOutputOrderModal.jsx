@@ -24,9 +24,9 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
     >
       <DateField
         id={"output-product-garanty"}
-        name="output_order_date"
+        name="output_product_garanty"
         onChange={handleChange}
-        value={form.output_order_date}
+        value={form.output_product_garanty}
         spanText="Fecha de finalización de la garantía"
       />
 
