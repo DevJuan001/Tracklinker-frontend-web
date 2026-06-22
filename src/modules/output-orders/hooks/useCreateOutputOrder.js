@@ -6,6 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export function useCreateOutputOrder() {
   const [form, setForm] = useState({
+    client_id: "",
     product_serials: [],
     output_product_garanty: "",
   });
