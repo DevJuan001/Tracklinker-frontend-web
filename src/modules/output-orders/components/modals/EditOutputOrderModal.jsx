@@ -3,21 +3,25 @@ import { useEditOutputOrder } from "../../hooks/useEditOutputOrder";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
+import TagInput from "../../../../globals/components/ui/TagInput";
+import DateField from "../../../../globals/components/ui/DateField";
+import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modals
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
-import DateField from "../../../../globals/components/ui/DateField";
-import TagInput from "../../../../globals/components/ui/TagInput";
 
 export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { form, error, loading, handleChange, handleSubmit } =
     useEditOutputOrder(selectedOutputOrder);
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       <DateField
         id={"output-product-garanty"}
         name="output_order_date"
@@ -62,7 +66,7 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
           confirmText="La orden de salida se ha modificado correctamente."
           confirmButtonText="Volver"
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -75,9 +79,9 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
           errorTitle="No se pudo actualizar la orden de salida"
           errorText={error}
           confirmButtonText="Volver"
-          onClose={() => openInnerModal(null)}
+          onClose={() => closeInnerModal()}
         />
       )}
-    </section>
+    </form>
   );
 }
