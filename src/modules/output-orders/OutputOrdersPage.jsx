@@ -6,6 +6,7 @@ import { useOutputOrders } from "./hooks/useOutputOrders";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import SearchBar from "../../globals/components/ui/SearchBar";
+import OutputOrdersKpis from "./components/ui/OutputOrdersKpis";
 import TopSection from "../../globals/components/ui/TopSection";
 import OutputOrdersTable from "./components/ui/OutputOrdersTable";
 // Modales
@@ -40,6 +41,8 @@ export default function OutputOrdersPage() {
       >
         <SearchBar value={search} onChange={setSearch} />
       </TopSection>
+
+      <OutputOrdersKpis />
 
       <OutputOrdersTable
         outputOrders={filteredOutputs}
