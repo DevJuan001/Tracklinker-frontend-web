@@ -105,6 +105,10 @@ export default function OutputOrdersTable({
 
               <th className="font-medium pl-4 text-start">Productos</th>
 
+              <th className="font-medium pl-4 text-start">
+                Fecha de finalización de la garantía
+              </th>
+
               <th className="font-medium pl-4 text-center">Acciones</th>
             </tr>
           </thead>
@@ -175,6 +179,10 @@ export default function OutputOrdersTable({
                           : `${outputOrder.products.length} Producto`}
                       </span>
                     </div>
+                  </th>
+
+                  <th className="font-normal text-start pl-4 text-sm">
+                    {outputOrder?.products?.[0]?.output_product_garanty}
                   </th>
 
                   <th className="relative">
