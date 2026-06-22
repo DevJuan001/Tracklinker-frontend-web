@@ -27,6 +27,7 @@ export default function FilterOutputOrderModal({
       }}
     >
       <SelectMenu
+        showAllOption
         id={"status"}
         name={"status"}
         spanText={"Estado"}
