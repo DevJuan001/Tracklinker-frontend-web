@@ -11,13 +11,17 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function AddOutputOrderModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
 
   const { form, loading, fieldError, handleSubmit, handleChange } =
     useCreateOutputOrder();
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       <DateField
         id={"output_product_garanty"}
         name="output_product_garanty"
@@ -52,7 +56,7 @@ export default function AddOutputOrderModal({ onClose }) {
           confirmText="La transformación se ha guardado correctamente."
           confirmButtonText="Volver"
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -65,9 +69,9 @@ export default function AddOutputOrderModal({ onClose }) {
           errorTitle="Error al registrar la transformación"
           errorText="Verifica los datos e inténtalo nuevamente."
           confirmButtonText="Volver"
-          onClose={() => openInnerModal(null)}
+          onClose={() => closeInnerModal()}
         />
       )}
-    </section>
+    </form>
   );
 }
