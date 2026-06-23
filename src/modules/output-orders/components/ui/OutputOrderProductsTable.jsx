@@ -8,7 +8,7 @@ export default function OutputOrderProductsTable({ outputOrder }) {
       className="bg-[#FAFAFA] dark:bg-[#0d0d0f]"
     >
       <td
-        colSpan={6}
+        colSpan={10}
         className="px-6 py-4 border-gray-200 dark:border-[#1e1e20cb]"
       >
         <div className="w-full flex flex-col gap-2">
