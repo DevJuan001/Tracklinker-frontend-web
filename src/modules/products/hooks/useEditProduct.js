@@ -57,6 +57,7 @@ export function useEditProduct(product) {
 
         if (response.success === true) {
           queryClient.invalidateQueries({ queryKey: ["products"] });
+          await queryClient.invalidateQueries({ queryKey: ["productsByStatus"] });
           openInnerModal("success", triggerButton);
         } else {
           setError(response.error);

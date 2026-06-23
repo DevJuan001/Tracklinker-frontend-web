@@ -40,6 +40,7 @@ export function useCreateProduct() {
 
       if (response.success == true) {
         await queryClient.invalidateQueries({ queryKey: ["products"] });
+        await queryClient.invalidateQueries({ queryKey: ["productsByStatus"] });
         openInnerModal("success", triggerButton);
       } else {
         setError(response.error);
