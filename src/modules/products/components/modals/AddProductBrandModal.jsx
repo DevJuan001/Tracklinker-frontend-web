@@ -11,7 +11,8 @@ import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateProductBrand();
 
@@ -22,7 +23,10 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
       onClose={onClose}
       title={"Crear Marca"}
     >
-      <section className="w-full flex flex-col items-center gap-2.5">
+      <form
+        action={(e) => handleSubmit(e, openInnerModal)}
+        className="w-full flex flex-col items-center gap-2.5"
+      >
         <FormField
           id={"name"}
           name={"name"}
@@ -37,11 +41,11 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
           confirmText={loading ? <Loader /> : "Crear"}
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
           cancelButtonOnClick={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
-      </section>
+      </form>
 
       {/* Modales internas */}
       {innerType === "success" && (
@@ -49,7 +53,7 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
           confirmTitle={"Marca creada correctamente"}
@@ -64,7 +68,7 @@ export default function AddProductBrandModal({ triggerRef, isOpen, onClose }) {
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
           confirmButtonText={"Volver a intentarlo"}
           errorTitle={"!No se pudo crear la marca!"}
           errorText={error}

@@ -26,7 +26,10 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
       onClose={onClose}
       title={"Agregar orden de entrada"}
     >
-      <section className="w-full flex flex-col items-center gap-2.5">
+      <form
+        action={(e) => handleSubmit(e, openInnerModal)}
+        className="w-full flex flex-col items-center gap-2.5"
+      >
         <SelectMenu
           searchable
           id={"suppliers-menu"}
@@ -55,7 +58,7 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
           confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal)}
           cancelButtonOnClick={onClose}
         />
-      </section>
+      </form>
 
       {/* Modales Internas */}
       {innerType === "success" && (
@@ -78,7 +81,7 @@ export default function AddInputOrderModal({ triggerRef, isOpen, onClose }) {
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
           confirmButtonText={"Volver a intentarlo"}
           errorTitle={"!No se pudo crear la orden!"}
           errorText={error}
