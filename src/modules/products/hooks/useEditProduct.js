@@ -45,10 +45,15 @@ export function useEditProduct(product) {
       return;
     }
 
+    if (form.status === 3) {
+      openInnerModal("sell", triggerButton);
+      delete changes.status;
+    }
+
     setLoading(true);
 
     try {
-      if (Object.keys(changes).length > 1) {
+      if (Object.keys(changes).length > 0) {
         const response = await editProductService({
           id: product.product_id,
           product_details_id: product.product_details_id,
@@ -57,8 +62,13 @@ export function useEditProduct(product) {
 
         if (response.success === true) {
           queryClient.invalidateQueries({ queryKey: ["products"] });
-          await queryClient.invalidateQueries({ queryKey: ["productsByStatus"] });
-          openInnerModal("success", triggerButton);
+          await queryClient.invalidateQueries({
+            queryKey: ["productsByStatus"],
+          });
+
+          if (form.status !== 3) {
+            openInnerModal("success", triggerButton);
+          }
         } else {
           setError(response.error);
           openInnerModal("error", triggerButton);
