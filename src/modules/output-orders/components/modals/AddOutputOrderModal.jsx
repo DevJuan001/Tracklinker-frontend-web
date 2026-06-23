@@ -8,19 +8,19 @@ import TagInput from "../../../../globals/components/ui/TagInput";
 import DateField from "../../../../globals/components/ui/DateField";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
+import CreateClientModal from "./CreateClientModal";
+import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import CreateClientModal from "./CreateClientModal";
 
-export default function AddOutputOrderModal({ onClose }) {
+export default function AddOutputOrderModal({ serial, onClose }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
 
   const { clients } = useActiveClients();
 
-  const { form, loading, fieldError, handleSubmit, handleChange } =
-    useCreateOutputOrder();
+  const { form, loading, error, fieldError, handleSubmit, handleChange } =
+    useCreateOutputOrder(serial);
 
   return (
     <form
@@ -37,7 +37,8 @@ export default function AddOutputOrderModal({ onClose }) {
         onChange={handleChange}
         options={clients.map((client) => ({
           value: client.id,
-          label: `${client.name} ${client.first_surname ?? ""} ${client.second_surname ?? ""}`.trim(),
+          label:
+            `${client.name} ${client.first_surname ?? ""} ${client.second_surname ?? ""}`.trim(),
         }))}
         className={fieldError("client_id")}
         addIconFunction={(e) => openInnerModal("createUser", e)}
@@ -73,8 +74,8 @@ export default function AddOutputOrderModal({ onClose }) {
         <SuccessModal
           triggerRef={innerTrigger}
           isOpen={true}
-          confirmTitle="¡Transformación registrada con éxito!"
-          confirmText="La transformación se ha guardado correctamente."
+          confirmTitle="¡Orden de salida registrada con éxito!"
+          confirmText="La orden de salida se ha creado correctamente."
           confirmButtonText="Volver"
           onClose={() => {
             closeInnerModal();
@@ -87,8 +88,8 @@ export default function AddOutputOrderModal({ onClose }) {
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          errorTitle="Error al registrar la transformación"
-          errorText="Verifica los datos e inténtalo nuevamente."
+          errorTitle="Error al registrar la orden de salida"
+          errorText={error}
           confirmButtonText="Volver"
           onClose={() => closeInnerModal()}
         />

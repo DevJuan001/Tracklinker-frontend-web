@@ -41,6 +41,7 @@ export function useCreateOutputOrder(serial) {
         await queryClient.invalidateQueries({ queryKey: ["productsByStatus"] });
         openInnerModal("success", triggerButton);
       } else {
+        setError(response.error)
         openInnerModal("error", triggerButton);
       }
     } catch {
