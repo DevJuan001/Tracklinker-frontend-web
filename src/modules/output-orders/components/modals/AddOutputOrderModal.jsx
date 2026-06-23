@@ -1,4 +1,5 @@
 // Hooks
+import { useActiveClients } from "../../hooks/useActiveClients";
 import { useCreateOutputOrder } from "../../hooks/useCreateOutputOrder";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
@@ -9,15 +10,39 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import SelectMenu from "../../../../globals/components/modals/SelectMenu";
+import CreateClientModal from "./CreateClientModal";
 
 export default function AddOutputOrderModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
+
+  const { clients } = useActiveClients();
 
   const { form, loading, fieldError, handleSubmit, handleChange } =
     useCreateOutputOrder();
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
+      <SelectMenu
+        searchable
+        seeAddButton
+        id={"clients-menu"}
+        name={"client_id"}
+        spanText={"Cliente"}
+        value={form.client_id}
+        onChange={handleChange}
+        options={clients.map((client) => ({
+          value: client.id,
+          label: `${client.name} ${client.first_surname ?? ""} ${client.second_surname ?? ""}`.trim(),
+        }))}
+        className={fieldError("client_id")}
+        addIconFunction={(e) => openInnerModal("createUser", e)}
+      />
+
       <DateField
         id={"output_product_garanty"}
         name="output_product_garanty"
@@ -52,7 +77,7 @@ export default function AddOutputOrderModal({ onClose }) {
           confirmText="La transformación se ha guardado correctamente."
           confirmButtonText="Volver"
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -65,9 +90,17 @@ export default function AddOutputOrderModal({ onClose }) {
           errorTitle="Error al registrar la transformación"
           errorText="Verifica los datos e inténtalo nuevamente."
           confirmButtonText="Volver"
+          onClose={() => closeInnerModal()}
+        />
+      )}
+
+      {innerType === "createUser" && (
+        <CreateClientModal
+          triggerRef={innerTrigger}
+          isOpen={true}
           onClose={() => openInnerModal(null)}
         />
       )}
-    </section>
+    </form>
   );
 }

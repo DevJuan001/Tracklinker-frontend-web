@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { createOutputOrderService } from "../services/createOutputOrderService";
+import { useQueryClient } from "@tanstack/react-query";
+import { createClientService } from "../services/createClientService";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 import { getModalTrigger } from "../../../utils/getModalTrigger";
-import { useQueryClient } from "@tanstack/react-query";
 
-export function useCreateOutputOrder() {
+export function useCreateClient() {
   const [form, setForm] = useState({
-    client_id: "",
-    product_serials: [],
-    output_product_garanty: "",
+    name: "",
+    first_surname: "",
+    second_surname: "",
+    address: "",
+    city: "",
+    email: "",
+    phone: "",
   });
-  const queryClient = useQueryClient();
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const queryClient = useQueryClient();
   const { validate, fieldError, clearError } = useFormValidation();
 
   function handleChange(e) {
@@ -28,35 +32,29 @@ export function useCreateOutputOrder() {
 
     const isValid = validate(form);
 
-    if (!isValid) return;
+    if (!isValid) {
+      return;
+    }
 
     setLoading(true);
 
     try {
-      const response = await createOutputOrderService(form);
-      
+      const response = await createClientService(form);
+
       if (response.success === true) {
-        queryClient.invalidateQueries({ queryKey: ["outputOrders"] });
+        queryClient.invalidateQueries({ queryKey: ["activeClients"] });
         openInnerModal("success", triggerButton);
       } else {
+        setError(response.error);
         openInnerModal("error", triggerButton);
       }
     } catch {
-      setError(
-        "No se pudo crear la orden de salida. inténtalo nuevamente más tarde.",
-      );
+      setError("No se pudo crear el cliente. Inténtalo de nuevo más tarde.");
       openInnerModal("error", triggerButton);
     } finally {
       setLoading(false);
     }
   }
 
-  return {
-    form,
-    loading,
-    error,
-    fieldError,
-    handleChange,
-    handleSubmit,
-  };
+  return { form, loading, error, fieldError, handleSubmit, handleChange };
 }

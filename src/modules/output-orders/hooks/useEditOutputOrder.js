@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { updateOutputOrderService } from "../services/updateOutputOrderService";
+import { useQueryClient } from "@tanstack/react-query";
 import { getModalTrigger } from "../../../utils/getModalTrigger";
 import { useFormValidation } from "../../../globals/hooks/useFormValidation";
-import { useQueryClient } from "@tanstack/react-query";
+import { updateOutputOrderService } from "../services/updateOutputOrderService";
 
 export function useEditOutputOrder(selectedOutputOrder) {
   const [form, setForm] = useState({
-    output_order_id: selectedOutputOrder.output_order_id || "",
-    output_order_date: selectedOutputOrder.output_order_date || "",
+    client_id: selectedOutputOrder?.client?.client_id || "" ,
+    output_order_id: selectedOutputOrder?.output_order_id || "",
+    output_product_garanty:
+      selectedOutputOrder?.products?.[0]?.output_product_garanty || "",
     product_serials:
-      selectedOutputOrder.products?.map((product) => product.product_serial) ??
+      selectedOutputOrder?.products?.map((product) => product.product_serial) ??
       [],
-    output_order_status: selectedOutputOrder.output_order_status || "",
+    output_order_status: selectedOutputOrder?.output_order_status || "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -37,6 +39,19 @@ export function useEditOutputOrder(selectedOutputOrder) {
     }
 
     const changes = getChanges(selectedOutputOrder, form);
+    delete changes.product_serials;
+
+    const originalSerials =
+      selectedOutputOrder?.products?.map((product) => product.product_serial) ??
+      [];
+    const newSerials = form.product_serials;
+    const serialsChanged =
+      originalSerials.length !== newSerials.length ||
+      originalSerials.some((s, i) => s !== newSerials[i]);
+
+    if (serialsChanged) {
+      changes.product_serials = newSerials;
+    }
 
     if (Object.keys(changes).length === 0) {
       openInnerModal("error", triggerButton);
@@ -48,13 +63,17 @@ export function useEditOutputOrder(selectedOutputOrder) {
     try {
       const response = await updateOutputOrderService(
         selectedOutputOrder.output_order_id,
-        changes,
+        {
+          ...changes,
+          output_product_garanty: form.output_product_garanty,
+        },
       );
 
       if (response.success == true) {
         queryClient.invalidateQueries({ queryKey: ["outputOrders"] });
         openInnerModal("success", triggerButton);
       } else {
+        setError(response.error);
         openInnerModal("error", triggerButton);
       }
     } catch {

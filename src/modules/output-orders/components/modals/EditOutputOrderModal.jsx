@@ -1,28 +1,49 @@
 // Hooks
+import { useActiveClients } from "../../hooks/useActiveClients";
 import { useEditOutputOrder } from "../../hooks/useEditOutputOrder";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
+import TagInput from "../../../../globals/components/ui/TagInput";
+import DateField from "../../../../globals/components/ui/DateField";
+import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modals
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
-import DateField from "../../../../globals/components/ui/DateField";
-import TagInput from "../../../../globals/components/ui/TagInput";
 
 export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { clients } = useActiveClients();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { form, error, loading, handleChange, handleSubmit } =
     useEditOutputOrder(selectedOutputOrder);
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
+      <SelectMenu
+        searchable
+        seeAddButton
+        id={"clients-menu"}
+        name={"client_id"}
+        spanText={"Cliente"}
+        value={form.client_id}
+        onChange={handleChange}
+        options={clients.map((client) => ({
+          value: client.id,
+          label:
+            `${client.name} ${client.first_surname ?? ""} ${client.second_surname ?? ""}`.trim(),
+        }))}
+      />
+
       <DateField
         id={"output-product-garanty"}
-        name="output_order_date"
+        name="output_product_garanty"
         onChange={handleChange}
-        value={form.output_order_date}
+        value={form.output_product_garanty}
         spanText="Fecha de finalización de la garantía"
       />
 
@@ -62,7 +83,7 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
           confirmText="La orden de salida se ha modificado correctamente."
           confirmButtonText="Volver"
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -75,9 +96,9 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
           errorTitle="No se pudo actualizar la orden de salida"
           errorText={error}
           confirmButtonText="Volver"
-          onClose={() => openInnerModal(null)}
+          onClose={() => closeInnerModal()}
         />
       )}
-    </section>
+    </form>
   );
 }
