@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useCatalog } from "./hooks/useCatalog";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
+// Constantes
+import { modalTitles } from "./constants/modalTitles";
 // Componentes
 import ProductsKpis from "./components/ui/ProductsKpis";
 import ProductsTable from "./components/ui/ProductsTable";
@@ -62,25 +64,7 @@ export default function ProductsPage() {
       {/* Modales */}
       {isOpen && (
         <Modal
-          title={
-            modalType === "user"
-              ? "Configuración"
-              : modalType === "help"
-                ? "Ayuda"
-                : modalType === "filter"
-                  ? "Filtrar"
-                  : modalType === "add"
-                    ? "Agregar Producto"
-                    : modalType === "edit"
-                      ? "Editar Producto"
-                      : modalType === "enable"
-                        ? "Habilitar Producto"
-                        : modalType === "disable"
-                          ? "Deshabilitar Producto"
-                          : modalType === "addWarranty"
-                            ? "Agregar Garantía"
-                            : ""
-          }
+          title={modalTitles[modalType]}
           type={modalType}
           isOpen={isOpen}
           triggerRef={triggerRef}
