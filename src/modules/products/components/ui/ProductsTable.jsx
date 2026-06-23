@@ -45,7 +45,9 @@ export default function ProductsTable({
 
               <ul className="text-center text-sm mt-1">
                 <li>• Revisa que el modelo esté bien escrito</li>
+
                 <li>• Busca por correo marca o subcategoria</li>
+
                 <li>• Si no existe, agrégalo como nuevo producto</li>
               </ul>
             </div>
@@ -103,18 +105,27 @@ export default function ProductsTable({
               dark:border-[#1e1e20e1] dark:bg-[#101012]"
             >
               <th className="font-medium text-start pl-4 pt-1">Estado</th>
+
               <th className="font-medium text-start pl-4 pt-1">
                 Fecha de Ingreso
               </th>
+
               <th className="font-medium text-start pl-4 pt-1">
                 Orden De Entrada
               </th>
+
               <th className="font-medium text-start pl-4 pt-1">Categoria</th>
+
               <th className="font-medium text-start pl-4 pt-1">Subcategoria</th>
+
               <th className="font-medium text-start pl-4 pt-1">Serial</th>
+
               <th className="font-medium text-start pl-4 pt-1">Modelo</th>
+
               <th className="font-medium text-start pl-4 pt-1">Descripción</th>
+
               <th className="font-medium text-start pl-4 pt-1">Marca</th>
+
               <th className="font-medium text-start px-4 pt-1">
                 Tiempo de Garantia
               </th>
@@ -157,6 +168,7 @@ export default function ProductsTable({
                 <th className="font-normal text-start pl-4 text-sm">
                   {product.input_order}
                 </th>
+                
                 {/* Categoria */}
                 <th className="font-normal text-start pl-4 text-sm">
                   {product.category}
