@@ -1,5 +1,6 @@
 import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
+import { useActiveClients } from "../../hooks/useActiveClients";
 import { useFilterOutputOrders } from "../../hooks/useFilterOutputOrders";
 
 export default function FilterOutputOrderModal({
@@ -8,6 +9,7 @@ export default function FilterOutputOrderModal({
   onClose,
 }) {
   const { form, handleChange } = useFilterOutputOrders(filters);
+  const { clients } = useActiveClients();
 
   return (
     <FilterModal
@@ -26,18 +28,37 @@ export default function FilterOutputOrderModal({
         onClose();
       }}
     >
-      <SelectMenu
-        showAllOption
-        id={"status"}
-        name={"status"}
-        spanText={"Estado"}
-        value={form.status}
-        onChange={handleChange}
-        options={[
-          { value: 1, label: "Deshabilitada" },
-          { value: 2, label: "Activa" },
-        ]}
-      />
+      <form
+        action={() => setFilters({ ...form })}
+        className="flex flex-col gap-2"
+      >
+        <SelectMenu
+          showAllOption
+          id={"status-menu"}
+          name={"status"}
+          spanText={"Estado"}
+          value={form.status}
+          onChange={handleChange}
+          options={[
+            { value: 1, label: "Deshabilitada" },
+            { value: 2, label: "Activa" },
+          ]}
+        />
+
+        <SelectMenu
+          searchable
+          showAllOption
+          id={"clients-menu"}
+          name={"client_id"}
+          spanText={"Cliente"}
+          value={form.status}
+          onChange={handleChange}
+          options={clients.map((client) => ({
+            value: client.id,
+            label: `${client.name} ${client.first_surname} ${client.second_surname}`,
+          }))}
+        />
+      </form>
     </FilterModal>
   );
 }
