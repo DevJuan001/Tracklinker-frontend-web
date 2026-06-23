@@ -12,15 +12,21 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modals
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
+import AddOutputOrderModal from "../../../output-orders/components/modals/AddOutputOrderModal";
 
 export default function EditProductModal({ selectedProduct, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { subcategories, brands, models, inputOrders } = useCatalog();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditProduct(selectedProduct);
 
   return (
-    <section className="w-full flex flex-col items-center gap-2.5">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="w-full flex flex-col items-center gap-2.5"
+    >
       <SelectMenu
         searchable
         id={"input-orders-menu"}
@@ -129,10 +135,28 @@ export default function EditProductModal({ selectedProduct, onClose }) {
 
       {/* Modales internos */}
       {innerType === "calendar" && (
-        <Calendar
-          onClose={() => openInnerModal(null)}
+        <Calendar onClose={closeInnerModal} triggerRef={innerTrigger} />
+      )}
+
+      {innerType === "sell" && (
+        <AddInnerModal
+          isOpen={true}
+          title={"Vender Producto"}
+          location={"center"}
           triggerRef={innerTrigger}
-        />
+          onClose={() => {
+            closeInnerModal();
+            onClose();
+          }}
+        >
+          <AddOutputOrderModal
+            serial={form?.product_serial}
+            onClose={() => {
+              closeInnerModal();
+              onClose();
+            }}
+          />
+        </AddInnerModal>
       )}
 
       {innerType === "success" && (
@@ -140,7 +164,7 @@ export default function EditProductModal({ selectedProduct, onClose }) {
           triggerRef={innerTrigger}
           isOpen={true}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
           confirmTitle={"Producto Editado Correctamente"}
@@ -155,12 +179,12 @@ export default function EditProductModal({ selectedProduct, onClose }) {
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
           errorTitle={"Error al editar el producto"}
           errorText={error}
           confirmButtonText={"Volver a intentarlo"}
         />
       )}
-    </section>
+    </form>
   );
 }

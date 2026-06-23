@@ -8,10 +8,12 @@ import EnableProductModal from "./EnableProductModal";
 import DisableProductModal from "./DisableProductModal";
 import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 import AddWarrantyModal from "../../../warranties/components/modals/AddWarrantyModal";
+import AddOutputOrderModal from "../../../output-orders/components/modals/AddOutputOrderModal";
 
 export default function EditProductStatusModal({ product, onClose }) {
   const { hasRole } = useCurrentUser();
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
 
   return (
     <div className="flex flex-col gap-0.5">
@@ -42,15 +44,12 @@ export default function EditProductStatusModal({ product, onClose }) {
           title={"Habilitar Producto"}
           location={"anchored"}
           triggerRef={innerTrigger}
-          onClose={() => {
-            openInnerModal(null);
-            onClose();
-          }}
+          onClose={closeInnerModal}
         >
           <EnableProductModal
             product={product}
             onClose={() => {
-              openInnerModal(null);
+              closeInnerModal();
               onClose();
             }}
           />
@@ -63,15 +62,12 @@ export default function EditProductStatusModal({ product, onClose }) {
           title={"Deshabilitar Producto"}
           location={"anchored"}
           triggerRef={innerTrigger}
-          onClose={() => {
-            openInnerModal(null);
-            onClose();
-          }}
+          onClose={closeInnerModal}
         >
           <DisableProductModal
             product={product}
             onClose={() => {
-              openInnerModal(null);
+              closeInnerModal();
               onClose();
             }}
           />
@@ -84,15 +80,12 @@ export default function EditProductStatusModal({ product, onClose }) {
           title={"Agregar Garantía"}
           location={"center"}
           triggerRef={innerTrigger}
-          onClose={() => {
-            openInnerModal(null);
-            onClose();
-          }}
+          onClose={closeInnerModal}
         >
           <AddWarrantyModal
             product={product}
             onCloseModal={() => {
-              openInnerModal(null);
+              closeInnerModal();
               onClose();
             }}
           />
@@ -103,10 +96,21 @@ export default function EditProductStatusModal({ product, onClose }) {
         <AddInnerModal
           isOpen={true}
           title={"Vender Producto"}
-          location={"anchored"}
+          location={"center"}
           triggerRef={innerTrigger}
-          onClose={() => openInnerModal(null)}
-        />
+          onClose={() => {
+            closeInnerModal();
+            onClose();
+          }}
+        >
+          <AddOutputOrderModal
+            serial={product?.product_serial}
+            onClose={() => {
+              closeInnerModal();
+              onClose();
+            }}
+          />
+        </AddInnerModal>
       )}
     </div>
   );

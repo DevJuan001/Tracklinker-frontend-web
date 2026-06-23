@@ -20,6 +20,7 @@ export function useUpdateProductStatus(product_data) {
       const response = await updateProductStatusService(form);
       if (response.success === true) {
         queryClient.invalidateQueries({ queryKey: ["products"] });
+        await queryClient.invalidateQueries({ queryKey: ["productsByStatus"] });
         onClose();
       } else {
         setError(response.error);

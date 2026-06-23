@@ -26,7 +26,10 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
       onClose={onClose}
       title={"Agregar modelo"}
     >
-      <section className="w-full flex flex-col items-center gap-2.5">
+      <form
+        action={(e) => handleSubmit(e, openInnerModal)}
+        className="w-full flex flex-col items-center gap-2.5"
+      >
         <SelectMenu
           searchable
           id={"brand-menu"}
@@ -86,13 +89,13 @@ export default function AddProductModelModal({ triggerRef, isOpen, onClose }) {
           <ErrorModal
             triggerRef={innerTrigger}
             isOpen={true}
-            onClose={() => closeInnerModal()}
+            onClose={closeInnerModal}
             confirmButtonText={"Volver a intentarlo"}
             errorTitle={"!No se pudo crear el modelo!"}
             errorText={error}
           />
         )}
-      </section>
+      </form>
     </AddInnerModal>
   );
 }

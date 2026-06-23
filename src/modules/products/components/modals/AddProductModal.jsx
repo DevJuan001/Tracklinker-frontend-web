@@ -18,7 +18,8 @@ import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 import AddSubcategoryModal from "../../../subcategories/components/modals/AddSubcategoryModal";
 
 export default function AddProductModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
 
   const { subcategories, brands, models, inputOrders } = useCatalog();
 
@@ -26,7 +27,10 @@ export default function AddProductModal({ onClose }) {
     useCreateProduct();
 
   return (
-    <section className="w-full flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="w-full flex flex-col items-center gap-2"
+    >
       {/* Menú de ordenes de entrada */}
       <SelectMenu
         searchable
@@ -162,7 +166,10 @@ export default function AddProductModal({ onClose }) {
         <SuccessModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => (openInnerModal(null), onClose())}
+          onClose={() => {
+            closeInnerModal();
+            onClose();
+          }}
           confirmTitle={"Producto Creado Correctamente"}
           confirmText={
             "El producto ha sido creado correctamente, ya puedes volver y verlo en la lista de productos."
@@ -175,7 +182,7 @@ export default function AddProductModal({ onClose }) {
         <ErrorModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
           errorTitle={"Error al crear el producto"}
           errorText={error}
           confirmButtonText={"Volver a intentarlo"}
@@ -186,7 +193,7 @@ export default function AddProductModal({ onClose }) {
         <AddInputOrderModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
 
@@ -194,10 +201,10 @@ export default function AddProductModal({ onClose }) {
         <AddInnerModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
           title={"Agregar subcategoria"}
         >
-          <AddSubcategoryModal onClose={() => openInnerModal(null)} />
+          <AddSubcategoryModal onClose={closeInnerModal} />
         </AddInnerModal>
       )}
 
@@ -205,7 +212,7 @@ export default function AddProductModal({ onClose }) {
         <AddProductBrandModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
 
@@ -213,9 +220,9 @@ export default function AddProductModal({ onClose }) {
         <AddProductModelModal
           triggerRef={innerTrigger}
           isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }
