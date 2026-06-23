@@ -12,6 +12,8 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modals
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
+import AddOutputOrderModal from "../../../output-orders/components/modals/AddOutputOrderModal";
 
 export default function EditProductModal({ selectedProduct, onClose }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -134,6 +136,27 @@ export default function EditProductModal({ selectedProduct, onClose }) {
       {/* Modales internos */}
       {innerType === "calendar" && (
         <Calendar onClose={closeInnerModal} triggerRef={innerTrigger} />
+      )}
+
+      {innerType === "sell" && (
+        <AddInnerModal
+          isOpen={true}
+          title={"Vender Producto"}
+          location={"center"}
+          triggerRef={innerTrigger}
+          onClose={() => {
+            closeInnerModal();
+            onClose();
+          }}
+        >
+          <AddOutputOrderModal
+            serial={form?.product_serial}
+            onClose={() => {
+              closeInnerModal();
+              onClose();
+            }}
+          />
+        </AddInnerModal>
       )}
 
       {innerType === "success" && (
