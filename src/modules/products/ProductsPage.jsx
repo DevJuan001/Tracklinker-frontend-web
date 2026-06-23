@@ -4,6 +4,7 @@ import { useCatalog } from "./hooks/useCatalog";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 // Componentes
+import ProductsKpis from "./components/ui/ProductsKpis";
 import ProductsTable from "./components/ui/ProductsTable";
 import Layout from "../../globals/components/Layout/Layout";
 import SearchBar from "../../globals/components/ui/SearchBar";
@@ -46,6 +47,9 @@ export default function ProductsPage() {
       >
         <SearchBar value={search} onChange={setSearch} />
       </TopSection>
+
+      {/* Kpis */}
+      <ProductsKpis />
 
       {/* Contenedor de la tabla */}
       <ProductsTable
