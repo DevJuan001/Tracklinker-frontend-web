@@ -8,7 +8,7 @@ export const productStatusConfig = {
     icon: "block",
     fill: false,
     styles:
-      "w-32 bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400",
+      "w-fit bg-gray-100 text-gray-500 dark:bg-gray-600/40 dark:text-gray-400",
     roles: ["Admin", "Almacén"],
   },
 
@@ -21,7 +21,7 @@ export const productStatusConfig = {
     icon: "circle",
     fill: true,
     styles:
-      "w-20 bg-green-100 text-green-600 dark:bg-[#00ff151f] dark:text-[#00ff3779]",
+      "w-fit bg-green-100 text-green-600 dark:bg-[#00ff151f] dark:text-[#00ff3779]",
     roles: ["Admin", "Almacén"],
   },
 
@@ -34,7 +34,7 @@ export const productStatusConfig = {
     icon: "credit_card",
     fill: false,
     styles:
-      "w-20 bg-blue-100 text-blue-600 dark:bg-[#1e3a5f] dark:text-[#60a5fa]",
+      "w-fit bg-blue-100 text-blue-600 dark:bg-blue-950/70 dark:text-[#60a5fa]",
     roles: ["Admin", "Almacén"],
   },
 
@@ -48,7 +48,7 @@ export const productStatusConfig = {
     icon: "schedule",
     fill: false,
     styles:
-      "w-28 bg-amber-100 text-amber-600 dark:bg-[#2d1f00] dark:text-[#fbbe24b6]",
+      "w-fit bg-amber-100 text-amber-600 dark:bg-[#2d1f00] dark:text-[#fbbe24b6]",
     roles: ["Admin", "Técnico"],
   },
 };
