@@ -1,12 +1,12 @@
-import UsersChart from "./charts/UsersChart";
-import SimpleAreaChart from "./charts/SimpleAreaChart";
-import SimpleBarChart from "./charts/SimpleBarChart";
-import SimplePieChart from "./charts/SimplePieChart";
-import ProductsChart from "./charts/ProductsChart";
-import BrandsChart from "./charts/BrandsCharts";
-import OutputOrdersChart from "./charts/OutputOrdersChart";
-import SubcategoriesWithStockChart from "./charts/SubcategoriesWithStockChart";
-import CategoriesChart from "./charts/CategoriesChart";
+import UsersKpi from "../charts/UsersKpi";
+import ProductsKpi from "../charts/ProductsKpi";
+import BrandsChart from "../charts/BrandsCharts";
+import CategoriesKpi from "../charts/CategoriesKpi";
+import SimpleBarChart from "../charts/SimpleBarChart";
+import SimplePieChart from "../charts/SimplePieChart";
+import SimpleAreaChart from "../charts/SimpleAreaChart";
+import OutputOrdersChart from "../charts/OutputOrdersKpi";
+import SubcategoriesWithStockChart from "../charts/SubcategoriesWithStockChart";
 
 export default function ChartsContainer() {
   return (
@@ -15,16 +15,26 @@ export default function ChartsContainer() {
       md:grid-cols-12 md:grid-rows-[repeat(5,minmax(150px,1fr))] overflow-y-auto"
     >
       {/* Primera Fila de Gráficos */}
-      <UsersChart />
-      <ProductsChart />
+      <UsersKpi />
+
+      <ProductsKpi />
+
       <OutputOrdersChart />
-      <CategoriesChart />
+
+      <CategoriesKpi />
+
       {/* Segunda Fila de Gráficos */}
+
       <SimpleAreaChart />
+
       <BrandsChart />
+
       <SimplePieChart />
+
       {/* Tercera fila de Gráficos */}
+
       <SubcategoriesWithStockChart />
+
       <SimpleBarChart />
     </section>
   );
