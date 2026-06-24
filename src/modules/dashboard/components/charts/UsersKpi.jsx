@@ -1,8 +1,8 @@
 import TopChartsCard from "../ui/TopChartsCard";
-import { useUsersChart } from "../../hooks/useUsersChart";
+import { useUsersKpiData } from "../../hooks/useUsersKpiData";
 
-export default function UsersChart() {
-  const { usersChartInfo } = useUsersChart();
+export default function UsersKpi() {
+  const { usersChartInfo } = useUsersKpiData();
 
   return (
     <>

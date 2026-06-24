@@ -1,8 +1,8 @@
 import TopChartsCard from "../ui/TopChartsCard";
-import { useCategoriesChart } from "../../hooks/useCategoriesChart";
+import { useCategoriesKpiData } from "../../hooks/useCategoriesKpiData";
 
-export default function CategoriesChart() {
-  const { categories } = useCategoriesChart();
+export default function CategoriesKpi() {
+  const { categories } = useCategoriesKpiData();
   return (
     <>
       {categories.map((item) => (

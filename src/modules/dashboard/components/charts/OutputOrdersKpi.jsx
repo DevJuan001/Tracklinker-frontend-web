@@ -1,8 +1,8 @@
 import TopChartsCard from "../ui/TopChartsCard";
-import { useOutputOrdersChart } from "../../hooks/useOutputOrdersChart";
+import { useOutputOrdersKpi } from "../../hooks/useOutputOrdersKpi";
 
-export default function OutputOrdersChart() {
-  const { orders } = useOutputOrdersChart();
+export default function OutputOrdersKpi() {
+  const { orders } = useOutputOrdersKpi();
 
   return (
     <>
