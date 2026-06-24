@@ -1,11 +1,11 @@
-import UsersKpi from "../charts/UsersKpi";
-import ProductsKpi from "../charts/ProductsKpi";
+import UsersKpi from "../kpis/UsersKpi";
+import ProductsKpi from "../kpis/ProductsKpi";
 import BrandsChart from "../charts/BrandsCharts";
-import CategoriesKpi from "../charts/CategoriesKpi";
+import CategoriesKpi from "../kpis/CategoriesKpi";
 import SimpleBarChart from "../charts/SimpleBarChart";
 import SimplePieChart from "../charts/SimplePieChart";
 import SimpleAreaChart from "../charts/SimpleAreaChart";
-import OutputOrdersChart from "../charts/OutputOrdersKpi";
+import OutputOrdersChart from "../kpis/OutputOrdersKpi";
 import SubcategoriesWithStockChart from "../charts/SubcategoriesWithStockChart";
 
 export default function ChartsContainer() {
