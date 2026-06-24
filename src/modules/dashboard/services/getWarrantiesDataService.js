@@ -1,7 +1,7 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getPieChartDataService() {
+export async function getWarrantiesDataService() {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.dashboard}/warranty-status`,
     {
