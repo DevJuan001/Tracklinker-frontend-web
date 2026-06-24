@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { brandsChartData } from "../services/brandsChartData";
+import { getBrandsChartDataService } from "../services/getBrandsChartDataService";
 
 export function useBrandsChart() {
   const [brandChartInfo, setBrandChartInfo] = useState([]);
@@ -9,7 +9,7 @@ export function useBrandsChart() {
       // Función para almacenar la informacion del graficó de barras pequeño
       async function fetchBarChartData() {
         try {
-          const data = await brandsChartData();
+          const data = await getBrandsChartDataService();
           setBrandChartInfo(data);
         } catch (error) {
           setError(error);

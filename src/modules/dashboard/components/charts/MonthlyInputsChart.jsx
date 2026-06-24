@@ -6,12 +6,12 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts";
-import useBarChart from "../../../hooks/useBarChart";
-import ChartCard from "../ChartCard";
+import { useMonthlyInputsChartData } from "../../hooks/useMonthlyInputsChartData";
+import ChartCard from "../ui/ChartCard";
 
 // Grafico de barras
-export default function SimpleBarChart() {
-  const { barChartData } = useBarChart();
+export default function MonthlyInputsChart() {
+  const { monthlyInputsData } = useMonthlyInputsChartData();
 
   return (
     // Contenedor del gráfico
@@ -21,11 +21,14 @@ export default function SimpleBarChart() {
       name={"Entradas Mensuales de cada proveedor"}
       imageDisplay={"hidden"}
     >
-      <ResponsiveContainer>
-        <BarChart data={barChartData}>
+      <ResponsiveContainer height={"100%"}>
+        <BarChart data={monthlyInputsData}>
           <YAxis width="auto" />
+
           <XAxis dataKey={"supplier_name"} fontSize={"6px"} fontWeight={800} />
+
           <Tooltip />
+
           <Bar dataKey="orders" fill="#152DD1" />
         </BarChart>
       </ResponsiveContainer>

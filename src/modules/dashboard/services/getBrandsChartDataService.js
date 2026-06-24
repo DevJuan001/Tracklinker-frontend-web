@@ -1,14 +1,14 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function areaChartData() {
+export async function getBrandsChartDataService() {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/monthly-outputs`,
+    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/stock_by_brand`,
     {
       method: "GET",
     },
   );
-
+  
   // Validamos si la respuesta fue OK
   if (!res.ok) {
     throw new Error("Error en la petición");

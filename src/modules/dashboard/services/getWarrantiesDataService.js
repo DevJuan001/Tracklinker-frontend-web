@@ -1,9 +1,9 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function usersChartData() {
+export async function getWarrantiesDataService() {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/new-users`,
+    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/warranty-status`,
     {
       method: "GET",
     },

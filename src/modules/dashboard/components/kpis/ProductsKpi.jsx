@@ -1,13 +1,13 @@
-import TopChartsCard from "../TopChartsCard";
-import { useProductChart } from "../../../hooks/useProductChart";
+import KpiCard from "../ui/KpiCard";
+import { useProductsKpiData } from "../../hooks/useProductsKpiData";
 
-export default function ProductsChart() {
-  const { productChartInfo } = useProductChart();
+export default function ProductsKpi() {
+  const { productChartInfo } = useProductsKpiData();
 
   return (
     <>
       {productChartInfo.map((item) => (
-        <TopChartsCard
+        <KpiCard
           key={"products"}
           background={"products-background"}
           title={"Productos"}

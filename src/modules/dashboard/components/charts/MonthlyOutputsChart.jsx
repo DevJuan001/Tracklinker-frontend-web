@@ -7,25 +7,28 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-import { useAreaChart } from "../../../hooks/useAreaChart";
-import ChartCard from "../ChartCard";
+import ChartCard from "../ui/ChartCard";
+import { useMonthlyOutputsChartData } from "../../hooks/useMonthlyOutputsChartData";
 
-export default function SimpleAreaChart() {
-  const { areaChartInfo } = useAreaChart();
+export default function MonthlyOutputsChart() {
+  const { monthlyOutputsData } = useMonthlyOutputsChartData();
 
   return (
     <ChartCard
       rowSpan={2}
       colSpan={6}
-      bgColor={""}
-      name={"Salidas Mensuales del año"}
+      name={`Salidas Mensuales del ${new Date().getFullYear()}`}
     >
       <ResponsiveContainer>
-        <AreaChart data={areaChartInfo} margin={{ left: 20 }}>
+        <AreaChart data={monthlyOutputsData} margin={{ left: 30 }}>
           <YAxis width="auto" fontSize={"11px"} />
+
           <XAxis dataKey={"month"} fontSize={"10px"} />
+
           <Tooltip />
+
           <CartesianGrid vertical={false} stroke="#e5e7eb" />
+
           <Area
             type={"natural"}
             dataKey={"output_orders"}
