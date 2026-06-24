@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { tinyBarChartData } from "../services/barChartData";
+import { getBarChartDataService } from "../services/getBarChartDataService";
 
 export default function useBarChartData() {
   const [barChartData, setBarChartData] = useState([]);
@@ -9,7 +9,7 @@ export default function useBarChartData() {
     // Función para almacenar la informacion del graficó de barras pequeño
     async function fetchBarChartData() {
       try {
-        const data = await tinyBarChartData();
+        const data = await getBarChartDataService();
         setBarChartData(data);
       } catch (error) {
         setError(error);

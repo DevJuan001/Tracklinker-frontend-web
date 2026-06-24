@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { categoriesChartData } from "../services/categoriesChartData";
+import { getCategoriesKpiDataService } from "../services/getCategoriesKpiDataService";
 
-export function useCategoriesChart() {
+export function useCategoriesKpiData() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchCategoriesChartData() {
+    async function fetchCategoriesKpiData() {
       setLoading(true);
       try {
-        const response = await categoriesChartData();
+        const response = await getCategoriesKpiDataService();
         setCategories(response);
       } catch (error) {
         setError(error);
@@ -18,7 +18,7 @@ export function useCategoriesChart() {
         setLoading(false);
       }
     }
-    fetchCategoriesChartData();
+    fetchCategoriesKpiData();
   }, []);
 
   return { categories, loading, error };

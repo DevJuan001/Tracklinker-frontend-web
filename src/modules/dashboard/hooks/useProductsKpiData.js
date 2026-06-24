@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { productsChartData } from "../services/productsChartData"
+import { getProductsKpiDataService } from "../services/getProductsKpiDataService"
 
-export function useProductChart() {
+export function useProductsKpiData() {
   const [productChartInfo, setProductChartInfo] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
@@ -10,7 +10,7 @@ export function useProductChart() {
     // Función para almacenar la informacion del grafico
     async function fetchProductsData() {
       try {
-        const data = await productsChartData();
+        const data = await getProductsKpiDataService();
         setProductChartInfo(data);
         setLoading(false);
       } catch (error) {

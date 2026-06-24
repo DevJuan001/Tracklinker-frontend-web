@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { pieChartData } from "../services/pieChartData";
+import { getPieChartDataService } from "../services/getPieChartDataService";
 
 export function usePieChart() {
   const [simplePieChartData, setSimplePieChartData] = useState([]);
@@ -9,7 +9,7 @@ export function usePieChart() {
     // Función para almacenar la informacion del graficó en forma de pie
     async function fetchPieChartData() {
       try {
-        const data = await pieChartData();
+        const data = await getPieChartDataService();
         // Almacenamos cada item de data dentro de un array de objetos para que sea usable con recharts
         const pieData = [
           { name: "Sin completar", value: data[0]?.total, color: "#2f3ab5" },

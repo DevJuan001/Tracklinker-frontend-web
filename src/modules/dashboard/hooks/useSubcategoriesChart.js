@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { subcategoriesChartData } from "../services/subcategoriesChartData";
+import { getSubcategoriesChartDataService } from "../services/getSubcategoriesChartDataService";
 
 export function useSubcategoriesChart() {
   const [subcategories, setSubcategories] = useState([]);
@@ -9,7 +9,7 @@ export function useSubcategoriesChart() {
   useEffect(() => {
     async function fetchSubcategoriesChart() {
       try {
-        const response = await subcategoriesChartData();
+        const response = await getSubcategoriesChartDataService();
         setSubcategories(response);
       } catch (error) {
         setError(error);

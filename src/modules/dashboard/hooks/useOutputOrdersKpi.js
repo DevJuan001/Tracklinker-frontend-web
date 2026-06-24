@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { outputOrdersChartData } from "../services/outputOrdersChartData";
+import { getOutputOrdersKpiDataService } from "../services/getOutputOrdersKpiDataService";
 
-export function useOutputOrdersChart() {
+export function useOutputOrdersKpi() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchOutputChartData() {
+    async function fetchOutputKpiData() {
       setLoading(true);
       try {
-        const response = await outputOrdersChartData();
+        const response = await getOutputOrdersKpiDataService();
         setOrders(response);
       } catch (error) {
         setError(error);
@@ -18,7 +18,7 @@ export function useOutputOrdersChart() {
         setLoading(false);
       }
     }
-    fetchOutputChartData();
+    fetchOutputKpiData();
   }, []);
 
   return { orders, loading, error };

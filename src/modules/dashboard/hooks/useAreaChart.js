@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { areaChartData } from "../services/areaChartData";
+import { getAreaChartDataService } from "../services/getAreaChartDataService";
 
 export function useAreaChart() {
   const [areaChartInfo, setareaChartData] = useState([]);
@@ -8,7 +8,7 @@ export function useAreaChart() {
   useEffect(() => {
     async function fetchAreaChartData() {
       try {
-        const data = await areaChartData();
+        const data = await getAreaChartDataService();
         setareaChartData(data);
       } catch (error) {
         setError(error)
