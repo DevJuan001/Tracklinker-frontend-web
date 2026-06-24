@@ -1,4 +1,4 @@
-import TopChartsCard from "../ui/TopChartsCard";
+import KpiCard from "../ui/KpiCard";
 import { useOutputOrdersKpi } from "../../hooks/useOutputOrdersKpi";
 
 export default function OutputOrdersKpi() {
@@ -7,7 +7,7 @@ export default function OutputOrdersKpi() {
   return (
     <>
       {orders.map((item) => (
-        <TopChartsCard
+        <KpiCard
           key={"output_orders"}
           background={"output-orders-background"}
           title={"Ordenes de salida"}

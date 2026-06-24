@@ -1,4 +1,4 @@
-import TopChartsCard from "../ui/TopChartsCard";
+import KpiCard from "../ui/KpiCard";
 import { useUsersKpiData } from "../../hooks/useUsersKpiData";
 
 export default function UsersKpi() {
@@ -7,7 +7,7 @@ export default function UsersKpi() {
   return (
     <>
       {usersChartInfo.map((item) => (
-        <TopChartsCard
+        <KpiCard
           key={"users"}
           background={
             item.new_users > 0 ? "growth-background" : "users-background"

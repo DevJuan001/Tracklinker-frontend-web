@@ -1,4 +1,4 @@
-import TopChartsCard from "../ui/TopChartsCard";
+import KpiCard from "../ui/KpiCard";
 import { useCategoriesKpiData } from "../../hooks/useCategoriesKpiData";
 
 export default function CategoriesKpi() {
@@ -6,7 +6,7 @@ export default function CategoriesKpi() {
   return (
     <>
       {categories.map((item) => (
-        <TopChartsCard
+        <KpiCard
           key={"categories"}
           background={"categories-background"}
           title={"Categorias"}

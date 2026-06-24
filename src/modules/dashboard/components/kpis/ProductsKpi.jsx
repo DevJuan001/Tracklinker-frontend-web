@@ -1,4 +1,4 @@
-import TopChartsCard from "../ui/TopChartsCard";
+import KpiCard from "../ui/KpiCard";
 import { useProductsKpiData } from "../../hooks/useProductsKpiData";
 
 export default function ProductsKpi() {
@@ -7,7 +7,7 @@ export default function ProductsKpi() {
   return (
     <>
       {productChartInfo.map((item) => (
-        <TopChartsCard
+        <KpiCard
           key={"products"}
           background={"products-background"}
           title={"Productos"}
