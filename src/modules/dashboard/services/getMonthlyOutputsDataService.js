@@ -1,7 +1,7 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getAreaChartDataService() {
+export async function getMonthlyOutputsDataService() {
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.dashboard}/monthly-outputs`,
     {
