@@ -1,5 +1,5 @@
-import TopChartsCard from "../TopChartsCard";
-import { useUsersChart } from "../../../hooks/useUsersChart";
+import TopChartsCard from "../ui/TopChartsCard";
+import { useUsersChart } from "../../hooks/useUsersChart";
 
 export default function UsersChart() {
   const { usersChartInfo } = useUsersChart();

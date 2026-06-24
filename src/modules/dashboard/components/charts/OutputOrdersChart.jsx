@@ -1,5 +1,5 @@
-import TopChartsCard from "../TopChartsCard";
-import { useOutputOrdersChart } from "../../../hooks/useOutputOrdersChart";
+import TopChartsCard from "../ui/TopChartsCard";
+import { useOutputOrdersChart } from "../../hooks/useOutputOrdersChart";
 
 export default function OutputOrdersChart() {
   const { orders } = useOutputOrdersChart();

@@ -6,8 +6,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useBrandsChart } from "../../../hooks/useBrandsChart";
-import ChartCard from "../ChartCard";
+import ChartCard from "../ui/ChartCard";
+import { useBrandsChart } from "../../hooks/useBrandsChart";
 
 export default function BrandsChart() {
   const { brandChartInfo } = useBrandsChart();
@@ -17,13 +17,16 @@ export default function BrandsChart() {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={brandChartInfo}>
           <YAxis width={10} fontSize={11} />
+
           <XAxis dataKey={"brand"} fontSize={"8px"} />
+
           <Bar
             dataKey={"products"}
             fill="#152DD1"
             background={"#000"}
             radius={[8, 8, 0, 0]}
           />
+
           <Tooltip />
         </BarChart>
       </ResponsiveContainer>

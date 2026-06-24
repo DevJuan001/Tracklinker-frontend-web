@@ -1,5 +1,5 @@
-import { useCategoriesChart } from "../../../hooks/useCategoriesChart";
-import TopChartsCard from "../TopChartsCard";
+import TopChartsCard from "../ui/TopChartsCard";
+import { useCategoriesChart } from "../../hooks/useCategoriesChart";
 
 export default function CategoriesChart() {
   const { categories } = useCategoriesChart();

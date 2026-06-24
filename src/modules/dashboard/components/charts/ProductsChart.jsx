@@ -1,5 +1,5 @@
-import TopChartsCard from "../TopChartsCard";
-import { useProductChart } from "../../../hooks/useProductChart";
+import TopChartsCard from "../ui/TopChartsCard";
+import { useProductChart } from "../../hooks/useProductChart";
 
 export default function ProductsChart() {
   const { productChartInfo } = useProductChart();

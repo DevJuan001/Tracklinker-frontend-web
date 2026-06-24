@@ -6,8 +6,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { usePieChart } from "../../../hooks/usePieChart";
-import ChartCard from "../ChartCard";
+import { usePieChart } from "../../hooks/usePieChart";
+import ChartCard from "../ui/ChartCard";
 
 export default function SimplePieChart() {
   const { simplePieChartData } = usePieChart();
