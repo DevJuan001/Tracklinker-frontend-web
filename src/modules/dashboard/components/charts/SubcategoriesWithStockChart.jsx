@@ -14,7 +14,7 @@ export default function SubcategoriesWithStockChart() {
   return (
     <ChartCard rowSpan={2} colSpan={5} name={"Subcategorias con mas productos"}>
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={subcategories} margin={{ left: 30, right: 10 }}>
+        <AreaChart data={subcategories} margin={{ left: 50, right: 10 }}>
           <YAxis width="auto" fontSize={"11px"} />
 
           <XAxis dataKey={"subcategory"} fontSize={"10px"} />
