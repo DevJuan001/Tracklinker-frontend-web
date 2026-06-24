@@ -1,9 +1,9 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function usersChartData() {
+export async function getBarChartDataService() {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/new-users`,
+    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/monthly-inputs`,
     {
       method: "GET",
     },
@@ -16,6 +16,7 @@ export async function usersChartData() {
 
   // Convertimos la respuesta a json y la almacenamos en data
   const data = await res.json();
+
   // Retornamos la información para el gráfico
   return data.data;
 }

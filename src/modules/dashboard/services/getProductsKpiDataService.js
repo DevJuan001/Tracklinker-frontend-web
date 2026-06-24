@@ -1,14 +1,13 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function pieChartData() {
+export async function getProductsKpiDataService() {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/warranty-status`,
+    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/all-and-new`,
     {
       method: "GET",
     },
   );
-
   // Validamos si la respuesta fue OK
   if (!res.ok) {
     throw new Error("Error en la petición");

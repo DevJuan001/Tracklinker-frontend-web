@@ -1,9 +1,9 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function tinyBarChartData() {
+export async function getAreaChartDataService() {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/monthly-inputs`,
+    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/monthly-outputs`,
     {
       method: "GET",
     },

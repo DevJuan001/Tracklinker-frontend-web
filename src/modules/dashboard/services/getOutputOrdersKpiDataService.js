@@ -1,16 +1,16 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function categoriesChartData() {
+export async function getOutputOrdersKpiDataService() {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/categories`,
+    `${apiRoutes.apiUrl}${apiRoutes.dashboard}/output-orders`,
     {
       method: "GET",
     },
   );
 
   if (!res.ok) {
-    throw new Error("Error al obtener las categorias");
+    throw new Error("Error al intentar obtener las ordenes de salida");
   }
 
   const data = await res.json();
