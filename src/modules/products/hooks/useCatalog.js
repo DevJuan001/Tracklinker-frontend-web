@@ -13,17 +13,7 @@ import { getSubcategories } from "../../subcategories/services/getSubcategoriesS
 import { productStatusConfig } from "../constants/productStatusConfig";
 
 export function useCatalog() {
-  const [filters, setFilters] = useState({
-    start_date: "",
-    end_date: "",
-    category_order: "",
-    subcategory_order: "",
-    warranty_time: "",
-    brand: "",
-    input_order: "",
-    product_model: "",
-    product_status: "",
-  });
+  const [filters, setFilters] = useState({});
 
   const products = useInfiniteQuery({
     queryKey: ["products", filters],
