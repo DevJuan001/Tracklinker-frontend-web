@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getWarrantiesService } from "../services/getWarrantiesService";
-import { useQuery } from "@tanstack/react-query";
 
 export function useWarranties() {
   const [filters, setFilters] = useState({});
 
-  const warranties = useQuery({
+  const warranties = useInfiniteQuery({
     queryKey: ["warranties", filters],
     queryFn: ({ pageParam }) => getWarrantiesService({ pageParam, filters }),
     initialPageParam: 1,
