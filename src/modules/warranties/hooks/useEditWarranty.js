@@ -7,7 +7,7 @@ import { useFormValidation } from "../../../globals/hooks/useFormValidation";
 export function useEditWarranty(selectedWarranty) {
   const [form, setForm] = useState({
     product_serial: selectedWarranty.product_serial,
-    customer: selectedWarranty.customer,
+    customer: selectedWarranty.customer_id,
     phone: selectedWarranty.phone,
     address: selectedWarranty.address,
     city: selectedWarranty.city,
