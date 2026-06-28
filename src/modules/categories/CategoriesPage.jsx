@@ -20,7 +20,16 @@ import EditCategoryInfoModal from "./components/modals/EditCategoryInfoModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function CategoriesPage() {
-  const { categories, loading, error, filters, setFilters } = useCategories();
+  const {
+    categories,
+    loading,
+    error,
+    filters,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    setFilters,
+  } = useCategories();
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
   const [search, setSearch] = useState("");
@@ -49,6 +58,9 @@ export default function CategoriesPage() {
         search={search}
         loading={loading}
         error={error}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+        isFetchingNextPage={isFetchingNextPage}
       />
 
       {/* Modales */}
