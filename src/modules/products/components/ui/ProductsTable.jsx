@@ -1,3 +1,5 @@
+// Hooks
+import { useInfiniteScroll } from "../../../../globals/hooks/useInfiniteScroll";
 // Constants
 import { productStatusConfig } from "../../constants/productStatusConfig";
 // Components
@@ -11,7 +13,11 @@ export default function ProductsTable({
   loading,
   search,
   openModal,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
 }) {
+  const { ref } = useInfiniteScroll({ hasNextPage, fetchNextPage });
   const noProducts = products.length === 0 && !loading;
   const isFirstLoad = products.length === 0 && loading;
 
@@ -129,6 +135,7 @@ export default function ProductsTable({
               <th className="font-medium text-start px-4 pt-1">
                 Tiempo de Garantia
               </th>
+
               <th className="font-medium text-start px-4">Acciones</th>
             </tr>
           </thead>
@@ -138,6 +145,7 @@ export default function ProductsTable({
             {products.map((product) => (
               /* Productos */
               <tr
+                ref={ref}
                 key={product.product_serial}
                 className="relative w-full text-base overflow-auto transition duration-75 text-[#45474d] dark:text-white
                 hover:bg-[#F5F3F6]
@@ -168,7 +176,7 @@ export default function ProductsTable({
                 <th className="font-normal text-start pl-4 text-sm">
                   {product.input_order}
                 </th>
-                
+
                 {/* Categoria */}
                 <th className="font-normal text-start pl-4 text-sm">
                   {product.category}
@@ -228,6 +236,23 @@ export default function ProductsTable({
                 </th>
               </tr>
             ))}
+
+            {isFetchingNextPage && (
+              <tr>
+                <td colSpan={11}>
+                  <Skeleton
+                    count={4}
+                    height="56px"
+                    width="100%"
+                    marginBottom={1}
+                    backgroundColor={"#F3EEF5"}
+                    darkModeBackgroundColor={"#101012"}
+                    shineColor="#C5C1C7"
+                    darkModeShineColor="#1e1e1e"
+                  />
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       )}
