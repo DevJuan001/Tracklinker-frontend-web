@@ -7,7 +7,10 @@ export function useWarranties() {
 
   const warranties = useQuery({
     queryKey: ["warranties", filters],
-    queryFn: () => getWarrantiesService(filters),
+    queryFn: ({ pageParam }) => getWarrantiesService({ pageParam, filters }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length === 20 ? allPages.length + 1 : undefined,
     staleTime: 1000 * 20,
     refetchInterval: 1000 * 20,
     refetchIntervalInBackground: false,
@@ -17,6 +20,9 @@ export function useWarranties() {
     warranties: warranties.data || [],
     loading: warranties.isLoading,
     error: warranties.error,
+    fetchNextPage: warranties.fetchNextPage,
+    hasNextPage: warranties.hasNextPage,
+    isFetchingNextPage: warranties.isFetchingNextPage,
     filters,
     setFilters,
   };
