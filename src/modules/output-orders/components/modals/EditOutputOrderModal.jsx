@@ -1,7 +1,7 @@
 // Hooks
-import { useActiveClients } from "../../hooks/useActiveClients";
 import { useEditOutputOrder } from "../../hooks/useEditOutputOrder";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useActiveClients } from "../../../../globals/hooks/useActiveClients";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import TagInput from "../../../../globals/components/ui/TagInput";
