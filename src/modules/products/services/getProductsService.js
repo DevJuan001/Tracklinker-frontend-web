@@ -2,14 +2,13 @@ import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 import { buildQueryParams } from "../../../utils/buildQueryParams";
 
-export async function getProductsService(filters = {}, signal) {
-  const params = buildQueryParams(filters);
+export async function getProductsService({ pageParam = 1, filters = {} }) {
+  const params = buildQueryParams({ ...filters, page: pageParam });
 
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.products}/?${params}`,
     {
       method: "GET",
-      signal,
     },
   );
 

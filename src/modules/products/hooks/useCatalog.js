@@ -1,6 +1,6 @@
 // Hooks
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 // Services
 import { getProductsService } from "../services/getProductsService";
 import { getInputOrdersService } from "../services/getInputOrdersService";
@@ -13,16 +13,21 @@ import { getSubcategories } from "../../subcategories/services/getSubcategoriesS
 import { productStatusConfig } from "../constants/productStatusConfig";
 
 export function useCatalog() {
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState({});
 
-  const products = useQuery({
+  const products = useInfiniteQuery({
     queryKey: ["products", filters],
-    queryFn: ({ signal }) => getProductsService(filters, signal),
+    queryFn: ({ pageParam }) => getProductsService({ pageParam, filters }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.length === 20 ? allPages.length + 1 : undefined,
     select: (data) =>
-      data.map((product) => ({
-        ...product,
-        status_text: productStatusConfig[product.status]?.text,
-      })),
+      data.pages.flatMap((page) =>
+        page.map((product) => ({
+          ...product,
+          status_text: productStatusConfig[product.status]?.text,
+        })),
+      ),
     staleTime: 1000 * 60 * 3,
     refetchInterval: 1000 * 20,
     refetchIntervalInBackground: false,
@@ -84,6 +89,9 @@ export function useCatalog() {
 
   return {
     products: products.data || [],
+    fetchNextPage: products.fetchNextPage,
+    hasNextPage: products.hasNextPage,
+    isFetchingNextPage: products.isFetchingNextPage,
     categories: categories.data || [],
     subcategories: subcategories.data || [],
     brands: brands.data || [],
@@ -98,6 +106,7 @@ export function useCatalog() {
       models.isLoading ||
       inputOrders.isLoading ||
       productStatus.isLoading,
+    pending: products.status === "pending",
     error:
       products.error ||
       categories.error ||

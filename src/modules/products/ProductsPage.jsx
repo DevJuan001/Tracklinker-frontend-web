@@ -23,7 +23,15 @@ import ProfileModal from "../../globals/components/modals/profileModal/ProfileMo
 export default function ProductsPage() {
   const { modalType, modalData, isOpen, triggerRef, openModal, closeModal } =
     useModal();
-  const { products, loading, filters, setFilters } = useCatalog();
+  const {
+    products,
+    loading,
+    filters,
+    setFilters,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useCatalog();
   const [search, setSearch] = useState("");
   const filteredProducts = useSearch(products ?? [], search);
 
@@ -59,6 +67,9 @@ export default function ProductsPage() {
         search={search}
         loading={loading}
         openModal={openModal}
+        fetchNextPage={fetchNextPage}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
       />
 
       {/* Modales */}
