@@ -2,6 +2,7 @@
 import { useCities } from "../../../../globals/hooks/useCities";
 import { useCreateWarranty } from "../../hooks/useCreateWarranty";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useActiveClients } from "../../../../globals/hooks/useActiveClients";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import TextArea from "../../../../globals/components/ui/TextArea";
@@ -11,8 +12,10 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import CreateClientModal from "../../../../globals/components/modals/CreateClientModal";
 
 export default function AddWarrantyModal({ product, onClose }) {
+  const { clients } = useActiveClients();
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
     useInnerModal();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
@@ -34,14 +37,22 @@ export default function AddWarrantyModal({ product, onClose }) {
         className={fieldError("product_serial")}
       />
 
-      <FormField
+      <SelectMenu
+        searchable
+        seeAddButton
         id={"customer"}
         name={"customer"}
-        labelText={"Nombre del Cliente"}
+        spanText={"Cliente"}
         value={form.customer}
         onChange={handleChange}
         placeholder="Miguel Arnulfo Pérez"
         className={fieldError("customer")}
+        addIconFunction={(e) => openInnerModal("createClient", e)}
+        options={clients.map((client) => ({
+          value: client.id,
+          label:
+            `${client.name} ${client.first_surname ?? ""} ${client.second_surname ?? ""}`.trim(),
+        }))}
       />
 
       <FormField
@@ -107,6 +118,14 @@ export default function AddWarrantyModal({ product, onClose }) {
         confirmText={loading ? <Loader /> : "Crear"}
       />
 
+      {innerType === "createClient" && (
+        <CreateClientModal
+          triggerRef={innerTrigger}
+          isOpen={true}
+          onClose={closeInnerModal}
+        />
+      )}
+
       {innerType === "success" && (
         <SuccessModal
           triggerRef={innerTrigger}
@@ -130,7 +149,7 @@ export default function AddWarrantyModal({ product, onClose }) {
           errorTitle="No se pudo registrar la garantía"
           errorText={error}
           confirmButtonText="Volver"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>

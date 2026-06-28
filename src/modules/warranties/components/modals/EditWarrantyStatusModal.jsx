@@ -10,7 +10,8 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function EditWarrantyStatusModal({ warranty, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { loading, error, handleStatusChange } = useEditWarrantyStatus();
 
   return (
@@ -51,14 +52,14 @@ export default function EditWarrantyStatusModal({ warranty, onClose }) {
           isOpen={true}
           title={"Deshabilitar garantía"}
           triggerRef={innerTrigger}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
           location="anchored"
           growDirection={"top-center"}
         >
           <DisableWarrantyModal
             selectedWarranty={warranty}
             onClose={() => {
-              openInnerModal(null);
+              closeInnerModal();
               onClose();
             }}
           />
@@ -71,7 +72,7 @@ export default function EditWarrantyStatusModal({ warranty, onClose }) {
           isOpen={true}
           location="anchored"
           growDirection={"center"}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
           errorTitle={"¡No se pudo cambiar el estado de la garantía!"}
           errorText={error}
         />
