@@ -11,6 +11,12 @@ export function useWarranties() {
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) =>
       lastPage.length === 20 ? allPages.length + 1 : undefined,
+    select: (data) =>
+      data.pages.flatMap((page) =>
+        page.map((warranty) => ({
+          ...warranty,
+        })),
+      ),
     staleTime: 1000 * 20,
     refetchInterval: 1000 * 20,
     refetchIntervalInBackground: false,
