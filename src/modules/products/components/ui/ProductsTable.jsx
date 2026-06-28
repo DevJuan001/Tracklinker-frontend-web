@@ -17,7 +17,11 @@ export default function ProductsTable({
   hasNextPage,
   isFetchingNextPage,
 }) {
-  const { ref } = useInfiniteScroll({ hasNextPage, fetchNextPage });
+  const { getItemRef } = useInfiniteScroll({
+    items: products,
+    hasNextPage,
+    fetchNextPage,
+  });
   const noProducts = products.length === 0 && !loading;
   const isFirstLoad = products.length === 0 && loading;
 
@@ -142,10 +146,10 @@ export default function ProductsTable({
 
           {/* Contenido de la tabla */}
           <tbody className="w-full min-h-full font-normal dark:text-gray-300">
-            {products.map((product) => (
+            {products.map((product, index) => (
               /* Productos */
               <tr
-                ref={ref}
+                ref={getItemRef(index)}
                 key={product.product_serial}
                 className="relative w-full text-base overflow-auto transition duration-75 text-[#45474d] dark:text-white
                 hover:bg-[#F5F3F6]
