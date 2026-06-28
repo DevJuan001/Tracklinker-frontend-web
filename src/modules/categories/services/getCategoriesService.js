@@ -2,8 +2,8 @@ import { apiRoutes } from "../../../config/apiRoutes";
 import { buildQueryParams } from "../../../utils/buildQueryParams";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getCategoriesService(filters = {}) {
-  const params = buildQueryParams(filters);
+export async function getCategoriesService({ pageParam = 1, filters = {} }) {
+  const params = buildQueryParams({ ...filters, page: pageParam });
 
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.categories}/?${params}`,
@@ -12,11 +12,11 @@ export async function getCategoriesService(filters = {}) {
     },
   );
 
-  const json = await res.json();
-
   if (!res.ok) {
-    return { error: json.detail || "Error en la petición", data: null };
+    throw new Error("Error en la petición");
   }
 
-  return json.data;
+  const data = await res.json();
+
+  return data.data;
 }
