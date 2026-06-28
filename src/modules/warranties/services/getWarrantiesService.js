@@ -2,8 +2,8 @@ import { apiRoutes } from "../../../config/apiRoutes";
 import { buildQueryParams } from "../../../utils/buildQueryParams";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getWarrantiesService(filters = {}) {
-  const params = buildQueryParams(filters);
+export async function getWarrantiesService({ pageParam = 1, filters = {} }) {
+  const params = buildQueryParams({ ...filters, page: pageParam });
 
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.warranties}/?${params}`,

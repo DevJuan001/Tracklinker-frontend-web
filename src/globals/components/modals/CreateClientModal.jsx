@@ -1,16 +1,16 @@
 // Hooks
-import { useCities } from "../../../../globals/hooks/useCities";
+import { useCities } from "../../hooks/useCities";
 import { useCreateClient } from "../../hooks/useCreateClient";
-import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useInnerModal } from "../../hooks/useInnerModal";
 // Componentes
-import Loader from "../../../../globals/components/ui/Loader";
-import FormField from "../../../../globals/components/ui/FormField";
-import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+import Loader from "../ui/Loader";
+import FormField from "../ui/FormField";
+import SelectMenu from "./SelectMenu";
+import ConfirmCancelButtons from "./ConfirmCancelButtons";
 // Modales
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
-import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
+import ErrorModal from "./ErrorModal";
+import SuccessModal from "./SuccessModal";
+import AddInnerModal from "./AddInnerModal";
 
 export default function CreateClientModal({ triggerRef, isOpen, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();

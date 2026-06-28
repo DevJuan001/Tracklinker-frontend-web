@@ -25,6 +25,7 @@ export default function FormField({
         onChange={onChange}
         value={value}
         type={type}
+        min={0}
         id={id}
         autoComplete={autoComplete}
         className={`

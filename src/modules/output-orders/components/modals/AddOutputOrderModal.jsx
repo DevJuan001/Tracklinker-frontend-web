@@ -1,5 +1,5 @@
 // Hooks
-import { useActiveClients } from "../../hooks/useActiveClients";
+import { useActiveClients } from "../../../../globals/hooks/useActiveClients";
 import { useCreateOutputOrder } from "../../hooks/useCreateOutputOrder";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
@@ -8,7 +8,7 @@ import TagInput from "../../../../globals/components/ui/TagInput";
 import DateField from "../../../../globals/components/ui/DateField";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 // Modales
-import CreateClientModal from "./CreateClientModal";
+import CreateClientModal from "../../../../globals/components/modals/CreateClientModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";

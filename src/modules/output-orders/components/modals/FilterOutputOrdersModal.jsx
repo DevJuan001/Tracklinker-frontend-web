@@ -1,7 +1,7 @@
-import FilterModal from "../../../../globals/components/modals/FilterModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
-import { useActiveClients } from "../../hooks/useActiveClients";
 import { useFilterOutputOrders } from "../../hooks/useFilterOutputOrders";
+import FilterModal from "../../../../globals/components/modals/FilterModal";
+import { useActiveClients } from "../../../../globals/hooks/useActiveClients";
 
 export default function FilterOutputOrderModal({
   filters,

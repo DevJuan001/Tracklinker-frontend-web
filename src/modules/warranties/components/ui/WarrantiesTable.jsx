@@ -1,3 +1,5 @@
+// Hooks
+import { useInfiniteScroll } from "../../../../globals/hooks/useInfiniteScroll";
 // Constantes
 import { warrantyStatusConfig } from "../../constants/warrantyStatus";
 // Componentes
@@ -12,7 +14,15 @@ export default function WarrantiesTable({
   loading,
   search,
   openModal,
+  hasNextPage,
+  fetchNextPage,
+  isFetchingNextPage,
 }) {
+  const { getItemRef } = useInfiniteScroll({
+    items: warranties,
+    hasNextPage: hasNextPage,
+    fetchNextPage: fetchNextPage,
+  });
   const noWarranties = warranties.length === 0 && !loading;
   const isFirstLoad = warranties.length === 0 && loading;
 
@@ -154,8 +164,9 @@ export default function WarrantiesTable({
             className="font-normal 
             dark:text-white"
           >
-            {warranties.map((warranty) => (
+            {warranties.map((warranty, index) => (
               <tr
+                ref={getItemRef(index)}
                 key={warranty.id}
                 className="relative h-12 text-base overflow-x-auto overflow-y-auto transition duration-75 text-[#45474d]
                 hover:bg-[#F5F3F6]
@@ -256,6 +267,23 @@ export default function WarrantiesTable({
                 </th>
               </tr>
             ))}
+
+            {isFetchingNextPage && (
+              <tr>
+                <td colSpan={11}>
+                  <Skeleton
+                    count={4}
+                    height="56px"
+                    width="100%"
+                    marginBottom={1}
+                    backgroundColor={"#F3EEF5"}
+                    darkModeBackgroundColor={"#101012"}
+                    shineColor="#C5C1C7"
+                    darkModeShineColor="#1e1e1e"
+                  />
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       )}

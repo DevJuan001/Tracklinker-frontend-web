@@ -2,6 +2,7 @@
 import { useEditWarranty } from "../../hooks/useEditWarranty";
 import { useCities } from "../../../../globals/hooks/useCities";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
+import { useActiveClients } from "../../../../globals/hooks/useActiveClients";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import TextArea from "../../../../globals/components/ui/TextArea";
@@ -11,12 +12,15 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import CreateClientModal from "../../../../globals/components/modals/CreateClientModal";
 
 export default function EditWarrantyModal({ selectedWarranty, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { form, handleChange, handleSubmit, loading } =
     useEditWarranty(selectedWarranty);
   const { cities } = useCities();
+  const { clients } = useActiveClients();
 
   return (
     <form
@@ -32,12 +36,21 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
         placeholder="QTYC99999"
       />
 
-      <FormField
+      <SelectMenu
+        searchable
+        seeAddButton
         id={"customer"}
         name={"customer"}
-        labelText={"Nombre del Cliente"}
+        spanText={"Cliente"}
         value={form.customer}
         onChange={handleChange}
+        placeholder="Miguel Arnulfo Pérez"
+        addIconFunction={(e) => openInnerModal("createClient", e)}
+        options={clients.map((client) => ({
+          value: client.id,
+          label:
+            `${client.name} ${client.first_surname ?? ""} ${client.second_surname ?? ""}`.trim(),
+        }))}
       />
 
       <FormField
@@ -109,6 +122,14 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
         confirmText={loading ? <Loader /> : "Editar"}
       />
 
+      {innerType === "createClient" && (
+        <CreateClientModal
+          triggerRef={innerTrigger}
+          isOpen={true}
+          onClose={closeInnerModal}
+        />
+      )}
+
       {innerType === "success" && (
         <SuccessModal
           triggerRef={innerTrigger}
@@ -117,7 +138,7 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
           confirmText="La garantía se ha actualizado correctamente."
           confirmButtonText="Cerrar"
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -130,7 +151,7 @@ export default function EditWarrantyModal({ selectedWarranty, onClose }) {
           errorTitle="No se pudo actualizar la garantía"
           errorText="Revisa que hayas cambiado algún campo o no este vacio e intentalo nuevamente."
           confirmButtonText="Cerrar"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>
