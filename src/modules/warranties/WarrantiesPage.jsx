@@ -23,7 +23,15 @@ import ProfileModal from "../../globals/components/modals/profileModal/ProfileMo
 export default function WarrantiesPage() {
   const { isOpen, modalData, modalType, triggerRef, openModal, closeModal } =
     useModal();
-  const { warranties, loading, filters, setFilters } = useWarranties();
+  const {
+    warranties,
+    loading,
+    filters,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    setFilters,
+  } = useWarranties();
   const [search, setSearch] = useState("");
   const filteredWarranties = useSearch(warranties, search);
 
@@ -50,6 +58,9 @@ export default function WarrantiesPage() {
         loading={loading}
         search={search}
         openModal={openModal}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+        isFetchingNextPage={isFetchingNextPage}
       />
 
       {/* Modales */}
