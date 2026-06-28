@@ -20,8 +20,8 @@ export default function WarrantiesTable({
 }) {
   const { getItemRef } = useInfiniteScroll({
     items: warranties,
-    hasNextPage: hasNextPage,
-    fetchNextPage: fetchNextPage,
+    hasNextPage,
+    fetchNextPage,
   });
   const noWarranties = warranties.length === 0 && !loading;
   const isFirstLoad = warranties.length === 0 && loading;
@@ -164,7 +164,7 @@ export default function WarrantiesTable({
             className="font-normal 
             dark:text-white"
           >
-            {warranties.map((warranty, index) => (
+            {warranties?.map((warranty, index) => (
               <tr
                 ref={getItemRef(index)}
                 key={warranty.id}
