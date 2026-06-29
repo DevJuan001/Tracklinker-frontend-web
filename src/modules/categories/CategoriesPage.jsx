@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useCategories } from "./hooks/useCategories";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
+// Constantes
+import { modalTitles } from "./constants/modalTitles";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import CategoriesList from "./components/ui/CategoriesList";
@@ -66,34 +68,13 @@ export default function CategoriesPage() {
       {/* Modales */}
       {modalType && (
         <Modal
-          title={
-            modalType === "filter"
-              ? "Filtrar"
-              : modalType === "add"
-                ? "Agregar Categoria"
-                : modalType === "user"
-                  ? "Configuración"
-                  : modalType === "help"
-                    ? "Ayuda"
-                    : modalType === "info"
-                      ? ""
-                      : modalType === "edit"
-                        ? "Editar Categoria"
-                        : modalType === "disable"
-                          ? "Deshabilitar Categoria"
-                          : modalType === "enable"
-                            ? "Habilitar Categoria"
-                            : "Ayuda"
-          }
+          title={modalTitles[modalType]}
           type={modalType}
           isOpen={isOpen}
           onClose={() => closeModal()}
           triggerRef={triggerRef}
-          location={
-            modalType === "info" || modalType === "add" || modalType === "edit"
-              ? "center"
-              : "anchored"
-          }
+          growDirection="center"
+          location={modalType === "add" ? "center" : "anchored"}
         >
           {modalType === "user" && <ProfileModal />}
 
