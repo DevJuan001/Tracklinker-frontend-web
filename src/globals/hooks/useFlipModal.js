@@ -722,14 +722,6 @@ export const useFlipModal = ({
         gsap.to(pair.source, { opacity: 0, duration: 0.15, ease: "power2.in" });
       }
 
-      // Ocultamos TODO el content del modal durante el viaje de los phantoms.
-      // Usamos visibility:hidden con !important inline. A diferencia de opacity,
-      // visibility se hereda a los hijos y NO la sobrescribe el Flip.from con
-      // nested:true (que restaura opacity/scale de los hijos pero no visibility).
-      // Así evitamos que se vea el texto del modal "por debajo" del phantom.
-      // Lo restauramos en el cleanup cuando la animación termina.
-      content.style.setProperty("visibility", "hidden", "important");
-
       // Aqui capturamos los estilos actuales del modal abierto.
       const state = Flip.getState([modal, ...modalShared], {
         props: "backgroundColor,color,padding",
