@@ -15,6 +15,7 @@ export default function Modal({
   children,
   onClose,
   disableClose = false,
+  hideTrigger = true,
 }) {
   const modalRef = useRef();
   const contentRef = useRef();
@@ -41,6 +42,7 @@ export default function Modal({
     location,
     growDirection,
     id: modalId,
+    hideTrigger
   });
 
   const enhancedChildren = React.Children.map(children, (child) => {
@@ -73,7 +75,7 @@ export default function Modal({
         dark:border-2 dark:bg-black dark:border-[#1e1e209f]`}
       >
         <div ref={contentRef}>
-          {!["calendar", "select", "menu", "editStatus"].includes(type) && (
+          {!["calendar", "select", "menu", "editStatus", "editCategory"].includes(type) && (
             <header className="flex justify-between items-center mb-2">
               <span
                 data-flip-id="modal-title"
