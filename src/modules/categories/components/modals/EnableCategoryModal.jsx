@@ -12,11 +12,14 @@ export default function EnableCategoryModal({ category, onClose }) {
   const { loading, error, handleEnable } = useEnableCategory(category.id);
 
   return (
-    <section className="flex flex-col justify-center items-center dark:text-white">
-      <p>
+    <section
+      className="flex flex-col justify-center items-center 
+      dark:text-white"
+    >
+      <span>
         ¿Seguro que deseas habilitar la categoría{" "}
         <span className="font-medium">{category.name}</span>?
-      </p>
+      </span>
 
       {/* Botones */}
       <ConfirmCancelButtons
