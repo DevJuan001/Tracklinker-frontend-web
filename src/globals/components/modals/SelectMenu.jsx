@@ -47,7 +47,7 @@ export default function SelectMenu({
           className={`relative w-full ${spanText ? "h-full pt-1.5" : "h-14"} pr-2 flex items-center bg-[#FBF9FC] border border-[#a1a1a131]
             rounded-2xl cursor-pointer text-sm
             dark:bg-black dark:border-[#1e1e20cb]
-            ${className}`}
+            ${className ? className : "shadow-sm"}`}
         >
           {spanText && (
             <div className="absolute top-2 left-3 px-1">
