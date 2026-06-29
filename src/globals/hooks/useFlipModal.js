@@ -722,14 +722,6 @@ export const useFlipModal = ({
         gsap.to(pair.source, { opacity: 0, duration: 0.15, ease: "power2.in" });
       }
 
-      // Ocultamos TODO el content del modal durante el viaje de los phantoms.
-      // Usamos visibility:hidden con !important inline. A diferencia de opacity,
-      // visibility se hereda a los hijos y NO la sobrescribe el Flip.from con
-      // nested:true (que restaura opacity/scale de los hijos pero no visibility).
-      // Así evitamos que se vea el texto del modal "por debajo" del phantom.
-      // Lo restauramos en el cleanup cuando la animación termina.
-      content.style.setProperty("visibility", "hidden", "important");
-
       // Aqui capturamos los estilos actuales del modal abierto.
       const state = Flip.getState([modal, ...modalShared], {
         props: "backgroundColor,color,padding",
@@ -823,11 +815,14 @@ export const useFlipModal = ({
           // y el phantom quedó en un valor intermedio.
           const targetFontSize = window.getComputedStyle(pair.source).fontSize;
           phantom.style.fontSize = targetFontSize;
-          // Revelamos el shared element del trigger instantáneamente
-          pair.source.style.removeProperty("opacity");
-          gsap.set(pair.source, { opacity: 1, clearProps: "opacity" });
-          // Retiramos el phantom en el mismo frame
-          phantom.remove();
+          // Pequeño delay antes del swap para que el trigger no salga
+          // demasiado rápido — el phantom se queda visible un instante
+          // más y luego se intercambia por el shared element del trigger.
+          gsap.delayedCall(0.18, () => {
+            pair.source.style.removeProperty("opacity");
+            gsap.set(pair.source, { opacity: 1, clearProps: "opacity" });
+            phantom.remove();
+          });
         }
         onClose();
       }

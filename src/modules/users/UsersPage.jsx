@@ -3,6 +3,15 @@ import { useState } from "react";
 import { useUsers } from "./hooks/useUsers";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
+// Constantes
+import { modalTitles } from "./constants/modalTitles";
+// Componentes
+import UsersKpis from "./components/ui/UsersKpis";
+import UsersTable from "./components/ui/UsersTable";
+import Layout from "../../globals/components/Layout/Layout";
+import SearchBar from "../../globals/components/ui/SearchBar";
+import TopSection from "../../globals/components/ui/TopSection";
+import EnableUserModal from "./components/modals/EnableUserModal";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
 import AddUserModal from "./components/modals/AddUserModal";
@@ -11,18 +20,20 @@ import FilterUserModal from "./components/modals/FilterUserModal";
 import DisableUserModal from "./components/modals/DisableUserModal";
 import EditUserInfoModal from "./components/modals/EditUserInfoModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
-// Componentes
-import UsersList from "./components/ui/UsersList";
-import MoreInfoUser from "./components/modals/MoreInfoUser";
-import Layout from "../../globals/components/Layout/Layout";
-import SearchBar from "../../globals/components/ui/SearchBar";
-import TopSection from "../../globals/components/ui/TopSection";
-import EnableUserModal from "./components/modals/EnableUserModal";
 
 export default function UsersPage() {
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
-  const { users, loading, error, filters, setFilters } = useUsers();
+  const {
+    users,
+    loading,
+    error,
+    filters,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    setFilters,
+  } = useUsers();
   const [search, setSearch] = useState("");
   const filteredUsers = useSearch(users, search);
 
@@ -42,35 +53,24 @@ export default function UsersPage() {
         <SearchBar value={search} onChange={setSearch} />
       </TopSection>
 
-      {/* Contenedor de los usuarios */}
-      <UsersList
+      <UsersKpis />
+
+      {/* Tabla de usuarios */}
+      <UsersTable
         users={filteredUsers}
         loading={loading}
         error={error}
         search={search}
         openModal={openModal}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+        fetchNextPage={fetchNextPage}
       />
 
       {/* Modales */}
       {modalType && (
         <Modal
-          title={
-            modalType === "user"
-              ? "Configuración"
-              : modalType === "filter"
-                ? "Filtrar"
-                : modalType === "add"
-                  ? "Agregar usuario"
-                  : modalType === "edit"
-                    ? "Editar usuario"
-                    : modalType === "info"
-                      ? ""
-                      : modalType === "disable"
-                        ? "Deshabilitar usuario"
-                        : modalType === "enable"
-                          ? "Habilitar usuario"
-                          : "Ayuda"
-          }
+          title={modalTitles[modalType]}
           location={
             modalType === "edit" || modalType === "info" || modalType === "add"
               ? "center"
@@ -95,10 +95,6 @@ export default function UsersPage() {
 
           {/* Modal para agregar un usuario */}
           {modalType === "add" && <AddUserModal onClose={() => closeModal()} />}
-
-          {modalType === "info" && (
-            <MoreInfoUser user={modalData} onClose={() => closeModal()} />
-          )}
 
           {/* Modal para editar el usuario */}
           {modalType === "edit" && (
