@@ -74,7 +74,9 @@ export default function CategoriesPage() {
           onClose={() => closeModal()}
           triggerRef={triggerRef}
           growDirection="center"
-          location={modalType === "add" ? "center" : "anchored"}
+          location={
+            modalType === "add" || modalType === "info" ? "center" : "anchored"
+          }
         >
           {modalType === "user" && <ProfileModal />}
 
