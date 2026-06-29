@@ -46,7 +46,7 @@ export default function ActionButtons({
           hover:bg-[#969292a8]`}
         >
           <Icon
-            name={`${visibilityIcon ? "visibility" : "visibility_off"}`}
+            name={`${visibilityIcon ? "disabled_visible" : "visibility_off"}`}
             className="dark:brightness-0"
           />
         </button>
