@@ -16,7 +16,10 @@ export default function AddCategoryModal({ onClose }) {
     useCreateCategory();
 
   return (
-    <section className="w-full flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="w-full flex flex-col items-center gap-2"
+    >
       <FormField
         onChange={handleChange}
         value={form.name}
@@ -73,6 +76,6 @@ export default function AddCategoryModal({ onClose }) {
           onClose={() => openInnerModal(null)}
         />
       )}
-    </section>
+    </form>
   );
 }

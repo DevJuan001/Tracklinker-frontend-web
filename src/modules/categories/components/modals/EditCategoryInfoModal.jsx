@@ -8,6 +8,7 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import TextArea from "../../../../globals/components/ui/TextArea";
 
 export default function EditCategoryInfoModal({ category, onClose }) {
   const { innerType, innerTrigger, openInnerModal } = useInnerModal();
@@ -15,7 +16,10 @@ export default function EditCategoryInfoModal({ category, onClose }) {
     useEditCategory(category);
 
   return (
-    <section className="w-full flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="w-full flex flex-col items-center gap-2"
+    >
       <FormField
         id={"name"}
         name={"name"}
@@ -24,7 +28,8 @@ export default function EditCategoryInfoModal({ category, onClose }) {
         labelText={"Nombre de la Categoría"}
         className={fieldError("name")}
       />
-      <FormField
+
+      <TextArea
         id={"description"}
         name={"description"}
         value={form.description}
@@ -68,6 +73,6 @@ export default function EditCategoryInfoModal({ category, onClose }) {
           onClose={() => openInnerModal(null)}
         />
       )}
-    </section>
+    </form>
   );
 }
