@@ -815,11 +815,14 @@ export const useFlipModal = ({
           // y el phantom quedó en un valor intermedio.
           const targetFontSize = window.getComputedStyle(pair.source).fontSize;
           phantom.style.fontSize = targetFontSize;
-          // Revelamos el shared element del trigger instantáneamente
-          pair.source.style.removeProperty("opacity");
-          gsap.set(pair.source, { opacity: 1, clearProps: "opacity" });
-          // Retiramos el phantom en el mismo frame
-          phantom.remove();
+          // Pequeño delay antes del swap para que el trigger no salga
+          // demasiado rápido — el phantom se queda visible un instante
+          // más y luego se intercambia por el shared element del trigger.
+          gsap.delayedCall(0.18, () => {
+            pair.source.style.removeProperty("opacity");
+            gsap.set(pair.source, { opacity: 1, clearProps: "opacity" });
+            phantom.remove();
+          });
         }
         onClose();
       }
