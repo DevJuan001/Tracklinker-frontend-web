@@ -7,6 +7,7 @@ export default function Icon({
   size = 24,
   color,
   className,
+  ...props
 }) {
   return (
     <span
@@ -16,6 +17,7 @@ export default function Icon({
         fontSize: size,
         color,
       }}
+      {...props}
     >
       {name}
     </span>

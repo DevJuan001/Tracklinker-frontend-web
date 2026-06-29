@@ -12,11 +12,14 @@ export default function DisableCategoryModal({ category, onClose }) {
   const { loading, error, handleDisable } = useDisableCategory(category.id);
 
   return (
-    <section className="flex flex-col justify-center items-center dark:text-white">
-      <p>
+    <section
+      className="flex flex-col justify-center items-center 
+      dark:text-white"
+    >
+      <span>
         ¿Seguro que deseas deshabilitar la categoría
         <span className="font-medium"> {category.name}</span>?
-      </p>
+      </span>
 
       {/* Botones */}
       <ConfirmCancelButtons

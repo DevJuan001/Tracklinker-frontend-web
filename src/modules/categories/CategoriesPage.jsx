@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useCategories } from "./hooks/useCategories";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
+// Constantes
+import { modalTitles } from "./constants/modalTitles";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import CategoriesList from "./components/ui/CategoriesList";
@@ -20,7 +22,16 @@ import EditCategoryInfoModal from "./components/modals/EditCategoryInfoModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function CategoriesPage() {
-  const { categories, loading, error, filters, setFilters } = useCategories();
+  const {
+    categories,
+    loading,
+    error,
+    filters,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    setFilters,
+  } = useCategories();
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
   const [search, setSearch] = useState("");
@@ -49,38 +60,22 @@ export default function CategoriesPage() {
         search={search}
         loading={loading}
         error={error}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+        isFetchingNextPage={isFetchingNextPage}
       />
 
       {/* Modales */}
       {modalType && (
         <Modal
-          title={
-            modalType === "filter"
-              ? "Filtrar"
-              : modalType === "add"
-                ? "Agregar Categoria"
-                : modalType === "user"
-                  ? "Configuración"
-                  : modalType === "help"
-                    ? "Ayuda"
-                    : modalType === "info"
-                      ? ""
-                      : modalType === "edit"
-                        ? "Editar Categoria"
-                        : modalType === "disable"
-                          ? "Deshabilitar Categoria"
-                          : modalType === "enable"
-                            ? "Habilitar Categoria"
-                            : "Ayuda"
-          }
+          title={modalTitles[modalType]}
           type={modalType}
           isOpen={isOpen}
           onClose={() => closeModal()}
           triggerRef={triggerRef}
+          growDirection="center"
           location={
-            modalType === "info" || modalType === "add" || modalType === "edit"
-              ? "center"
-              : "anchored"
+            modalType === "add" || modalType === "info" ? "center" : "anchored"
           }
         >
           {modalType === "user" && <ProfileModal />}

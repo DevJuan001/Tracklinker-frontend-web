@@ -1,14 +1,25 @@
+// Hooks
+import { useInfiniteScroll } from "../../../../globals/hooks/useInfiniteScroll";
+// Componentes
 import CategoryItem from "./CategoryItem";
-import CreateButton from "../../../../globals/components/ui/CreateButton";
 import Icon from "../../../../globals/components/ui/Icon";
 import Skeleton from "../../../../globals/components/ui/Skeleton";
+import CreateButton from "../../../../globals/components/ui/CreateButton";
 
 export default function CategoriesList({
   categories,
   loading,
   search,
   openModal,
+  hasNextPage,
+  isFetchingNextPage,
+  fetchNextPage,
 }) {
+  const { getItemRef } = useInfiniteScroll({
+    items: categories,
+    hasNextPage,
+    fetchNextPage,
+  });
   const noCategories = categories.length === 0 && !loading;
   const isFirstLoad = categories.length === 0 && loading;
 
@@ -28,16 +39,21 @@ export default function CategoriesList({
               >
                 <Icon name={"search_off"} size={60} />
               </div>
+
               <span className="text-2xl font-medium text-center">
                 No hay resultados para <strong>"{search}"</strong>.
               </span>
+
               <span className="text-lg text-center">
-                Intenta con otra nombre o agrega una nueva.
+                Intenta con otra nombre o crea una nueva.
               </span>
+
               <ul className="text-center text-sm mt-1">
                 <li>• Revisa que el nombre esté bien escrito</li>
+
                 <li>• Busca por nombre o fecha de creación</li>
-                <li>• Si no existe, agrégala como nueva categoría</li>
+
+                <li>• Si no existe, crea como nueva categoría</li>
               </ul>
             </div>
           ) : (
@@ -51,18 +67,23 @@ export default function CategoriesList({
               >
                 <Icon name={"folder_copy"} size={60} fill />
               </div>
+
               <div className="flex flex-col items-center">
                 <span className="font-medium text-2xl">
                   Aún no hay categorías
                 </span>
+
                 <span className="text-lg text-center">
-                  Agrega una nueva categoría y empieza a organizar tus
+                  Crea una nueva categoría y empieza a organizar tus
                   productos.
                 </span>
               </div>
+
               <ul className="text-center text-sm mt-1">
                 <li>• Asigna categorías a tus productos</li>
+
                 <li>• Gestiona el inventario de manera eficiente</li>
+
                 <li>• Crea categorías con un solo click</li>
               </ul>
             </div>
@@ -87,8 +108,9 @@ export default function CategoriesList({
         />
       ) : (
         <ul className="flex flex-col gap-1">
-          {categories.map((category) => (
+          {categories?.map((category, index) => (
             <CategoryItem
+              ref={getItemRef(index)}
               key={category.id}
               category={category}
               openModal={openModal}
@@ -102,6 +124,19 @@ export default function CategoriesList({
               }}
             />
           ))}
+
+          {isFetchingNextPage && (
+            <Skeleton
+              height="80px"
+              count={2}
+              backgroundColor={"#F3EEF5"}
+              darkModeBackgroundColor={"#101012"}
+              shineColor="#C5C1C7"
+              darkModeShineColor="#1e1e1e"
+              borderRadius={12}
+              marginBottom={2}
+            />
+          )}
         </ul>
       )}
     </section>

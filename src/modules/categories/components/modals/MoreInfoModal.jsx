@@ -20,10 +20,12 @@ export default function MoreInfoCategoryModal({ category, onClose }) {
             <div className="min-w-12 min-h-12 flex items-center justify-center bg-[#49454f14] rounded-full">
               <Icon name={"folder_open"} fill size={30} />
             </div>
+
             <span className="text-3xl leading-none font-semibold">
               {category.name}
             </span>
           </div>
+
           <div
             className={`flex gap-1.5 px-2 py-1.5 rounded-full border
             ${categoryStatusConfig[category.status]?.styles}`}
@@ -33,6 +35,7 @@ export default function MoreInfoCategoryModal({ category, onClose }) {
               fill={categoryStatusConfig[category.status]?.fill}
               size={14}
             />
+
             <span className="text-xs font-medium">
               {categoryStatusConfig[category.status]?.text}
             </span>
@@ -43,6 +46,7 @@ export default function MoreInfoCategoryModal({ category, onClose }) {
           <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
             Descripción
           </span>
+
           <span className="flex items-center font-medium">
             {category.description}
           </span>
@@ -52,6 +56,7 @@ export default function MoreInfoCategoryModal({ category, onClose }) {
           <span className="text-sm text-[#7e777ed0] dark:text-[#b4aab4]">
             Fecha de creación
           </span>
+
           <span className="flex items-center font-medium">{category.date}</span>
         </div>
       </div>
