@@ -3,6 +3,8 @@ import Icon from "../ui/Icon";
 export default function ModalHighSection({
   deleteButtonOnClick,
   deleteButtonIcon = "delete",
+  deleteButtonHoverBackground = "hover:bg-[#ff5b5b41]",
+  deleteIconHoverColor = "group-hover:text-red-700",
   closeButtonOnClick,
   icon,
   iconClassName = "dark:text-[#E4E2E5]",
@@ -18,14 +20,14 @@ export default function ModalHighSection({
         <button
           type="button"
           onClick={deleteButtonOnClick}
-          className="self-start flex items-center p-2.5 rounded-3xl bg-[#fbf9fc] border border-[#EBE6E7] transition-colors duration-200 group
-          hover:bg-[#ff5b5b41]
-          dark:bg-black dark:text-[#7E8088] dark:border-[#202022]"
+          className={`self-start flex items-center p-2.5 rounded-3xl bg-[#fbf9fc] border border-[#EBE6E7] transition-colors duration-200 group
+          ${deleteButtonHoverBackground}
+          dark:bg-black dark:text-[#7E8088] dark:border-[#202022]`}
         >
           <Icon
             name={deleteButtonIcon}
             size={20}
-            className={"group-hover:text-red-700"}
+            className={deleteIconHoverColor}
           />
         </button>
       )}
@@ -39,22 +41,24 @@ export default function ModalHighSection({
           data-shared-id="modal-icon"
         />
 
-        <span
-          className="max-w-52 font-semibold text-2xl text-wrap text-center overflow-hidden
-          dark:text-[#E4E2E5]"
-          data-shared-id="modal-title"
-        >
-          {text}
-        </span>
-
-        {description && (
+        <div className="flex flex-col items-center">
           <span
-            className="max-w-52 text-wrap text-[#75777E] font-dmsans
-            dark:text-[#7E8088]"
+            className="max-w-52 font-semibold text-2xl text-wrap text-center overflow-hidden
+            dark:text-[#E4E2E5]"
+            data-shared-id="modal-title"
           >
-            {description}
+            {text}
           </span>
-        )}
+
+          {description && (
+            <span
+              className="max-w-52 max-h-16 text-wrap text-center leading-tight text-[#75777E] text-ellipsis font-dmsans overflow-hidden
+              dark:text-[#7E8088]"
+            >
+              {description}
+            </span>
+          )}
+        </div>
       </div>
 
       <button
