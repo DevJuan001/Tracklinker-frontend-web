@@ -8,7 +8,8 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function DisableProductModal({ product, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { handleSubmit, loading, error } = useUpdateProductStatus({
     product_id: product.product_id,
     product_serial: product.product_serial,
@@ -31,7 +32,7 @@ export default function DisableProductModal({ product, onClose }) {
         confirmButtonOnClick={(e) => handleSubmit(e, openInnerModal, onClose)}
         cancelButtonOnClick={onClose}
       />
-      
+
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
@@ -41,7 +42,7 @@ export default function DisableProductModal({ product, onClose }) {
           confirmButtonText={"Volver a intentarlo"}
           errorTitle={"¡No se pudo deshabilitar el producto!"}
           errorText={error}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </section>

@@ -4,7 +4,7 @@ import { useCatalog } from "./hooks/useCatalog";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 // Constantes
-import { modalTitles } from "./constants/modalTitles";
+import { modals } from "./constants/modals";
 // Componentes
 import ProductsKpis from "./components/ui/ProductsKpis";
 import ProductsTable from "./components/ui/ProductsTable";
@@ -75,17 +75,13 @@ export default function ProductsPage() {
       {/* Modales */}
       {isOpen && (
         <Modal
-          title={modalTitles[modalType]}
+          title={modals[modalType]?.title}
           type={modalType}
           isOpen={isOpen}
           triggerRef={triggerRef}
-          location={
-            modalType === "filter" || modalType === "editStatus"
-              ? "anchored"
-              : "center"
-          }
+          location={modals[modalType]?.location}
           growDirection={"bottom"}
-          onClose={() => closeModal()}
+          onClose={closeModal}
         >
           {modalType === "user" && <ProfileModal />}
 
@@ -93,7 +89,7 @@ export default function ProductsPage() {
             <ProductsFilterModal filters={filters} setFilters={setFilters} />
           )}
 
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
 
           {modalType === "add" && (
             <AddProductModal
@@ -108,10 +104,7 @@ export default function ProductsPage() {
           )}
 
           {modalType === "editStatus" && (
-            <EditProductStatusModal
-              product={modalData}
-              onClose={() => closeModal()}
-            />
+            <EditProductStatusModal product={modalData} onClose={closeModal} />
           )}
         </Modal>
       )}
