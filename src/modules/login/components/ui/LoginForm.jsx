@@ -20,64 +20,62 @@ export default function LoginForm({ openModal }) {
   } = useLogin(openModal);
 
   return (
-    <section className="w-full h-full flex items-center justify-center">
-      {/* Container del formulario */}
-      <div className="w-full flex flex-col items-center px-4 py-8">
-        {/* Icono de Tracklinker */}
-        <img
-          src={loginIcons.tracklinkerIcon}
-          alt=""
-          className="w-[150px] h-[150px] dark:invert dark:brightness-0"
-        />
-        
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="w-[360px] flex flex-col gap-2 
+    <div className="w-full flex flex-col items-center justify-center px-4 py-8">
+      {/* Icono de Tracklinker */}
+      <img
+        src={loginIcons.tracklinkerIcon}
+        alt=""
+        className="w-[150px] h-[150px] dark:invert dark:brightness-0"
+      />
+
+      <form
+        action={(e) => handleSubmit(e)}
+        onSubmit={(e) => e.preventDefault()}
+        className="w-[360px] flex flex-col gap-2 
           sm:w-[440px]
           dark:text-white"
+      >
+        {/* Campo del correo */}
+        <FormField
+          id={"email"}
+          name={"email"}
+          labelText={"Correo"}
+          value={form.email}
+          autoComplete="email"
+          placeholder={"Correo"}
+          onChange={handleChange}
+          className={fieldError("email")}
+        />
+
+        {/* Campo de la contraseña */}
+        <FormField
+          id={"password"}
+          name={"password"}
+          labelText={"Contraseña"}
+          type={showPassword ? "text" : "password"}
+          value={form.password}
+          onChange={handleChange}
+          placeholder={"Contraseña"}
+          className={fieldError("password")}
         >
-          {/* Campo del correo */}
-          <FormField
-            id={"email"}
-            name={"email"}
-            labelText={"Correo"}
-            value={form.email}
-            autoComplete="email"
-            placeholder={"Correo"}
-            onChange={handleChange}
-            className={fieldError("email")}
-          />
-
-          {/* Campo de la contraseña */}
-          <FormField
-            id={"password"}
-            name={"password"}
-            labelText={"Contraseña"}
-            type={showPassword ? "text" : "password"}
-            value={form.password}
-            onChange={handleChange}
-            placeholder={"Contraseña"}
-            className={fieldError("password")}
+          <button
+            className="flex items-center pr-1"
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
           >
-            <button
-              className="flex items-center pr-1"
-              type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              <Icon name={showPassword ? "visibility_off" : "visibility"} />
-            </button>
-          </FormField>
+            <Icon name={showPassword ? "visibility_off" : "visibility"} />
+          </button>
+        </FormField>
 
-          {/* Botones de Ingresar y recuperar contraseña */}
-          <FormButtons
-            getIntoButtonText={loading ? <Loader /> : "Ingresar"}
-            getIntoButtonOnclick={(e) => handleSubmit(e)}
-            recoverButtonOnclick={(e) =>
-              openModal(null, "rememberPassword", null, e.currentTarget)
-            }
-          />
-        </form>
-      </div>
-    </section>
+        {/* Botones de Ingresar y recuperar contraseña */}
+        <FormButtons
+          getIntoButtonText={loading ? <Loader /> : "Ingresar"}
+          getIntoButtonOnclick={(e) => handleSubmit(e)}
+          recoverButtonOnclick={(e) =>
+            openModal(null, "rememberPassword", null, e.currentTarget)
+          }
+        />
+      </form>
+    </div>
   );
 }

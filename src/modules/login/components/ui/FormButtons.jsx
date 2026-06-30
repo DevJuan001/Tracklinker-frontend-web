@@ -4,16 +4,17 @@ export default function FormButtons({
   recoverButtonOnclick,
 }) {
   return (
-    <section className="flex flex-col pt-5 gap-2">
+    <div className="flex flex-col pt-5 gap-2">
       <button
         id="login-button"
-        type="button"
+        type="submit"
         onClick={getIntoButtonOnclick}
         className="h-16 flex items-center justify-center py-3 text-sm text-white bg-blue-700 rounded-2xl transition duration-300
         hover:bg-blue-600"
       >
         {getIntoButtonText}
       </button>
+
       <button
         id="recover-password-button"
         type="button"
@@ -24,6 +25,6 @@ export default function FormButtons({
       >
         Olvidaste tu contraseña?
       </button>
-    </section>
+    </div>
   );
 }
