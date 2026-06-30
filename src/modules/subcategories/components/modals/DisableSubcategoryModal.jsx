@@ -8,17 +8,18 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function DisableSubcategoryModal({ subcategory, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { loading, error, handleSubmit } = useDisableSubcategory(
     subcategory.subcategory_id,
   );
 
   return (
     <section className="flex flex-col justify-center items-center dark:text-white">
-      <p>
+      <span>
         ¿Seguro que deseas Deshabilitar la subcategoria
         <span className="font-medium"> {subcategory.subcategory_name}</span>?
-      </p>
+      </span>
 
       {/* Botones */}
       <ConfirmCancelButtons
@@ -39,7 +40,7 @@ export default function DisableSubcategoryModal({ subcategory, onClose }) {
           errorTitle="¡No se pudo deshabilitar la categoría!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </section>

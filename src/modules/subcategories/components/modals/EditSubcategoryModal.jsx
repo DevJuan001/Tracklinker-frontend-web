@@ -1,6 +1,6 @@
 // Hooks
-import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useEditSubcategory } from "../../hooks/useEditSubcategory";
+import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
@@ -12,13 +12,17 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { categories } = useActiveCategories();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditSubcategory(subcategory);
 
   return (
-    <section className="w-full flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="w-full flex flex-col items-center gap-2"
+    >
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
         searchable
@@ -33,6 +37,7 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
         }))}
         className={fieldError("category_id")}
       />
+
       <FormField
         id={"name"}
         name={"subcategory_name"}
@@ -63,7 +68,7 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -78,9 +83,9 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           errorTitle="¡No se pudo editar la subcategoria!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }

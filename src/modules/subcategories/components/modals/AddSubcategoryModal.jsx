@@ -12,13 +12,17 @@ import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 
 export default function AddSubcategoryModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { categories } = useActiveCategories();
   const { form, loading, error, fieldError, handleSubmit, handleChange } =
     useCreateSubcategory();
 
   return (
-    <section className="w-full flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="w-full flex flex-col items-center gap-2"
+    >
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
         searchable
@@ -64,7 +68,7 @@ export default function AddSubcategoryModal({ onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -76,9 +80,9 @@ export default function AddSubcategoryModal({ onClose }) {
           errorTitle="¡No se pudo crear la subcategoria!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }
