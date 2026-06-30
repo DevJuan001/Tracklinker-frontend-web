@@ -2,14 +2,16 @@
 import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 import { useCreateSubcategory } from "../../hooks/useCreateSubcategory";
-// Modales
-import ErrorModal from "../../../../globals/components/modals/ErrorModal";
-import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
 import FormField from "../../../../globals/components/ui/FormField";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
+// Modales
+import ErrorModal from "../../../../globals/components/modals/ErrorModal";
+import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
+import AddCategoryModal from "../../../categories/components/modals/AddCategoryModal";
 
 export default function AddSubcategoryModal({ onClose }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -26,6 +28,8 @@ export default function AddSubcategoryModal({ onClose }) {
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
         searchable
+        seeAddButton
+        addIconFunction={(e) => openInnerModal("addCategory", e)}
         id={"categories-menu"}
         value={form.category_id}
         name={"category_id"}
@@ -57,6 +61,17 @@ export default function AddSubcategoryModal({ onClose }) {
         cancelButtonOnClick={onClose}
       />
 
+      {innerType === "addCategory" && (
+        <AddInnerModal
+          isOpen={true}
+          onClose={closeInnerModal}
+          title={"Crear categoría"}
+          triggerRef={innerTrigger}
+        >
+          <AddCategoryModal onClose={closeInnerModal} />
+        </AddInnerModal>
+      )}
+
       {/* Modales Internas */}
       {innerType === "success" && (
         <SuccessModal
@@ -73,6 +88,7 @@ export default function AddSubcategoryModal({ onClose }) {
           }}
         />
       )}
+
       {innerType === "error" && (
         <ErrorModal
           triggerRef={innerTrigger}
