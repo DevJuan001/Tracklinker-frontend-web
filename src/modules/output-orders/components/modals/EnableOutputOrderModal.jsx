@@ -18,13 +18,13 @@ export default function EnableOutputOrdersModal({
 
   return (
     <section className="flex flex-col justify-center items-center dark:text-white">
-      <p>
+      <span>
         ¿Estás seguro de que deseas habilitar la orden de salida N°{" "}
         <span className="font-medium">
           {selectedOutputOrder.output_order_id}
         </span>
         ?
-      </p>
+      </span>
 
       {/* Botones */}
       <ConfirmCancelButtons

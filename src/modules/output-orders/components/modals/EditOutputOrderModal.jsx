@@ -11,6 +11,7 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import CreateClientModal from "../../../../globals/components/modals/CreateClientModal";
 
 export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
   const { clients } = useActiveClients();
@@ -32,6 +33,7 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
         spanText={"Cliente"}
         value={form.client_id}
         onChange={handleChange}
+        addIconFunction={(e) => openInnerModal("createClient", e)}
         options={clients.map((client) => ({
           value: client.id,
           label:
@@ -75,6 +77,14 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
         cancelButtonOnClick={onClose}
       />
 
+      {innerType === "createClient" && (
+        <CreateClientModal
+          triggerRef={innerTrigger}
+          isOpen={true}
+          onClose={closeInnerModal}
+        />
+      )}
+
       {innerType === "success" && (
         <SuccessModal
           isOpen={true}
@@ -96,7 +106,7 @@ export default function EditOutputOrderModal({ selectedOutputOrder, onClose }) {
           errorTitle="No se pudo actualizar la orden de salida"
           errorText={error}
           confirmButtonText="Volver"
-          onClose={() => closeInnerModal()}
+          onClose={closeInnerModal}
         />
       )}
     </form>

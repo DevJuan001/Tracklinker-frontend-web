@@ -41,7 +41,7 @@ export default function AddOutputOrderModal({ serial, onClose }) {
             `${client.name} ${client.first_surname ?? ""} ${client.second_surname ?? ""}`.trim(),
         }))}
         className={fieldError("client_id")}
-        addIconFunction={(e) => openInnerModal("createUser", e)}
+        addIconFunction={(e) => openInnerModal("createClient", e)}
       />
 
       <DateField
@@ -70,6 +70,14 @@ export default function AddOutputOrderModal({ serial, onClose }) {
         cancelButtonOnClick={onClose}
       />
 
+      {innerType === "createClient" && (
+        <CreateClientModal
+          triggerRef={innerTrigger}
+          isOpen={true}
+          onClose={closeInnerModal}
+        />
+      )}
+
       {innerType === "success" && (
         <SuccessModal
           triggerRef={innerTrigger}
@@ -91,15 +99,7 @@ export default function AddOutputOrderModal({ serial, onClose }) {
           errorTitle="Error al registrar la orden de salida"
           errorText={error}
           confirmButtonText="Volver"
-          onClose={() => closeInnerModal()}
-        />
-      )}
-
-      {innerType === "createUser" && (
-        <CreateClientModal
-          triggerRef={innerTrigger}
-          isOpen={true}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>

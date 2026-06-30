@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 import { useOutputOrders } from "./hooks/useOutputOrders";
+// Constantes
+import { modals } from "./constants/modals";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import SearchBar from "../../globals/components/ui/SearchBar";
@@ -56,31 +58,9 @@ export default function OutputOrdersPage() {
           isOpen={isOpen}
           onClose={closeModal}
           type={modalType}
-          title={
-            modalType === "user"
-              ? "Configuración"
-              : modalType === "filter"
-                ? "Filtrar"
-                : modalType === "add"
-                  ? "Crear Orden"
-                  : modalType === "edit"
-                    ? "Editar Orden"
-                    : modalType === "disable"
-                      ? "Deshabilitar orden"
-                      : modalType === "enable"
-                        ? "Habilitar orden"
-                        : modalType === "moreInfo"
-                          ? "Más Información"
-                          : "Ayuda"
-          }
+          title={modals[modalType]?.title}
           triggerRef={triggerRef}
-          location={
-            modalType === "add" ||
-            modalType === "moreInfo" ||
-            modalType === "edit"
-              ? "center"
-              : "anchored"
-          }
+          location={modals[modalType]?.location}
         >
           {modalType === "user" && <ProfileModal />}
 
@@ -92,7 +72,7 @@ export default function OutputOrdersPage() {
             />
           )}
 
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
 
           {modalType === "add" && <AddOutputOrderModal onClose={closeModal} />}
 
