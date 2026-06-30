@@ -12,7 +12,8 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function AddSupplierModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useCreateSupplier();
   const { cities } = useCities();
@@ -100,7 +101,7 @@ export default function AddSupplierModal({ onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -115,7 +116,7 @@ export default function AddSupplierModal({ onClose }) {
           errorTitle="¡No se puedo crear el proveedor!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>
