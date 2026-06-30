@@ -8,7 +8,8 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function DisableSupplierModal({ supplier, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { loading, error, handleSubmit } = useDisableSupplier(supplier.id);
 
   return (
@@ -34,7 +35,7 @@ export default function DisableSupplierModal({ supplier, onClose }) {
           errorTitle="¡No se pudo deshabilitar el proveedor!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </div>

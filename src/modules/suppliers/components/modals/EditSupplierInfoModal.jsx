@@ -12,7 +12,8 @@ import SelectMenu from "../../../../globals/components/modals/SelectMenu";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditSupplierInfoModal({ supplier, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditSupplier(supplier);
   const { cities } = useCities();
@@ -105,7 +106,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -118,7 +119,7 @@ export default function EditSupplierInfoModal({ supplier, onClose }) {
           errorTitle="¡No se pudo editar el proveedor!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </form>

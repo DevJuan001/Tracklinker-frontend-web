@@ -8,7 +8,8 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function EnableSupplierModal({ supplier, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { loading, error, handleSubmit } = useEnableSupplier(supplier.id);
 
   return (
@@ -33,7 +34,7 @@ export default function EnableSupplierModal({ supplier, onClose }) {
           errorTitle="¡No se pudo habilitar el proveedor!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </div>
