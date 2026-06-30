@@ -4,7 +4,7 @@ import { useSuppliers } from "./hooks/useSuppliers";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 // Constantes
-import { modalTitles } from "./constants/modalTitles";
+import { modals } from "./constants/modals";
 // Componentes
 import SupliersKpis from "./components/ui/SuppliersKpis";
 import SuppliersTable from "./components/ui/SuppliersTable";
@@ -59,16 +59,12 @@ export default function SuppliersPage() {
       {/* Modales */}
       {modalType && (
         <Modal
-          title={modalTitles[modalType]}
+          title={modals[modalType]?.title}
           type={modalType}
           isOpen={isOpen}
-          onClose={() => closeModal()}
+          onClose={closeModal}
           triggerRef={triggerRef}
-          location={
-            modalType === "info" || modalType === "add" || modalType === "edit"
-              ? "center"
-              : "anchored"
-          }
+          location={modals[modalType]?.location}
         >
           {modalType === "user" && <ProfileModal />}
 
@@ -76,38 +72,27 @@ export default function SuppliersPage() {
             <FilterSuppliersModal
               filters={filters}
               setFilters={setFilters}
-              onClose={() => closeModal()}
+              onClose={closeModal}
             />
           )}
 
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
 
-          {modalType === "add" && (
-            <AddSupplierModal onClose={() => closeModal()} />
-          )}
+          {modalType === "add" && <AddSupplierModal onClose={closeModal} />}
 
           {/* Modal para editar el Proveedor */}
           {modalType === "edit" && (
-            <EditSupplierInfoModal
-              supplier={modalData}
-              onClose={() => closeModal()}
-            />
+            <EditSupplierInfoModal supplier={modalData} onClose={closeModal} />
           )}
 
           {/* Modal para eliminar el Proveedor */}
           {modalType === "disable" && (
-            <DisableSupplierModal
-              supplier={modalData}
-              onClose={() => closeModal()}
-            />
+            <DisableSupplierModal supplier={modalData} onClose={closeModal} />
           )}
 
           {/* Modal para eliminar el Proveedor */}
           {modalType === "enable" && (
-            <EnableSupplierModal
-              supplier={modalData}
-              onClose={() => closeModal()}
-            />
+            <EnableSupplierModal supplier={modalData} onClose={closeModal} />
           )}
         </Modal>
       )}
