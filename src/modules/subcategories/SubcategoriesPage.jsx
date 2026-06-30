@@ -4,7 +4,7 @@ import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 import { useSubcategories } from "./hooks/useSubcategories";
 // Constantes
-import { modalTitles } from "./constants/modalTitles";
+import { modals } from "./constants/modals";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import SearchBar from "../../globals/components/ui/SearchBar";
@@ -68,13 +68,11 @@ export default function SubcategoriesPage() {
       {/* Modales */}
       {modalType && (
         <Modal
-          title={modalTitles[modalType]}
+          title={modals[modalType]?.title}
           type={modalType}
           isOpen={isOpen}
           triggerRef={triggerRef}
-          location={
-            modalType === "info" || modalType === "add" ? "center" : "anchored"
-          }
+          location={modals[modalType]?.location}
           onClose={closeModal}
         >
           {modalType === "user" && <ProfileModal />}
