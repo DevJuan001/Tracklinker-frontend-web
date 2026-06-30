@@ -1,6 +1,8 @@
 // Hooks
 import { useModal } from "../../globals/hooks/useModal";
 import { useState } from "react";
+// Constantes
+import { modals } from "./constants/modals";
 // Componentes
 import Toast from "../../globals/components/ui/Toast";
 import Layout from "../../globals/components/Layout/Layout";
@@ -36,25 +38,17 @@ export default function DashBoardPage() {
       {/* Modales */}
       {modalType && (
         <Modal
-          title={
-            modalType === "filter"
-              ? "Filtrar"
-              : modalType === "user"
-                ? "Configuración"
-                : modalType === "help"
-                  ? "Ayuda"
-                  : ""
-          }
+          title={modals[modalType]?.title}
           triggerRef={triggerRef}
           type={modalType}
           isOpen={isOpen}
-          onClose={() => closeModal()}
+          onClose={closeModal}
         >
           {modalType === "user" && <ProfileModal />}
-          {modalType === "filter" && (
-            <FilterModal onClose={() => closeModal()} />
-          )}
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
+          {modalType === "filter" && <FilterModal onClose={closeModal} />}
+
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
         </Modal>
       )}
 
