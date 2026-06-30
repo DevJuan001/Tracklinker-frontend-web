@@ -1,6 +1,8 @@
 // Hooks
 import { useCurrentUser } from "../../globals/hooks/useCurrentUser";
 import { useModal } from "../../globals/hooks/useModal";
+// Constantes
+import { modals } from "./constants/modals";
 // Components
 import Layout from "../../globals/components/Layout/Layout";
 import SectionsContainer from "./components/ui/SectionsContainer";
@@ -13,7 +15,7 @@ export default function HomePage() {
   const { modalType, isOpen, triggerRef, openModal, closeModal } = useModal();
   const { user } = useCurrentUser();
 
-  return (  
+  return (
     <Layout
       avatarOnClick={(e) => openModal(null, "user", null, e.currentTarget)}
       helpOnClick={(e) => {
@@ -29,20 +31,21 @@ export default function HomePage() {
       >
         Bienvenido, {user.name}
       </h1>
-      
+
       {/* Contenedor de las cards de los modúlos */}
       <SectionsContainer />
 
       {modalType && (
         <Modal
           triggerRef={triggerRef}
-          title={modalType === "user" ? "Configuración" : "Ayuda"}
+          title={modals[modalType]?.title}
           type={modalType}
           isOpen={isOpen}
-          onClose={() => closeModal()}
+          onClose={closeModal}
         >
           {modalType === "user" && <ProfileModal />}
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
         </Modal>
       )}
     </Layout>
