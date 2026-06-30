@@ -4,7 +4,7 @@ import { useCategories } from "./hooks/useCategories";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 // Constantes
-import { modalTitles } from "./constants/modalTitles";
+import { modals } from "./constants/modals";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
 import CategoriesList from "./components/ui/CategoriesList";
@@ -68,15 +68,13 @@ export default function CategoriesPage() {
       {/* Modales */}
       {modalType && (
         <Modal
-          title={modalTitles[modalType]}
+          title={modals[modalType]?.title}
           type={modalType}
           isOpen={isOpen}
           onClose={closeModal}
           triggerRef={triggerRef}
           growDirection="center"
-          location={
-            modalType === "add" || modalType === "info" ? "center" : "anchored"
-          }
+          location={modals[modalType]?.location}
         >
           {modalType === "user" && <ProfileModal />}
 
