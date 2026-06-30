@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import Icon from "./Icon";
 
 export default function Toast({
   isOpen,
+  onClose,
   icon,
   iconLightColor = "white",
   iconDarkColor = "black",
@@ -11,9 +13,13 @@ export default function Toast({
   textLightColor = "white",
   textDarkColor = "black",
   description,
-  duration = 100,
+  duration = 3000,
 }) {
-  setTimeout(() => isOpen === false, duration);
+  useEffect(() => {
+    if (!isOpen) return;
+    const id = setTimeout(onClose, duration);
+    return () => clearTimeout(id);
+  }, [isOpen, duration, onClose]);
 
   return (
     isOpen && (
