@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useModal } from "../../globals/hooks/useModal";
 // Constantes
+import { modals } from "./constants/modals";
 import { sections } from "./constants/reportSections";
 // Componentes
 import Layout from "../../globals/components/Layout/Layout";
@@ -24,7 +25,8 @@ import ProfileModal from "../../globals/components/modals/profileModal/ProfileMo
 export default function ReportsPage() {
   const [topSectionVisiblity, setTopSectionVisiblity] = useState(true);
   const [report, setReport] = useState("home");
-  const { modalType, modalData, isOpen, triggerRef, openModal, closeModal } = useModal();
+  const { modalType, modalData, isOpen, triggerRef, openModal, closeModal } =
+    useModal();
 
   return (
     <Layout
@@ -49,21 +51,33 @@ export default function ReportsPage() {
       )}
 
       {/* Contenido principal dinamico */}
-      {report === "users" && <UsersReport setReport={setReport} openModal={openModal} />}
+      {report === "users" && (
+        <UsersReport setReport={setReport} openModal={openModal} />
+      )}
 
-      {report === "products" && <ProductsReport setReport={setReport} openModal={openModal} />}
+      {report === "products" && (
+        <ProductsReport setReport={setReport} openModal={openModal} />
+      )}
 
-      {report === "categories" && <CategoriesReport setReport={setReport} openModal={openModal} />}
+      {report === "categories" && (
+        <CategoriesReport setReport={setReport} openModal={openModal} />
+      )}
 
       {report === "subcategories" && (
         <SubcategoriesReport setReport={setReport} />
       )}
 
-      {report === "warranties" && <WarrantiesReport setReport={setReport} openModal={openModal} />}
+      {report === "warranties" && (
+        <WarrantiesReport setReport={setReport} openModal={openModal} />
+      )}
 
-      {report === "suppliers" && <SuppliersReport setReport={setReport} openModal={openModal} />}
+      {report === "suppliers" && (
+        <SuppliersReport setReport={setReport} openModal={openModal} />
+      )}
 
-      {report === "outputs" && <OutputsReport setReport={setReport} openModal={openModal} />}
+      {report === "outputs" && (
+        <OutputsReport setReport={setReport} openModal={openModal} />
+      )}
 
       {report === "transformations" && (
         <TransformationsReport setReport={setReport} openModal={openModal} />
@@ -73,23 +87,17 @@ export default function ReportsPage() {
       {modalType && (
         <Modal
           triggerRef={triggerRef}
-          title={
-            modalType === "user"
-              ? "Configuración"
-              : modalType === "editStatus"
-              ? ""
-              : "Ayuda"
-          }
+          title={modals[modalType]?.title}
           type={modalType}
           isOpen={isOpen}
-          onClose={() => closeModal()}
+          onClose={closeModal}
         >
           {modalType === "user" && <ProfileModal />}
 
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
 
           {modalType === "editStatus" && (
-            <ExportReportModal modalData={modalData} onClose={() => closeModal()} />
+            <ExportReportModal modalData={modalData} onClose={closeModal} />
           )}
         </Modal>
       )}
