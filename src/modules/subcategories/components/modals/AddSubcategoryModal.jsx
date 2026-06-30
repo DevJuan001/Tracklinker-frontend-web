@@ -29,12 +29,12 @@ export default function AddSubcategoryModal({ onClose }) {
       <SelectMenu
         searchable
         seeAddButton
-        addIconFunction={(e) => openInnerModal("addCategory", e)}
         id={"categories-menu"}
         value={form.category_id}
         name={"category_id"}
         spanText={"Categoria"}
         onChange={handleChange}
+        addIconFunction={(e) => openInnerModal("addCategory", e)}
         options={categories.map((category) => ({
           value: category.category_id,
           label: category.category_name,

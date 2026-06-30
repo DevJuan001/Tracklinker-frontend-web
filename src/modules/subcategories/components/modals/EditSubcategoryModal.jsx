@@ -10,6 +10,8 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import AddCategoryModal from "../../../categories/components/modals/AddCategoryModal";
+import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
   const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
@@ -26,11 +28,13 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
         searchable
+        seeAddButton
         id={"categories-menu"}
         name={"category_id"}
         value={form.category_id}
         spanText={"Categoria"}
         onChange={handleChange}
+        addIconFunction={(e) => openInnerModal("addCategory", e)}
         options={categories.map((category) => ({
           value: category.category_id,
           label: category.category_name,
@@ -56,6 +60,17 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
       />
 
       {/* Modales Internas */}
+      {innerType === "addCategory" && (
+        <AddInnerModal
+          isOpen={true}
+          onClose={closeInnerModal}
+          title={"Crear categoría"}
+          triggerRef={innerTrigger}
+        >
+          <AddCategoryModal onClose={closeInnerModal} />
+        </AddInnerModal>
+      )}
+
       {innerType === "success" && (
         <SuccessModal
           location="anchored"
