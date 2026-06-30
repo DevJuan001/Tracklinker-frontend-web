@@ -1,5 +1,7 @@
 // Hooks
 import { useModal } from "../../globals/hooks/useModal";
+// Constantes
+import { modals } from "./constants/modals";
 // Componentes
 import LoginForm from "./components/ui/LoginForm";
 // Modales
@@ -20,17 +22,17 @@ export default function Login() {
 
       {modalType && (
         <Modal
-          title={modalType === "rememberPassword" ? "Olvide Mi Contraseña" : ""}
+          title={modals[modalType]?.title}
           type={modalType}
           isOpen={isOpen}
           location="center"
           triggerRef={triggerRef}
-          onClose={() => closeModal()}
+          onClose={closeModal}
         >
-          {modalType === "error" && <ErrorModal onClose={() => closeModal()} />}
+          {modalType === "error" && <ErrorModal onClose={closeModal} />}
 
           {modalType === "rememberPassword" && (
-            <RecoverPasswordModal onClose={() => closeModal()} />
+            <RecoverPasswordModal onClose={closeModal} />
           )}
         </Modal>
       )}
