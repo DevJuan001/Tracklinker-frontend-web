@@ -1,8 +1,15 @@
 // Hooks
-import { useModal } from "../../globals/hooks/useModal";
 import { useState } from "react";
+import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 import { useSubcategories } from "./hooks/useSubcategories";
+// Constantes
+import { modalTitles } from "./constants/modalTitles";
+// Componentes
+import Layout from "../../globals/components/Layout/Layout";
+import SearchBar from "../../globals/components/ui/SearchBar";
+import TopSection from "../../globals/components/ui/TopSection";
+import SubcategoriesList from "./components/ui/SubcategoriesList";
 // Modales
 import Modal from "../../globals/components/modals/Modal";
 import HelpModal from "../../globals/components/modals/HelpModal";
@@ -13,15 +20,18 @@ import DisableSubcategoryModal from "./components/modals/DisableSubcategoryModal
 import MoreSubcategoryInfoModal from "./components/modals/MoreSubcategoryInfoModal";
 import FilterSubcategoriesModal from "./components/modals/FilterSubcategoriesModal";
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
-// Componentes
-import Layout from "../../globals/components/Layout/Layout";
-import SearchBar from "../../globals/components/ui/SearchBar";
-import TopSection from "../../globals/components/ui/TopSection";
-import SubcategoriesList from "./components/ui/SubcategoriesList";
 
 export default function SubcategoriesPage() {
-  const { subcategories, loading, error, filters, setFilters } =
-    useSubcategories();
+  const {
+    subcategories,
+    loading,
+    error,
+    filters,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    setFilters,
+  } = useSubcategories();
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
   const [search, setSearch] = useState("");
@@ -50,35 +60,22 @@ export default function SubcategoriesPage() {
         loading={loading}
         error={error}
         openModal={openModal}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
+        fetchNextPage={fetchNextPage}
       />
 
       {/* Modales */}
       {modalType && (
         <Modal
-          title={
-            modalType === "user"
-              ? "Configuración"
-              : modalType === "filter"
-                ? "Filtrar"
-                : modalType === "add"
-                  ? "Crear subcategoria"
-                  : modalType === "info"
-                    ? ""
-                    : modalType === "edit"
-                      ? "Editar Subcategoria"
-                      : modalType === "disable"
-                        ? "Deshabilitar Subcategoria"
-                        : modalType === "enable"
-                          ? "Habilitar Subcategoria"
-                          : "Ayuda"
-          }
+          title={modalTitles[modalType]}
           type={modalType}
           isOpen={isOpen}
           triggerRef={triggerRef}
           location={
             modalType === "info" || modalType === "add" ? "center" : "anchored"
           }
-          onClose={() => closeModal()}
+          onClose={closeModal}
         >
           {modalType === "user" && <ProfileModal />}
 
@@ -86,22 +83,20 @@ export default function SubcategoriesPage() {
             <FilterSubcategoriesModal
               filters={filters}
               setFilters={setFilters}
-              onClose={() => closeModal()}
+              onClose={closeModal}
             />
           )}
 
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
 
           {/* Modal para agregar una subcategoria */}
-          {modalType === "add" && (
-            <AddSubcategoryModal onClose={() => closeModal()} />
-          )}
+          {modalType === "add" && <AddSubcategoryModal onClose={closeModal} />}
 
           {/* Modal para mas información de la subcategoria */}
           {modalType === "info" && (
             <MoreSubcategoryInfoModal
               subcategory={modalData}
-              onClose={() => closeModal()}
+              onClose={closeModal}
             />
           )}
 
@@ -109,7 +104,7 @@ export default function SubcategoriesPage() {
           {modalType === "edit" && (
             <EditSubcategoryModal
               subcategory={modalData}
-              onClose={() => closeModal()}
+              onClose={closeModal}
             />
           )}
 
@@ -117,7 +112,7 @@ export default function SubcategoriesPage() {
           {modalType === "disable" && (
             <DisableSubcategoryModal
               subcategory={modalData}
-              onClose={() => closeModal()}
+              onClose={closeModal}
             />
           )}
 
@@ -125,7 +120,7 @@ export default function SubcategoriesPage() {
           {modalType === "enable" && (
             <EnableSubcategoryModal
               subcategory={modalData}
-              onClose={() => closeModal()}
+              onClose={closeModal}
             />
           )}
         </Modal>

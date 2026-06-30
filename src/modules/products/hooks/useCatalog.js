@@ -1,6 +1,8 @@
 // Hooks
 import { useState } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+// Status
+import { productStatusConfig } from "../constants/productStatusConfig";
 // Services
 import { getProductsService } from "../services/getProductsService";
 import { getInputOrdersService } from "../services/getInputOrdersService";
@@ -8,9 +10,7 @@ import { getProductStatusService } from "../services/getProductStatusService";
 import { getProductBrandsService } from "../services/getProductBrandsService";
 import { getProductModelsService } from "../services/getProductModelsService";
 import { getCategoriesService } from "../../categories/services/getCategoriesService";
-import { getSubcategories } from "../../subcategories/services/getSubcategoriesService";
-// Status
-import { productStatusConfig } from "../constants/productStatusConfig";
+import { getActiveSubcategoriesService } from "../services/getActiveSubcategoriesService";
 
 export function useCatalog() {
   const [filters, setFilters] = useState({});
@@ -43,8 +43,8 @@ export function useCatalog() {
   });
 
   const subcategories = useQuery({
-    queryKey: ["subcategories"],
-    queryFn: getSubcategories,
+    queryKey: ["activeSubcategories"],
+    queryFn: getActiveSubcategoriesService,
     select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
     refetchInterval: 1000 * 20,

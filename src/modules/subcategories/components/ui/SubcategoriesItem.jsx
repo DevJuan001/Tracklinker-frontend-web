@@ -3,6 +3,7 @@ import ActionButtons from "../../../../globals/components/ui/ActionButtons";
 import { categoryStatusConfig } from "../../../categories/constants/categoryStatusConfig";
 
 export default function SubcategoriesItem({
+  ref,
   subcategory,
   editButtonOnClick,
   openModal,
@@ -10,6 +11,7 @@ export default function SubcategoriesItem({
 }) {
   return (
     <li
+      ref={ref}
       key={subcategory.subcategory_id}
       onClick={moreInfoOnClick}
       className="flex items-center justify-between p-5 bg-[#F5F3F6] rounded-lg transition duration-300 cursor-pointer

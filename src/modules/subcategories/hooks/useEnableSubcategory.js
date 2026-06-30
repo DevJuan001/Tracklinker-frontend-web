@@ -20,6 +20,7 @@ export function useEnableSubcategory(subcategory_id) {
       
       if (response.success === true) {
         queryClient.invalidateQueries(["subcategories"]);
+        queryClient.invalidateQueries({ queryKey: ["activeSubcategories"] });
         onClose();
       } else {
         setError(response.error);

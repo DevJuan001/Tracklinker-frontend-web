@@ -71,7 +71,7 @@ export default function CategoriesPage() {
           title={modalTitles[modalType]}
           type={modalType}
           isOpen={isOpen}
-          onClose={() => closeModal()}
+          onClose={closeModal}
           triggerRef={triggerRef}
           growDirection="center"
           location={
@@ -84,41 +84,30 @@ export default function CategoriesPage() {
             <FilterCategoryModal
               filters={filters}
               setFilters={setFilters}
-              onClose={() => closeModal()}
+              onClose={closeModal}
             />
           )}
 
-          {modalType === "help" && <HelpModal onClose={() => closeModal()} />}
+          {modalType === "help" && <HelpModal onClose={closeModal} />}
 
-          {modalType === "add" && (
-            <AddCategoryModal onClose={() => closeModal()} />
-          )}
+          {modalType === "add" && <AddCategoryModal onClose={closeModal} />}
 
           {/* Modal para mas información de la categoria */}
           {modalType === "info" && <MoreInfoModal category={modalData} />}
 
           {/* Modal para editar la categoria */}
           {modalType === "edit" && (
-            <EditCategoryInfoModal
-              category={modalData}
-              onClose={() => closeModal()}
-            />
+            <EditCategoryInfoModal category={modalData} onClose={closeModal} />
           )}
 
           {/* Modal para eliminar la categoria */}
           {modalType === "disable" && (
-            <DisableCategoryModal
-              category={modalData}
-              onClose={() => closeModal()}
-            />
+            <DisableCategoryModal category={modalData} onClose={closeModal} />
           )}
 
           {/* Modal para habilitar la categoria */}
           {modalType === "enable" && (
-            <EnableCategoryModal
-              category={modalData}
-              onClose={() => closeModal()}
-            />
+            <EnableCategoryModal category={modalData} onClose={closeModal} />
           )}
         </Modal>
       )}

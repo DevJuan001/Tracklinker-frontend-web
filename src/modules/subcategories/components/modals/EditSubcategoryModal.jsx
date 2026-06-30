@@ -1,6 +1,6 @@
 // Hooks
-import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useEditSubcategory } from "../../hooks/useEditSubcategory";
+import { useActiveCategories } from "../../hooks/useActiveCategories";
 import { useInnerModal } from "../../../../globals/hooks/useInnerModal";
 // Componentes
 import Loader from "../../../../globals/components/ui/Loader";
@@ -10,29 +10,38 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 // Modales
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
+import AddCategoryModal from "../../../categories/components/modals/AddCategoryModal";
+import AddInnerModal from "../../../../globals/components/modals/AddInnerModal";
 
 export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { categories } = useActiveCategories();
   const { form, loading, error, fieldError, handleChange, handleSubmit } =
     useEditSubcategory(subcategory);
 
   return (
-    <section className="w-full flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="w-full flex flex-col items-center gap-2"
+    >
       {/* Menú para elegir la categoria a la cúal pertenecera la subcategoria */}
       <SelectMenu
         searchable
+        seeAddButton
         id={"categories-menu"}
         name={"category_id"}
         value={form.category_id}
         spanText={"Categoria"}
         onChange={handleChange}
+        addIconFunction={(e) => openInnerModal("addCategory", e)}
         options={categories.map((category) => ({
           value: category.category_id,
           label: category.category_name,
         }))}
         className={fieldError("category_id")}
       />
+
       <FormField
         id={"name"}
         name={"subcategory_name"}
@@ -51,6 +60,17 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
       />
 
       {/* Modales Internas */}
+      {innerType === "addCategory" && (
+        <AddInnerModal
+          isOpen={true}
+          onClose={closeInnerModal}
+          title={"Crear categoría"}
+          triggerRef={innerTrigger}
+        >
+          <AddCategoryModal onClose={closeInnerModal} />
+        </AddInnerModal>
+      )}
+
       {innerType === "success" && (
         <SuccessModal
           location="anchored"
@@ -63,7 +83,7 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -78,9 +98,9 @@ export default function EditSubcategoryInfoModal({ subcategory, onClose }) {
           errorTitle="¡No se pudo editar la subcategoria!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }
