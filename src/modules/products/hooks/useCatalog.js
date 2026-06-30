@@ -8,7 +8,7 @@ import { getProductStatusService } from "../services/getProductStatusService";
 import { getProductBrandsService } from "../services/getProductBrandsService";
 import { getProductModelsService } from "../services/getProductModelsService";
 import { getCategoriesService } from "../../categories/services/getCategoriesService";
-import { getSubcategories } from "../../subcategories/services/getSubcategoriesService";
+import { getSubcategoriesService } from "../../subcategories/services/getSubcategoriesService";
 // Status
 import { productStatusConfig } from "../constants/productStatusConfig";
 
@@ -44,7 +44,7 @@ export function useCatalog() {
 
   const subcategories = useQuery({
     queryKey: ["subcategories"],
-    queryFn: getSubcategories,
+    queryFn: getSubcategoriesService,
     select: (data) => data ?? [],
     staleTime: 1000 * 60 * 10,
     refetchInterval: 1000 * 20,
