@@ -5,7 +5,7 @@ export function useActiveCategories() {
   const categories = useQuery({
     queryKey: ["activeCategories"],
     queryFn: getActiveCategoriesService,
-    staleTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 5,
   });
 
   return {
