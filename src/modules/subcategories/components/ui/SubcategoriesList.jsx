@@ -1,16 +1,27 @@
+// Hooks
+import { useInfiniteScroll } from "../../../../globals/hooks/useInfiniteScroll";
+// Componentes
 import SubcategoriesItem from "./SubcategoriesItem";
 import Icon from "../../../../globals/components/ui/Icon";
-import CreateButton from "../../../../globals/components/ui/CreateButton";
 import Skeleton from "../../../../globals/components/ui/Skeleton";
+import CreateButton from "../../../../globals/components/ui/CreateButton";
 
 export default function SubcategoriesList({
   subcategories,
   search,
   loading,
   openModal,
+  hasNextPage,
+  isFetchingNextPage,
+  fetchNextPage,
 }) {
-  const noSubcategories = subcategories.length === 0 && !loading;
   const isFirstLoad = subcategories.length === 0 && loading;
+  const noSubcategories = subcategories.length === 0 && !loading;
+  const { getItemRef } = useInfiniteScroll({
+    items: subcategories,
+    hasNextPage,
+    fetchNextPage,
+  });
 
   return (
     /* Contenedor de las subcategorías */
@@ -39,7 +50,9 @@ export default function SubcategoriesList({
 
               <ul className="text-center text-sm mt-1">
                 <li>• Revisa que el nombre esté bien escrito</li>
+
                 <li>• Busca por categoría o fecha de creación</li>
+
                 <li>• Si no existe, crea una nueva subcategoría</li>
               </ul>
             </div>
@@ -54,6 +67,7 @@ export default function SubcategoriesList({
               >
                 <Icon name={"folder_copy"} size={60} fill />
               </div>
+
               <div className="flex flex-col items-center">
                 <span className="font-medium text-2xl">
                   Aún no hay subcategorías
@@ -66,7 +80,9 @@ export default function SubcategoriesList({
 
                 <ul className="text-center text-sm mt-1">
                   <li>• Crea subcategorías para organizar tus productos</li>
+
                   <li>• Gestiona tu inventario de manera eficiente</li>
+
                   <li>• Crea y edita subcategorías fácilmente</li>
                 </ul>
               </div>
@@ -91,9 +107,10 @@ export default function SubcategoriesList({
         />
       ) : (
         <ul className="flex flex-col gap-1">
-          {subcategories.map((subcategory) => (
+          {subcategories.map((subcategory, index) => (
             // Subcategorías
             <SubcategoriesItem
+              ref={getItemRef(index)}
               key={subcategory.subcategory_id}
               subcategory={subcategory}
               openModal={openModal}
@@ -107,6 +124,19 @@ export default function SubcategoriesList({
               }}
             />
           ))}
+
+          {isFetchingNextPage && (
+            <Skeleton
+              height="80px"
+              count={2}
+              backgroundColor={"#F3EEF5"}
+              darkModeBackgroundColor={"#101012"}
+              shineColor="#C5C1C7"
+              darkModeShineColor="#1e1e1e"
+              borderRadius={12}
+              marginBottom={2}
+            />
+          )}
         </ul>
       )}
     </section>
