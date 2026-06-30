@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getActiveCategories } from "../services/getActiveCategoriesService";
+import { getActiveCategoriesService } from "../services/getActiveCategoriesService";
 
 export function useActiveCategories() {
   const categories = useQuery({
     queryKey: ["activeCategories"],
-    queryFn: getActiveCategories,
+    queryFn: getActiveCategoriesService,
     staleTime: 1000 * 60 * 10,
   });
 

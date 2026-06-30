@@ -1,9 +1,9 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
 
-export async function getActiveCategories() {
+export async function getActiveCategoriesService() {
   const res = await fetchWithAuth(
-    `${apiRoutes.apiUrl}${apiRoutes.subcategories}/active-categories`,
+    `${apiRoutes.apiUrl}${apiRoutes.categories}/active-categories`,
     {
       method: "GET",
     },
