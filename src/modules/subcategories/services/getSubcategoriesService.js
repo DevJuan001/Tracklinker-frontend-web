@@ -1,9 +1,9 @@
 import { apiRoutes } from "../../../config/apiRoutes";
-import { buildQueryParams } from "../../../utils/buildQueryParams";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
+import { buildQueryParams } from "../../../utils/buildQueryParams";
 
-export async function getSubcategories(filters = {}) {
-  const params = buildQueryParams(filters);
+export async function getSubcategoriesService({ pageParam = 1, filters = {} }) {
+  const params = buildQueryParams({ ...filters, page: pageParam });
 
   const res = await fetchWithAuth(
     `${apiRoutes.apiUrl}${apiRoutes.subcategories}/?${params}`,
@@ -11,7 +11,7 @@ export async function getSubcategories(filters = {}) {
       method: "GET",
     },
   );
-  
+
   // Validamos si la respuesta fue OK
   if (!res.ok) {
     throw new Error("Error en la petición");
