@@ -39,6 +39,7 @@ export function useCreateSubcategory() {
       if (response.success === true) {
         openInnerModal("success", triggerButton);
         queryClient.invalidateQueries({ queryKey: ["subcategories"] });
+        queryClient.invalidateQueries({ queryKey: ["activeSubcategories"] });
       } else {
         setError(response.error);
         openInnerModal("error", triggerButton);
