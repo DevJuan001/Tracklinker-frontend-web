@@ -1,5 +1,6 @@
 import { apiRoutes } from "../../../config/apiRoutes";
 import { fetchWithAuth } from "../../../utils/fetchWithAuth";
+import { getValueError } from "../../../utils/getValueError";
 
 export async function editUserService(user_id, user_data) {
   const response = await fetchWithAuth(
@@ -15,18 +16,11 @@ export async function editUserService(user_id, user_data) {
 
   const json = await response.json();
 
-  if (!response.ok) {
-    const emailError = Array.isArray(json.detail)
-      ? json.detail.map((err) =>
-          err.msg.replace(
-            /value is not a valid email address:.+/i,
-            "El correo electrónico no es válido, revisa que este bien escrito e intentalo nuevamente",
-          ),
-        )
-      : null;
+  const error = getValueError(json);
 
+  if (!response.ok) {
     return {
-      error: emailError ?? json.detail ?? "Error en la petición",
+      error: error || json.detail || "Error en la petición",
       data: null,
     };
   }
