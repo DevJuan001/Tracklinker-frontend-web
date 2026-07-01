@@ -24,7 +24,16 @@ import ProfileModal from "../../globals/components/modals/profileModal/ProfileMo
 export default function SuppliersPage() {
   const { modalType, triggerRef, isOpen, modalData, openModal, closeModal } =
     useModal();
-  const { suppliers, loading, error, filters, setFilters } = useSuppliers();
+  const {
+    suppliers,
+    loading,
+    error,
+    filters,
+    setFilters,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useSuppliers();
   const [search, setSearch] = useState("");
   const filteredSuppliers = useSearch(suppliers, search);
 
@@ -54,6 +63,9 @@ export default function SuppliersPage() {
         loading={loading}
         error={error}
         openModal={openModal}
+        fetchNextPage={fetchNextPage}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
       />
 
       {/* Modales */}
