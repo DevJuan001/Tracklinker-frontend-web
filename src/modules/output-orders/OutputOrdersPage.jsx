@@ -22,7 +22,15 @@ import DisableOutputOrderModal from "./components/modals/DisableOutputOrderModal
 import ProfileModal from "../../globals/components/modals/profileModal/ProfileModal";
 
 export default function OutputOrdersPage() {
-  const { outputOrders, loading, filters, setFilters } = useOutputOrders();
+  const {
+    outputOrders,
+    loading,
+    filters,
+    setFilters,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useOutputOrders();
   const { modalType, isOpen, modalData, triggerRef, openModal, closeModal } =
     useModal();
   const [search, setSearch] = useState("");
@@ -51,6 +59,9 @@ export default function OutputOrdersPage() {
         loading={loading}
         search={search}
         openModal={openModal}
+        fetchNextPage={fetchNextPage}
+        hasNextPage={hasNextPage}
+        isFetchingNextPage={isFetchingNextPage}
       />
 
       {modalType && (
