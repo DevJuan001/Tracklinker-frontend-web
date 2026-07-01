@@ -8,7 +8,7 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function DisableWarrantyModal({ selectedWarranty, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } = useInnerModal();
   const { loading, error, handleSubmit } = useDisableWarranty(selectedWarranty);
 
   return (
@@ -33,7 +33,7 @@ export default function DisableWarrantyModal({ selectedWarranty, onClose }) {
           isOpen={true}
           location="anchored"
           growDirection={"center"}
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
           errorTitle={"¡No se pudo deshabilitar la garantía!"}
           errorText={error}
         />
