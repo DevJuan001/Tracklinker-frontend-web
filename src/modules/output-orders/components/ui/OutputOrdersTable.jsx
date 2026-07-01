@@ -1,5 +1,6 @@
 // Hooks
 import { useState } from "react";
+import { useInfiniteScroll } from "../../../../globals/hooks/useInfiniteScroll";
 // Constantes
 import { userStatus } from "../../../users/constants/userStatus";
 // Componentes
@@ -15,10 +16,18 @@ export default function OutputOrdersTable({
   loading,
   search,
   openModal,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
 }) {
   const [selectedOutputOrder, setSelectedOutputOrder] = useState(null);
   const noOutputOrders = outputOrders.length === 0 && !loading;
   const isFirstLoad = outputOrders.length === 0 && loading;
+  const { getItemRef } = useInfiniteScroll({
+    items: outputOrders,
+    hasNextPage,
+    fetchNextPage,
+  });
 
   return (
     <section
@@ -125,9 +134,10 @@ export default function OutputOrdersTable({
 
           {/* Cuerpo de la tabla */}
           <tbody className="font-normal dark:text-white">
-            {outputOrders.map((outputOrder) => (
+            {outputOrders.map((outputOrder, index) => (
               <Fragment key={outputOrder.output_order_id}>
                 <tr
+                  ref={getItemRef(index)}
                   key={outputOrder.output_order_id}
                   onClick={() =>
                     setSelectedOutputOrder((prev) =>
@@ -240,6 +250,23 @@ export default function OutputOrdersTable({
                 )}
               </Fragment>
             ))}
+
+            {isFetchingNextPage && (
+              <tr>
+                <td colSpan={10} className="text-center py-4">
+                  <Skeleton
+                    count={2}
+                    height="56px"
+                    width="100%"
+                    marginBottom={1}
+                    backgroundColor={"#F3EEF5"}
+                    darkModeBackgroundColor={"#101012"}
+                    shineColor="#C5C1C7"
+                    darkModeShineColor="#1e1e1e"
+                  />
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       )}
