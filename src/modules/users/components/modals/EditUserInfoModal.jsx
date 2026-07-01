@@ -13,14 +13,18 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function EditUserInfoModal({ user, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { roles } = useRoles();
   const { cities } = useCities();
   const { handleChange, handleSubmit, loading, form, error, fieldError } =
     useEditUser(user);
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       <SelectMenu
         id={"roles-menu"}
         name={"role_id"}
@@ -141,7 +145,7 @@ export default function EditUserInfoModal({ user, onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -155,9 +159,9 @@ export default function EditUserInfoModal({ user, onClose }) {
           errorTitle="¡No se pudo actualizar el usuario!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }

@@ -13,14 +13,18 @@ import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 import SuccessModal from "../../../../globals/components/modals/SuccessModal";
 
 export default function AddUserModal({ onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { roles } = useRoles();
   const { cities } = useCities();
   const { form, loading, error, fieldError, handleSubmit, handleChange } =
     useCreateUser();
 
   return (
-    <section className="flex flex-col items-center gap-2">
+    <form
+      action={(e) => handleSubmit(e, openInnerModal)}
+      className="flex flex-col items-center gap-2"
+    >
       {/* Menú de roles */}
       <SelectMenu
         id={"roles-menu"}
@@ -132,7 +136,7 @@ export default function AddUserModal({ onClose }) {
           }
           confirmButtonText={"Volver a la pagina"}
           onClose={() => {
-            openInnerModal(null);
+            closeInnerModal();
             onClose();
           }}
         />
@@ -146,9 +150,9 @@ export default function AddUserModal({ onClose }) {
           errorTitle="No se pudo completar el registro!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
-    </section>
+    </form>
   );
 }
