@@ -5,16 +5,24 @@ import Icon from "../../../../globals/components/ui/Icon";
 import Skeleton from "../../../../globals/components/ui/Skeleton";
 import CreateButton from "../../../../globals/components/ui/CreateButton";
 import ActionButtons from "../../../../globals/components/ui/ActionButtons";
+import { useInfiniteScroll } from "../../../../globals/hooks/useInfiniteScroll";
 
 export default function SuppliersTable({
   suppliers,
   search,
   loading,
   openModal,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
 }) {
   const noSuppliers = suppliers.length === 0 && !loading;
   const isFirstLoad = suppliers.length === 0 && loading;
-
+  const { getItemRef } = useInfiniteScroll({
+    items: suppliers,
+    hasNextPage,
+    fetchNextPage,
+  });
   return (
     <section
       className={`${noSuppliers || isFirstLoad ? "h-full" : "h-auto border"} w-full max-h-[55%] border-gray-200 rounded-3xl overflow-y-auto overflow-x-auto overflow-hidden
@@ -133,8 +141,9 @@ export default function SuppliersTable({
           </thead>
 
           <tbody>
-            {suppliers.map((supplier) => (
+            {suppliers.map((supplier, index) => (
               <tr
+                ref={getItemRef(index)}
                 key={supplier.id}
                 className="h-12 transition-colors duration-200
                 hover:bg-[#f5f3f6]
@@ -198,6 +207,23 @@ export default function SuppliersTable({
                 </th>
               </tr>
             ))}
+
+            {isFetchingNextPage && (
+              <tr>
+                <td colSpan={10} className="text-center py-4">
+                  <Skeleton
+                    count={2}
+                    height="56px"
+                    width="100%"
+                    marginBottom={1}
+                    backgroundColor={"#F3EEF5"}
+                    darkModeBackgroundColor={"#101012"}
+                    shineColor="#C5C1C7"
+                    darkModeShineColor="#1e1e1e"
+                  />
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       )}
