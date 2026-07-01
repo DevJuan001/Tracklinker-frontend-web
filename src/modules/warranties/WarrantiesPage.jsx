@@ -4,7 +4,7 @@ import { useWarranties } from "./hooks/useWarranties";
 import { useModal } from "../../globals/hooks/useModal";
 import { useSearch } from "../../globals/hooks/useSearch";
 // Constantes
-import { modalTitles } from "./constants/modalTitles";
+import { modals } from "./constants/modals";
 // Componentes
 import WarrantiesKpis from "./components/ui/WarrantiesKpis";
 import Layout from "../../globals/components/Layout/Layout";
@@ -66,16 +66,12 @@ export default function WarrantiesPage() {
       {/* Modales */}
       {modalType && (
         <Modal
-          title={modalTitles[modalType]}
+          title={modals[modalType]?.title}
           type={modalType}
           isOpen={isOpen}
           onClose={closeModal}
           triggerRef={triggerRef}
-          location={
-            modalType === "info" || modalType === "edit" || modalType === "add"
-              ? "center"
-              : "anchored"
-          }
+          location={modals[modalType]?.location}
         >
           {modalType === "user" && <ProfileModal />}
 
