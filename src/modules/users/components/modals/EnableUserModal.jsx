@@ -6,7 +6,8 @@ import Loader from "../../../../globals/components/ui/Loader";
 import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmCancelButtons";
 
 export default function EnableUserModal({ user, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { loading, error, handleSubmit } = useEnableUser(user.id);
 
   return (
@@ -37,7 +38,7 @@ export default function EnableUserModal({ user, onClose }) {
           errorTitle="¡No se pudo habilitar el usuario!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </section>

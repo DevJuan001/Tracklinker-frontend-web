@@ -8,7 +8,8 @@ import ConfirmCancelButtons from "../../../../globals/components/modals/ConfirmC
 import ErrorModal from "../../../../globals/components/modals/ErrorModal";
 
 export default function DisableUserModal({ user, onClose }) {
-  const { innerType, innerTrigger, openInnerModal } = useInnerModal();
+  const { innerType, innerTrigger, openInnerModal, closeInnerModal } =
+    useInnerModal();
   const { loading, error, handleSubmit } = useDisableUser(user.id);
 
   return (
@@ -40,7 +41,7 @@ export default function DisableUserModal({ user, onClose }) {
           errorTitle="¡No se pudo deshabilitar el usuario!"
           errorText={error}
           confirmButtonText="Volver a intentarlo"
-          onClose={() => openInnerModal(null)}
+          onClose={closeInnerModal}
         />
       )}
     </section>
